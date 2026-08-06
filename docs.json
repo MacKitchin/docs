@@ -93,77 +93,61 @@
         ]
       },
       {
-        "tab": "Documentation",
+        "tab": "Exhibitor Guide",
         "groups": [
           {
-            "group": "Get Started",
+            "group": "Get started",
             "pages": [
               "introduction",
-              "quickstart",
-              "account-setup"
+              "exhibitors/who-should-exhibit"
+            ],
+            "icon": "compass"
+          },
+          {
+            "group": "Package and appointments",
+            "icon": "package",
+            "pages": [
+              "exhibitors/packages",
+              "exhibitors/appointments",
+              "exhibitors/prepare"
             ]
           },
           {
-            "group": "Core Concepts",
+            "group": "At the event",
+            "icon": "map",
             "pages": [
-              "concepts/meetings",
-              "concepts/agendas",
-              "concepts/minutes-and-actions",
-              "concepts/roles-and-permissions"
-            ]
-          },
-          {
-            "group": "Scheduling",
-            "pages": [
-              "scheduling/smart-scheduling",
-              "scheduling/reminders",
-              "scheduling/recurring-meetings"
-            ]
-          },
-          {
-            "group": "Agendas & Minutes",
-            "pages": [
-              "agendas/building-agendas",
-              "agendas/templates",
-              "agendas/approval-workflows",
-              "minutes/live-minutes",
-              "minutes/action-items"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/microsoft-365",
-              "integrations/calendar-sync"
-            ]
-          },
-          {
-            "group": "Analytics & Security",
-            "pages": [
-              "analytics/meeting-analytics",
-              "security/data-security",
-              "security/sso"
+              "exhibitors/onsite",
+              "exhibitors/after"
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
+        "tab": "Hosted Buyer Guide",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Get started",
+            "icon": "compass",
             "pages": [
-              "api/overview",
-              "api/authentication"
+              "hosted-buyers/introduction",
+              "hosted-buyers/who-qualifies"
             ]
           },
           {
-            "group": "Endpoints",
+            "group": "Applying and preparing",
+            "icon": "clipboard-check",
             "pages": [
-              "api/meetings",
-              "api/agendas",
-              "api/action-items",
-              "api/users"
+              "hosted-buyers/qualification",
+              "hosted-buyers/whats-covered",
+              "hosted-buyers/prepare"
+            ]
+          },
+          {
+            "group": "At the event",
+            "icon": "map",
+            "pages": [
+              "hosted-buyers/onsite",
+              "hosted-buyers/after"
             ]
           }
         ]
@@ -173,16 +157,16 @@
   "navbar": {
     "primary": {
       "type": "button",
-      "label": "Get Started",
-      "href": "https://connectmeetings.ca"
+      "label": "Apply as a Buyer",
+      "href": "https://informaconnect.com/meetings-events-tradeshows/"
     }
   },
   "footer": {
     "socials": {
-      "website": "https://connectmeetings.ca"
+      "website": "https://informaconnect.com/meetings-events-tradeshows"
     }
   },
-  "description": "The internal knowledge base for Informa Connect — Connect Meetings & Events. Company, people, events, projects, data model, and AI stack, written for both people and agents.",
+  "description": "Connect Meetings, the trade show business inside Informa Connect. Exhibitor Guide, Hosted Buyer Guide, and the internal Company Brain for team and agent use.",
   "appearance": {
     "default": "system"
   },
