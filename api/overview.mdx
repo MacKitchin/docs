@@ -1,0 +1,181 @@
+---
+title: "ConnectMeetings REST API Overview"
+sidebarTitle: "Overview"
+description: "The ConnectMeetings REST API lets Enterprise customers programmatically manage meetings, agendas, action items, and users. Base URL, versioning, and rate limits."
+---
+
+The ConnectMeetings REST API gives Enterprise customers programmatic access to their meeting data. Use it to create and manage meetings, build agendas, track action items, and administer users — all from your own systems and workflows.
+
+<Note>
+  API access is available on the **Enterprise plan** only. If you're on a lower tier and want to upgrade, contact [sales@connectmeetings.ca](mailto:sales@connectmeetings.ca).
+</Note>
+
+<Tip>
+  Use the API to sync ConnectMeetings data with external reporting tools such as Power BI, Tableau, or custom dashboards. Pull meeting records, agenda items, and action-item statuses on a schedule to keep your reports always up to date.
+</Tip>
+
+---
+
+## Base URL
+
+All API requests are made to the following base URL:
+
+```
+https://api.connectmeetings.ca/v1
+```
+
+---
+
+## Versioning
+
+The current API version is `v1`, reflected in the base URL path. When ConnectMeetings introduces breaking changes, a new version is released (e.g., `v2`). Old versions are deprecated with a **12-month notice** before being retired, giving you ample time to migrate.
+
+---
+
+## Authentication
+
+Every request must include a valid Bearer token in the `Authorization` header:
+
+```
+Authorization: Bearer YOUR_API_KEY
+```
+
+See the [Authentication](/api/authentication) page for instructions on generating and managing API keys.
+
+---
+
+## Content Type
+
+All request bodies must be JSON, and all responses are returned as JSON. Include the following header on every request:
+
+```
+Content-Type: application/json
+```
+
+---
+
+## Rate Limits
+
+Each API key is limited to **1,000 requests per hour**. Every response includes the following headers so you can track your usage:
+
+| Header | Description |
+|---|---|
+| `X-RateLimit-Limit` | The maximum number of requests allowed per hour |
+| `X-RateLimit-Remaining` | The number of requests remaining in the current window |
+| `X-RateLimit-Reset` | The Unix timestamp when the current window resets |
+
+If you exceed the limit, the API returns a `429 Too Many Requests` response. Wait until the reset time before retrying.
+
+---
+
+## Pagination
+
+List endpoints return paginated results. Control pagination using these query parameters:
+
+| Parameter | Type | Default | Description |
+|---|---|---|---|
+| `page` | integer | `1` | The page number to retrieve |
+| `per_page` | integer | `20` | The number of results per page (max `100`) |
+
+Every paginated response includes a `meta` object:
+
+```json
+"meta": {
+  "total": 42,
+  "page": 1,
+  "per_page": 20
+}
+```
+
+---
+
+## Error Format
+
+All errors return a JSON body with a structured `error` object. Use `error.code` for programmatic handling and `error.message` for human-readable context.
+
+```json
+{
+  "error": {
+    "code": "resource.not_found",
+    "message": "The requested meeting could not be found."
+  }
+}
+```
+
+Common HTTP status codes returned by the API:
+
+| Status | Meaning |
+|---|---|
+| `200 OK` | Request succeeded |
+| `201 Created` | Resource was created successfully |
+| `400 Bad Request` | The request body or parameters are invalid |
+| `401 Unauthorized` | Authentication failed or key is missing |
+| `403 Forbidden` | The API key lacks the required scope |
+| `404 Not Found` | The requested resource does not exist |
+| `422 Unprocessable Entity` | Validation failed on the submitted data |
+| `429 Too Many Requests` | Rate limit exceeded |
+| `500 Internal Server Error` | Something went wrong on our end |
+
+---
+
+## Available Endpoints
+
+<CardGroup cols={2}>
+  <Card title="Meetings" icon="calendar">
+    Create, retrieve, update, and delete meetings. Manage meeting status, scheduling, and location details.
+
+    `GET /meetings` · `POST /meetings` · `GET /meetings/{id}` · `PATCH /meetings/{id}` · `DELETE /meetings/{id}`
+  </Card>
+  <Card title="Agendas" icon="list">
+    Build and manage agenda sections and items attached to a meeting.
+
+    `GET /meetings/{id}/agenda` · `POST /meetings/{id}/agenda/items` · `PATCH /agenda/items/{id}` · `DELETE /agenda/items/{id}`
+  </Card>
+  <Card title="Action Items" icon="circle-check">
+    Track decisions and tasks assigned during meetings. Update statuses and assignees.
+
+    `GET /action-items` · `POST /action-items` · `GET /action-items/{id}` · `PATCH /action-items/{id}`
+  </Card>
+  <Card title="Users" icon="users">
+    Manage organization members, roles, and access. Invite new users or deactivate existing ones.
+
+    `GET /users` · `POST /users/invite` · `GET /users/{id}` · `PATCH /users/{id}` · `DELETE /users/{id}`
+  </Card>
+</CardGroup>
+
+---
+
+## Example Request and Response
+
+The following example retrieves a list of meetings for your organization.
+
+**Request**
+
+```bash
+curl -X GET https://api.connectmeetings.ca/v1/meetings \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+**Response**
+
+```json
+{
+  "data": [
+    {
+      "id": "mtg_01HX3K2P9QRST4UVWXYZ",
+      "title": "City Council Regular Meeting",
+      "status": "published",
+      "starts_at": "2024-03-15T14:00:00-05:00",
+      "ends_at": "2024-03-15T16:00:00-05:00",
+      "location": "City Hall, Council Chambers",
+      "created_at": "2024-03-01T09:00:00-05:00"
+    }
+  ],
+  "meta": {
+    "total": 42,
+    "page": 1,
+    "per_page": 20
+  }
+}
+```

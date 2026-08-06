@@ -1,0 +1,84 @@
+---
+title: "Understanding Meetings in ConnectMeetings"
+sidebarTitle: "Meetings"
+description: "Learn how ConnectMeetings structures meetings: types, statuses, lifecycle stages, and how they connect to agendas, minutes, and participants."
+---
+
+Meetings are the central object in ConnectMeetings. Every agenda, set of minutes, vote record, and action item belongs to a meeting. Whether you are coordinating a routine council session or a one-off public hearing, ConnectMeetings gives each meeting a consistent structure so participants know what to expect and administrators have a reliable audit trail.
+
+## Meeting Types
+
+ConnectMeetings supports four meeting types to match the most common public-sector formats.
+
+<CardGroup cols={2}>
+  <Card title="Regular" icon="calendar">
+    A scheduled, recurring meeting that follows a standard agenda format. Most council sessions, board meetings, and committee reviews fall into this category.
+  </Card>
+  <Card title="Special / Emergency" icon="bolt">
+    A one-off meeting called outside the regular schedule to address urgent matters. Special meetings often have restricted agenda scope defined by your governing rules.
+  </Card>
+  <Card title="Standing Committee" icon="users">
+    A permanent sub-group that meets on a defined cadence — for example, a finance committee or planning committee. Standing committees typically have a fixed membership and a recurring agenda template.
+  </Card>
+  <Card title="Public Hearing" icon="megaphone">
+    A formal meeting held to collect public comment on a specific matter, such as a zoning change or budget proposal. Public hearings may have specific notice and record-keeping requirements under your jurisdiction's rules.
+  </Card>
+</CardGroup>
+
+## Meeting Lifecycle
+
+Every meeting moves through a defined set of statuses from creation to archival. Understanding the lifecycle helps you know what actions are available at each stage.
+
+<Steps>
+  <Step title="Draft">
+    The meeting has been created but is not yet visible to participants. Organizers can edit all details, build the agenda, and invite attendees. No notifications are sent while a meeting is in Draft.
+  </Step>
+  <Step title="Published">
+    The meeting is visible to all invited participants. The agenda has been distributed, and calendar invites have been sent. Participants can view agenda items and any attached documents.
+  </Step>
+  <Step title="In Progress">
+    The meeting has started. The minutes editor is active, and organizers can record motions, votes, and notes in real time. The agenda is locked against structural changes during this stage.
+  </Step>
+  <Step title="Completed">
+    The meeting has ended. Minutes are available for review and approval. Action items are open for assignment and tracking. No further changes can be made to the meeting record itself.
+  </Step>
+  <Step title="Archived">
+    The meeting and all associated records are preserved in read-only form for compliance and historical reference. Archived meetings are searchable but cannot be reopened.
+  </Step>
+</Steps>
+
+### Status Summary
+
+| Status | Visible to Participants | Agenda Editable | Minutes Active |
+|---|---|---|---|
+| Draft | No | Yes | No |
+| Published | Yes | Yes (before locking) | No |
+| In Progress | Yes | No | Yes |
+| Completed | Yes | No | Review only |
+| Archived | Yes (read-only) | No | No |
+
+## Meeting Components
+
+Each meeting in ConnectMeetings is made up of the following core components.
+
+- **Title** — A clear, descriptive name that appears in notifications, the calendar, and published records.
+- **Date, time, and duration** — The scheduled start and end time, used to generate calendar invitations.
+- **Location** — A physical address, a virtual meeting link (such as a Microsoft Teams URL), or both for hybrid meetings.
+- **Agenda** — The structured list of items to be discussed. See [How Agendas Work](/concepts/agendas) for full details.
+- **Attendees** — The invited participants, including their roles for the specific meeting (chair, secretary, member, observer).
+- **Minutes** — The official record of what occurred. See [Minutes and Action Items](/concepts/minutes-and-actions) for full details.
+- **Action items** — Tasks assigned during or after the meeting, tracked through to completion.
+
+## Meeting Visibility
+
+ConnectMeetings lets you control who can see a meeting and its associated documents.
+
+**Public meetings** are visible to anyone in your organization with a ConnectMeetings account, and optionally to unauthenticated visitors if your administrator has enabled the public portal. Public visibility is appropriate for council meetings and hearings where transparency is required.
+
+**Private meetings** are visible only to explicitly invited participants. Use private meetings for sensitive committee sessions, personnel matters, or in-camera discussions where access must be restricted.
+
+You set visibility when creating a meeting and can change it any time before the meeting reaches the In Progress stage.
+
+<Tip>
+  If your committee meets on a fixed schedule — for example, every second Tuesday — use the recurring meeting feature to generate the full series at once. ConnectMeetings copies the meeting type, attendee list, and agenda template to each occurrence, so your organizers only need to customize the details that change from session to session. Navigate to **Meetings → New Meeting → Recurrence** to configure the pattern.
+</Tip>

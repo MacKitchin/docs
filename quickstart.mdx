@@ -1,47 +1,81 @@
 ---
-title: "Quickstart"
-description: "Begin with a guide on the fastest path to a successful outcome"
+title: "Get Started with ConnectMeetings in 5 Minutes"
+sidebarTitle: "Quickstart"
+description: "Learn how to sign up, connect Microsoft 365, and schedule your first meeting with ConnectMeetings in under five minutes."
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+This guide walks you through everything you need to run your first meeting with ConnectMeetings. By the end, you will have an account, a connected Microsoft 365 workspace, a scheduled meeting, and a published agenda — ready to share with your team.
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
-
-## Prerequisites
-
-Before you begin, you must have:
-
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
-
-## Get started
+<Note>
+  ConnectMeetings works best with a Microsoft 365 subscription, which enables calendar sync, Teams meeting links, and SharePoint document archiving. If your organization does not use Microsoft 365, you can still use ConnectMeetings in email-only mode — calendar invitations will be sent as standard `.ics` files instead.
+</Note>
 
 <Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+  <Step title="Create your account">
+    Go to [connectmeetings.ca](https://connectmeetings.ca) and click **Sign Up** in the top-right corner.
 
-    ```bash
-    npm install your-package
-    ```
+    Fill in your organization details:
+    - **Organization name** — the name that will appear on agendas and minutes documents.
+    - **Sector** — choose from municipal government, school board, healthcare, or other public sector.
+    - **Plan** — select Starter, Professional, or Enterprise. You can upgrade at any time.
+
+    Check your inbox for a verification email and click the confirmation link to activate your account.
   </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+  <Step title="Connect Microsoft 365">
+    After logging in, navigate to **Settings > Integrations > Microsoft 365** and click **Connect**.
 
-    ```bash
-    your-cli init
-    ```
+    You will be redirected to a Microsoft OAuth consent screen. Sign in with your Microsoft 365 admin account and grant the requested permissions. ConnectMeetings requests access to:
+    - Outlook calendar (read and write) — to check availability and create calendar events.
+    - Microsoft Teams — to generate Teams meeting links automatically.
+    - SharePoint — to archive agenda and minutes documents to your chosen document library.
+
+    Once authorized, you will be returned to ConnectMeetings with a green **Connected** status next to each service.
   </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+  <Step title="Create your first meeting">
+    From the dashboard, click **New Meeting**.
 
-    ```bash
-    your-cli start
-    ```
+    Enter the following details:
+    - **Title** — a short, descriptive name for the meeting (e.g., *Monthly Council Meeting — July 2025*).
+    - **Date and time** — pick a date and start time. ConnectMeetings will show you a real-time availability summary for all invited attendees.
+    - **Duration** — set an expected end time. This is used to block calendars and track whether meetings run over schedule.
+    - **Attendees** — search for team members by name or email address and add them. Each attendee receives a role of Organizer or Participant.
+
+    Click **Save Draft** to continue building the meeting before sending invitations.
+  </Step>
+  <Step title="Build your agenda">
+    Open the **Agenda** tab inside your new meeting and click **Add Item**.
+
+    For each agenda item, you can:
+    - Enter a title and a short description.
+    - Assign a **presenter** responsible for leading that item.
+    - Set a **time allocation** in minutes. ConnectMeetings will display a running total so your agenda stays within the meeting's scheduled duration.
+    - Attach supporting documents directly from SharePoint or your local drive.
+
+    Repeat until all items are covered. You can drag and drop items to reorder them at any time.
+
+    <Tip>
+      Save time on recurring meetings — such as weekly stand-ups or monthly board meetings — by saving your agenda as a **template**. Go to **Agenda > Save as Template**, give it a name, and reuse it next time with one click. Templates can include standard items like *Approval of Previous Minutes* and *Other Business* pre-populated.
+    </Tip>
+  </Step>
+  <Step title="Send invitations">
+    When your agenda is ready, click **Publish Agenda**. This locks the agenda for attendees to review before the meeting.
+
+    Click **Send Invitations** to dispatch calendar invites to all attendees in one action. Each invitation includes:
+    - The meeting title, date, time, and location or Teams link.
+    - A link to the published agenda in ConnectMeetings.
+    - An `.ics` calendar attachment compatible with Outlook and other calendar clients.
+
+    Attendees can accept or decline directly from their calendar. Their responses are reflected in real time on your meeting dashboard.
   </Step>
 </Steps>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+## What to explore next
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<CardGroup cols={2}>
+  <Card title="Smart Scheduling" icon="calendar-check" href="/scheduling/smart-scheduling">
+    Learn how ConnectMeetings finds the best meeting time across large teams automatically.
+  </Card>
+  <Card title="Building Agendas" icon="list-check" href="/agendas/building-agendas">
+    Explore advanced agenda features including approval workflows, templates, and item attachments.
+  </Card>
+</CardGroup>

@@ -1,0 +1,105 @@
+---
+title: "Roles and Permissions in ConnectMeetings"
+sidebarTitle: "Roles"
+description: "Understand the four ConnectMeetings roles — Admin, Organizer, Participant, and View Only — and what each role can see and do in your organization."
+---
+
+ConnectMeetings uses a role-based permission model to ensure every user can do exactly what they need to — and nothing more. Roles are assigned at the organization level and apply across all meetings in your account. There are four roles: **Admin**, **Organizer**, **Participant**, and **View Only**. Each role is designed for a specific type of user in a public-sector meeting workflow.
+
+## Roles Overview
+
+<Tabs>
+  <Tab title="Admin">
+    Admins have full access to everything in the ConnectMeetings organization. This role is intended for IT administrators and senior staff responsible for the platform.
+
+    **Admins can:**
+    - Manage organization settings, including branding and the public portal
+    - Add, remove, and reassign roles for all users
+    - Access and manage all meetings, regardless of whether they were invited
+    - Approve or unlock agendas and minutes for any meeting
+    - Manage billing, subscription, and integrations (including Microsoft 365)
+    - View the full audit trail for any meeting or record
+    - Export any data from the platform
+  </Tab>
+  <Tab title="Organizer">
+    Organizers are the staff members who plan and run meetings — typically clerks, executive assistants, committee coordinators, or department managers.
+
+    **Organizers can:**
+    - Create new meetings and configure all meeting details
+    - Build, edit, and submit agendas for approval
+    - Upload and manage agenda attachments
+    - Invite and manage attendees for meetings they own
+    - Open the live minutes editor and record notes, motions, and votes
+    - Create and assign action items during and after a meeting
+    - Submit minutes for approval and distribute approved copies
+    - Export minutes as PDF and action items as CSV
+  </Tab>
+  <Tab title="Participant">
+    Participants are the people who attend meetings — elected members, board directors, committee members, or invited staff.
+
+    **Participants can:**
+    - View published agendas and attached documents for meetings they are invited to
+    - Access the meeting link and any virtual conferencing details
+    - View approved minutes for meetings they attended
+    - Receive action items assigned to them and update the status of their own action items
+    - Add progress notes to their own action items
+    - View (but not edit) action items assigned to others in the same meeting
+  </Tab>
+  <Tab title="View Only">
+    View Only users have read-only access to published meeting materials. This role suits members of the public, auditors, or internal stakeholders who need visibility without the ability to participate or edit.
+
+    **View Only users can:**
+    - View published agendas for meetings they have been granted access to
+    - View approved minutes once they are published
+    - Download PDF exports of approved minutes (if permitted by the organizer)
+
+    **View Only users cannot:**
+    - Attend meetings or access virtual meeting links
+    - View Draft or In Progress content of any kind
+    - Receive, create, or update action items
+    - Make any changes to any record
+  </Tab>
+</Tabs>
+
+## Permissions at a Glance
+
+| Permission | Admin | Organizer | Participant | View Only |
+|---|:---:|:---:|:---:|:---:|
+| Manage org settings & billing | ✅ | ❌ | ❌ | ❌ |
+| Manage users & roles | ✅ | ❌ | ❌ | ❌ |
+| Create and delete meetings | ✅ | ✅ | ❌ | ❌ |
+| Build and edit agendas | ✅ | ✅ | ❌ | ❌ |
+| Approve agendas and minutes | ✅ | ✅ | ❌ | ❌ |
+| View published agendas | ✅ | ✅ | ✅ | ✅ |
+| Record live minutes | ✅ | ✅ | ❌ | ❌ |
+| View approved minutes | ✅ | ✅ | ✅ | ✅ |
+| Create and assign action items | ✅ | ✅ | ❌ | ❌ |
+| Update own action items | ✅ | ✅ | ✅ | ❌ |
+| Access audit trail | ✅ | ❌ | ❌ | ❌ |
+
+## Assigning Roles
+
+Only Admins can assign or change roles. To update a user's role:
+
+<Steps>
+  <Step title="Open Members">
+    Go to **Admin → Members** in the left navigation panel.
+  </Step>
+  <Step title="Find the user">
+    Search for the user by name or email address in the Members list.
+  </Step>
+  <Step title="Change the role">
+    Select the user's current role in the **Role** column. A dropdown appears with the four available roles. Select the new role.
+  </Step>
+  <Step title="Confirm">
+    The change takes effect immediately. The user's permissions update on their next page load — no sign-out required. ConnectMeetings logs the role change in the organization audit trail.
+  </Step>
+</Steps>
+
+<Note>
+  Organizations on the **Enterprise plan** have access to custom Role-Based Access Control (RBAC). Enterprise RBAC lets you define granular permission sets — for example, allowing a specific Organizer to manage only certain committees, or granting a Participant the ability to view Draft agendas. Contact your ConnectMeetings account manager or visit **Admin → Roles → Custom Roles** to learn more.
+</Note>
+
+<Warning>
+  On the **Starter plan**, each organization can have only one Admin. If you need to reassign the Admin role to a different user, the current Admin must first contact ConnectMeetings Support to initiate the transfer. Upgrading to the **Professional or Enterprise plan** removes this restriction and allows multiple Admins.
+</Warning>

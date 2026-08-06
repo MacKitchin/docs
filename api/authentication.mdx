@@ -1,0 +1,127 @@
+---
+title: "Authenticate with the ConnectMeetings API"
+sidebarTitle: "Authentication"
+description: "Generate and manage API keys for the ConnectMeetings REST API. Pass your key as a Bearer token in the Authorization header on every request."
+---
+
+The ConnectMeetings API uses API keys for authentication. Every request you make must include your key as a Bearer token in the `Authorization` header. Without a valid key, the API will reject the request with a `401` error.
+
+<Warning>
+  Never share your API keys or commit them to source control. Anyone with access to your key can make API calls on behalf of your organization. If a key is ever exposed, revoke it immediately from **Settings > API Keys**.
+</Warning>
+
+---
+
+## Generating an API Key
+
+You must be an **Admin** to generate API keys. Keys are organization-scoped and can be created from the ConnectMeetings dashboard.
+
+<Steps>
+  <Step title="Log in as an Admin">
+    Sign in to your ConnectMeetings account using an Admin account.
+  </Step>
+  <Step title="Go to Settings > API Keys">
+    Open the main navigation menu, select **Settings**, then choose **API Keys** from the sidebar.
+  </Step>
+  <Step title="Click Generate New Key">
+    Click the **Generate New Key** button in the top-right corner of the API Keys page.
+  </Step>
+  <Step title="Name your key">
+    Give the key a descriptive name that identifies its purpose — for example, `"Reporting Integration"` or `"Agenda Sync Service"`. A clear name makes it easier to manage and revoke keys later.
+  </Step>
+  <Step title="Select the required scopes">
+    Choose the scopes this key needs: **Read**, **Write**, and/or **Admin**. Apply the principle of least privilege — grant only the permissions the integration actually requires.
+  </Step>
+  <Step title="Copy the key immediately">
+    Your key is displayed **once** after creation. Copy it now and store it securely — ConnectMeetings does not store the raw key value and cannot show it to you again.
+  </Step>
+</Steps>
+
+---
+
+## Using Your API Key
+
+Pass your API key in the `Authorization` header of every request using the `Bearer` scheme:
+
+```bash
+curl -X GET https://api.connectmeetings.ca/v1/meetings \
+  -H "Authorization: Bearer cm_live_xxxxxxxxxxxxxxxxxxxxxxxx"
+```
+
+---
+
+## API Key Format
+
+ConnectMeetings API keys follow a consistent naming convention so you can identify them at a glance:
+
+| Prefix | Environment |
+|---|---|
+| `cm_live_` | Production — use this key against live data |
+| `cm_test_` | Sandbox / test environment — safe for development and testing |
+
+Always use `cm_test_` keys during development to avoid unintended changes to your production data.
+
+---
+
+## Key Scopes
+
+When creating a key, you assign one or more scopes that control what the key is permitted to do:
+
+| Scope | Description |
+|---|---|
+| **Read** | Retrieve data — meetings, agendas, action items, users |
+| **Write** | Create and update resources |
+| **Admin** | Manage users, roles, and organization settings |
+
+We recommend applying the **principle of least privilege**: grant only the scopes an integration needs to function. For example, a reporting integration only needs the **Read** scope.
+
+---
+
+## Revoking a Key
+
+You can revoke any API key at any time from the dashboard:
+
+1. Go to **Settings > API Keys**.
+2. Find the key you want to revoke.
+3. Click **Revoke** next to it.
+
+Revocation is immediate. Any requests made with a revoked key will return a `401` error.
+
+---
+
+## Security Best Practices
+
+Follow these practices to keep your API keys secure:
+
+- **Never commit API keys to source control.** Use a `.gitignore` file and secrets scanning tools to prevent accidental exposure.
+- **Use environment variables.** Store keys in environment variables (e.g., `CM_API_KEY`) rather than hardcoding them in your application.
+- **Rotate keys periodically.** Generate a new key, update your integration, then revoke the old one on a regular schedule.
+- **Use a separate key per integration.** One key per service makes it easy to revoke a single integration without affecting others.
+
+---
+
+## Authentication Errors
+
+<Note>
+  API keys are **organization-scoped** and inherit the permissions of the Admin who created them. If that Admin's account is deactivated, all keys they created will also be invalidated.
+</Note>
+
+If your request is not authenticated correctly, the API returns one of the following errors:
+
+| Status | Error Code | Meaning |
+|---|---|---|
+| `401` | `auth.invalid_key` | The API key is invalid or has been revoked |
+| `401` | `auth.missing_key` | The `Authorization` header is not present on the request |
+| `403` | `auth.insufficient_scope` | The key does not have the required scope for this action |
+| `429` | `rate.limit_exceeded` | Too many requests — slow down and retry after the reset window |
+
+All error responses follow the standard error format:
+
+```json
+{
+  "error": {
+    "code": "auth.missing_key",
+    "message": "No Authorization header was provided. Include your API key as a Bearer token."
+  }
+}
+```

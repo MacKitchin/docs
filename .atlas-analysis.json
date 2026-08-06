@@ -1,13 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "ConnectMeetings",
+  "projectType": "saas",
+  "projectName": "ConnectMeetings",
+  "projectDescription": "A structured meeting management platform for governments, school boards, and public-sector organizations — covering smart scheduling, agenda building, collaborative minutes, and action item tracking.",
   "theme": "almond",
-  "colors": {
-    "primary": "#ef7025",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
-  },
-  "favicon": "/favicon.svg",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
   "navigation": {
     "tabs": [
       {
@@ -88,16 +86,30 @@
       }
     ]
   },
-  "navbar": {
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://connectmeetings.ca"
-    }
-  },
-  "footer": {
-    "socials": {
-      "website": "https://connectmeetings.ca"
-    }
-  }
+  "keyFeatures": [
+    "Smart scheduling — find open slots instantly across teams",
+    "Collaborative agenda builder with templates and approval workflows",
+    "Live meeting minutes with real-time collaboration",
+    "Action item tracking with owners and due dates",
+    "Automated email and SMS reminders",
+    "Microsoft 365 deep integration (Outlook, Teams, SharePoint)",
+    "Meeting analytics — attendance, duration, action item completion",
+    "Support for formal governance workflows (motions, votes, roll calls)",
+    "SOC 2 Type II certified with AES-256 encryption",
+    "Role-based access control (RBAC)",
+    "Canadian data residency options"
+  ],
+  "publicApiSurface": [
+    "GET /meetings — list meetings",
+    "POST /meetings — create a meeting",
+    "GET /meetings/{id} — retrieve a meeting",
+    "PATCH /meetings/{id} — update a meeting",
+    "DELETE /meetings/{id} — delete a meeting",
+    "GET /meetings/{id}/agenda — get meeting agenda",
+    "POST /meetings/{id}/agenda/items — add agenda item",
+    "GET /meetings/{id}/action-items — list action items",
+    "POST /meetings/{id}/action-items — create action item",
+    "GET /users — list users in organization",
+    "POST /auth/token — obtain API token"
+  ]
 }

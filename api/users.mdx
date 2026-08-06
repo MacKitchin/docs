@@ -1,0 +1,154 @@
+---
+title: "REST API Endpoints for Users"
+sidebarTitle: "Users"
+description: "List and retrieve users in your ConnectMeetings organization via the API. Look up user IDs for assigning meeting participants and action item owners."
+---
+
+The Users API provides read access to the members of your ConnectMeetings organization. Use these endpoints to list all users, filter by role, and look up individual user records. The most common reason to call these endpoints is to retrieve user IDs before assigning action items or building participant lists in your own integrations.
+
+<Note>
+  User write operations — including inviting new users, changing roles, and deactivating accounts — are managed through the ConnectMeetings admin UI. The API does not support creating, updating, or deleting user records.
+</Note>
+
+---
+
+## GET /users
+
+Retrieve a paginated list of all active users in your organization. Filter by role to narrow results to a specific group.
+
+<ParamField query="role" type="string">
+  Filter users by their organization role. Accepted values: `admin`, `organizer`, `participant`, `view_only`.
+</ParamField>
+
+<ParamField query="page" type="integer" default="1">
+  The page number to return.
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="20">
+  The number of users to return per page. Maximum: `100`.
+</ParamField>
+
+```bash
+curl -X GET "https://api.connectmeetings.ca/v1/users?role=organizer&page=1&per_page=20" \
+  -H "Authorization: Bearer cm_live_xxxx"
+```
+
+```json
+{
+  "data": [
+    {
+      "id": "usr_77gh8ijk9lmn0opq1rst2uvw",
+      "name": "Margaret Osei",
+      "email": "m.osei@cityofharbourview.ca",
+      "role": "organizer",
+      "created_at": "2023-08-14T10:30:00Z"
+    },
+    {
+      "id": "usr_88rs9tuv0wxy1zabc2defg3h",
+      "name": "David Tremblay",
+      "email": "d.tremblay@cityofharbourview.ca",
+      "role": "organizer",
+      "created_at": "2023-09-02T08:15:00Z"
+    },
+    {
+      "id": "usr_99tu0vwx1yza2bcde3fghi4j",
+      "name": "Priya Anand",
+      "email": "p.anand@cityofharbourview.ca",
+      "role": "organizer",
+      "created_at": "2024-01-11T13:45:00Z"
+    }
+  ],
+  "meta": {
+    "total": 3,
+    "page": 1,
+    "per_page": 20
+  }
+}
+```
+
+<ResponseField name="data" type="array">
+  An array of user objects.
+
+  <Expandable title="User object fields">
+    <ResponseField name="data[].id" type="string">
+      The unique identifier for the user. Use this value as `assignee_id` when creating action items.
+    </ResponseField>
+    <ResponseField name="data[].name" type="string">
+      The full display name of the user.
+    </ResponseField>
+    <ResponseField name="data[].email" type="string">
+      The email address associated with the user's account.
+    </ResponseField>
+    <ResponseField name="data[].role" type="string">
+      The user's role in the organization: `admin`, `organizer`, `participant`, or `view_only`.
+    </ResponseField>
+    <ResponseField name="data[].created_at" type="string">
+      The UTC timestamp when the user was added to the organization.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Pagination metadata for the response.
+
+  <Expandable title="Meta fields">
+    <ResponseField name="meta.total" type="integer">
+      The total number of users matching the query.
+    </ResponseField>
+    <ResponseField name="meta.page" type="integer">
+      The current page number.
+    </ResponseField>
+    <ResponseField name="meta.per_page" type="integer">
+      The number of results returned per page.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## GET /users/\{id\}
+
+Retrieve a single user by their unique ID. Use this endpoint to confirm user details before assigning tasks or to resolve a user ID to a name and email in your own application.
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the user to retrieve.
+</ParamField>
+
+```bash
+curl -X GET https://api.connectmeetings.ca/v1/users/usr_77gh8ijk9lmn0opq1rst2uvw \
+  -H "Authorization: Bearer cm_live_xxxx"
+```
+
+```json
+{
+  "data": {
+    "id": "usr_77gh8ijk9lmn0opq1rst2uvw",
+    "name": "Margaret Osei",
+    "email": "m.osei@cityofharbourview.ca",
+    "role": "organizer",
+    "created_at": "2023-08-14T10:30:00Z"
+  }
+}
+```
+
+<ResponseField name="data" type="object">
+  The user object for the requested ID.
+
+  <Expandable title="User object fields">
+    <ResponseField name="data.id" type="string">
+      The unique identifier for the user.
+    </ResponseField>
+    <ResponseField name="data.name" type="string">
+      The full display name of the user.
+    </ResponseField>
+    <ResponseField name="data.email" type="string">
+      The email address associated with the user's account.
+    </ResponseField>
+    <ResponseField name="data.role" type="string">
+      The user's role in the organization: `admin`, `organizer`, `participant`, or `view_only`.
+    </ResponseField>
+    <ResponseField name="data.created_at" type="string">
+      The UTC timestamp when the user was added to the organization.
+    </ResponseField>
+  </Expandable>
+</ResponseField>

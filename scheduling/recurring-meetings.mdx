@@ -1,0 +1,89 @@
+---
+title: "Set Up Recurring Meetings for Standing Committees"
+sidebarTitle: "Recurring Meetings"
+description: "Create recurring meeting series in ConnectMeetings for standing committees, councils, and board meetings with shared agenda templates and consistent scheduling."
+---
+
+Standing committees, city councils, and school boards meet on a predictable schedule — weekly, monthly, or quarterly. ConnectMeetings recurring meetings let you define that schedule once and automatically generate every occurrence, complete with a shared agenda template, consistent attendee list, and pre-configured reminders. You spend less time on logistics and more time on the work that matters.
+
+## Creating a Recurring Series
+
+<Steps>
+  <Step title="Open a New Meeting">
+    From your dashboard, click **New Meeting** in the top navigation bar.
+  </Step>
+  <Step title="Enable Recurring">
+    In the meeting setup panel, toggle **Recurring** to the on position. A recurrence configuration panel appears below the date and time fields.
+  </Step>
+  <Step title="Set the Recurrence Pattern">
+    Choose one of the available patterns: **Daily**, **Weekly**, **Bi-weekly**, **Monthly**, or **Custom**. Configure the pattern details — for example, which days of the week, or which date of the month. See the options below.
+  </Step>
+  <Step title="Set the Series End">
+    Choose when the series ends: after a specific **number of occurrences**, on a specific **end date**, or select **No end date** for an ongoing series. You can end the series at any time from the series management view.
+  </Step>
+  <Step title="Add Attendees and Details">
+    Add your attendees, location or video link, and any other meeting details. These apply to the entire series but can be overridden on individual occurrences.
+  </Step>
+  <Step title="Attach an Agenda Template (Optional)">
+    In the **Agenda** section, click **Attach Template** and choose an existing template. Each new occurrence will automatically start with that template's structure. See the section below for more details.
+  </Step>
+  <Step title="Save the Series">
+    Click **Create Series**. ConnectMeetings generates all scheduled occurrences and sends invitations to all attendees.
+  </Step>
+</Steps>
+
+## Recurrence Options
+
+ConnectMeetings supports the following recurrence patterns.
+
+| Pattern | Configuration Options |
+|---|---|
+| **Daily** | Every day, or every N days (e.g., every 2 days) |
+| **Weekly** | One or more days of the week (e.g., every Tuesday and Thursday) |
+| **Bi-weekly** | Every two weeks on selected days |
+| **Monthly (by date)** | A specific date each month (e.g., the 15th) |
+| **Monthly (by day)** | A specific day-of-week occurrence (e.g., first Monday, last Friday) |
+| **Custom interval** | Any combination of days, weeks, or months (e.g., every 6 weeks) |
+
+For monthly patterns, use **by day-of-week** when the meeting should always fall on a business day regardless of how the calendar falls (e.g., "first Monday of every month" rather than "the 1st").
+
+## Series vs. Individual Occurrence
+
+You can edit a recurring series at two levels: the entire series or a single occurrence.
+
+- **Edit entire series** — Changes apply to all future occurrences from today onward. Past occurrences are not affected. Use this when the meeting time, attendees, or recurrence pattern changes permanently.
+- **Edit single occurrence** — Changes apply only to that specific meeting date. The rest of the series remains unchanged. Use this for one-off exceptions such as a location change or a guest attendee.
+
+<Warning>
+  When you open an occurrence and click **Edit**, ConnectMeetings asks whether you want to edit **this occurrence** or **this and all future occurrences**. Choose carefully — selecting "all future occurrences" will overwrite any individual customizations you have already made to upcoming meetings in the series. This action cannot be undone.
+</Warning>
+
+## Agenda Templates on Recurring Meetings
+
+Attaching an agenda template to a series ensures every occurrence starts with the same structure — standing agenda items, sections, and pre-filled descriptions — while still allowing each meeting's agenda to be customized before publication.
+
+When a new occurrence is created, ConnectMeetings copies the template into the occurrence as a draft agenda. Changes you make to that occurrence's agenda do not affect the template or other occurrences.
+
+<Tip>
+  If your committee has a standard agenda structure (e.g., Call to Order, Approval of Minutes, Committee Reports, New Business, Adjournment), build it once as an **Agenda Template** under **Settings > Agenda Templates**, then attach it to the series. Every new occurrence will be pre-populated and ready to customize in seconds.
+</Tip>
+
+To update the template attached to a series, go to the series detail view, click **Edit Series**, and choose a different template from the **Agenda Template** dropdown. Future occurrences will use the new template; past and already-customized occurrences are not affected.
+
+## Managing a Series
+
+You can view and manage all occurrences in a series from the **Series View**.
+
+**To open the Series View**, click the series name from your meeting list and select **View All Occurrences**. This shows a timeline of every past, upcoming, and cancelled occurrence.
+
+### Cancelling a Single Occurrence
+
+Open the occurrence you want to cancel, click **Cancel Occurrence**, and enter an optional cancellation reason. Attendees receive a cancellation notification automatically. The occurrence remains visible in the Series View with a **Cancelled** label.
+
+### Ending a Series
+
+To stop all future occurrences, open the Series View and click **End Series**. Choose an effective date — occurrences scheduled after that date are cancelled and attendees are notified. Occurrences before the effective date are preserved with their existing data.
+
+### Reactivating or Editing a Cancelled Occurrence
+
+A cancelled single occurrence can be reinstated. Open the cancelled occurrence in the Series View and click **Reinstate Occurrence**. Update the date or time if needed and save — invitations are re-sent to all attendees.

@@ -1,0 +1,340 @@
+---
+title: "REST API Endpoints for Meeting Agendas"
+sidebarTitle: "Agendas"
+description: "Retrieve and manage meeting agendas via the ConnectMeetings API. Fetch the full agenda or add, reorder, and remove individual agenda items."
+---
+
+The Agendas API gives you full programmatic control over the agenda for any meeting in your organization. You can fetch the complete agenda, add and update individual items, remove items that are no longer needed, and reorder items to match your preferred sequence — all without leaving your own systems or workflows.
+
+---
+
+## GET /meetings/\{meeting_id\}/agenda
+
+Retrieve the full agenda for a specific meeting. The response includes the agenda object and an ordered array of all agenda items.
+
+<ParamField path="meeting_id" type="string" required>
+  The unique identifier of the meeting whose agenda you want to retrieve.
+</ParamField>
+
+```bash
+curl -X GET https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/agenda \
+  -H "Authorization: Bearer cm_live_xxxx"
+```
+
+```json
+{
+  "data": {
+    "id": "agn_03kt0bxrzm5tp7dm1f9y4g6h",
+    "meeting_id": "mtg_01hq8zvpxk3rn5bk9d7w2e4f",
+    "items": [
+      {
+        "id": "agi_11ab2cde3fgh4ijk5lmn6opq",
+        "title": "Call to Order",
+        "type": "information",
+        "presenter": null,
+        "duration_minutes": 2,
+        "description": null,
+        "order": 1
+      },
+      {
+        "id": "agi_22rs3tuv4wxy5zabc6defg7h",
+        "title": "Approval of Previous Meeting Minutes",
+        "type": "action",
+        "presenter": "City Clerk",
+        "duration_minutes": 5,
+        "description": "Review and approve the minutes from the March 18 regular meeting.",
+        "order": 2
+      },
+      {
+        "id": "agi_33hi4jkl5mno6pqr7stu8vwx",
+        "title": "Public Comment Period",
+        "type": "public_comment",
+        "presenter": null,
+        "duration_minutes": 30,
+        "description": null,
+        "order": 3
+      }
+    ]
+  }
+}
+```
+
+<ResponseField name="data" type="object">
+  The agenda object for the meeting.
+
+  <Expandable title="Agenda fields">
+    <ResponseField name="data.id" type="string">
+      The unique identifier of the agenda.
+    </ResponseField>
+    <ResponseField name="data.meeting_id" type="string">
+      The ID of the meeting this agenda belongs to.
+    </ResponseField>
+    <ResponseField name="data.items" type="array">
+      An ordered array of agenda item objects. Items are sorted by their `order` value, ascending.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="data.items[]" type="object">
+  An individual agenda item.
+
+  <Expandable title="Agenda item fields">
+    <ResponseField name="data.items[].id" type="string">
+      The unique identifier of the agenda item.
+    </ResponseField>
+    <ResponseField name="data.items[].title" type="string">
+      The display title of the agenda item.
+    </ResponseField>
+    <ResponseField name="data.items[].type" type="string">
+      The item type: `information`, `action`, `presentation`, `consent`, or `public_comment`.
+    </ResponseField>
+    <ResponseField name="data.items[].presenter" type="string">
+      The name of the person presenting this item, or `null` if not assigned.
+    </ResponseField>
+    <ResponseField name="data.items[].duration_minutes" type="integer">
+      The allocated time for this item in minutes, or `null` if not set.
+    </ResponseField>
+    <ResponseField name="data.items[].description" type="string">
+      Supporting notes or context for the item, or `null` if not set.
+    </ResponseField>
+    <ResponseField name="data.items[].order" type="integer">
+      The position of this item in the agenda sequence, starting at `1`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## POST /meetings/\{meeting_id\}/agenda/items
+
+Add a new item to a meeting's agenda. By default, new items are appended to the end of the agenda. Provide an `order` value to insert the item at a specific position — existing items will shift down accordingly.
+
+<ParamField path="meeting_id" type="string" required>
+  The unique identifier of the meeting to add the item to.
+</ParamField>
+
+<ParamField body="title" type="string" required>
+  The display title of the agenda item.
+</ParamField>
+
+<ParamField body="type" type="string">
+  The item type. Accepted values: `information`, `action`, `presentation`, `consent`, `public_comment`. Defaults to `information`.
+</ParamField>
+
+<ParamField body="presenter" type="string">
+  The name of the person responsible for presenting this item.
+</ParamField>
+
+<ParamField body="duration_minutes" type="integer">
+  The number of minutes allocated for this item on the agenda.
+</ParamField>
+
+<ParamField body="description" type="string">
+  Supporting notes, context, or background information for this item.
+</ParamField>
+
+<ParamField body="order" type="integer">
+  The position to insert this item in the agenda sequence. If omitted, the item is appended to the end.
+</ParamField>
+
+```bash
+curl -X POST https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/agenda/items \
+  -H "Authorization: Bearer cm_live_xxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Budget Amendment — Parks and Recreation",
+    "type": "action",
+    "presenter": "Director of Finance",
+    "duration_minutes": 20,
+    "description": "Review and vote on proposed budget reallocation for Q3.",
+    "order": 4
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "agi_44yz5abc6def7ghi8jkl9mno",
+    "title": "Budget Amendment — Parks and Recreation",
+    "type": "action",
+    "presenter": "Director of Finance",
+    "duration_minutes": 20,
+    "description": "Review and vote on proposed budget reallocation for Q3.",
+    "order": 4
+  }
+}
+```
+
+<ResponseField name="data" type="object">
+  The newly created agenda item. See [GET /meetings/\{meeting_id\}/agenda](#get-meetingsmeeting_idagenda) for a description of all item fields.
+</ResponseField>
+
+---
+
+## PATCH /meetings/\{meeting_id\}/agenda/items/\{item_id\}
+
+Update one or more fields on an existing agenda item. Include only the fields you want to change.
+
+<ParamField path="meeting_id" type="string" required>
+  The unique identifier of the meeting the item belongs to.
+</ParamField>
+
+<ParamField path="item_id" type="string" required>
+  The unique identifier of the agenda item to update.
+</ParamField>
+
+<ParamField body="title" type="string">
+  An updated display title for the item.
+</ParamField>
+
+<ParamField body="type" type="string">
+  An updated item type: `information`, `action`, `presentation`, `consent`, or `public_comment`.
+</ParamField>
+
+<ParamField body="presenter" type="string">
+  An updated presenter name.
+</ParamField>
+
+<ParamField body="duration_minutes" type="integer">
+  An updated time allocation in minutes.
+</ParamField>
+
+<ParamField body="description" type="string">
+  Updated supporting notes for the item.
+</ParamField>
+
+<Note>
+  To change the position of an item, use the [PUT /reorder](#put-meetingsmeeting_idagendaitemsreorder) endpoint instead of updating `order` directly via PATCH.
+</Note>
+
+```bash
+curl -X PATCH https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/agenda/items/agi_44yz5abc6def7ghi8jkl9mno \
+  -H "Authorization: Bearer cm_live_xxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "duration_minutes": 25,
+    "presenter": "Director of Finance and the City Manager"
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "agi_44yz5abc6def7ghi8jkl9mno",
+    "title": "Budget Amendment — Parks and Recreation",
+    "type": "action",
+    "presenter": "Director of Finance and the City Manager",
+    "duration_minutes": 25,
+    "description": "Review and vote on proposed budget reallocation for Q3.",
+    "order": 4
+  }
+}
+```
+
+<ResponseField name="data" type="object">
+  The full updated agenda item object reflecting all changes.
+</ResponseField>
+
+---
+
+## DELETE /meetings/\{meeting_id\}/agenda/items/\{item_id\}
+
+Remove an item from a meeting's agenda. Remaining items automatically resequence to fill the gap.
+
+<ParamField path="meeting_id" type="string" required>
+  The unique identifier of the meeting the item belongs to.
+</ParamField>
+
+<ParamField path="item_id" type="string" required>
+  The unique identifier of the agenda item to remove.
+</ParamField>
+
+```bash
+curl -X DELETE https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/agenda/items/agi_44yz5abc6def7ghi8jkl9mno \
+  -H "Authorization: Bearer cm_live_xxxx"
+```
+
+A successful delete returns HTTP `204 No Content` with an empty response body.
+
+---
+
+## PUT /meetings/\{meeting_id\}/agenda/items/reorder
+
+Reorder all agenda items in a single request. Send the complete new order as an array of item IDs. Every item in the agenda must be included — any item omitted from the array will be appended to the end in an undefined order.
+
+<ParamField path="meeting_id" type="string" required>
+  The unique identifier of the meeting whose agenda you want to reorder.
+</ParamField>
+
+<ParamField body="order" type="array" required>
+  An array of agenda item ID strings in the desired sequence, from first to last.
+</ParamField>
+
+<Tip>
+  Fetch the current agenda with `GET /meetings/{meeting_id}/agenda` first to get all item IDs, then construct your new `order` array before submitting.
+</Tip>
+
+```bash
+curl -X PUT https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/agenda/items/reorder \
+  -H "Authorization: Bearer cm_live_xxxx" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "order": [
+      "agi_11ab2cde3fgh4ijk5lmn6opq",
+      "agi_33hi4jkl5mno6pqr7stu8vwx",
+      "agi_44yz5abc6def7ghi8jkl9mno",
+      "agi_22rs3tuv4wxy5zabc6defg7h"
+    ]
+  }'
+```
+
+```json
+{
+  "data": {
+    "id": "agn_03kt0bxrzm5tp7dm1f9y4g6h",
+    "meeting_id": "mtg_01hq8zvpxk3rn5bk9d7w2e4f",
+    "items": [
+      {
+        "id": "agi_11ab2cde3fgh4ijk5lmn6opq",
+        "title": "Call to Order",
+        "type": "information",
+        "presenter": null,
+        "duration_minutes": 2,
+        "description": null,
+        "order": 1
+      },
+      {
+        "id": "agi_33hi4jkl5mno6pqr7stu8vwx",
+        "title": "Public Comment Period",
+        "type": "public_comment",
+        "presenter": null,
+        "duration_minutes": 30,
+        "description": null,
+        "order": 2
+      },
+      {
+        "id": "agi_44yz5abc6def7ghi8jkl9mno",
+        "title": "Budget Amendment — Parks and Recreation",
+        "type": "action",
+        "presenter": "Director of Finance and the City Manager",
+        "duration_minutes": 25,
+        "description": "Review and vote on proposed budget reallocation for Q3.",
+        "order": 3
+      },
+      {
+        "id": "agi_22rs3tuv4wxy5zabc6defg7h",
+        "title": "Approval of Previous Meeting Minutes",
+        "type": "action",
+        "presenter": "City Clerk",
+        "duration_minutes": 5,
+        "description": "Review and approve the minutes from the March 18 regular meeting.",
+        "order": 4
+      }
+    ]
+  }
+}
+```
+
+<ResponseField name="data" type="object">
+  The full agenda object with all items in their new order. See [GET /meetings/\{meeting_id\}/agenda](#get-meetingsmeeting_idagenda) for a description of all fields.
+</ResponseField>
