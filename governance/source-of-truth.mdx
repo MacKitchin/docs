@@ -1,0 +1,87 @@
+---
+title: "Source of truth"
+description: "Which system owns which fact, who maintains it, and how often it refreshes."
+icon: "shield-check"
+---
+
+The Source of Truth Registry is the decision layer for information ownership. Check it before editing a page, and before answering when sources disagree.
+
+## Truth levels
+
+<CardGroup cols={3}>
+  <Card title="Canonical" icon="badge-check">
+    Authoritative. Exactly one canonical entry exists per information type.
+  </Card>
+
+  <Card title="Working" icon="flask-conical">
+    Useful but unverified. Must be checked before it is relied on, and disclosed as unverified when cited.
+  </Card>
+
+  <Card title="Deprecated" icon="archive">
+    Retained for history. Must not be used for new work.
+  </Card>
+</CardGroup>
+
+## Registry rules
+
+1. Every major information type gets exactly **one** Canonical entry.
+2. Every entry needs an **Owner** and a **Refresh Cadence**.
+3. When a source is replaced, mark the old row **Deprecated** and link the replacement.
+4. AI agents should prefer Canonical rows and disclose uncertainty when a row is Working or Deprecated.
+
+## The registry
+
+### Canonical
+
+| Information type | System | Owner | Refresh | Notes |
+| --- | --- | --- | --- | --- |
+| Client and account data | Salesforce | Andrew Dysart | Live | `connect-prod` Org `00D30000001H2naEAC`. Notion documents structure only, never record data |
+| Salesforce org metadata and schema | Salesforce | Mac Kitchin | As needed | Refresh via `sf sobject describe` and `sf data query` |
+| Sales process and business processes | Salesforce | Andrew Dysart | Quarterly | Business Processes catalogue in the Salesforce KB, linked to Customer FAQs |
+| Event information, calendar, operational resources | Notion | Mac Kitchin | Monthly | **Live Events is the single authoritative event source**, one page per event. Customer-service chatbots answer only from these |
+| Projects and initiatives | Notion | Mac Kitchin | Weekly | Master Projects, one row per initiative |
+| Tasks | Notion | Mac Kitchin | Live | Master Tasks. Legacy Tasks, My Tasks, and Claude Tasks are deprecated - do not add rows there |
+| People directory | Notion | Mac Kitchin | Quarterly | Master People is the data source; Team HQ is the front door |
+| Workspace structure and conventions | Notion | Mac Kitchin | Quarterly | PARA navigation, master databases, naming and archive rules |
+| SOPs and process documentation | Notion | Mac Kitchin | As needed | Company-wide in Master Docs; Salesforce-specific in the SF KB |
+| Company terminology | Notion | Mac Kitchin | As needed | Company glossary in Master Docs; Salesforce terms in the SF KB glossary |
+| AI agent documentation | Notion | Mac Kitchin | Monthly | AI & Automation Hub plus the AI & Agent Library. Agentforce detail in the SF KB |
+| Prompt library | Notion | Mac Kitchin | As needed | Canonical merged index of Prompt Library plus Agent Prompts & Examples |
+| Customer FAQ answers | Notion | Mac Kitchin | Monthly | ~31 grounded Q&A pairs with confidence scores, ranked by frequency. Agents cite these |
+| Supplier knowledge, email-mined | Email-mined | Mac Kitchin | Quarterly | FAQs, articles, tribal knowledge, gaps, automation opportunities. Sensitive items gated |
+| Connect and BizBash consolidation analysis | Notion | Mac Kitchin | Quarterly | The seven-part analysis |
+
+### Working - verify before relying on
+
+| Information type | System | Owner | Notes |
+| --- | --- | --- | --- |
+| Reporting dashboards | Salesforce | Mac Kitchin | Live in `connect-prod` but **not indexed in Notion**. A dashboard index page is a candidate |
+| Company policies | Notion | Mac Kitchin | Policy docs in Master Docs. **HR and legal policies not yet imported** |
+| Training materials and onboarding | Notion | Mac Kitchin | Training docs in Master Docs. **Needs role-specific onboarding steps per department** |
+
+### Deprecated
+
+| Information type | Replacement |
+| --- | --- |
+| Master Events database | Live Events. The database contained zero records and was archived on 29 July 2026 |
+| Legacy Tasks / My Tasks / Claude Tasks | Master Tasks |
+| Legacy people directory page | Team HQ as the front door; Master People remains the data source |
+| Duplicate Salesforce Knowledge Base | The original SF KB, which is linked from all hubs |
+
+## How this site relates to the registry
+
+This Company Brain is a **derived mirror**, not a registry entry in its own right. It restates canonical material in a form that is easier to read and easier for an agent to retrieve from. It does not hold record data and it is not authoritative over a source system.
+
+<Warning>
+  If this site and a canonical source disagree, the canonical source wins and this site is out of date. Report the drift to the owner listed above rather than editing around it.
+</Warning>
+
+## Refresh cadences at a glance
+
+| Cadence | What it covers |
+| --- | --- |
+| **Live / synced** | Client and account data, tasks, reporting dashboards |
+| **Weekly** | Projects and initiatives |
+| **Monthly** | Event information, AI agent documentation, Customer FAQs |
+| **Quarterly** | Sales and business processes, people directory, workspace conventions, supplier knowledge, consolidation analysis, training |
+| **As needed** | Schema and metadata, SOPs, terminology, prompt library, policies |

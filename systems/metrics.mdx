@@ -1,0 +1,219 @@
+---
+title: "Metrics and definitions"
+description: "Exact definitions and SOQL for revenue, pipeline, win rate, registrations, and account spend."
+icon: "chart-line"
+---
+
+Every metric below is defined once, here. If a number in a deck disagrees with one of these queries, the query wins until someone changes the definition on this page.
+
+## Revenue
+
+### Revenue booked (Closed Won)
+
+Total value of won deals, cash only.
+
+```sql
+SELECT SUM(Amount) revenue
+FROM Opportunity
+WHERE StageName = 'Closed Won'
+  AND CloseDate = THIS_YEAR
+  AND Barter__c = false
+  AND Account.Account_Status__c != 'Inactive'
+```
+
+Segment by `Sales_Territory__c`, `Media_Rep__c`, `Type` (New versus Existing), or `Event_Market_Segment__c`.
+
+<Warning>
+  `Amount` can be edited after Closed Won. For a historically accurate figure, check `Change_Made_After_Closed_Won__c` and `Initial_Close_Won_Date__c`.
+</Warning>
+
+### Revenue by product category
+
+```sql
+SELECT Product_Category__c, SUM(TotalPrice) revenue
+FROM OpportunityLineItem
+WHERE Opportunity.StageName = 'Closed Won'
+  AND Opportunity.CloseDate = THIS_YEAR
+  AND Opportunity.Barter__c = false
+GROUP BY Product_Category__c
+```
+
+### Revenue by business unit
+
+```sql
+SELECT Organization__c, SUM(TotalPrice) revenue
+FROM OpportunityLineItem
+WHERE Opportunity.StageName = 'Closed Won'
+  AND Product_Year__c = '2026'
+GROUP BY Organization__c
+```
+
+Returns the Meetings, Travel, BizBash, and TSNN split. Note this filters on **product year**, not close date.
+
+## Pipeline
+
+### Active pipeline value
+
+```sql
+SELECT SUM(Amount) pipeline
+FROM Opportunity
+WHERE IsClosed = false
+  AND StageName NOT IN ('Expired')
+  AND Account.Account_Status__c != 'Inactive'
+```
+
+### Pipeline by stage
+
+```sql
+SELECT StageName, SUM(Amount) value, COUNT(Id) count
+FROM Opportunity
+WHERE IsClosed = false
+  AND StageName != 'Expired'
+GROUP BY StageName
+ORDER BY SUM(Amount) DESC
+```
+
+### Weighted pipeline by forecast category
+
+```sql
+SELECT ForecastCategoryName, SUM(Amount) totalValue, COUNT(Id) dealCount
+FROM Opportunity
+WHERE IsClosed = false
+  AND StageName != 'Expired'
+GROUP BY ForecastCategoryName
+```
+
+## Win and loss
+
+### Win rate
+
+Percentage of closed deals that were won, **excluding Expired from the denominator**.
+
+SOQL has no `CASE`, so run two queries and divide client-side.
+
+```sql
+-- Won
+SELECT COUNT(Id) wonCount FROM Opportunity
+WHERE IsWon = true AND CloseDate = THIS_YEAR AND StageName != 'Expired'
+
+-- Total closed
+SELECT COUNT(Id) closedCount FROM Opportunity
+WHERE IsClosed = true AND CloseDate = THIS_YEAR AND StageName != 'Expired'
+```
+
+<Tip>
+  Report both the excluding-Expired and including-Expired figures. On the supplier cohort they are 78% and 69%, and the nine-point gap _is_ the follow-up problem - 79 deals worth \$660K that simply timed out.
+</Tip>
+
+### Loss reasons
+
+```sql
+SELECT Reason_Lost__c, COUNT(Id) lostCount, SUM(Amount) lostValue
+FROM Opportunity
+WHERE StageName = 'Closed Lost'
+  AND CloseDate = THIS_YEAR
+  AND Reason_Lost__c != null
+GROUP BY Reason_Lost__c
+ORDER BY COUNT(Id) DESC
+```
+
+<Warning>
+  This query currently returns almost nothing useful. `Reason_Lost__c` is blank on 421 of 424 lost deals. Loss intelligence today comes from [mined email](/projects/supplier-knowledge), not from CRM fields. Enforcing this field at Closed Lost is an open action on the [data consolidation project](/projects/data-consolidation).
+</Warning>
+
+## Events
+
+### Registrations by event and stage
+
+```sql
+SELECT Marketplace__r.Name, Registration_Stage__c, COUNT(Id) regCount
+FROM Registration__c
+WHERE Marketplace__r.Start_Date__c = THIS_YEAR
+GROUP BY Marketplace__r.Name, Registration_Stage__c
+```
+
+### Confirmed attendees
+
+```sql
+SELECT Marketplace__r.Name, COUNT(Id) confirmedCount
+FROM Registration__c
+WHERE Registration_Stage__c = 'Fully Registered'
+  AND Marketplace__r.Start_Date__c = THIS_YEAR
+GROUP BY Marketplace__r.Name
+ORDER BY COUNT(Id) DESC
+```
+
+### Event quick stats, using rollups
+
+```sql
+SELECT Name, Event_Type__c, Start_Date__c, Event_Status__c,
+       Registration_Capacity__c, Total_Fully_Registered__c,
+       Cancelled_Count__c, Location_City__c
+FROM Marketplace__c
+WHERE Start_Date__c = THIS_YEAR
+ORDER BY Start_Date__c
+```
+
+### Registration conversion rate
+
+Compare `Total_Registrations__c` against `Total_Fully_Registered__c` on `Marketplace__c` and divide client-side.
+
+### No-show rate
+
+```sql
+SELECT Marketplace__r.Name, Attendance_Outcome__c, COUNT(Id) count
+FROM Registration__c
+WHERE Registration_Stage__c = 'Fully Registered'
+  AND Marketplace__r.Event_Status__c = 'Completed'
+GROUP BY Marketplace__r.Name, Attendance_Outcome__c
+```
+
+No-shows are commercially material, not administrative: the hosted buyer deposit is forfeited on missed appointments, and supplier renewal depends on appointments actually happening.
+
+## Accounts
+
+### Top accounts by spend
+
+```sql
+SELECT Name, Total_Spend_This_Product_Year__c, Total_Spend_Last_Product_Year__c,
+       Total_Historical_Account_Spend__c, Sales_Territory__c
+FROM Account
+WHERE Account_Status__c = 'Active'
+  AND Total_Spend_This_Product_Year__c > 0
+ORDER BY Total_Spend_This_Product_Year__c DESC
+LIMIT 25
+```
+
+### Events versus media split
+
+```sql
+SELECT Name,
+       Total_Spend_Events_This_Product_Year__c,
+       Total_Spend_Media_This_Product_Year__c,
+       Total_Spend_This_Product_Year__c
+FROM Account
+WHERE Account_Status__c = 'Active'
+  AND Total_Spend_This_Product_Year__c > 0
+ORDER BY Total_Spend_This_Product_Year__c DESC
+LIMIT 50
+```
+
+### Year-over-year change
+
+Pull `Total_Spend_This_Product_Year__c` and `Total_Spend_Last_Product_Year__c` together and compute the delta client-side. Historical years go back five product years via `Total_Spend_2_Product_Years_Ago__c` through `..._5_Product_Years_Ago__c`.
+
+## Reference benchmarks
+
+Current figures on the supplier cohort, for sanity-checking any new analysis.
+
+| Benchmark | Value |
+| --- | --- |
+| Average won deal | ~\$16K |
+| Average renewal deal | ~\$18.8K |
+| Average new-business deal | ~\$10.1K |
+| Renewal win rate | 84.6% |
+| New-business win rate | 67.2% |
+| Inbound win rate | 77.9% |
+| Outbound win rate | 71.5% |
+| Overall win rate excluding expired | ~78% |
+| Overall win rate including expired | ~69% |

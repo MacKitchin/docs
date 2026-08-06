@@ -1,0 +1,98 @@
+---
+title: "Supplier Knowledge Intelligence"
+description: "Mining the supplier email corpus into a governed, agent-ready knowledge base."
+icon: "brain"
+---
+
+<Info>
+  **Stage** Planned (v1 complete, full-corpus run pending) · **Priority** Medium · **Type** Knowledge · **Area** Technology & AI · **Lead** Mac Kitchin
+</Info>
+
+## Overview
+
+An institutional-knowledge base mined from historical Salesforce correspondence with **supplier accounts** - exhibitors, sponsors, advertisers, DMOs and CVBs, venues, AV, production, and technology vendors. It turns tribal knowledge that lived only in reps' inboxes into a searchable, retrieval-ready knowledge base for both employees and Agentforce agents.
+
+The next phase scales the pipeline from the v1 sample to the full 2025-2026 corpus of roughly **26,600 logged supplier emails**, to produce a true ranked top-100 question list and quantified deal correlations.
+
+## Scope and method
+
+|  |  |
+| --- | --- |
+| **Supplier cohort** | Accounts where `Primary_Category__c LIKE 'Supplier-%'` - roughly 13,800 accounts across 29 supplier categories |
+| **Why that filter** | `Account_Sub_Type__c = 'Supplier'` returns only 30 records; category was the far better signal |
+| **Activity profiled** | 80,612 `EmailMessage` records (67k outbound, 13k inbound) and 416,578 `Task` records, of which 385k are logged emails |
+| **v1 sample** | The most recent ~200 days of supplier email threads, to validate the pipeline end to end and seed each knowledge base with grounded findings |
+| **Confidence** | Every finding carries a confidence score and an occurrence signal; minimum corroboration for anything treated as policy is two independent sources |
+
+## Governance
+
+<Warning>
+  This is the most sensitive project in the portfolio, and its governance rules are non-negotiable.
+
+  - Raw email bodies are **never** stored. Only generalised, PII-redacted knowledge.
+  - Pricing, legal, contract, payment, complaint, and PII content is flagged High or Critical sensitivity and routed to the **Knowledge Candidates** review queue rather than auto-published. Six sensitive items are currently held there awaiting human review.
+  - Single-source items are never treated as policy.
+  - Source Salesforce record IDs are retained on every finding for auditability.
+</Warning>
+
+## What v1 produced
+
+| Knowledge base | Contents |
+| --- | --- |
+| Customer FAQs | ~31 grounded question-and-answer pairs with confidence scores, ranked by frequency |
+| Knowledge Articles | 10 retrieval-optimised articles |
+| Tribal Knowledge | 12 undocumented know-how items |
+| Automation Opportunities | 9 candidates worth roughly 1,405 hrs/yr |
+| Knowledge Gaps | 8 documentation gaps |
+| Communication Patterns | 7 lifecycle patterns |
+| Agentforce Recommendations | 6 agent topics |
+| Knowledge Candidates | Governed review queue, 6 sensitive items held |
+
+## The top supplier questions
+
+Ranked by observed frequency in the sample. Frequency is a relative signal, not a full-corpus count.
+
+| # | Question | Category | Frequency | Confidence |
+| --- | --- | --- | --- | --- |
+| 1 | What attendee details do I submit after registering? | Registration | Very high | 0.86 |
+| 2 | When and where is Connect Marketplace 2026? | Event logistics | Very high | 0.90 |
+| 3 | What is included in a supplier package? | Connect Marketplace | High | 0.82 |
+| 4 | What media or advertising can I buy to reach attendees? | Media & Advertising | High | 0.85 |
+| 5 | When is payment due, and what are the terms? | Billing & Contracts | High | 0.75 |
+| 6 | Can I get the buyer list or attendee breakdown? | Attendee Data | High | 0.78 |
+| 7 | Can I get campaign analytics or reporting? | Campaign Management | High | 0.78 |
+| 8 | How do I book my hotel room block? | Hotel & Logistics | Medium | 0.80 |
+| 9 | Do you have creative examples before I sign? | Media & Advertising | Medium | 0.75 |
+| 10 | How do I sign, and what is the contract process? | Billing & Contracts | Medium | 0.88 |
+| 11 | Am I eligible for the Hosted Buyer or VIP programme? | Hosted Buyer | Medium | 0.83 |
+| 12 | How are buyer appointments scheduled? | Connect Marketplace | Medium | 0.80 |
+| 13 | What editorial and print ads exist, and what are the deadlines? | Media & Advertising | Medium | 0.80 |
+| 14 | Can I transfer my invite to a colleague? | Hosted Buyer | Low-medium | 0.70 |
+| 15 | What incentives apply if I sign now? | Promotions | Low-medium | 0.70 |
+
+<Tip>
+  Questions 1, 2, 6, and 7 together account for the three P1 automations on the [roadmap](/ai/automation-roadmap). They are high-frequency, low-judgement, and entirely answerable from existing sources - which is exactly the profile of good automation.
+</Tip>
+
+## Next steps
+
+- [ ] Define batch windows and a thread-level dedupe strategy
+- [ ] Re-run scoring and update Last Observed on all findings
+- [ ] Human review pass on the Knowledge Candidates queue - 6 sensitive items waiting
+
+## Risks and blockers
+
+| Risk | Impact | Mitigation | Status |
+| --- | --- | --- | --- |
+| PII or pricing leakage into published knowledge | Governance breach | Knowledge Candidates review gate plus redaction rules | **Controlled** |
+
+## Scaling to the full corpus
+
+1. Iterate the supplier cohort across the full 2025-2026 history in windowed batches, deduplicating by thread.
+2. Join activity to opportunity stage and outcome to quantify which questions and objections correlate with won deals.
+3. Add numeric Frequency and Rank properties to Customer FAQs and build a sorted top-100 view.
+4. Re-run scoring, promote review-queue items after human approval, update Last Observed.
+
+## Tooling observed in the corpus
+
+Outreach, Artisan AI (AI SDR), DocuSign, and ZoomInfo appear throughout the supplier email sample - useful context when interpreting activity records, since not every logged email was hand-written by a rep.

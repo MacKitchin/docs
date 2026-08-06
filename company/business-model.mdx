@@ -1,0 +1,86 @@
+---
+title: "Business model"
+description: "How the reverse tradeshow, hosted buyer programme, and supplier packages actually make money."
+icon: "handshake"
+---
+
+## The core mechanic
+
+A traditional tradeshow sells floor space and hopes buyers walk by. We invert it.
+
+<Steps>
+  <Step title="Recruit and qualify buyers">
+    Event planners apply to the hosted buyer programme. Qualification is real: a typical bar is generating 50 or more rooms on peak nights, ability to rotate destinations nationally or regionally, and a verifiable two-year event history. Applications take about ten minutes and require a refundable deposit, usually \$200.
+  </Step>
+  <Step title="Sponsor their attendance">
+    Qualified hosted buyers get roundtrip airfare, hotel for the event nights, meals, all networking events, and the education programme, at no cost. In exchange they commit to a full appointment schedule.
+  </Step>
+  <Step title="Sell suppliers access to that room">
+    Suppliers buy tiered packages priced by appointment count. At the flagship these run from Ice Breaker at $$4,250 for 12 appointments up to Deal Closer at $$5,950 for 40 appointments with guaranteed top-five requests.
+  </Step>
+  <Step title="Match and schedule before anyone travels">
+    Appointments are matched, often AI-assisted, and scheduled in advance. Nobody arrives hoping for a conversation. Suppliers arrive with a diary.
+  </Step>
+  <Step title="Return the deposit, and rebook">
+    The buyer deposit is refunded on completing the assigned appointments, and forfeited on no-shows. Rebooking for next year happens onsite in a dedicated rebooking lounge.
+  </Step>
+</Steps>
+
+<Warning>
+  The deposit is the enforcement mechanism for the whole model. If hosted buyers skip appointments, suppliers do not renew, and renewals are 79 percent of supplier revenue. Attendance compliance is a commercial control, not an admin detail.
+</Warning>
+
+## Supplier package structure
+
+Pricing published for Connect Marketplace 2026. Regional events start at \$4,250 for 12 appointments.
+
+| Package | Price | Appointments | Notes |
+| --- | --- | --- | --- |
+| Deal Closer | \$5,950 | 40 | Top five requests guaranteed, preferred listing, 15 available |
+| Elite Connecter | \$5,250 | 30 | Marked most popular, 35 available |
+| Growth Accelerator | \$4,850 | 24 |  |
+| Ice Breaker | \$4,250 | 12 | Entry tier, also the regional-event starting price |
+| Power Pass (Supplier) | \$1,950 | 0 | Access and education only, no scheduled meetings |
+| Power Pass (Buyer) | \$350 | 0 | Planners and buyers only |
+
+## Where the rest of the revenue comes from
+
+<CardGroup cols={2}>
+  <Card title="Event amplification" icon="megaphone">
+    Advertising attached to an event: custom video, lead insights, digital media, event targeting, onsite ads. Priced from roughly $$3,000 for onsite ads up to $$9,950 for the Texas Meeting Planners Guide.
+  </Card>
+
+  <Card title="Media and print" icon="newspaper">
+    BizBash issues, marketplace guides, the Sports Facilities Guide, pre-show and post-show emails. Typically $$5,000 to $$7,000 plus per placement.
+  </Card>
+
+  <Card title="Sponsorships" icon="star">
+    Hosted meals, afternoon amp-ups, hosted buyer amenity shop, closing night party. Priced through the sponsorship prospectus, not published.
+  </Card>
+
+  <Card title="Registration and services" icon="ticket">
+    Non-hosted registrations, Power Passes, and services line items.
+  </Card>
+</CardGroup>
+
+In Salesforce these map to `OpportunityLineItem.Product_Category__c`, which takes four values: **Digital**, **Event**, **Event Amplification**, and **Special Projects**. Business unit is `Organization__c`: **Meetings**, **Travel**, **BizBash**, **TSNN**.
+
+## Track qualification
+
+Marketplace tracks are how we keep the room valuable. Each has its own bar, on top of the general minimum of 50 or more peak rooms, national rotation ability, and a two-year verifiable history.
+
+| Track | Scale | Qualification highlights |
+| --- | --- | --- |
+| Corporate | 400\+ corporate event professionals | Director, VP, or C-suite; six to seven figure budgets |
+| Association | 300\+ association event professionals | 50\+ rooms on peak |
+| Citywide | - | 87% manage \$1M\+ budgets; 1,000\+ rooms or 100,000\+ sq ft minimum |
+| Specialty | 300\+ specialty professionals | Social, military, and fraternal group planners |
+| Sports | 200\+ sports event professionals | Competitive sporting events and sports-themed meetings |
+| International (RTO) | 150\+ international tourism professionals | Receptive tour operators booking inbound North America travel; up to \$600 flight stipend per company |
+| Business Travel | - | 1 in 3 buyers controls \$10M\+ travel budgets; 80%\+ manager level or above |
+| Diversity | 100\+ target community | Faith-based, fraternal, nonprofit, education, LGBTQ\+, multicultural, and women's group planners |
+| Informa | - | Informa PLC colleagues only; registration fees waived |
+
+## Buyer economics we quote to sponsors
+
+From the flagship Why Sponsor page: 61 percent of hosted buyers manage budgets over $$250K, 31 percent manage $$500K or more, 34 percent generate 1,000 or more room nights per event, 45 percent require 250 or more peak rooms, and 22 percent require 500 or more.

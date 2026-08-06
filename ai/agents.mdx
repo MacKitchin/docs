@@ -1,0 +1,93 @@
+---
+title: "Agent roster"
+description: "The six Agentforce agents running in connect-prod and what each one is for."
+icon: "bot"
+---
+
+Six agents are recorded in the AI & Agent Library, all on the Salesforce Agentforce platform in `connect-prod`, all with status **Active**, all owned by Mac Kitchin. Deployment status per agent is an open confirmation item on the [rollout project](/projects/agentforce-rollout).
+
+<CardGroup cols={2}>
+  <Card title="Connect (SF Agent)" icon="message-circle">
+    Developer name `Agentforce_Employee_Agent`. The employee-facing agent for internal question-answering and task execution. The general-purpose front door for staff.
+  </Card>
+
+  <Card title="Data Steward Agent" icon="broom">
+    Data quality and hygiene. Given that `Reason_Lost__c` is blank on 421 of 424 lost deals, this agent has the clearest brief in the roster.
+  </Card>
+
+  <Card title="Flow Automation Agent" icon="workflow">
+    Salesforce Flow automation. Sits alongside the 92 active flows and 235 automation records already in the org.
+  </Card>
+
+  <Card title="Notebook AI Agent" icon="notebook">
+    Analysis and notebook-style work against org data.
+  </Card>
+
+  <Card title="Opportunity Agent" icon="dollar-sign">
+    Opportunity-focused: pipeline hygiene, deal context, and stage progression.
+  </Card>
+
+  <Card title="Agentforce Sales Coach" icon="graduation-cap">
+    Sales coaching against real conversation data - Chorus conversation intelligence is already in the org.
+  </Card>
+</CardGroup>
+
+## What grounds them
+
+An agent is only as good as what it is allowed to read. Retrieval scope by agent type:
+
+| Agent type | May ground on | Must not ground on |
+| --- | --- | --- |
+| Customer-facing | Customer FAQs library (~31 grounded Q&A pairs with confidence scores), Knowledge Articles, the Live Events wiki | Raw email, project pages, marketing site copy, anything marked Deprecated |
+| Employee-facing | Company OS canonical sources, the Salesforce Knowledge Base, Supplier Knowledge Intelligence | Anything marked Deprecated without saying so |
+| Data and ops | `connect-prod` directly, plus the [data model](/systems/data-model) and [metrics](/systems/metrics) definitions | Cached or derived figures presented as live |
+
+<Warning>
+  **The stale-facts problem is the central risk.** Multiple event sites publish contradictory dates, hosts, venues, and cancellation policies - see [Known issues](/governance/known-issues). Restricting customer-facing chatbots to the Live Events wiki is the mitigation, and it only works if the wiki stays current. The refresh SOP is not optional.
+</Warning>
+
+## Prompts and examples
+
+Two prompt collections have been merged into one canonical index: the Prompt Library from the Salesforce Knowledge Base and Agent Prompts & Examples. Merging them fully is an open item on the [Company OS project](/projects/company-os).
+
+## Automation already in place
+
+The AI roster sits on top of substantial existing automation, not on a blank slate.
+
+|  |  |
+| --- | --- |
+| Automation records | 235 |
+| Active flows | 92 |
+| Documented | Salesforce automation is catalogued; **Notion and Zapier automations are not yet documented** |
+
+<Tip>
+  Record every new workflow in the AI & Agent Library **before** launch, not after. Undocumented automation is how the 235-record catalogue became hard to reason about in the first place.
+</Tip>
+
+## Recording a new agent or asset
+
+The AI & Agent Library takes one row per asset with these properties:
+
+| Property | Values |
+| --- | --- |
+| Asset Type | Agent, Prompt, MCP Tool |
+| Platform | Salesforce, Notion, Cursor, HubSpot, Other |
+| Status | Active, and other lifecycle states |
+| Owner | A person from Master People |
+| Docs Link | The canonical documentation page |
+
+## Where to go next
+
+<CardGroup cols={3}>
+  <Card title="Guardrails" icon="shield" href="/ai/guardrails">
+    What agents may and may not say.
+  </Card>
+
+  <Card title="Automation roadmap" icon="list-checks" href="/ai/automation-roadmap">
+    The prioritised backlog, with hours.
+  </Card>
+
+  <Card title="MCP and tooling" icon="wrench" href="/ai/tooling">
+    What the stack runs on.
+  </Card>
+</CardGroup>

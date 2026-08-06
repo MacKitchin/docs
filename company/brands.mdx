@@ -1,0 +1,65 @@
+---
+title: "Brands"
+description: "Connect, BizBash, TSNN, and Connect Travel - what each brand is, who runs it, and how it shows up in Salesforce."
+icon: "tag"
+---
+
+Four brands sit under Connect Meetings & Events. They share one Salesforce org, one sales organisation, and one event operations team, but they address different audiences and carry different products.
+
+<CardGroup cols={2}>
+  <Card title="Connect" icon="handshake">
+    The meetings marketplace brand. Owns the flagship Connect Marketplace plus every regional marketplace and specialty event. This is the appointment-event business.
+  </Card>
+
+  <Card title="BizBash" icon="newspaper">
+    Events media and awards brand. Magazine issues, digital advertising, editorial, and the Sports Innovation Forum ecosystem. Led by Michela Giovannotto, VP BizBash. Editorial led by Sarah Kloepple, Editorial Director.
+  </Card>
+
+  <Card title="TSNN" icon="rss">
+    Trade Show News Network. Industry news brand and the home of the Fifty Over 50 recognition programme. Group content led by Danica Tormohlen, VP Content.
+  </Card>
+
+  <Card title="Connect Travel" icon="plane">
+    The travel-sector arm, including eTourism Marketplace and international inbound travel programming. Ashleigh Trout is VP, Travel.
+  </Card>
+</CardGroup>
+
+## How brands appear in the data
+
+Brand is not a single field. It surfaces in three places, and mixing them up is a common analysis error.
+
+| Field | Object | Values | Use for |
+| --- | --- | --- | --- |
+| `Organization__c` | OpportunityLineItem | Meetings, Travel, BizBash, TSNN | Splitting revenue by business unit. This is the reliable one. |
+| `Product_Type__c` | OpportunityLineItem | Association, Sports, BizBash, Marketplace, Webinar, and 50\+ others | Product-level mix |
+| `Event_Name__c` | OpportunityLineItem | Spring Marketplace, MEGA, Winter Marketplace, and others | Attributing revenue to a specific event |
+
+```sql Revenue by brand for a product year
+SELECT Organization__c, SUM(TotalPrice) revenue
+FROM OpportunityLineItem
+WHERE Opportunity.StageName = 'Closed Won'
+  AND Product_Year__c = '2026'
+GROUP BY Organization__c
+```
+
+<Warning>
+  Connect and BizBash grew up as separate businesses and their account, contact, and lead data has not been fully merged. As of the current analysis there are 26 account-team rep assignments covering 20,876 advertiser accounts on the BizBash side. That gap is the whole point of the [data consolidation project](/projects/data-consolidation). Do not assume BizBash advertiser accounts have an owner.
+</Warning>
+
+## Media partnerships across events
+
+BizBash, TSNN, and Corporate Event News appear as media partners on most Connect event sites. They are internal brands acting as media partners to our own events, which is intentional but occasionally confuses external readers of a sponsor list.
+
+## Brand-facing contact routes
+
+| Route | Address |
+| --- | --- |
+| General event inquiries (informa.com contact pages) | `mac.kitchin@informa.com` |
+| General inquiries (connectmeetings.com contact pages) | `info@connectmeetings.com` |
+| Sponsorship inquiries, regional events | `sales@connectmeetings.com` |
+| BizBash and Sports Innovation Forum sponsorship | `bizbash.sales@informa.com` |
+| Cancellations | `connect.cancellations@informa.com` |
+
+<Note>
+  Every event site currently publishes two different contact pages with overlapping but inconsistent rosters and different email domains. Both are preserved rather than reconciled - see [Known issues](/governance/known-issues).
+</Note>

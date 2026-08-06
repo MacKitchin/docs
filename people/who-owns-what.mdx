@@ -1,0 +1,63 @@
+---
+title: "Who owns what"
+description: "Ownership index - which person to go to for which system, dataset, or decision."
+icon: "key"
+---
+
+If you need a decision, a permission, or an authoritative answer, this is the routing table.
+
+## Systems and data
+
+| Thing | Owner | Notes |
+| --- | --- | --- |
+| Salesforce org `connect-prod` - schema and metadata | Mac Kitchin | Refreshed via `sf sobject describe` and `sf data query` |
+| Client and account data in Salesforce | Andrew Dysart | Notion documents structure only, never record data |
+| Sales process and business process catalogue | Andrew Dysart | Business Processes catalogue in the Salesforce KB |
+| Reporting dashboards | Mac Kitchin | Live in `connect-prod`, not yet indexed in Notion - marked **Working**, not canonical |
+| Hosted buyer data | Bill Mathis | Registration and attendee datasets |
+| Information systems | Wei Zheng |  |
+| Notion Company OS structure and conventions | Mac Kitchin | PARA navigation, master databases, naming and archive rules |
+| Projects and initiatives register | Mac Kitchin | Master Projects, one row per initiative |
+| Tasks | Mac Kitchin | Master Tasks. Legacy Tasks, My Tasks, and Claude Tasks databases are deprecated |
+| People directory | Mac Kitchin | Master People is the data source; Team HQ is the front door |
+| Company terminology | Mac Kitchin | Master Docs glossary, plus a Salesforce-specific glossary |
+| SOPs and process documentation | Mac Kitchin | Company-wide SOPs in Master Docs; Salesforce SOPs in the SF KB |
+
+## AI and automation
+
+| Thing | Owner | Notes |
+| --- | --- | --- |
+| AI agent documentation | Mac Kitchin | AI & Automation Hub plus the AI & Agent Library |
+| Prompt library | Mac Kitchin | Canonical merged index of prompts |
+| Supplier knowledge, email-mined | Mac Kitchin | FAQs, articles, tribal knowledge, gaps, automation opportunities |
+| Customer FAQ answers | Mac Kitchin | ~31 grounded Q&A pairs with confidence scores; agents cite these |
+
+## Events and commercial
+
+| Thing | Owner | Notes |
+| --- | --- | --- |
+| Event information, calendar, operational resources | Mac Kitchin | Live Events is the single authoritative event source, one page per event |
+| Event delivery and logistics | Tinsley Conway |  |
+| Hosted buyer experience and industry relations | Rachel Piper |  |
+| Connect marketplace sales | Suzi Schnell |  |
+| BizBash sales | Michela Giovannotto |  |
+| Media and travel sales | Andrew Dysart |  |
+| Regional event sponsorship inquiries | `sales@connectmeetings.com` |  |
+| BizBash and Sports Innovation Forum sponsorship | `bizbash.sales@informa.com` |  |
+| Event amplification, regional | Andrew Dysart |  |
+
+## Unowned
+
+<Warning>
+  These have no recorded owner and are the clearest gaps in the ownership map.
+
+  - **Customer Success** as an area, despite having three managers working in it
+  - **Finance** as an area
+  - **Company policies** - marked Working, HR and legal policies not yet imported
+  - **Training materials and onboarding** - marked Working, needs role-specific steps per department
+  - **Notion and Zapier automations** - not yet documented; record each new workflow in the AI & Agent Library before launch
+</Warning>
+
+## The escalation rule
+
+For anything customer-facing that touches **billing, legal, contract terms, a specific rate, or a complaint**, an agent must not answer. Escalate to a human. That rule is absolute and is reproduced on [Guardrails](/ai/guardrails).

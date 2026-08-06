@@ -1,0 +1,59 @@
+---
+title: "Glossary"
+description: "Company and Salesforce terminology used across Connect Meetings & Events."
+icon: "book-a"
+---
+
+Terms are grouped by where you will meet them. Salesforce API names are given in backticks where a term maps to a field.
+
+## Business and event terms
+
+| Term | Definition |
+| --- | --- |
+| **MICE** | Meetings, Incentives, Conferences, Exhibitions - the industry we serve. |
+| **Marketplace** | A Connect in-person event where planners meet suppliers in scheduled one-to-one appointments. Also the Salesforce object `Marketplace__c`. |
+| **Reverse tradeshow** | Our event format: buyers sit at tables and suppliers rotate to them, rather than buyers walking an expo floor. |
+| **Hosted buyer** | An event planner whose attendance is sponsored - flights and hotel covered - in exchange for completing an assigned appointment schedule. Tracked on `Registration__c.Hosted_Buyer_Type__c`. |
+| **Anchor planner** | A hosted buyer category signalling unusually high sourcing volume. |
+| **Power Pass** | A non-hosted badge. Full event access and education, but no pre-scheduled appointments. |
+| **Regiception** | Combined registration and opening reception that starts most Connect events. |
+| **Track** | A qualification-gated segment of a marketplace: Association, Corporate, Sports, Specialty, International, Informa. |
+| **Club Connect** | Points-based hosted buyer rewards programme, redeemable for priority seating, hospitality suite access, and transportation. |
+| **CMP credits** | Certified Meeting Professional continuing-education credits earned in our education sessions. |
+| **Event amplification** | Advertising add-ons sold alongside an event package: custom video, lead insights, digital media, event targeting. |
+
+## Commercial terms
+
+| Term | Definition |
+| --- | --- |
+| **IO / Insertion Order** | A signed advertising order. Every Opportunity carries `IO_Number__c`. |
+| **Product year** | The calendar year a product is sold _for_. `OpportunityLineItem.Product_Year__c`. A deal closed in December 2026 can carry product year 2027. |
+| **Closed Won** | The booked stage. `StageName = 'Closed Won'`, `IsWon = true`. |
+| **Expired** | A stale deal that timed out. Closed but not lost - exclude from win-rate denominators. |
+| **Barter** | A non-cash trade deal. `Barter__c = true`. Always exclude from cash revenue. |
+| **PSL** | Prospect / Sponsorship Lead. `Contains_PSL__c` on Opportunity. |
+| **Total spend** | Denormalised historical account spend, held as rollup fields on Account going back five product years. |
+| **Sales territory** | Midwest, Northeast, South, West, or International. Derived from `BillingState`, not a separate territory object. |
+
+## Systems and brands
+
+| Term | Definition |
+| --- | --- |
+| **`connect-prod`** | The production Salesforce org, ID `00D30000001H2naEAC`. |
+| **AdBook (AB2)** | Ad order management system deeply integrated with Salesforce. All `AB2__` prefixed fields come from it. |
+| **Visit Create** | The hosted buyer registration platform. Syncs into `Registration__c` via webhook. |
+| **BizBash** | Events media and awards brand within Informa Connect. |
+| **TSNN** | Trade Show News Network, an Informa Connect media brand. |
+| **Connect Travel** | The travel-sector arm, including eTourism Marketplace. |
+| **Agentforce** | Salesforce's agent platform. Our agent roster runs in `connect-prod`. |
+| **Company OS** | The Notion workspace that holds projects, people, docs, and the source-of-truth registry. |
+| **PARA** | Projects, Areas, Resources, Archive - the navigation model Company OS uses. |
+
+## Governance vocabulary
+
+| Term | Definition |
+| --- | --- |
+| **Canonical** | Authoritative. Exactly one canonical entry exists per information type. |
+| **Working** | Useful but unverified. Must be checked before it is relied on. |
+| **Deprecated** | Retained for history. Must not be used for new work. |
+| **Knowledge Candidates** | The human review queue for mined knowledge flagged as sensitive - pricing, legal, PII. |

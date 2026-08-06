@@ -1,0 +1,100 @@
+---
+title: "Connect and BizBash Data Consolidation"
+sidebarTitle: "Data Consolidation"
+description: "Merging Connect and BizBash account, contact, lead, and opportunity data into one clean dataset."
+icon: "database"
+---
+
+<Info>
+  **Stage** In progress · **Priority** High · **Type** Ops · **Area** Operations · **Lead** Mac Kitchin
+</Info>
+
+## Overview
+
+Consolidate Salesforce Accounts, Contacts, Leads, Prospects, Opportunities, Campaigns, Campaign Members, and Account Team data across the Connect and BizBash businesses so that **routing, reporting, and sales coverage all work from one clean dataset**.
+
+Connect and BizBash grew up separately. They now share a Salesforce org but not a coherent data model, and the seams show most clearly in account ownership.
+
+## Goals and success criteria
+
+- Account team coverage ready for BizBash routing.
+- A deduplicated account and contact universe with categories preserved.
+- The data-quality plan executed against the source analysis.
+
+## The headline problem
+
+<Warning>
+  **26 account-team rep assignments against 20,876 advertiser accounts.** On the BizBash side, effectively no advertiser account has a recorded owner. Any routing rule, coverage report, or agent escalation path that assumes account ownership is currently operating on nothing.
+</Warning>
+
+## The second problem: loss data does not exist
+
+<Warning>
+  `Reason_Lost__c` is **blank on 421 of 424 lost deals**, and `Opportunity_Product_Type__c` is **100 percent null**. Structured win/loss and objection analytics are therefore impossible from CRM fields today. This is why the objection and loss intelligence in the [Supplier Knowledge Intelligence](/projects/supplier-knowledge) project had to be mined from email rather than queried.
+</Warning>
+
+## What the analysis established
+
+Real numbers from supplier-account opportunities closing since 1 January 2025, filtered on `Account.Primary_Category__c LIKE 'Supplier-%'`.
+
+| Metric | Value | What it means |
+| --- | --- | --- |
+| Closed Won | 492 deals, \$7.85M | Average won deal around \$16K |
+| Closed Lost | 139 deals, \$1.93M | Roughly 78% win rate, won over won plus lost |
+| Expired | 79 deals, \$0.66M | Roughly 69% win rate including expired - expiries are a follow-up gap, not a loss |
+| Existing / renewal business | 84.6% win, $$6.22M, ~$$18.8K average | Renewals are the revenue engine |
+| New business | 67.2% win, $$1.64M, ~$$10.1K average | New logos convert lower and smaller |
+| Inbound vs outbound | 77.9% vs 71.5% win rate | Inbound converts better - prioritise inbound response time |
+
+<Tip>
+  The gap between the 78 percent and 69 percent win rates is 79 expired deals worth \$660K. Those are not deals we lost on merit; they are deals nobody followed up on. That is the cheapest revenue in the analysis.
+</Tip>
+
+## Next steps
+
+- [ ] Review the seven-part analysis and confirm the deployment map
+- [ ] Enforce `Reason_Lost__c` and product type at Closed Lost
+
+## Risks and blockers
+
+| Risk | Impact | Mitigation | Status |
+| --- | --- | --- | --- |
+| Team-role routing falls through at cutover | Advertiser accounts left unowned | Build the deployment map before cutover | **Open** |
+
+## The seven-part analysis
+
+The full working sits in Notion Company OS as a seven-document series.
+
+<CardGroup cols={2}>
+  <Card title="1. Executive summary and evidence" icon="file-text">
+    The findings and the data behind them.
+  </Card>
+
+  <Card title="2. Salesforce data context map" icon="map">
+    What lives where across the two businesses.
+  </Card>
+
+  <Card title="3. Segmentation taxonomy" icon="layers">
+    How accounts and contacts should be categorised post-merge.
+  </Card>
+
+  <Card title="4. Lead and prospect triage rules" icon="filter">
+    Decision rules for inbound records.
+  </Card>
+
+  <Card title="5. Assignment and routing logic" icon="route">
+    The rules that replace the missing account team coverage.
+  </Card>
+
+  <Card title="6. Data quality, cleanup, automation, and reporting plan" icon="broom">
+    The remediation programme.
+  </Card>
+
+  <Card title="7. Skill addendum and reusable context" icon="package">
+    The reusable analytical context, which became the informa-data-analyst skill.
+  </Card>
+</CardGroup>
+
+## Why this blocks other work
+
+Clean account ownership is a precondition for agent escalation (who does the agent hand off to?), for coverage reporting, and for any renewal-outreach automation. Given that renewals carry 79 percent of supplier revenue, an unowned account is an unrenewed account.

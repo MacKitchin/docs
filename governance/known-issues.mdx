@@ -1,0 +1,125 @@
+---
+title: "Known issues"
+description: "Open data-quality problems, unresolved content conflicts, and documentation gaps."
+icon: "triangle-alert"
+---
+
+Everything on this page is a known, unresolved problem. It is here so that nobody - person or agent - has to rediscover it, and so that nobody quietly papers over a conflict by picking a side.
+
+<Note>
+  The standing rule: **preserve both versions, flag the conflict, do not reconcile.** Reconciliation is a decision for the owner of the source, not for a reader or a retrieval system.
+</Note>
+
+## Data quality in Salesforce
+
+| Issue | Detail | Impact | Owner |
+| --- | --- | --- | --- |
+| **`Reason_Lost__c` is blank on 421 of 424 lost deals** | Loss reason is effectively unrecorded | Structured win/loss and objection analytics are impossible from CRM fields. Loss intelligence has to be mined from email instead | Mac Kitchin |
+| **`Opportunity_Product_Type__c` is 100% null** | Product type never captured at opportunity level | Product-level win/loss analysis unavailable | Mac Kitchin |
+| **26 account-team rep assignments against 20,876 BizBash advertiser accounts** | Account ownership effectively absent on the BizBash side | Routing, coverage reporting, and agent escalation all break | Mac Kitchin |
+| **Two agency-contact objects** | `Agency_Contact__c` and `Agency_Contacts__c` overlap | Ambiguous joins | Mac Kitchin |
+| **`ProposalDetailsTrigger` on API v29** | Dates from 2014 | Technical debt | Mac Kitchin |
+| **Silverpop and Marketing Cloud coexist** | Silverpop notionally being retired | Duplicate email tracking | Mac Kitchin |
+
+## Ownership gaps
+
+| Gap | Detail |
+| --- | --- |
+| **Customer Success has no area owner** | Three Customer Success Managers work in it, each reporting to a different sales leader |
+| **Finance has no area owner** |  |
+| **Operations has two recorded owners** | Team HQ names Rachel Piper; the Areas database names Andrew Dysart |
+| **Alexa Dye has two recorded managers** | Master People records Rachel Piper; Matt Johnson's direct-reports rollup also lists her. Rachel Piper is treated as correct |
+| **Claudia Curry's role is a placeholder** | Recorded role is a single-character placeholder, and the email `claudia.gunn@informa.com` does not match the recorded name |
+| **An unnamed placeholder area exists** | Created without a name or owner, retained for review rather than deleted. Merge or archive once ownership is confirmed |
+
+## Event content conflicts
+
+Found during the August 2026 site crawl. All are live on `informaconnect.com` as of capture.
+
+<AccordionGroup>
+  <Accordion title="Connect North 2027 - three conflicting date variants" icon="calendar-x">
+    The agenda pages are headed "Tuesday 27 January 2026", "Wednesday 28 January 2026", and "Thursday 29 January 2026". Every other page - Home, How to Attend, Who Attends, Hosted Buyers, Contact, Terms - states 22-24 February 2027. The sponsors page meta description references "Connect North 2026", a third variant.
+  </Accordion>
+
+  <Accordion title="Connect North 2027 - wrong host city on sponsors page" icon="map-pin-x">
+    The sponsors page lists Visit Pittsburgh as host, while the homepage hero reads "Thank you, Pittsburgh - Cincinnati, you're up next!" The sponsor list appears to be carried over from the prior Pittsburgh edition.
+  </Accordion>
+
+  <Accordion title="Connect West 2026 - Lake Tahoe sponsors on a Scottsdale event" icon="map-pin-x">
+    The sponsors page lists Visit Lake Tahoe as host with Margaritaville Resort Lake Tahoe, Alterra Mountain Company and others, despite the 2026 event being at The Westin Kierland Resort and Spa, Scottsdale. Carried over from a prior South Lake Tahoe edition.
+  </Accordion>
+
+  <Accordion title="Connect Texas 2026 - Plan Your Visit describes the wrong city" icon="map-pin-x">
+    The Plan Your Visit page describes Frisco, TX - hotels, meeting space, airports, attractions - while the venue everywhere else is The Woodlands, TX. Leftover page template from a different Connect event.
+  </Accordion>
+
+  <Accordion title="Connect South + Faith 2026 - Plan Your Visit describes Fort Worth" icon="map-pin-x">
+    The Plan Your Visit page describes Fort Worth, TX including the Stockyards District, despite the venue being Branson Convention Center, Branson, MO.
+  </Accordion>
+
+  <Accordion title="Connect South + Faith 2026 - Faith Track date is a day longer" icon="calendar-x">
+    The Faith Track page heading states 9-11 November 2026 while every other page and the actual two-day agenda state 9-10 November. Nov 9-10 is treated as canonical.
+  </Accordion>
+
+  <Accordion title="Spring Marketplace 2027 - contact page shows 2025 dates" icon="calendar-x">
+    The contact-us page displays "22-24 April, 2025, Wynn and Encore Las Vegas", conflicting with the 21-23 April 2027 at The Wynn used consistently everywhere else.
+  </Accordion>
+
+  <Accordion title="Spring Marketplace 2027 - appointment counts differ by page" icon="hash">
+    Supplier badge appointments: "up to 25" on the homepage, "up to 40" on How to Attend. Hosted buyer appointments: "up to 45" on two pages, "up to 40 curated 9-minute meetings" on the Hosted Buyer Experience page.
+  </Accordion>
+
+  <Accordion title="Connect Marketplace 2026 - buyer count and CMP hours differ by page" icon="hash">
+    "900\+ actively sourcing planners" on Why Attend versus "1,100\+ actively sourcing hosted buyers" on Why Sponsor - unclear whether these are different populations or different snapshot dates. CMP credit hours cited as both 14 and 15.
+  </Accordion>
+
+  <Accordion title="Connect Winter Marketplace 2026 - year label mismatch" icon="calendar-x">
+    Homepage body copy refers to "Connect Winter Marketplace 2027" despite dates of 18-20 November 2026. This may be a season-year branding convention rather than an error.
+  </Accordion>
+
+  <Accordion title="Women's Summit and Sports Innovation Forum dates overlap by one day" icon="calendar-x">
+    The Women's Summit is dated 27-28 October 2026, the parent Sports Innovation Forum 28-30 October 2026. They overlap only on 28 October, despite the Summit running as a track inside the Forum.
+  </Accordion>
+</AccordionGroup>
+
+## Contact page conflicts
+
+<Warning>
+  **Every event site publishes two different contact pages.** A `/contact-us/` page lists a fuller roster on `@informa.com` with general inquiries to `mac.kitchin@informa.com`. A separate `/contact/` page lists an overlapping but shorter roster on `@connectmeetings.com` with general inquiries to `info@connectmeetings.com`, and gives several of the same people different titles - Derek Rodriguez appears as both "EVP Sales" and "Sr VP Sales", Orlon Daniels as both "Senior Operations Leader" and "Senior Operations Manager", and the Hosted Buyer VP as both "Rachel Piper" and "Rachel Jackson".
+
+  Verify which page is current before quoting any external contact.
+</Warning>
+
+Two further extraction issues on the Connect Texas page: a general inquiries address was captured as `mac.kitchen@informa.com`, which is almost certainly a misread of `mac.kitchin@informa.com`, and the "\+ Medical" branding has no corresponding track or track page anywhere on the site.
+
+## Cancellation policy conflicts
+
+Every event publishes two different cancellation policies with no statement of which applies to whom.
+
+| Source page | Policy |
+| --- | --- |
+| Hosted Buyers page | 30\+ days: full refund or credit. 8-30 days with transportation booked: transportation may not be refundable. 7 days or fewer: no refund plus one hotel night fee |
+| Terms & Conditions | 57\+ days: refund minus 10% administration charge. Within 56 days or no-show: full fee forfeited |
+
+They most likely apply to hosted buyers and to paying delegates respectively, but no page states that. Never quote one without establishing which registrant type you are dealing with.
+
+## Documentation gaps
+
+| Gap | Status |
+| --- | --- |
+| Notion and Zapier automations not documented | Open. Record each new workflow in the AI & Agent Library before launch |
+| Reporting dashboards not indexed in Notion | Marked **Working**. A dashboard index page is a candidate |
+| HR and legal policies not imported | Marked **Working** |
+| Role-specific onboarding steps per department | Marked **Working** |
+| Salesforce teamspace flagged `in_trash` | Open blocker on the [Company OS project](/projects/company-os). Key pages moved into Company OS; verify the teamspace in the UI |
+| Six sensitive items awaiting human review | In the Knowledge Candidates queue on the [supplier knowledge project](/projects/supplier-knowledge) |
+| Two prompt libraries not yet merged | Open item on the Company OS project |
+
+## Capture gaps
+
+Not errors, but places where the source crawl could not see everything. Absence of evidence, not evidence of absence.
+
+- Connect Winter Marketplace sponsors page is fully JavaScript-rendered; no sponsor names were retrievable.
+- Sports Innovation Forum and Women's Summit contact pages are JavaScript-rendered; no named contacts retrievable.
+- Connect Winter Marketplace day 2 and day 3 agendas are JavaScript-rendered and likely contain sessions not captured.
+- The Connect Marketplace "Advertise" page returned content identical to the homepage - possibly a template or redirect issue worth flagging to marketing.

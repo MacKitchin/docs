@@ -1,0 +1,88 @@
+---
+title: "Notion Workspace Rebuild"
+sidebarTitle: "Notion Workspace Rebuild"
+description: "Consolidating three front doors and ~35 databases into Company OS."
+icon: "book"
+---
+
+<Info>
+  **Stage** In progress · **Priority** High · **Type** Knowledge · **Area** Technology & AI · **Lead** Mac Kitchin · **Timeline** 26 June 2026 to 31 July 2026
+</Info>
+
+## Overview
+
+Consolidate three competing front doors and roughly 35 scattered databases into **Company OS**: PARA navigation over a master-database engine, with a Knowledge Base, department pages, an AI & Automation Hub, and a Source of Truth Registry.
+
+The design principle is a clean separation between two layers.
+
+<CardGroup cols={2}>
+  <Card title="Navigation layer" icon="compass">
+    Projects, Areas, Resources, Archive. Front doors that show linked views. Optimised for a human finding something.
+  </Card>
+
+  <Card title="Data layer" icon="database">
+    Master databases - People, Projects, Docs, Tasks, Areas, Resources. Each fact has exactly one home. Optimised for correctness.
+  </Card>
+</CardGroup>
+
+## Goals and success criteria
+
+- One front door. Legacy hubs archived with redirect banners.
+- Every domain has exactly one canonical home, recorded in the [source-of-truth registry](/governance/source-of-truth).
+- A new hire can self-orient in under fifteen minutes.
+
+## Key decisions
+
+| Date | Decision | Why, and the trade-off | Decided by |
+| --- | --- | --- | --- |
+| 2026-06-27 | PARA navigation plus hub-and-spoke master databases | Separates navigation from data and kills duplication | Mac Kitchin |
+| 2026-07-06 | Keep the original Salesforce Knowledge Base as canonical; archive the duplicate | The original is linked from every hub, and row counts were identical | Mac Kitchin |
+
+## What Company OS now contains
+
+| Layer | Contents |
+| --- | --- |
+| **Front doors** | Home, Team HQ, Projects & Initiatives, Areas & Departments, Resources, AI & Automation Hub, Source of Truth Registry, Archive, Databases (Admin) |
+| **Master databases** | People, Projects, Docs, Tasks, Areas, Resources, Registry, AI & Agent Library |
+| **Domain hubs** | Salesforce Knowledge Base for `connect-prod`; Supplier Knowledge Intelligence |
+| **Wikis** | Live Events (2026-2027), the canonical event source |
+
+## Next steps
+
+- [ ] Create the Company OS teamspace in the Notion UI and move the page tree into it
+- [ ] Restore or confirm the Salesforce teamspace flagged `in_trash`
+- [ ] Migrate legacy Team HQ starter-database rows into the master databases
+- [ ] Merge the two prompt libraries into one
+
+## Risks and blockers
+
+| Risk | Impact | Mitigation | Status |
+| --- | --- | --- | --- |
+| Salesforce teamspace flagged `in_trash` | Loss of the Salesforce knowledge engine | Key pages already moved into Company OS; verify the teamspace in the UI | **Open** |
+| Old links pointing at archived hubs | User confusion | Redirect banners on every legacy front door | Mitigated |
+
+## Conventions the rebuild established
+
+These now apply to anything added to the workspace, and by extension to this site.
+
+<AccordionGroup>
+  <Accordion title="Projects end, areas continue" icon="clock">
+    If it has an end date and a definition of done, it is a project and belongs in Master Projects. If it is ongoing ownership, it is an area. Do not create area pages for time-bound work.
+  </Accordion>
+
+  <Accordion title="Link, do not copy" icon="link">
+    Both projects and areas link to their canonical docs and sources rather than duplicating them. Duplication is what created the problem this project is solving.
+  </Accordion>
+
+  <Accordion title="One canonical entry per information type" icon="badge-check">
+    Every major information type gets exactly one Canonical registry entry, with an owner and a refresh cadence. When a source is replaced, the old row is marked Deprecated and linked to its replacement.
+  </Accordion>
+
+  <Accordion title="Database properties beat page bodies" icon="table">
+    Owner, stage, priority, area, and timeline live in database properties and stay authoritative. Page bodies hold context and decisions, not status.
+  </Accordion>
+</AccordionGroup>
+
+## Why this matters beyond Notion
+
+This project is the precondition for everything in the [AI stack](/ai/agents). An agent grounded on a workspace with three front doors, duplicate databases, and no truth levels will confidently cite the wrong thing. The registry is what lets an agent say "this source is marked Working, treat it with caution" instead of guessing.
