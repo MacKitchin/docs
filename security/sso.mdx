@@ -1,7 +1,7 @@
 ---
-title: "Sign In with Microsoft 365 SSO"
-sidebarTitle: "SSO"
-description: "ConnectMeetings supports Microsoft 365 Single Sign-On on all plans. Users sign in with their work Microsoft account — no separate password required."
+title: "Microsoft 365 Single Sign-On (SSO) for ConnectMeetings"
+sidebarTitle: "Single Sign-On"
+description: "Set up Microsoft 365 SSO so your team signs in with their work account. Available on all plans, with auto-provisioning and optional SSO enforcement."
 ---
 
 Single Sign-On (SSO) lets your team access ConnectMeetings using the same Microsoft work account they already use every day — no separate password to remember, reset, or manage. For IT administrators, SSO means tighter control over who can access ConnectMeetings, automatic de-provisioning when a staff member leaves, and a reduced attack surface with one fewer credential set to protect.
@@ -62,12 +62,8 @@ By default, SSO is an additional sign-in option — users can still log in with 
 When SSO enforcement is active, password-based login is disabled for all users in your organization.
 
 <Warning>
-  Enabling SSO enforcement will immediately log out any users who currently sign in with a password only. Make sure all users have a Microsoft 365 work account in your tenant before enforcing SSO. Users without a valid account in your Microsoft tenant will lose access to ConnectMeetings.
+  Enabling SSO enforcement immediately logs out any users who currently sign in with a password only. Before turning this on, confirm that every person in your organization has an active Microsoft 365 work account in your tenant. Anyone without a valid account in that tenant will lose access to ConnectMeetings.
 </Warning>
-
-<Note>
-  SSO enforcement requires all users in your organization to have an active Microsoft 365 account in the tenant you have configured. If some users do not have Microsoft 365 accounts, do not enable enforcement — those users will be unable to log in.
-</Note>
 
 ## Fallback Login
 

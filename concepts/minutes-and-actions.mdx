@@ -1,5 +1,5 @@
 ---
-title: "Meeting Minutes and Action Items Explained"
+title: "Meeting Minutes, Governance Records, and Action Items"
 sidebarTitle: "Minutes & Actions"
 description: "Learn how ConnectMeetings captures live meeting minutes, records motions and votes, and tracks action items from creation through to completion."
 ---
@@ -51,6 +51,7 @@ Action items represent commitments made during or following a meeting. Each acti
 | Owner | The person responsible for completing the action |
 | Due date | The target completion date |
 | Source | The meeting and agenda item where the action was created |
+| Priority | Urgency level — Low, Medium, High, or Critical — used to sort and filter the action item dashboard |
 | Status | Current progress state (see lifecycle below) |
 | Notes | Optional detail or context for the owner |
 
@@ -77,13 +78,16 @@ Like agendas, minutes follow an approval workflow before they become the officia
 
 <Steps>
   <Step title="Draft">
-    Minutes are being written or have been completed but not yet submitted for review. Only organizers and admins can view Draft minutes.
+    Minutes are being written or reviewed internally. Only organizers and admins can view Draft minutes. The organizer can continue editing until the record is ready for formal review.
   </Step>
-  <Step title="Reviewed">
-    The minutes have been submitted to the chair or designated approver for review. The approver can annotate, request changes, or approve. Participants may also receive a preview copy at this stage depending on your organization's settings.
+  <Step title="Submitted">
+    The organizer submits the completed minutes to the designated approver — typically the meeting chair or a senior administrator. The approver receives an email notification with a direct link to the review view.
   </Step>
-  <Step title="Approved">
-    The minutes are approved and locked as the official record. All participants receive a notification. Approved minutes are published to the meeting record and, if configured, to the public portal.
+  <Step title="Approved or Rejected">
+    The approver reviews the minutes and takes one of two actions. **Approved** locks the minutes as the official record and notifies all participants. **Rejected** returns the minutes to Draft with comments so the organizer can make corrections and resubmit.
+  </Step>
+  <Step title="Distributed">
+    Approved minutes are published to the meeting record and automatically distributed to all participants by email. If your organization has enabled the public portal, the approved minutes are published there as well.
   </Step>
 </Steps>
 

@@ -1,7 +1,7 @@
 ---
-title: "Agenda Approval Workflows"
+title: "Configure Agenda Approval Workflows in ConnectMeetings"
 sidebarTitle: "Approval Workflows"
-description: "Set up agenda approval workflows in ConnectMeetings to ensure agendas are reviewed by the right people before they are distributed to meeting participants."
+description: "Configure multi-step agenda approval workflows in ConnectMeetings to catch errors, ensure sign-off, and maintain an audit trail before distribution."
 ---
 
 Publishing an agenda with an error — a missing item, an incorrect presenter, or an attachment that was not cleared for release — can undermine trust in a formal governance process. Approval workflows give designated reviewers a chance to verify the agenda before it reaches attendees, creating a clear paper trail of who reviewed and approved it.
@@ -26,7 +26,8 @@ Every agenda in an approval workflow moves through the following stages:
 |---|---|
 | **Draft** | Organizer is building the agenda; not yet submitted for review |
 | **Submitted for Review** | Organizer has submitted; approvers are notified and reviewing |
-| **Changes Requested** | An approver has returned the agenda with comments for revision |
+| **Changes Requested** | An approver has returned the agenda with revision comments; organizer can edit and resubmit |
+| **Rejected** | An approver has declined the agenda; it cannot be resubmitted without starting a new draft |
 | **Approved** | All required approvers have signed off; agenda is ready to publish |
 | **Distributed** | Agenda has been published and sent to attendees |
 
@@ -34,12 +35,19 @@ Every agenda in an approval workflow moves through the following stages:
 
 Set up approvers at the meeting level or as a default for a meeting series.
 
-1. Open the meeting and go to **Meeting Settings → Agenda Approval**.
-2. Click **Add Approver** and search for the person by name or email.
-3. Repeat to add multiple approvers.
-4. Choose the approval mode:
-   - **Sequential** — approvers review one at a time in the order you specify
-   - **Parallel** — all approvers review simultaneously; the agenda advances once everyone has approved
+<Steps>
+  <Step title="Open Agenda Approval settings">
+    Open the meeting and go to **Meeting Settings → Agenda Approval**.
+  </Step>
+  <Step title="Add approvers">
+    Click **Add Approver** and search for each person by name or email. Repeat until all required approvers are listed.
+  </Step>
+  <Step title="Choose approval mode">
+    Select the mode that matches your review chain:
+    - **Sequential** — approvers review one at a time in the order you specify
+    - **Parallel** — all approvers review simultaneously; the agenda advances once everyone has approved
+  </Step>
+</Steps>
 
 <Tip>
 Use sequential approval for clerk → chair sign-off chains. For example, the City Clerk reviews the agenda for completeness first, and once approved, it moves to the Mayor or Chair for final sign-off. This mirrors the real-world review hierarchy most governance bodies already follow.

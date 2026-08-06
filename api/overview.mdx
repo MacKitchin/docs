@@ -1,7 +1,7 @@
 ---
-title: "ConnectMeetings REST API Overview"
+title: "ConnectMeetings REST API — Overview and Reference Guide"
 sidebarTitle: "Overview"
-description: "The ConnectMeetings REST API lets Enterprise customers programmatically manage meetings, agendas, action items, and users. Base URL, versioning, and rate limits."
+description: "Explore the ConnectMeetings REST API for Enterprise. Covers base URL, versioning, authentication, rate limits, pagination, and error handling."
 ---
 
 The ConnectMeetings REST API gives Enterprise customers programmatic access to their meeting data. Use it to create and manage meetings, build agendas, track action items, and administer users — all from your own systems and workflows.
@@ -20,7 +20,7 @@ The ConnectMeetings REST API gives Enterprise customers programmatic access to t
 
 All API requests are made to the following base URL:
 
-```
+```bash
 https://api.connectmeetings.ca/v1
 ```
 
@@ -36,7 +36,7 @@ The current API version is `v1`, reflected in the base URL path. When ConnectMee
 
 Every request must include a valid Bearer token in the `Authorization` header:
 
-```
+```bash
 Authorization: Bearer YOUR_API_KEY
 ```
 
@@ -48,7 +48,7 @@ See the [Authentication](/api/authentication) page for instructions on generatin
 
 All request bodies must be JSON, and all responses are returned as JSON. Include the following header on every request:
 
-```
+```bash
 Content-Type: application/json
 ```
 

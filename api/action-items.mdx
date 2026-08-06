@@ -1,5 +1,5 @@
 ---
-title: "REST API Endpoints for Action Items"
+title: "Action Items API — Track Meeting Tasks in ConnectMeetings"
 sidebarTitle: "Action Items"
 description: "Create, update, and list meeting action items via the ConnectMeetings API. Track task status, ownership, and due dates programmatically."
 ---
@@ -24,8 +24,16 @@ List all action items associated with a specific meeting. Use the query paramete
   Filter by the user ID of the assigned owner. Use `GET /users` to look up user IDs.
 </ParamField>
 
+<ParamField query="page" type="integer" default="1">
+  The page number to return.
+</ParamField>
+
+<ParamField query="per_page" type="integer" default="20">
+  The number of action items to return per page. Maximum: `100`.
+</ParamField>
+
 ```bash
-curl -X GET "https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/action-items?status=open" \
+curl -X GET "https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w2e4f/action-items?status=open&page=1&per_page=20" \
   -H "Authorization: Bearer cm_live_xxxx"
 ```
 
@@ -56,7 +64,12 @@ curl -X GET "https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w
       "created_at": "2024-04-15T16:18:00Z",
       "updated_at": "2024-04-15T16:18:00Z"
     }
-  ]
+  ],
+  "meta": {
+    "total": 2,
+    "page": 1,
+    "per_page": 20
+  }
 }
 ```
 
@@ -93,6 +106,22 @@ curl -X GET "https://api.connectmeetings.ca/v1/meetings/mtg_01hq8zvpxk3rn5bk9d7w
     </ResponseField>
     <ResponseField name="data[].updated_at" type="string">
       The UTC timestamp of the most recent update.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="meta" type="object">
+  Pagination metadata for the response.
+
+  <Expandable title="Meta fields">
+    <ResponseField name="meta.total" type="integer">
+      The total number of action items matching the query.
+    </ResponseField>
+    <ResponseField name="meta.page" type="integer">
+      The current page number.
+    </ResponseField>
+    <ResponseField name="meta.per_page" type="integer">
+      The number of results returned per page.
     </ResponseField>
   </Expandable>
 </ResponseField>

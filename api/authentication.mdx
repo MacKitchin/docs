@@ -1,10 +1,14 @@
 ---
-title: "Authenticate with the ConnectMeetings API"
+title: "API Key Authentication for the ConnectMeetings REST API"
 sidebarTitle: "Authentication"
-description: "Generate and manage API keys for the ConnectMeetings REST API. Pass your key as a Bearer token in the Authorization header on every request."
+description: "Generate and manage API keys for ConnectMeetings in Settings > API Keys. Pass your key as a Bearer token in the Authorization header on every request."
 ---
 
 The ConnectMeetings API uses API keys for authentication. Every request you make must include your key as a Bearer token in the `Authorization` header. Without a valid key, the API will reject the request with a `401` error.
+
+<Note>
+  ConnectMeetings does not expose a `POST /auth/token` endpoint or any other programmatic key-generation endpoint. You generate and manage API keys entirely through the dashboard UI at **Settings > API Keys**. Once you have a key, you pass it directly as a Bearer token — no token exchange step is required.
+</Note>
 
 <Warning>
   Never share your API keys or commit them to source control. Anyone with access to your key can make API calls on behalf of your organization. If a key is ever exposed, revoke it immediately from **Settings > API Keys**.
