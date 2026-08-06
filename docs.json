@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Connect Company Brain",
-  "theme": "almond",
+  "theme": "mint",
   "colors": {
     "primary": "#ef7025",
     "light": "#eec9bc",
