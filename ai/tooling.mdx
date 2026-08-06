@@ -1,0 +1,75 @@
+---
+title: "MCP and tooling"
+description: "The MCP servers, integrations, and platforms the AI stack runs on."
+icon: "wrench"
+---
+
+The AI work runs across two surfaces: **Agentforce inside Salesforce** for production agents, and **MCP-connected assistants** (Cursor, Claude) for build, analysis, and knowledge work.
+
+## MCP servers in use
+
+| Server | Purpose |
+| --- | --- |
+| `salesforce` / `salesforce-mcp-server` / `salesforce-dx` | Query and administer `connect-prod`, run SOQL, deploy metadata |
+| `notion-workspace` | Read and write the Company OS Notion workspace |
+| `informa-connect` | Informa Connect internal tooling |
+| `visit-create` | Visit Create event tooling |
+| `HubSpotDev` | HubSpot CLI for projects, apps, and CMS development |
+| `Playwright` | Browser automation for testing and site crawling |
+| `vercel` | Deployment |
+| `supabase` | Database |
+| `huggingface-skills` | ML tooling |
+| `mainframe` | Platform plugin |
+
+<Note>
+  The Playwright server is not incidental. The Live Events wiki pages are built from full site crawls of `informaconnect.com` - the Connect Marketplace page alone was refreshed from 24 pages on 3 August 2026. That crawl is how most of the source conflicts on [Known issues](/governance/known-issues) were found.
+</Note>
+
+## Registered assets
+
+Everything is recorded in the AI & Agent Library with an owner, platform, status, and docs link.
+
+| Asset | Type | Platform |
+| --- | --- | --- |
+| Salesforce MCP Servers (Cursor) | MCP Tool | Cursor |
+| Notion MCP Server (Cursor) | MCP Tool | Cursor |
+| Playwright MCP | MCP Tool | Cursor |
+| Visit Create MCP | MCP Tool | Other |
+| Informa Connect MCP | MCP Tool | Other |
+| HubSpot Dev MCP | MCP Tool | HubSpot |
+| Supabase MCP | MCP Tool | Other |
+| Vercel MCP | MCP Tool | Other |
+| Prompt Library (Salesforce KB) | Prompt | Salesforce |
+| Agent Prompts & Examples | Prompt | Notion |
+| Connect (SF Agent) | Agent | Salesforce |
+| Data Steward Agent | Agent | Salesforce |
+| Flow Automation Agent | Agent | Salesforce |
+| Notebook AI Agent | Agent | Salesforce |
+| Opportunity Agent | Agent | Salesforce |
+| Agentforce Sales Coach | Agent | Salesforce |
+
+## Sales-side AI tooling in the field
+
+Observed in the supplier email corpus rather than centrally registered, but worth knowing about because it affects how you read activity records.
+
+| Tool | Used for |
+| --- | --- |
+| **Outreach** | Sales sequencing |
+| **Artisan AI** | AI SDR - autonomous outbound |
+| **ZoomInfo** | Enrichment and intent, also integrated into Salesforce as DOZISF |
+| **Chorus** | Conversation intelligence, in the org as affectlayer |
+| **DocuSign** | Contract execution |
+
+<Warning>
+  Not every logged email in `Task` was written by a human. Outreach sequences and Artisan AI both log activity. When analysing rep behaviour or response times, account for automated sends or you will draw the wrong conclusion about who is doing what.
+</Warning>
+
+## Companion skill
+
+The reusable analytical context from the [data consolidation project](/projects/data-consolidation) was packaged as an **informa-data-analyst** skill: entity definitions, metric calculations, standard filters, and common query patterns for `connect-prod`. It is the machine-readable version of the [data model](/systems/data-model) and [metrics](/systems/metrics) pages on this site.
+
+## Undocumented territory
+
+<Warning>
+  **Notion and Zapier automations are not yet documented.** They exist and they run. The standing instruction is to record each new workflow in the AI & Agent Library before launch. Until the backlog is captured, treat any assumption about what is automated in Notion or Zapier as unverified.
+</Warning>

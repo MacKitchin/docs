@@ -1,0 +1,176 @@
+---
+title: "Data model"
+description: "Core objects, relationships, and the fields that actually matter for analysis."
+icon: "share-2"
+---
+
+## Relationship map
+
+```text
+Account (client / supplier)
+├── Opportunity (sales deal / IO)
+│   ├── OpportunityLineItem (products sold)
+│   │   ├── Product2 (product catalogue)
+│   │   └── AB2__AdBookIndependentDrop__c (ad line items)
+│   ├── AB2__AdBookPackageDrop__c (ad packages)
+│   └── Contact (Billing_Contact__c, Signer_Contact__c, Production_Contact__c)
+├── Contact (people at the account)
+│   └── Registration__c (hosted buyer registrations)
+├── Registration__c (via Planner_Account__c)
+│   ├── Campaign (the event registered for)
+│   └── Marketplace__c (the specific marketplace instance)
+├── Agency_Contact__c / Agency_Contacts__c
+└── Account_Competitor__c
+
+Marketplace__c (event instance)
+├── Registration__c (many)
+└── Visit_Expo_ID__c → Visit Create platform
+
+Campaign (event)
+└── Registration__c (many, via Meeting_Event__c)
+```
+
+## Disambiguating everyday words
+
+When someone says one of these, they mean a specific object.
+
+| They say | They mean |
+| --- | --- |
+| Customer, client | **Account**. `Type` separates Client, Prospect, 3rd Party Planner, Competitor, Agency. `Account_Status__c` is Active, Dormant, Inactive, Nurturing, or For Connect |
+| Contact | **Contact**, an individual at an Account via `AccountId`. `Contact_Role__c` is Decision Maker, Influencer, Marketing, Sales, Operations |
+| Deal, opportunity | **Opportunity**, linked to an Account via `AccountId`, with product detail on `OpportunityLineItem` |
+| Registration, attendee | **`Registration__c`**, linked to Contact via `Registrant__c` and Account via `Planner_Account__c` |
+| Event, marketplace | **`Marketplace__c`**, or **Campaign** where referenced by `Registration__c.Meeting_Event__c` |
+| Prospect | **Lead**. The object is labelled "Prospect" in this org |
+
+## Account
+
+The central entity for both sides of the business.
+
+| Field | Meaning |
+| --- | --- |
+| `Type` | Client, Prospect, 3rd Party Planner, Agency, Competitor |
+| `Account_Status__c` | Active, Dormant, Inactive, Nurturing, For Connect |
+| `Primary_Category__c` | Association, Corporation, Agency, `Venue-*`, `Supplier-*`. **The supplier cohort filter is `LIKE 'Supplier-%'`** |
+| `Market_Segment__c` | Association, Connect, Corporate, Sports, Third Party |
+| `Sales_Territory__c` | Midwest, Northeast, South, West, International. Derived from `BillingState` |
+| `Industry` | Highly detailed, includes `Supplier-*` and `Venue-*` categories |
+| `Credit_Worthiness_Score__c` | Green, Yellow, Red, Approval required |
+| `Red_Flagged_Status__c` | Blacklisted, Unpaid Debt |
+| `ParentId` | Parent account, for hierarchies |
+
+**Spend rollups** are denormalised onto Account and maintained by the `dlrs` package. Use them rather than aggregating opportunities.
+
+`Total_Spend_This_Product_Year__c`, `Total_Spend_Last_Product_Year__c`, `Total_Spend_2_Product_Years_Ago__c` through `..._5_Product_Years_Ago__c`, `Total_Historical_Account_Spend__c`, plus events-versus-media splits: `Total_Spend_Events_This_Product_Year__c` and `Total_Spend_Media_This_Product_Year__c`.
+
+Per-event participation is also denormalised, as booleans and counts such as `Num_Spring_MP_Products_This_Year__c` and `Has_Connect_Spring_2026_Purchase__c`.
+
+## Opportunity
+
+| Field | Meaning |
+| --- | --- |
+| `StageName` | See the stage ladder below |
+| `Amount` | Deal total. Note this is deal-level, not line-level |
+| `CloseDate` | Expected or actual close. Required |
+| `Type` | New Business or Existing Business. **The single most predictive field in the dataset** |
+| `ForecastCategoryName` | Omitted, Pipeline, Best Case, Commit, Closed |
+| `IO_Number__c` | Insertion order number. Required, unique |
+| `Opportunity_Product_Type__c` | Registration, Sponsorship, Digital, Print, CAP, Bundle, Marketplace, Services. **Currently 100% null** |
+| `Sales_Territory__c` | Eastern, Midwest, Northeast, South, West, International |
+| `Barter__c` | Non-cash trade. Always exclude for cash revenue |
+| `Reason_Lost__c` | Loss reason. **Blank on 421 of 424 lost deals** |
+| `Event_Market_Segment__c` | Association, Corporate, Sports, Faith |
+| `Lead_Channel__c` | Inbound or Outbound. Inbound wins at 77.9% vs 71.5% |
+| `Initial_Close_Won_Date__c` | First time marked Closed Won, for historical accuracy |
+| `Change_Made_After_Closed_Won__c` | By Production, By Accounting |
+| `Billing_Terms__c` | One Time, Recurring, Compound, Cancelled, Billed in Full |
+
+### Stage ladder
+
+| Stage | IsClosed | IsWon |
+| --- | --- | --- |
+| Made Contact & Set Meeting | false | false |
+| Prospecting/RFP | false | false |
+| Previous Year Purchase | false | false |
+| Proposal Creation (BANT Known) | false | false |
+| Initial Call · Interested · Proposal · Proposal Sent | false | false |
+| Presentation · Proposal Review · Negotiation | false | false |
+| Verbal · MSA Signed · SOW Signed | false | false |
+| **Closed Won** | **true** | **true** |
+| Expired | true | false |
+| Closed Lost | true | false |
+
+<Tip>
+  **Expired is not lost.** It is a deal that timed out without a decision. Exclude it from win-rate denominators or you understate performance by roughly nine percentage points - and you hide \$660K of un-followed-up pipeline.
+</Tip>
+
+## OpportunityLineItem
+
+Where the product taxonomy lives, and where revenue is actually attributable.
+
+| Field | Values |
+| --- | --- |
+| `TotalPrice` | Line item total. Reconciles to `Opportunity.Amount` but not always |
+| `Product_Category__c` | **Digital, Event, Event Amplification, Special Projects** |
+| `Product_Type__c` | 50\+ types: Association, BizBash, Corporate, Marketplace, Sports, Webinar |
+| `Event_Name__c` | Spring Marketplace, MEGA, Winter Marketplace |
+| `Organization__c` | **Meetings, Travel, BizBash, TSNN** - the business unit split |
+| `Product_Year__c` | The calendar year the product is _for_ |
+| `Product_Status__c` | Pending, In Process, Completed |
+| `Barter_Value__c` / `Monetary_Value__c` | Non-cash and cash portions |
+| `AB2__ABPayType__c` | PaidFor, ValueAdd, NonBillable, Barter, Promo |
+
+Boolean helpers exist per event, such as `IsSpringMarketplaceProduct__c`, `IsMEGAProduct__c`, `Is_Show_Booth__c`, and `IsRegistrationProduct__c`.
+
+## Contact
+
+| Field | Meaning |
+| --- | --- |
+| `Contact_Role__c` | Decision Maker, Influencer, Marketing, Sales, Operations |
+| `Inactive__c` / `No_Longer_with_Company__c` | Filter both out for live outreach |
+| `Decision_Maker__c` | Boolean |
+| `Lead_Type__c` | Advertiser, Agency, Event Pro, Non-customer |
+| `Connect_No_Fly_List__c` | **Banned from events. Always exclude from event queries** |
+| `Quality_Score__c`, `National_Meetings_Score__c` | Planner qualification scoring |
+| `HasOptedOutOfEmail` | Email opt-out |
+
+## Registration and Marketplace
+
+`Registration__c` links a hosted buyer to an event.
+
+| Field | Meaning |
+| --- | --- |
+| `Registrant__c` | The Contact |
+| `Planner_Account__c` | The Account |
+| `Meeting_Event__c` | The Campaign |
+| `Marketplace__c` | The specific `Marketplace__c` instance |
+| `Registration_Stage__c` | Registering, Pending Confirmation, Registered, **Fully Registered**, Cancelled, Declined, Verbal, Stopped |
+| `Hosted_Buyer_Type__c` | Anchor Planner, End User, Third Party, Non-Hosted Buyer |
+| `Qualification_Status__c` | Qualification outcome |
+| `Visit_Registration_Key__c`, `Visit_Visitor_Id__c`, `Visit_Order_Id__c`, `Visit_Expo_Id__c` | Visit Create platform sync keys |
+
+`Marketplace__c` carries `Event_Type__c`, `Event_Track__c`, `Start_Date__c`, `End_Date__c`, `Event_Status__c`, `Visit_Expo_ID__c`, a multi-picklist of available appointment tracks, and registration rollup counts by stage.
+
+## The five gotchas that cause most wrong answers
+
+<AccordionGroup>
+  <Accordion title="Amount versus TotalPrice" icon="triangle-alert">
+    `Opportunity.Amount` is the deal total; `OpportunityLineItem.TotalPrice` is per line. They should reconcile but will not if products were added or removed after the fact.
+  </Accordion>
+
+  <Accordion title="Product year is not close year" icon="calendar">
+    A deal closed in December 2026 can carry `Product_Year__c = '2027'`. Use product year for product and renewal analysis, close date for when revenue was booked.
+  </Accordion>
+
+  <Accordion title="Barter inflates revenue" icon="scale">
+    Barter deals have a positive `Amount` and no cash. Filter `Barter__c = false` for cash revenue, and use `AB2__ABPayType__c = 'PaidFor'` at line level.
+  </Accordion>
+
+  <Accordion title="Only Fully Registered means confirmed" icon="user-check">
+    Registering and Pending Confirmation are not attendance. Do not count them.
+  </Accordion>
+
+  <Accordion title="Post-close edits" icon="pencil">
+    Opportunities can be modified after Closed Won. Check `Change_Made_After_Closed_Won__c` and compare against `Initial_Close_Won_Date__c` when historical accuracy matters.
+  </Accordion>
+</AccordionGroup>

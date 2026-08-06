@@ -1,0 +1,76 @@
+---
+title: "Departments"
+description: "The eight areas of the business, who owns each one, and what they are accountable for."
+icon: "sitemap"
+---
+
+Company OS distinguishes **areas** from **projects**: areas are ongoing ownership, projects end. These are the areas.
+
+| Area | Owner | Remit |
+| --- | --- | --- |
+| **Leadership** | Matt Johnson | Strategy, priorities, decisions, company-wide communication |
+| **Sales** | Derek Rodriguez | Supplier packages, media and advertising sales across Connect Marketplace, BizBash, TSNN, and Connect Travel |
+| **Marketing** | Jordan Bouldin | Campaigns, media and advertising products, event promotion, audience growth |
+| **Operations** | Rachel Piper (see note) | Registration, attendee data, account routing, data quality, reporting |
+| **Events** | Tinsley Conway | Event delivery and logistics for Connect Marketplace and all live events |
+| **Technology & AI** | Mac Kitchin | Salesforce org, integrations, AI agents, automation, and the Notion workspace |
+| **Customer Success** | Unassigned | Supplier and client services: onboarding, support, retention |
+| **Finance** | Unassigned | Billing, contracts, payment terms, revenue operations |
+
+<Warning>
+  **Two open ownership gaps.** Customer Success and Finance have no recorded area owner, even though Customer Success has three managers working in it. There is also a conflict on Operations: Team HQ names Rachel Piper as area owner while the Areas database names Andrew Dysart. Both are logged on [Known issues](/governance/known-issues).
+</Warning>
+
+## What each area actually does
+
+<AccordionGroup>
+  <Accordion title="Sales" icon="dollar-sign">
+    The commercial engine, and the largest team. Three sub-organisations: Connect marketplace sales under Suzi Schnell, BizBash under Michela Giovannotto, media and travel under Andrew Dysart. Sells appointment packages, sponsorships, event amplification, and media insertion orders. Territories are Midwest, Northeast, South, West, and International, derived from account billing state rather than a separate territory object.
+
+    The key commercial fact: renewals win at 84.6 percent and average around $$18.8K, while new business wins at 67.2 percent and averages around $$10.1K. Rebooking is where the money is.
+  </Accordion>
+
+  <Accordion title="Operations" icon="settings">
+    Owns everything between a registration and a clean dataset: hosted buyer registration and qualification, attendee data, account routing, data quality, and reporting. Four Hosted Buyer Experience Managers handle the registration lifecycle. Bill Mathis holds hosted buyer data.
+
+    Operations owns the [Connect and BizBash data consolidation](/projects/data-consolidation) project.
+  </Accordion>
+
+  <Accordion title="Events" icon="calendar-days">
+    Delivery and logistics for all nine live events: venues, agendas, room blocks, receptions, onsite operations. A Meetings & Events Director, two Meetings Managers, and a Coordinator under Tinsley Conway.
+  </Accordion>
+
+  <Accordion title="Marketing" icon="megaphone">
+    Campaigns, event promotion, audience growth, and the media and advertising products themselves. Digital marketing, design, and coordination in-house; editorial is largely freelance and reports separately.
+  </Accordion>
+
+  <Accordion title="Technology and AI" icon="bot">
+    The Salesforce org, its integrations, the Agentforce agent roster, automation, and the Notion Company OS workspace. Two people - Mac Kitchin as AI & Innovation Lead, Wei Zheng as Information Systems Manager - and all four active company projects sit here or partner with here.
+  </Accordion>
+
+  <Accordion title="Customer Success" icon="life-buoy">
+    Supplier and client onboarding, support, and retention. Functionally real but structurally distributed: its three managers each report into a different sales leader, and no area owner is recorded.
+  </Accordion>
+
+  <Accordion title="Finance" icon="receipt">
+    Billing, contracts, payment terms, revenue operations. Runs through FinancialForce invoicing and the AdBook order lifecycle rather than a dedicated in-unit team. No area owner recorded.
+  </Accordion>
+
+  <Accordion title="Leadership" icon="compass">
+    Strategy, prioritisation, and company-wide communication. Matt Johnson as Managing Director, Derek Rodriguez as EVP Connect Meetings, Kimberly Collie as Strategic Director.
+  </Accordion>
+</AccordionGroup>
+
+## Domain hubs
+
+Two areas maintain their own deep knowledge bases rather than living entirely in the department page.
+
+<CardGroup cols={2}>
+  <Card title="Salesforce Knowledge Base" icon="cloud" href="/systems/salesforce-org">
+    Objects, fields, relationships, automation, and integrations for `connect-prod`.
+  </Card>
+
+  <Card title="Supplier Knowledge Intelligence" icon="brain" href="/projects/supplier-knowledge">
+    Email-mined supplier FAQs, tribal knowledge, and automation opportunities.
+  </Card>
+</CardGroup>

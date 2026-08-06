@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "ConnectMeetings",
+  "name": "Connect Company Brain",
   "theme": "almond",
   "colors": {
     "primary": "#ef7025",
@@ -10,6 +10,88 @@
   "favicon": "/favicon.svg",
   "navigation": {
     "tabs": [
+      {
+        "tab": "Company Brain",
+        "groups": [
+          {
+            "group": "Start here",
+            "icon": "compass",
+            "pages": [
+              "index",
+              "start/how-to-use",
+              "start/glossary"
+            ]
+          },
+          {
+            "group": "The company",
+            "icon": "building",
+            "pages": [
+              "company/overview",
+              "company/business-model",
+              "company/brands"
+            ]
+          },
+          {
+            "group": "People & org",
+            "icon": "users",
+            "pages": [
+              "people/org-chart",
+              "people/departments",
+              "people/directory",
+              "people/who-owns-what"
+            ]
+          },
+          {
+            "group": "Events portfolio",
+            "icon": "calendar-days",
+            "pages": [
+              "events/overview",
+              "events/connect-marketplace",
+              "events/regional",
+              "events/sports-and-summits"
+            ]
+          },
+          {
+            "group": "Projects",
+            "icon": "rocket",
+            "pages": [
+              "projects/overview",
+              "projects/company-os",
+              "projects/agentforce-rollout",
+              "projects/data-consolidation",
+              "projects/supplier-knowledge"
+            ]
+          },
+          {
+            "group": "Data & systems",
+            "icon": "database",
+            "pages": [
+              "systems/salesforce-org",
+              "systems/data-model",
+              "systems/metrics",
+              "systems/integrations"
+            ]
+          },
+          {
+            "group": "AI & automation",
+            "icon": "bot",
+            "pages": [
+              "ai/agents",
+              "ai/tooling",
+              "ai/automation-roadmap",
+              "ai/guardrails"
+            ]
+          },
+          {
+            "group": "Governance",
+            "icon": "shield-check",
+            "pages": [
+              "governance/source-of-truth",
+              "governance/known-issues"
+            ]
+          }
+        ]
+      },
       {
         "tab": "Documentation",
         "groups": [
@@ -99,5 +181,15 @@
     "socials": {
       "website": "https://connectmeetings.ca"
     }
+  },
+  "description": "The internal knowledge base for Informa Connect — Connect Meetings & Events. Company, people, events, projects, data model, and AI stack, written for both people and agents.",
+  "appearance": {
+    "default": "system"
+  },
+  "search": {
+    "prompt": "Search the Company Brain..."
+  },
+  "seo": {
+    "indexing": "navigable"
   }
 }

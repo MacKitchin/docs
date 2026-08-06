@@ -1,0 +1,68 @@
+---
+title: "Who we are"
+description: "Informa Connect, Connect Meetings & Events, and where this business sits inside Informa PLC."
+icon: "building"
+---
+
+## Where we sit
+
+**Informa PLC** is the parent group. **Informa Connect** is the division. **Connect Meetings & Events** is our business unit inside that division, and it is what this Company Brain documents.
+
+The reporting line into the group runs through **Andrew Mullins**, an Informa executive external to Connect, to **Matt Johnson**, Managing Director, who owns Connect Meetings & Events end to end.
+
+<Info>
+  When an event site says "operated by Informa Connect Division of Informa PLC", that is us. Customer-facing material uses the **Connect** brand; internal systems and email use `@informa.com`.
+</Info>
+
+## What the business does
+
+Two commercial engines run side by side.
+
+<CardGroup cols={2}>
+  <Card title="Events" icon="calendar-days">
+    Marketplace-style appointment events across the United States. Suppliers buy appointment packages and sponsorships; planners attend as sponsored hosted buyers. Nine events run in the 2026-2027 season, anchored by Connect Marketplace in Tampa.
+  </Card>
+
+  <Card title="Media and advertising" icon="newspaper">
+    Digital, print, and email advertising sold through BizBash, TSNN, and Connect Travel, plus event amplification products attached to event packages. Managed in AdBook and synced to Salesforce.
+  </Card>
+</CardGroup>
+
+## Customers
+
+The sales model is **supplier-side**. We sell to the people who want to be found, and we recruit the people doing the finding.
+
+| Side | Who they are | What they do with us |
+| --- | --- | --- |
+| **Suppliers** (paying customers) | CVBs and DMOs, hotels and resorts, convention centres and venues, AV and production companies, event technology vendors, airlines, gifting and merchandise companies, experiential agencies | Buy appointment packages, sponsorships, booths, and advertising |
+| **Buyers** (recruited, mostly sponsored) | Association, corporate, sports, specialty, and international event planners | Attend as hosted buyers, take pre-scheduled appointments, source destinations and services |
+
+In Salesforce both sides live on the `Account` object and are separated by `Type` and `Primary_Category__c`. Supplier accounts are identified by `Primary_Category__c LIKE 'Supplier-%'` - roughly 13,800 accounts across 29 supplier categories.
+
+## Scale markers
+
+These are the figures published on our own event sites and derived from `connect-prod`. Treat published marketing figures as approximate; treat CRM figures as point-in-time.
+
+| Marker | Figure | Source |
+| --- | --- | --- |
+| Attendees at flagship Connect Marketplace | 3,000\+ MICE professionals | Event site, 2026 |
+| Actively sourcing buyers at flagship | 900\+ (Why Attend page) or 1,100\+ (Why Sponsor page) | Event site - the two figures conflict, see [Known issues](/governance/known-issues) |
+| Suppliers at flagship | 1,800\+ solution-ready suppliers | Event site, 2026 |
+| Supplier accounts in CRM | ~13,800 across 29 categories | `connect-prod` |
+| Supplier deals closed won since Jan 2025 | 492 deals, $$7.85M, average ~$$16K | `connect-prod` opportunity analysis |
+| Supplier win rate | ~78% won versus lost; ~69% including expired | `connect-prod` |
+| Renewal versus new business | Renewals 84.6% win at ~$$18.8K average; new logos 67.2% win at ~$$10.1K | `connect-prod` |
+| Inbound versus outbound win rate | 77.9% inbound versus 71.5% outbound | `connect-prod` |
+
+<Tip>
+  The renewal numbers are the single most load-bearing fact about this business: existing business converts at a materially higher rate and at nearly twice the deal size. Rebooking is the revenue engine, not new logo acquisition.
+</Tip>
+
+## Where the business is run from
+
+| Location | Who is there |
+| --- | --- |
+| **US Norcross - 3740 Davinci Court** | Leadership, most of Sales, Events, Operations, part of Marketing |
+| **US Norcross - 15 Technology Parkway South** | Event Experience Sales |
+| **US Chicago - 300 S. Riverside Plaza** | Strategic Director |
+| **US Home (remote)** | Sales, Marketing, Customer Success, contractors and freelancers |
