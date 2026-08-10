@@ -1,13 +1,16 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Connect Company Brain",
-  "theme": "maple",
+  "theme": "mint",
   "colors": {
     "primary": "#ec6940",
     "light": "#eec9bc",
     "dark": "#4fa1ab"
   },
-  "favicon": "/favicon.svg",
+  "favicon": {
+    "light": "/favicon.svg",
+    "dark": "/favicon.svg"
+  },
   "navigation": {
     "tabs": [
       {
