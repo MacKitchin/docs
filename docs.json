@@ -26,6 +26,51 @@
             ]
           },
           {
+            "group": "Products & services",
+            "icon": "store",
+            "pages": [
+              "products/overview",
+              {
+                "group": "Media kit 2025",
+                "icon": "newspaper",
+                "pages": [
+                  "products/media-kit/overview",
+                  "products/media-kit/audience-and-brands",
+                  "products/media-kit/digital-solutions",
+                  "products/media-kit/thought-leadership",
+                  "products/media-kit/print-solutions",
+                  "products/media-kit/event-amplification"
+                ]
+              },
+              {
+                "group": "Connect Marketplace 2026",
+                "icon": "handshake",
+                "pages": [
+                  "products/marketplace-2026/overview",
+                  "products/marketplace-2026/digital-sponsorships",
+                  "products/marketplace-2026/booths-and-signage",
+                  "products/marketplace-2026/high-visibility",
+                  "products/marketplace-2026/experiences-and-activations",
+                  "products/marketplace-2026/closing-party",
+                  "products/marketplace-2026/direct-to-buyers",
+                  "products/marketplace-2026/sports",
+                  "products/marketplace-2026/add-ons",
+                  "products/marketplace-2026/event-amplification"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Events portfolio",
+            "icon": "calendar-days",
+            "pages": [
+              "events/overview",
+              "events/connect-marketplace",
+              "events/regional",
+              "events/sports-and-summits"
+            ]
+          },
+          {
             "group": "The company",
             "icon": "building",
             "pages": [
@@ -54,28 +99,7 @@
             ]
           },
           {
-            "group": "Events portfolio",
-            "icon": "calendar-days",
-            "pages": [
-              "events/overview",
-              "events/connect-marketplace",
-              "events/regional",
-              "events/sports-and-summits"
-            ]
-          },
-          {
-            "group": "Projects",
-            "icon": "rocket",
-            "pages": [
-              "projects/overview",
-              "projects/company-os",
-              "projects/agentforce-rollout",
-              "projects/data-consolidation",
-              "projects/supplier-knowledge"
-            ]
-          },
-          {
-            "group": "Data & systems",
+            "group": "Systems & data",
             "icon": "database",
             "pages": [
               "systems/salesforce-org",
@@ -100,6 +124,17 @@
             "pages": [
               "governance/source-of-truth",
               "governance/known-issues"
+            ]
+          },
+          {
+            "group": "Projects",
+            "icon": "rocket",
+            "pages": [
+              "projects/overview",
+              "projects/company-os",
+              "projects/agentforce-rollout",
+              "projects/data-consolidation",
+              "projects/supplier-knowledge"
             ]
           }
         ]
