@@ -26,6 +26,15 @@
             ]
           },
           {
+            "group": "The company",
+            "icon": "building",
+            "pages": [
+              "company/overview",
+              "company/business-model",
+              "company/brands"
+            ]
+          },
+          {
             "group": "Products & services",
             "icon": "store",
             "pages": [
@@ -68,25 +77,6 @@
               "events/connect-marketplace",
               "events/regional",
               "events/sports-and-summits"
-            ]
-          },
-          {
-            "group": "Systems & data",
-            "icon": "database",
-            "pages": [
-              "systems/salesforce-org",
-              "systems/data-model",
-              "systems/metrics",
-              "systems/integrations"
-            ]
-          },
-          {
-            "group": "The company",
-            "icon": "building",
-            "pages": [
-              "company/overview",
-              "company/business-model",
-              "company/brands"
             ]
           },
           {
