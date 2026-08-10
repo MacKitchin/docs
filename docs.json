@@ -35,6 +35,15 @@
             ]
           },
           {
+            "group": "Products & services",
+            "icon": "briefcase-business",
+            "pages": [
+              "products-services/overview",
+              "products-services/event-sponsorships",
+              "products-services/media-amplification"
+            ]
+          },
+          {
             "group": "People & org",
             "icon": "users",
             "pages": [
