@@ -26,15 +26,6 @@
             ]
           },
           {
-            "group": "The company",
-            "icon": "building",
-            "pages": [
-              "company/overview",
-              "company/business-model",
-              "company/brands"
-            ]
-          },
-          {
             "group": "Products & services",
             "icon": "store",
             "pages": [
@@ -80,6 +71,15 @@
             ]
           },
           {
+            "group": "The company",
+            "icon": "building",
+            "pages": [
+              "company/overview",
+              "company/business-model",
+              "company/brands"
+            ]
+          },
+          {
             "group": "People & org",
             "icon": "users",
             "pages": [
@@ -90,11 +90,13 @@
             ]
           },
           {
-            "group": "Governance",
-            "icon": "shield-check",
+            "group": "Systems & data",
+            "icon": "database",
             "pages": [
-              "governance/source-of-truth",
-              "governance/known-issues"
+              "systems/salesforce-org",
+              "systems/data-model",
+              "systems/metrics",
+              "systems/integrations"
             ]
           },
           {
@@ -105,6 +107,14 @@
               "ai/tooling",
               "ai/automation-roadmap",
               "ai/guardrails"
+            ]
+          },
+          {
+            "group": "Governance",
+            "icon": "shield-check",
+            "pages": [
+              "governance/source-of-truth",
+              "governance/known-issues"
             ]
           },
           {
