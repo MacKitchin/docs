@@ -8,8 +8,8 @@
     "dark": "#4fa1ab"
   },
   "favicon": {
-    "light": "/favicon.svg",
-    "dark": "/favicon.svg"
+    "light": "/assets/connect-icon.jpg",
+    "dark": "/assets/connect-icon.jpg"
   },
   "navigation": {
     "tabs": [
@@ -187,5 +187,10 @@
   },
   "seo": {
     "indexing": "navigable"
+  },
+  "logo": {
+    "light": "/assets/connect-wordmark.jpg",
+    "dark": "/assets/connect-wordmark.jpg",
+    "href": "/index"
   }
 }
