@@ -13,8 +13,8 @@ icon: "plug"
     Full ad order management: line items, rate cards, pricing, and the IO lifecycle. 25\+ objects, 200\+ Apex classes, triggers on Account, Contact, Opportunity, OpportunityLineItem, and Product2. Every `AB2__` field comes from here.
   </Card>
 
-  <Card title="Visit Create" icon="ticket">
-    The hosted buyer registration platform. Feeds `Registration__c` via webhook, logged in `Visit_Webhook_Log__c`. Keys are `Visit_Registration_Key__c`, `Visit_Visitor_Id__c`, `Visit_Order_Id__c`, and `Visit_Expo_Id__c`. Over 40 registration fields originate from Visit forms.
+  <Card title="Visit Create" icon="ticket" href="/systems/visit-create">
+    Registration platform. Five webhook pipelines into `Registration__c` and `Supplier_Registration__c`. Keys: `Visit_Registration_Key__c`, `Visit_Visitor_Id__c`, `Visit_Order_Id__c`, `Visit_Expo_Id__c`.
   </Card>
 </CardGroup>
 
@@ -88,3 +88,9 @@ Line-level payment fields include `AR_Payment_Status__c`, `Paid_In_Full_Date__c`
 - **`ProposalDetailsTrigger`** on `Proposal_Details__c` runs on API version 29, dating from 2014.
 - **`Order_Details__c`** is likely legacy or supplementary to `OpportunityLineItem`.
 - **Silverpop and Marketing Cloud coexist**, with Silverpop notionally being retired.
+
+## Next
+
+<Card title="Visit Create" icon="ticket" href="/systems/visit-create">
+  The registration platform, live expos, and how it maps into Salesforce.
+</Card>

@@ -80,6 +80,42 @@ Found during the August 2026 site crawl. All are live on `informaconnect.com` as
   <Accordion title="Women's Summit and Sports Innovation Forum dates overlap by one day" icon="calendar-x">
     The Women's Summit is dated 27-28 October 2026, the parent Sports Innovation Forum 28-30 October 2026. They overlap only on 28 October, despite the Summit running as a track inside the Forum.
   </Accordion>
+
+  <Accordion title="Connect Winter Marketplace 2026 - body copy places the event in the nation's capital" icon="map-pin-x">
+    Recaptured 12 August 2026. A homepage paragraph says corporate and association professionals "will join in the nation’s capital" while the hero, venue line, and hotel block are Palm Beach County Convention Center, Palm Beach, FL. Separate from the 2026-versus-2027 year-label mismatch on the same page.
+  </Accordion>
+
+  <Accordion title="eTourism Marketplace - Washington D.C. leftovers on a Palm Beach event" icon="map-pin-x">
+    Recaptured 12 August 2026. Hero and venue say Hilton West Palm Beach, 18-20 November. Page meta, Open Graph description, and the contact-page social description still say Washington, D.C. The Hosted DMO recruiting widget still lists 21-23 October 2024.
+  </Accordion>
+
+  <Accordion title="eTourism Marketplace - DMO headcount is 50 on one page and 75 on another" icon="hash">
+    How to Attend and the homepage promise "a select group of 50 top DMOs." Who Attends says "75 of the top DMO leaders" and "75 high-performing solution providers." Both were live on 12 August 2026.
+  </Accordion>
+
+  <Accordion title="eTourism Summit 2027 - Louisville leftovers on a Las Vegas event" icon="map-pin-x">
+    Recaptured 12 August 2026. Homepage hero is 21-23 April 2027, Wynn Las Vegas. Meta description and the Destination Marketing hub still say Louisville. Know Before You Go dates lunch to "Wednesday, 23 April" (23 April 2027 is a Friday), announces eTSY winners on 24 April (after the published window), and publishes leftover Belize-host Wi-Fi credentials. The Summit Who Attends page is Marketplace copy (50 DMO leaders).
+  </Accordion>
+
+  <Accordion title="BizBash About Us readership does not match the 2025 media kit" icon="hash">
+    Captured 12 August 2026. [bizbash.com/about-us](https://www.bizbash.com/about-us) says average monthly readership of **500,000**. The 2025 Events | Travel | Sports media kit cites **107K monthly uniques** and **231K monthly views**. Do not average them or present one as a rounding of the other.
+  </Accordion>
+
+  <Accordion title="BizBash Innovation Forum - Tampa hero, Miami and sports leftovers in meta" icon="map-pin-x">
+    Captured 12 August 2026. Hero and Plan Your Visit: 23-25 August 2026, Tampa Convention Center. Speakers-page meta: "August 25-27 in Miami." How to Attend and Plan Your Visit meta descriptions still describe a sports-marketing event. Same template family as Sports Innovation Forum.
+  </Accordion>
+
+  <Accordion title="Sarah Kloepple title differs by surface" icon="id-card">
+    Master People and most bizbash.com bylines: Editorial Director. The About Us roster: Deputy Editor. Both were live on 12 August 2026.
+  </Accordion>
+
+  <Accordion title="TSNN audience figures do not match across About, Advertise, and the 2025 kit" icon="hash">
+    Captured 12 August 2026. [tsnn.com/about-us](https://www.tsnn.com/about-us): 160,000+ registered users, 140,000+ monthly newsletter subscribers, 10,000+ LinkedIn, 10,000+ Twitter. Advertise page: 160,000 visitors and subscribers, 30,000 Twitter reach, 10,000 LinkedIn; individual newsletters at 10K / 12K / 8K / 25K. 2025 Events \| Travel \| Sports kit: 53K monthly users, 175K monthly views, 42.9K newsletter subscribers; The Industry This Week priced at 13K. Do not blend them.
+  </Accordion>
+
+  <Accordion title="TSNN About Us and Contact Us disagree on office and sales lead" icon="id-card">
+    Captured 12 August 2026. About Us: Norcross, Georgia office; sales contact John Rice, Sales and Business Development. Advertise: John Rice, VP of Sales. Contact Us: Chicago, 300 S. Riverside Plaza; sales lead Chris Conwell, VP Group Media; John Rice is absent. Master People: John Rice is a Contractor reporting to Derek Rodriguez. Contact Us also spells Michele **Lautik**; the directory has Michele **Laufik**.
+  </Accordion>
 </AccordionGroup>
 
 ## Contact page conflicts
@@ -108,7 +144,10 @@ They most likely apply to hosted buyers and to paying delegates respectively, bu
 | Gap | Status |
 | --- | --- |
 | Notion and Zapier automations not documented | Open. Record each new workflow in the AI & Agent Library before launch |
-| Reporting dashboards not indexed in Notion | Marked **Working**. A dashboard index page is a candidate |
+| Reporting dashboards not indexed in Notion | Marked **Working**. Company Brain now has [Dashboard index](/systems/dashboards); Notion still has no index |
+| Salesforce Business Processes catalogue is empty | Canonical register points at the database; queried 12 August 2026, **zero rows**. Sales-process page is grounded on Record Types + data model until the catalogue is filled |
+| `Marketplace__c.Visit_Expo_Id__c` reads null via Salesforce MCP | All 50 Marketplace rows returned null on 12 August 2026. `sf-visit-webhook` still documents expo-to-Marketplace pairs and Marketplace 2026 webhooks were firing. Treat as FLS on the connected user until a human confirms |
+| Visit Winter Marketplace 2026 expo exists; webhook README said pending | Live expo `14d0ea7t27s15` (18–20 Nov 2026). eTourism Marketplace 2026 (`3ifgqc5icj4qz`) is also live and absent from the README active-events table |
 | HR and legal policies not imported | Marked **Working** |
 | Role-specific onboarding steps per department | Marked **Working** |
 | Salesforce teamspace flagged `in_trash` | Open blocker on the [Company OS project](/projects/company-os). Key pages moved into Company OS; verify the teamspace in the UI |

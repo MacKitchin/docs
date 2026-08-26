@@ -1,0 +1,74 @@
+---
+title: "Elysia"
+description: "Informa's internal AI platform: the API, Elysia Code gateway for Claude Code, and how Connect uses it locally."
+icon: "sparkles"
+---
+
+Elysia is **Informa's managed AI platform**. It sits between our tools and LLM providers. It routes models, keeps traffic on Informa infrastructure, and applies governance, tracing, and billing. Connect uses it in two ways: as an **HTTP API** for chat, agents, and content, and as **Elysia Code**, a CLI that points Claude Code at the Informa AI gateway.
+
+<Info>
+  **Captured from local files and Notion, 12 August 2026.** Sources: `elysia-console`, `Elysia-Web-App`, `~/Elysia API Docs`, `Dev/elysia-code-latest` (CLI 0.3.0), Notion **Elysia Code 0.3.0** (verified) and **Elysia API Guidebook**. **Do not put API keys, client secrets, workspace IDs, or bearer tokens on this site.** Credentials live in `~/Elysia API Docs/Elysia Credentials.txt` and the Notion credentials block — retrieve them there, never copy them here.
+</Info>
+
+This is **not** Agentforce. Agentforce agents run in `connect-prod`. Elysia is the Informa-wide AI estate. They can meet: Elysia chat can call local MCP tools (Salesforce, Visit Create, Power BI) through the console bridge.
+
+## How Connect uses it
+
+| Surface | Local path | Role |
+| --- | --- | --- |
+| **Elysia API** | Stage: `https://api.stage.ai.informa.com`. Dev also appears in the complete API notes: `https://api.dev.ai.informa.com`. **Prod host is unconfirmed** in the console handoff. | Chat, agents, content, assets, apps |
+| **Elysia Code** | CLI `elysia-code` 0.3.0 at `~/.local/bin/elysia-code`. Download: [pilots.ai.informa.com/elysia-code](https://pilots.ai.informa.com/elysia-code/) | Configures Claude Code to use the Informa AI gateway |
+| **Elysia Console** | `/Users/william.kitchin/repos/elysia-console` | Local API tester + chat UI + MCP bridge. `python3 elysia_console.py` → `http://localhost:8765/` |
+| **Elysia Web App** | `/Users/william.kitchin/repos/Elysia-Web-App` | Next.js Salesforce assistant. Read-only SOQL via MCP, PDF export |
+
+## Two API products
+
+The **Elysia API Guidebook** (Company OS, status Done) distinguishes:
+
+| | Community API | Professional API |
+| --- | --- | --- |
+| For | Internal use cases and developer testing (performance, pen-test, UAT) | Customer-facing solutions after the checklist |
+| Hosting | Informa infrastructure only | Same, after review |
+| SLA / security | Not guaranteed for customer-facing use | Requires SLAs, GDPR, AI Governance, cost code, security review, usage metrics |
+| Monthly cap (guidebook) | 5,000 calls per instance | After re-engagement with the Elysia product team |
+| Support | Integration is not supported by the Elysia product team | Via the product team |
+| Contact | `elysia@informa.com` | Professional access form (product team) |
+
+## Auth (two layers)
+
+From the console handoff and the `elysia-api` skill. Do not treat Cloudflare Access as the API bearer token.
+
+1. **OAuth2 client credentials** → Cognito JWT. Token URL used locally: `https://idp.dev.ai.informa.com/oauth2/token`. Send as `Authorization: Bearer …`.
+2. **Cloudflare Access / basic auth** protects the docs and some console flows (`CF_Authorization` cookie). It is not the Elysia JWT.
+
+An **app ID** is required on chat and several other calls (`ELYSIA_APP_ID`). Get it from the platform team or the credentials file — not from this page.
+
+## Local inventory (this machine)
+
+Searched 12 August 2026. Useful trees only.
+
+| Path | What it is |
+| --- | --- |
+| `/Users/william.kitchin/repos/elysia-console` | Console, OpenAPI copy, Postman collection, `skills/elysia-api` |
+| `/Users/william.kitchin/repos/Elysia-Web-App` | Salesforce assistant web app |
+| `/Users/william.kitchin/Elysia API Docs` | Guidebook PDF/PPTX, complete markdown, OpenAPI, Postman. **Also contains `Elysia Credentials.txt` — do not commit or paste** |
+| `/Users/william.kitchin/Dev/elysia-code-latest` | CLI source, version **0.3.0** |
+| `~/.local/bin/elysia-code` | Installed CLI |
+| `~/.elysia` | Compression state and logs |
+| `~/.claude/commands/elysia-*.md` | Slash commands: `/elysia-config`, `/elysia-model`, `/elysia-compression` |
+| Notion | Elysia Code 0.3.0 (verified), Elysia API Guidebook, Elysia Ai Assistant Api Documentation |
+
+Desktop PDFs (`Elysia Code.pdf`, `Elysia Chat.pdf`, `Elysia_AI_Assistant_API_Documentation.pdf`) match the same products. Teams demos exist for Salesforce MCP tool calling — they are recordings, not source of truth.
+
+## What not to do
+
+- Do not paste keys, client secrets, workspace IDs, config IDs, user IDs, or JWTs into MDX.
+- Do not treat Community API as approved for a customer-facing Connect product.
+- Do not switch the console off `/v1/ai/chat/stream/completion` without a new live check. The console handoff says `/v2/ai/chat/completion` was unavailable on stage.
+- Do not confuse Elysia with Agentforce or with the Bun/TypeScript framework also named Elysia.
+
+## Next
+
+<Card title="Elysia API" icon="code" href="/ai/elysia-api">
+  Environments, auth, chat, agents, content, and the OpenAPI catalog.
+</Card>

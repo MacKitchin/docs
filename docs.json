@@ -1,167 +1,220 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Connect Company Brain",
-  "theme": "mint",
+  "theme": "maple",
+  "layout": "sidenav",
+  "sidebar": {
+    "items": "collapsible"
+  },
+  "disableAnchors": false,
   "colors": {
-    "primary": "#ec6940",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
+    "primary": "#002244",
+    "light": "#4fa1ab",
+    "dark": "#ec6940"
+  },
+  "logo": {
+    "light": "/images/informa-connect-logo.png",
+    "dark": "/images/informa-connect-logo.png",
+    "href": "/"
   },
   "favicon": {
     "light": "/favicon.svg",
     "dark": "/favicon.svg"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Company Brain",
-        "groups": [
+        "group": "Welcome",
+        "icon": "compass",
+        "pages": [
+          "index",
+          "start/how-to-use"
+        ]
+      },
+      {
+        "group": "Company & Strategy",
+        "icon": "building",
+        "pages": [
           {
-            "group": "Start here",
-            "icon": "compass",
-            "pages": [
-              "index",
-              "start/how-to-use",
-              "start/glossary"
-            ]
-          },
-          {
-            "group": "The company",
+            "group": "Who we are",
             "icon": "building",
             "pages": [
               "company/overview",
-              "company/business-model",
               "company/brands"
             ]
           },
           {
-            "group": "Products & services",
-            "icon": "briefcase-business",
+            "group": "How we work",
+            "icon": "handshake",
+            "pages": [
+              "company/business-model",
+              "company/sales-process"
+            ]
+          },
+          {
+            "group": "Our brands",
+            "icon": "flag",
+            "pages": [
+              "company/bizbash",
+              "company/tsnn"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "For Exhibitors",
+        "icon": "briefcase",
+        "pages": [
+          "customers/exhibitors",
+          "customers/who-should-exhibit",
+          {
+            "group": "Packages & Pricing",
+            "icon": "package",
+            "pages": [
+              "customers/exhibitor-packages",
+              "customers/exhibitor-appointments"
+            ]
+          },
+          {
+            "group": "Event Journey",
+            "icon": "route",
+            "pages": [
+              "customers/exhibitor-prepare",
+              "customers/exhibitor-onsite",
+              "customers/exhibitor-after"
+            ]
+          },
+          "start/customer-faqs"
+        ]
+      },
+      {
+        "group": "For Hosted Buyers",
+        "icon": "user-check",
+        "pages": [
+          "customers/hosted-buyers",
+          {
+            "group": "Qualification",
+            "icon": "clipboard-check",
+            "pages": [
+              "customers/who-qualifies",
+              "customers/buyer-qualification",
+              "customers/buyer-whats-covered"
+            ]
+          },
+          {
+            "group": "Event Journey",
+            "icon": "route",
+            "pages": [
+              "customers/buyer-prepare",
+              "customers/buyer-onsite",
+              "customers/buyer-after"
+            ]
+          }
+        ]
+      },
+      {
+        "group": "Events & Products",
+        "icon": "calendar-days",
+        "pages": [
+          "events/overview",
+          {
+            "group": "Connect Events",
+            "icon": "users",
+            "pages": [
+              "events/connect-marketplace",
+              "events/regional"
+            ]
+          },
+          {
+            "group": "Specialty Events",
+            "icon": "star",
+            "pages": [
+              "events/connect-travel",
+              "events/sports-and-summits",
+              "events/bizbash"
+            ]
+          },
+          {
+            "group": "Products & Services",
+            "icon": "tag",
             "pages": [
               "products-services/overview",
               "products-services/event-sponsorships",
               "products-services/media-amplification"
             ]
-          },
-          {
-            "group": "People & org",
-            "icon": "users",
-            "pages": [
-              "people/org-chart",
-              "people/departments",
-              "people/directory",
-              "people/who-owns-what"
-            ]
-          },
-          {
-            "group": "Events portfolio",
-            "icon": "calendar-days",
-            "pages": [
-              "events/overview",
-              "events/connect-marketplace",
-              "events/regional",
-              "events/sports-and-summits"
-            ]
-          },
+          }
+        ]
+      },
+      {
+        "group": "People & Teams",
+        "icon": "users",
+        "pages": [
+          "people/departments",
+          "people/who-owns-what",
+          "people/org-chart",
+          "people/directory"
+        ]
+      },
+      {
+        "group": "Operations",
+        "icon": "cog",
+        "pages": [
           {
             "group": "Projects",
             "icon": "rocket",
             "pages": [
               "projects/overview",
               "projects/company-os",
-              "projects/agentforce-rollout",
               "projects/data-consolidation",
-              "projects/supplier-knowledge"
+              "projects/supplier-knowledge",
+              "projects/agentforce-rollout"
             ]
           },
           {
-            "group": "Data & systems",
+            "group": "Systems & Data",
             "icon": "database",
             "pages": [
               "systems/salesforce-org",
+              "systems/salesforce-glossary",
               "systems/data-model",
               "systems/metrics",
-              "systems/integrations"
+              "systems/dashboards",
+              "systems/integrations",
+              "systems/hosted-buyer-ops"
             ]
           },
           {
-            "group": "AI & automation",
+            "group": "Visit Create",
+            "icon": "ticket",
+            "pages": [
+              "systems/visit-create",
+              "systems/visit-create-api",
+              "systems/visit-create-workflows"
+            ]
+          },
+          {
+            "group": "AI & Automation",
             "icon": "bot",
             "pages": [
               "ai/agents",
               "ai/tooling",
+              "ai/guardrails",
+              "ai/elysia",
+              "ai/elysia-api",
+              "ai/elysia-code",
               "ai/automation-roadmap",
-              "ai/guardrails"
-            ]
-          },
-          {
-            "group": "Governance",
-            "icon": "shield-check",
-            "pages": [
-              "governance/source-of-truth",
-              "governance/known-issues"
+              "start/agent-retrieval"
             ]
           }
         ]
       },
       {
-        "tab": "Exhibitor Guide",
-        "groups": [
-          {
-            "group": "Get started",
-            "pages": [
-              "introduction",
-              "exhibitors/who-should-exhibit"
-            ],
-            "icon": "compass"
-          },
-          {
-            "group": "Package and appointments",
-            "icon": "package",
-            "pages": [
-              "exhibitors/packages",
-              "exhibitors/appointments",
-              "exhibitors/prepare"
-            ]
-          },
-          {
-            "group": "At the event",
-            "icon": "map",
-            "pages": [
-              "exhibitors/onsite",
-              "exhibitors/after"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Hosted Buyer Guide",
-        "groups": [
-          {
-            "group": "Get started",
-            "icon": "compass",
-            "pages": [
-              "hosted-buyers/introduction",
-              "hosted-buyers/who-qualifies"
-            ]
-          },
-          {
-            "group": "Applying and preparing",
-            "icon": "clipboard-check",
-            "pages": [
-              "hosted-buyers/qualification",
-              "hosted-buyers/whats-covered",
-              "hosted-buyers/prepare"
-            ]
-          },
-          {
-            "group": "At the event",
-            "icon": "map",
-            "pages": [
-              "hosted-buyers/onsite",
-              "hosted-buyers/after"
-            ]
-          }
+        "group": "Reference",
+        "icon": "book",
+        "pages": [
+          "start/glossary",
+          "governance/source-of-truth",
+          "governance/known-issues"
         ]
       }
     ]

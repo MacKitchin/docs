@@ -1,0 +1,68 @@
+---
+title: "Dashboard index"
+description: "Which Salesforce dashboards exist in connect-prod, which folders they live in, and which metric definition they should use. Working, not Canonical."
+icon: "layout-dashboard"
+---
+
+Reporting dashboards are **Working** in the [source-of-truth registry](/governance/source-of-truth): live in `connect-prod`, not indexed in Notion. This page is a Company Brain index of names and purpose. It is not Canonical. It does not hold live figures.
+
+<Info>
+  Queried `Dashboard` in `connect-prod` on **12 August 2026**. There are **200+** dashboard records. Most are year-stamped personal or team copies from 2019–2022. Use a recently modified company, public, hosted-buyer, travel, or ops dashboard — not a 2020 personal activity clone.
+</Info>
+
+<Warning>
+  If a dashboard number disagrees with a query on [Metrics](/systems/metrics), the query wins until a human changes the definition. Do not paste dashboard totals into MDX.
+</Warning>
+
+## Folders worth opening first
+
+| Folder | What it holds |
+| --- | --- |
+| **Public Dashboards** | Cross-brand media, product-category, renewals, hunting, event TV walls |
+| **Company Dashboards** | All-sales activity, company-wide sales, Q4 event sales, accounting exceptions |
+| **Hosted Buyer Team dashboards** | Approvals, HBE goals, registrations by rep, command centre |
+| **Connect Travel Dashboards** | Annual Connect Travel sales (2024, 2025, 2026) |
+| **Ops Workflow Dashboards** | Sold-product status, TSNN fulfilment, content activation |
+| **2024 Sales Dashboards / 2025 AKA 2 Centuries + 1/4 Century** | Leadership copies (P and L, rebook). Treat as Working |
+
+Older folders (`*North/South/West Sales Team Activity Dashboards`, `2020 Sales Dashboards`, `2020 PDT Dashboards`, `*PDT Activity Dashboards`) are historical. Do not use them for current pipeline.
+
+## Recently maintained (last modified 2025)
+
+Last-modified dates from the org query. Descriptions are inferred from the title only where the Salesforce `Description` field is blank.
+
+| Dashboard | Folder | Last modified | Use for |
+| --- | --- | --- | --- |
+| 2026 Media Dashboard for All Brands | Public Dashboards | 17 Dec 2025, Wei Zheng | Media revenue by `Organization__c`. Metric: revenue by business unit |
+| 2025 Media Dashboard for All Brands | Public Dashboards | 11 Dec 2025, Wei Zheng | Prior-year media. Same definition, filter product year 2025 |
+| 2025 Centralized Product Category Dashboard for Connect - SS Team | Public Dashboards | 10 Dec 2025, Wei Zheng | Connect product mix. Metric: revenue by `Product_Category__c` |
+| 2026 DR Rebook | 2025 AKA 2 Centuries + 1/4 Century | 4 Dec 2025, Derek Rodriguez | Rebooking / Existing Business. Metric: `Type`, product year |
+| 2026 Connect Travel Sales | Connect Travel Dashboards | 24 Nov 2025, Wei Zheng | Travel / eTourism. Filter `Organization__c = 'Travel'` |
+| 2026 All Sales Activity Tracker | Company Dashboards | 12 Nov 2025, Rebecca Rosengren | Activity volume. Automated Outreach/Artisan rows sit in `Task` — do not treat every row as a human send |
+| Account Renewals Dashboard | Public Dashboards | 5 Nov 2025, MacKenzie Kitchin | Existing Business coverage |
+| Sales Renewals by Rep Y/Y | Public Dashboards | 4 Nov 2025, MacKenzie Kitchin | Rep-level renewal |
+| Sold Product Status for This Year | Ops Workflow Dashboards | 10 Oct 2025, Wei Zheng | Fulfilment of won lines (`Product_Status__c`) |
+| Centralized Product Category Dashboard for All Event Sales | Public Dashboards | 2 Oct 2025, Wei Zheng | Event-line mix |
+| 2025 Show Approvals | Hosted Buyer Team dashboards | 11 Sep 2025, Wei Zheng | Qualification pipeline. Count Fully Registered, not Registered |
+| 2025 Q4 Event Sales (Winter, West, South) | Company Dashboards | 2 Sep 2025, Wei Zheng | Regional event bookings |
+| 2025 Hosted Buyer Registrations by Reps | Hosted Buyer Team dashboards | 8 Jul 2025, Wei Zheng | Recruiter activity |
+| 2025 Hosted Buyer Command Center | Hosted Buyer Team dashboards | 23 Jan 2025, Wei Zheng | HBX operating view |
+| Sales Hunting Board | Public Dashboards | 21 Mar 2025, Wei Zheng | New Business |
+| Exception Dashboard for Accounting | Company Dashboards | 19 Nov 2024, Wei Zheng | Billing exceptions. Escalate; do not answer invoice questions from it |
+
+Copies ("Copy of…", "for suzi", "TV Dash", named-rep media dashboards) exist alongside these. Prefer the untitled-as-copy original.
+
+## How to pick a dashboard
+
+1. Match the question to a [metric definition](/systems/metrics).
+2. Prefer `Organization__c` for brand, `Product_Year__c` for season, `Type` for new vs existing.
+3. Exclude barter and Expired unless the question needs them.
+4. If the dashboard is year-stamped 2024 or earlier and nothing newer exists, say so.
+
+Owner of the dashboard *index* (Working): Mac Kitchin. Most current objects were last edited by **Wei Zheng**.
+
+## Next
+
+<Card title="Integrations" icon="plug" href="/systems/integrations">
+  AdBook, Visit Create, and the rest of the managed-package estate.
+</Card>

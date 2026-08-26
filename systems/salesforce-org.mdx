@@ -20,7 +20,7 @@ For task-based, in-app how-tos, go to the source:
 - **Permissions, sharing, licences**: contact the Salesforce admin. See [People & org](/people/who-owns-what) for who owns Salesforce administration.
 - **Reports and dashboards inside Salesforce**: use the Reports tab in the org. For metric definitions and the SOQL behind them, see [metrics](/systems/metrics).
 
-If a record-creation workflow is Connect-specific (for example, hosted buyer registrations flowing in from Visit Create), it will be documented under [integrations](/systems/integrations) or the relevant object in the [data model](/systems/data-model).
+If a record-creation workflow is Connect-specific (for example, hosted buyer registrations flowing in from Visit Create), it will be documented under [Visit Create workflows](/systems/visit-create-workflows) or the relevant object in the [data model](/systems/data-model).
 
 ## What the org supports
 
@@ -119,18 +119,8 @@ When to override: include `Closed Lost` for win/loss and loss-reason analysis; i
 - For large result sets use the aggregate query tool rather than pulling records.
 - Prefer Account rollup fields (`Total_Spend_*`) over aggregating opportunities. The `dlrs` package maintains them.
 
-## Where to go deeper
+## Next
 
-<CardGroup cols={3}>
-  <Card title="Data model" icon="share-2" href="/systems/data-model">
-    Field-level detail on the objects that matter.
-  </Card>
-
-  <Card title="Metrics" icon="chart-line" href="/systems/metrics">
-    Definitions and exact SOQL for every standard measure.
-  </Card>
-
-  <Card title="Integrations" icon="plug" href="/systems/integrations">
-    The managed-package estate and what each package touches.
-  </Card>
-</CardGroup>
+<Card title="Data model" icon="database" href="/systems/data-model">
+  Core objects, relationships, and the fields that matter for analysis.
+</Card>

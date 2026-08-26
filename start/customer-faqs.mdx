@@ -1,0 +1,296 @@
+---
+title: "Customer FAQs"
+description: "Extract of the Canonical Customer FAQ library: 29 grounded supplier and hosted-buyer answers with confidence scores."
+icon: "circle-help"
+---
+
+This page is an extract of the Notion **Customer FAQs** database — the Canonical home for customer-facing answers. Customer-facing agents should cite these pairs, then the [Events portfolio](/events/overview) for dates, venues, and policy. Do not rewrite the answers from memory.
+
+<Info>
+  **Source:** Notion database `🙋‍♂️ Customer FAQs` under the Salesforce Knowledge Base. **Owner:** Mac Kitchin. **Refresh:** monthly. **Extracted:** 12 August 2026. **Last validated in source:** 26 June 2026. Registry notes say ~31 pairs; this extract found **29** rows. Every row is still status **In progress**.
+</Info>
+
+<Warning>
+  Several answers mention billing, discounts, payment timing, or attendee lists. Those rows carry a **When not to use** rule. Follow it. Escalate amounts, terms, and named lists to a human — see [Guardrails](/ai/guardrails).
+</Warning>
+
+Event facts in this library are restated from email and onboarding copy. If a pair disagrees with an [Events](/events/overview) page or [Known issues](/governance/known-issues), report both. Do not pick a winner.
+
+## How to use a pair
+
+| Field | Meaning |
+| --- | --- |
+| **Short answer** | The approved reply. Quote this, do not paraphrase into a new policy. |
+| **Confidence** | Source-scored. Surface the score when it is below 0.8, or when the field is blank. |
+| **Frequency / rank** | How often the question appeared in the mined corpus. Blank means unranked. |
+| **When not to use** | Hard stop. Usually account-specific money or PII. |
+
+Sensitive review-queue items (specific discounts, invoice schedules, unpublished rates) stay in Knowledge Candidates. They are not on this page.
+
+## Hosted buyer and attendee
+
+<AccordionGroup>
+  <Accordion title="My application is approved — what are the next steps for Connect Marketplace?">
+    **Short answer:** Add the dates (Aug 24-26, Tampa), book your hotel via the link, watch for your flight invite from TripEasy, and complete your appointment-portal selections. Marketplace 1:1 appointments are the only mandatory requirement (8/25 10am - 8/26 5pm).
+
+    **When to use:** Newly approved/secured attendee asking "what now?"
+
+    Frequency 30 · Rank 5 · Confidence 0.85
+  </Accordion>
+
+  <Accordion title="How and when do I get my deposit back?">
+    **Short answer:** You receive a refund check at the conclusion of your 1:1 appointments — but you must attend ALL of your scheduled 1:1 appointments to receive your deposit back.
+
+    **When to use:** Attendee asking about deposit refund timing or conditions.
+
+    Frequency 14 · Rank 14 · Confidence 0.85
+
+    <Note>
+      The [Hosted Buyer Guide](/customers/buyer-qualification) and the archived VIP playbook also describe an on-site or post-completion refund. Mechanism and timing are still a TODO on the public guide. Report both versions. Do not invent a single process.
+    </Note>
+  </Accordion>
+
+  <Accordion title="Who books my flight and how?">
+    **Short answer:** A flight-booking invitation comes directly from our travel partner, TripEasy (`travelnoreply@tripeasy.com`) — add it to your safe-sender list. The travel team (`connectmeetings@its.com`) can help.
+
+    **When to use:** Attendee asking how/when to book flights or who to contact for travel.
+
+    Frequency 12 · Rank 18 · Confidence 0.82
+  </Accordion>
+
+  <Accordion title="How many appointments will I have, and how do I choose who I meet?">
+    **Short answer:** You'll meet roughly 30-40 suppliers/buyers over the event. Closer to the date you'll get appointment-portal access to make your selections — make as many as possible.
+
+    **When to use:** Attendee asking how many meetings or how matchmaking works.
+
+    Frequency 12 · Rank 17 · Confidence 0.80
+  </Accordion>
+
+  <Accordion title="Is there a referral program / can I refer a colleague?">
+    **Short answer:** Yes — "Connect is Better with Friends". Refer a qualified planner who has never attended a Connect event; if they're approved and attend, you both get $250 after the event.
+
+    **When to use:** Attendee asking about referrals or incentives for bringing peers.
+
+    Frequency 8 · Confidence 0.80
+  </Accordion>
+
+  <Accordion title="Can I transfer my hosted invite or registration to a colleague?">
+    **Short answer:** Yes, with rep approval and if the colleague is qualified (typically director-level or above).
+
+    **When to use:** Invitee declines but wants to send a colleague.
+
+    Confidence blank in the database (source note 0.70).
+  </Accordion>
+
+  <Accordion title="What is the Hosted Buyer / Fully Hosted VIP program and am I eligible?">
+    **Short answer:** Select director-level+ buyers (e.g., DMO/state tourism leaders) are fully hosted — flight and hotel covered — in exchange for taking pre-scheduled appointments. A refundable deposit secures the spot.
+
+    **When to use:** Buyer/DMO asking about hosted invitations, eligibility, or what's covered.
+
+    **When not to use:** Pricing/financial specifics beyond the refundable deposit — confirm with the rep.
+
+    Confidence blank (source note 0.80).
+  </Accordion>
+
+  <Accordion title="What is eTourism Marketplace and how does hosting work?">
+    **Short answer:** An intimate destination-marketing show (Nov 18-20, 2026, West Palm Beach) with max 75 hosted DMO/state leaders and 75 travel suppliers, built around 35 pre-scheduled 1:1 appointments.
+
+    **When to use:** DMO/supplier asking about eTourism Marketplace format, dates, or hosting.
+
+    <Warning>
+      The live event site says **50** DMOs on How to Attend and **75** on Who Attends. This FAQ uses 75. See [Known issues](/governance/known-issues). Dates and venue: [Connect Travel](/events/connect-travel).
+    </Warning>
+  </Accordion>
+</AccordionGroup>
+
+## Supplier packages, appointments, and events
+
+<AccordionGroup>
+  <Accordion title="When and where is Connect Marketplace 2026?">
+    **Short answer:** Connect Marketplace 2026 is August 24-26 in Tampa, FL — the flagship show of the year.
+
+    **When to use:** Any supplier asking about dates, location, or which show is the flagship.
+
+    Confidence blank (source note 0.90). Confirm against [Connect Marketplace](/events/connect-marketplace).
+  </Accordion>
+
+  <Accordion title="What's included in a Connect Marketplace supplier package?">
+    **Short answer:** Appointment-based packages (commonly 24, 30, or 40 pre-scheduled 1:1 appointments) with pre-qualified, appointment-ready buyers, plus access to the buyer/appointment portal.
+
+    **When to use:** Supplier asking what they get for participating or comparing package tiers.
+
+    **When not to use:** For exact current-year pricing — route to the rate card / rep.
+
+    Published flagship prices live on [Business model](/company/business-model) and [Packages](/customers/exhibitor-packages).
+  </Accordion>
+
+  <Accordion title="What booth / exhibit options are available at Connect Marketplace?">
+    **Short answer:** 20x20 exhibit booths are offered in tiers — Basic Turnkey, Turnkey, and fully Activated (with a traffic-driving experience). BizBash/Connect handles booth logistics and coordination; design upgrades cost extra.
+
+    **When to use:** Supplier asking about exhibiting/booth options or buildout.
+
+    **When not to use:** Exact booth pricing — sensitive; confirm with rep.
+
+    Frequency 10 · Confidence 0.75
+  </Accordion>
+
+  <Accordion title="How are buyer appointments scheduled at the event?">
+    **Short answer:** Appointments are pre-scheduled before you arrive, so every meeting is booked in advance. Early registrants get early access to the appointment portal.
+
+    **When to use:** Supplier asking how matchmaking/appointments work or why to sign early.
+  </Accordion>
+
+  <Accordion title="Can I see the attendee or buyer list before the event?">
+    **Short answer:** Reps can share a sample of attendee brands/titles to convey who's in the room; full buyer profiles come via the appointment portal after you sign.
+
+    **When to use:** Supplier requests buyer list, attendee breakdown, or "who will be there".
+
+    **When not to use:** Do not share full attendee PII/contact lists pre-sale.
+
+    Confidence blank (source note 0.78).
+  </Accordion>
+
+  <Accordion title="How do I book my hotel room block for the event?">
+    **Short answer:** Your rep sends a Hotel Link to book; confirm your dates and let the rep know so they can verify the booking.
+
+    **When to use:** Supplier asking about hotel, room block, or whether a booking went through.
+
+    Confidence blank (source note 0.80).
+  </Accordion>
+
+  <Accordion title="What attendee details do I need to submit after registering?">
+    **Short answer:** You'll receive an "Action Required: Attendee Details" request (via DocuSign) to provide the names/info of who is attending under your registration.
+
+    **When to use:** Supplier asking what to do after signing or what the attendee-details email is.
+  </Accordion>
+
+  <Accordion title="What is the BizBash Innovation Forum?">
+    **Short answer:** An invite-only, intentionally small event (capped ~150 senior event/marketing/experience leaders) focused on peer-to-peer conversation — not an expo hall.
+
+    **When to use:** Supplier asking what the Innovation Forum is or who attends.
+
+    Dates and venue: [Innovation Forum](/events/bizbash). The cap is from this FAQ, not from the live event hero.
+  </Accordion>
+</AccordionGroup>
+
+## Media, creative, and campaigns
+
+<AccordionGroup>
+  <Accordion title="How do I submit my ad creative / materials for my campaign?">
+    **Short answer:** Our Audience Extension Team (Informa Engage) coordinates your campaign. Send your ad material + landing-page URL to `AE-Assets@informa.com` (include the campaign details/Ref ID) by the next business day, meeting the ad spec guide.
+
+    **When to use:** Supplier asking how/where to send creative or what the materials deadline is.
+
+    Frequency 16 · Rank 12 · Confidence 0.82
+  </Accordion>
+
+  <Accordion title="What advertising and media options can suppliers buy to reach attendees?">
+    **Short answer:** Pre/post-show attendee emails, event targeting (guaranteed clicks), retargeting, lead-gen (guaranteed leads), awareness/video, editorial sponsorships (newsletter, sponsored social, dedicated roadblocks), and print/magazine ads.
+
+    **When to use:** Supplier asking how to market to attendees beyond the booth/appointments.
+
+    Rate-card dollars: [Media & amplification](/products-services/media-amplification). Confidence blank (source note 0.85).
+  </Accordion>
+
+  <Accordion title="What print/editorial advertising is available and what are the deadlines?">
+    **Short answer:** BizBash and TSNN have editorial calendars plus several guides/magazines; print deadlines are ~6 weeks before publish and digital deadlines ~1-2 weeks out.
+
+    **When to use:** Supplier asking about magazines, editorial, annual guides, or deadlines.
+
+    **When not to use:** Exact ad rates — keep to the rate card (sensitive).
+  </Accordion>
+
+  <Accordion title="What is a co-branded webinar and what's included?">
+    **Short answer:** An hour-long co-branded webinar with Connect/BizBash, guaranteeing 250+ registrants. Only ~2 are offered per month; you receive the opt-in registrant contact list, and it's promoted via newsletter, email, and social.
+
+    **When to use:** Supplier asking about webinar sponsorship or lead-gen via content.
+
+    Frequency 9 · Confidence 0.78
+  </Accordion>
+
+  <Accordion title="What is a co-branded whitepaper / e-book and what do I get?">
+    **Short answer:** A co-branded whitepaper based on your data/case study, guaranteeing 200+ downloads. You review/approve the topic, receive the opt-in download contact list, and co-own the asset to reuse in your own marketing.
+
+    **When to use:** Supplier asking about content/thought-leadership lead-gen.
+
+    Frequency 6 · Confidence 0.72
+  </Accordion>
+
+  <Accordion title="Do you have creative examples before I sign on for a campaign?">
+    **Short answer:** Yes — reps routinely share examples of the email creative, event targeting, and past campaigns so you can evaluate before signing.
+
+    **When to use:** Supplier hesitant to sign without seeing creative/deliverables.
+
+    Confidence blank (source note 0.75).
+  </Accordion>
+
+  <Accordion title="Can I get analytics / performance reporting on my campaign?">
+    **Short answer:** Yes — reps request a campaign deliverables/analytics report (often from the analytics team) and share YTD performance and social retargeting reports.
+
+    **When to use:** Supplier asking how a campaign is performing or requesting analytics.
+  </Accordion>
+</AccordionGroup>
+
+## Contracting, payment, and discounts
+
+<AccordionGroup>
+  <Accordion title="How do I sign up — what is the contract process?">
+    **Short answer:** Agreements are sent and signed via DocuSign; once signed, the campaign/participation is secured and fulfillment begins.
+
+    **When to use:** Supplier ready to move forward or asking how to commit.
+  </Accordion>
+
+  <Accordion title="How do I pay my invoice and what payment methods are accepted?">
+    **Short answer:** Your Customer Success Manager sends an invoice with due dates; pay via our secure, fee-free credit-card link ("BizBashPayNow", powered by Square). Large agreements are commonly billed in quarterly installments.
+
+    **When to use:** Supplier asking how to pay, payment methods, or installment options.
+
+    **When not to use:** Specific amounts/schedules — account-specific and sensitive.
+
+    Frequency 20 · Rank 8 · Confidence 0.80
+  </Accordion>
+
+  <Accordion title="When is payment due after I sign an agreement?">
+    **Short answer:** Payment terms are set in your agreement; reps send "Payment Due" reminders and some packages require a deposit. Specific amounts/terms vary — confirm on your agreement.
+
+    **When to use:** Supplier asking about payment timing or terms.
+
+    **When not to use:** Do not quote specific amounts here — account-specific and sensitive.
+  </Accordion>
+
+  <Accordion title="Can I get a discount or reduce my package cost?">
+    **Short answer:** Packages are custom and reps can offer tiered options, partnership discounts, or apply a credit on file — but specific reductions require rep/manager approval. Share your budget and goals and we'll tailor a package.
+
+    **When to use:** Supplier asking to revisit pricing or fit within budget.
+
+    **When not to use:** Do not quote specific discounts/amounts — account-specific and sensitive.
+
+    Frequency 20 · Rank 9 · Confidence 0.70
+  </Accordion>
+
+  <Accordion title="Do existing partners get deals or discounts on other events?">
+    **Short answer:** It's handled case-by-case; reps will take an active partnership into account when proposing participation in another event.
+
+    **When to use:** Partner asking about cross-event discounts or bundles.
+
+    **When not to use:** Promising a specific discount — this is discretionary and needs rep/manager input.
+  </Accordion>
+
+  <Accordion title="What incentives are offered to sign up early?">
+    **Short answer:** Time-boxed incentives like waived fees, gift cards, sweepstakes (e.g., FIFA/World Cup tickets), and BOGO offers are used to drive early sign-ups before deadlines.
+
+    **When to use:** Supplier asking about current promos or the deal if they sign now.
+
+    **When not to use:** Don't promise expired promotions; confirm current offer with the rep.
+  </Accordion>
+</AccordionGroup>
+
+<Tip>
+  If the question is not in this list, say you do not have a grounded FAQ for it. Do not invent a thirtieth pair. Check [Events](/events/overview), [Sales process](/company/sales-process), or escalate.
+</Tip>
+
+## Next
+
+<Card title="Who we are" icon="building" href="/company/overview">
+  Informa Connect, this business unit, and where it sits inside Informa PLC.
+</Card>

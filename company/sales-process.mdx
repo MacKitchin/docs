@@ -1,0 +1,97 @@
+---
+title: "Sales process"
+description: "How a Connect deal moves: two sales processes, New vs Existing, IOs, and what happens after Closed Won."
+icon: "funnel"
+---
+
+This page is the staff view of how we sell. Field names and SOQL live on the [data model](/systems/data-model) and [metrics](/systems/metrics). The Canonical register entry is **Sales process and business processes** (Andrew Dysart, quarterly), pointing at the Salesforce Knowledge Base catalogue. That catalogue currently has **zero rows**. Until it is populated, this page is grounded on the Record Types & Business Processes note and the [Customer FAQs](/start/customer-faqs).
+
+<Warning>
+  Do not treat this page as a substitute for the empty Business Processes catalogue. Inferences on the Record Types page are labelled as such in the source. Do not promote them to policy.
+</Warning>
+
+## What we sell, and to whom
+
+The model is **supplier-side**. We sell to hospitality and travel suppliers. We recruit planners as hosted buyers. See [Business model](/company/business-model).
+
+In Salesforce a deal is an **Opportunity**. Every Opportunity carries `IO_Number__c` (Insertion Order). Product detail lives on `OpportunityLineItem`, not on the Opportunity header. `Opportunity_Product_Type__c` is **100% null** — do not analyse it.
+
+Brand / business unit on the line: `Organization__c` = Meetings, Travel, BizBash, TSNN. Product category on the line: Digital, Event, Event Amplification, Special Projects.
+
+## Two processes, one picklist
+
+Record types are used sparingly. Differentiation is mostly picklists. The `StageName` picklist holds **two merged sales processes** that share terminal stages.
+
+| Process (as inferred in the Salesforce KB) | Open stages | Shared close |
+| --- | --- | --- |
+| Event / marketplace | Prospecting → Interested → Proposal → Verbal | Closed Won, Closed Lost, Expired |
+| Media / advertising | Made Contact & Set Meeting → Proposal Creation (BANT Known) → Proposal Sent → Negotiation | Closed Won, Closed Lost, Expired |
+
+Stages that sit across both and matter commercially:
+
+| Stage | Role |
+| --- | --- |
+| **Previous Year Purchase** | Renewal pipeline. Existing suppliers being worked for the next product year. |
+| **MSA Signed / SOW Signed** | Contract-focused, typically larger deals. |
+| **Closed Won** | Booked. `IsClosed = true`, `IsWon = true`. |
+| **Expired** | Timed out without a decision. Closed but **not** lost. Exclude from win-rate denominators. |
+| **Closed Lost** | Lost. `Reason_Lost__c` is blank on 421 of 424 lost deals — do not expect a structured reason. |
+
+The full stage ladder, including `IsClosed` / `IsWon`, is on the [data model](/systems/data-model).
+
+<Tip>
+  `Opportunity.Type` — **New Business** vs **Existing Business** — is the most predictive commercial field in the org. Renewals win at 84.6% and average around $18.8K; new logos win at 67.2% and average around $10.1K. Rebooking is the engine.
+</Tip>
+
+## How a deal is built
+
+<Steps>
+  <Step title="Account and contact already exist, or are created">
+    Supplier accounts: `Primary_Category__c LIKE 'Supplier-%'`. Territory is derived from `BillingState`, not a territory object. Do not assume a BizBash advertiser account has an owner.
+  </Step>
+  <Step title="Opportunity is opened with an IO number">
+    `IO_Number__c` is required and unique. `CloseDate` is required. Set `Type` (New vs Existing) correctly — it drives every renewal analysis.
+  </Step>
+  <Step title="Products go on OpportunityLineItem">
+    Appointment packages, sponsorships, media, amplification. `Product_Year__c` is the year the product is *for*, not the close-date year. A December 2026 close can be product year 2027.
+  </Step>
+  <Step title="Agreement is sent in DocuSign">
+    From the Customer FAQ library: agreements are sent and signed via DocuSign; once signed, participation or the campaign is treated as secured and fulfilment begins. After signature, suppliers often receive an "Action Required: Attendee Details" DocuSign for who is attending.
+  </Step>
+  <Step title="Media and digital orders may enter AdBook">
+    Not every opportunity uses AdBook. Check `AB2__Order_Created__c = true` before relying on any `AB2__` field. Cash at line level is `AB2__ABPayType__c = 'PaidFor'`.
+  </Step>
+  <Step title="Closed Won, then billing">
+    Salesforce Opportunities are the source of booked revenue. FinancialForce holds invoices with limited field access — prefer Opportunity billing fields (`Billing_Terms__c`, `Invoice_Number__c`, `Opportunity_Paid_In_Full__c`). Customer-facing payment questions: see the FAQ on invoices (BizBashPayNow / Square). Do not quote a specific amount or schedule.
+  </Step>
+</Steps>
+
+## After Closed Won
+
+`Amount` can be edited after the deal is won. For a historically accurate figure check `Change_Made_After_Closed_Won__c` and `Initial_Close_Won_Date__c`.
+
+Cash revenue excludes `Barter__c = true`. Default reporting filters: `Account_Status__c != 'Inactive'`, `StageName NOT IN ('Expired', 'Closed Lost')`, `IsDeleted = false`.
+
+## Renewals and rebooking
+
+Existing Business is worked from **Previous Year Purchase** and from onsite rebooking. The business-model page records a dedicated rebooking lounge at the event. There is no separate "renewal object" — it is the same Opportunity model with `Type = Existing Business` and the next `Product_Year__c`.
+
+Use Account spend rollups (`Total_Spend_This_Product_Year__c` and the five prior years) rather than re-aggregating opportunities. The `dlrs` package maintains them.
+
+## What agents must not do from this page
+
+| Ask | Do |
+| --- | --- |
+| A specific rate, discount, or expired promo | Escalate to the account's sales owner. FAQ confidence on discounts is 0.70 and marked "when not to use". |
+| Payment terms, installments, invoice amounts | Escalate. Finance as an area is unowned. |
+| Contract changes, T&Cs, legal | Escalate to Legal routing. |
+| Full attendee or buyer contact list | Brand-and-title samples only, after a package is secured. |
+| Which stage a named deal is in | Query `connect-prod`. This site does not hold record data. |
+
+Sales owners: Connect marketplace — Suzi Schnell. BizBash — Michela Giovannotto. Media and travel — Andrew Dysart.
+
+## Next
+
+<Card title="Brands" icon="tag" href="/company/brands">
+  Connect, BizBash, TSNN, and Connect Travel — how each one shows up in Salesforce.
+</Card>

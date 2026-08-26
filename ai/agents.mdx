@@ -38,7 +38,7 @@ An agent is only as good as what it is allowed to read. Retrieval scope by agent
 
 | Agent type | May ground on | Must not ground on |
 | --- | --- | --- |
-| Customer-facing | Customer FAQs library (~31 grounded Q&A pairs with confidence scores), Knowledge Articles, the Live Events wiki | Raw email, project pages, marketing site copy, anything marked Deprecated |
+| Customer-facing | [Customer FAQs](/start/customer-faqs) extract (29 pairs; registry still says ~31), Knowledge Articles, the Live Events wiki | Raw email, project pages, marketing site copy, anything marked Deprecated, FAQ rows marked When not to use |
 | Employee-facing | Company OS canonical sources, the Salesforce Knowledge Base, Supplier Knowledge Intelligence | Anything marked Deprecated without saying so |
 | Data and ops | `connect-prod` directly, plus the [data model](/systems/data-model) and [metrics](/systems/metrics) definitions | Cached or derived figures presented as live |
 
@@ -76,18 +76,8 @@ The AI & Agent Library takes one row per asset with these properties:
 | Owner | A person from Master People |
 | Docs Link | The canonical documentation page |
 
-## Where to go next
+## Next
 
-<CardGroup cols={3}>
-  <Card title="Guardrails" icon="shield" href="/ai/guardrails">
-    What agents may and may not say.
-  </Card>
-
-  <Card title="Automation roadmap" icon="list-checks" href="/ai/automation-roadmap">
-    The prioritised backlog, with hours.
-  </Card>
-
-  <Card title="MCP and tooling" icon="wrench" href="/ai/tooling">
-    What the stack runs on.
-  </Card>
-</CardGroup>
+<Card title="MCP and tooling" icon="wrench" href="/ai/tooling">
+  The MCP servers, integrations, and platforms the AI stack runs on.
+</Card>

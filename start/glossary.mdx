@@ -1,20 +1,20 @@
 ---
 title: "Glossary"
-description: "Company and Salesforce terminology used across Connect Meetings & Events."
+description: "Everyday company terminology used across Connect Meetings & Events."
 icon: "head-side-speak"
 mode: "default"
 ---
 
-Terms are grouped by where you will meet them. Salesforce API names are given in backticks where a term maps to a field.
+Business language only. Salesforce API names and object mappings live on the [Salesforce glossary](/systems/salesforce-glossary).
 
 ## Business and event terms
 
 | Term | Definition |
 | --- | --- |
-| **MICE** | Meetings, Incentives, Conferences, Exhibitions - the industry we serve. |
-| **Marketplace** | A Connect in-person event where planners meet suppliers in scheduled one-to-one appointments. Also the Salesforce object `Marketplace__c`. |
+| **MICE** | Meetings, Incentives, Conferences, Exhibitions — the industry we serve. |
+| **Marketplace** | A Connect in-person event where planners meet suppliers in scheduled one-to-one appointments. |
 | **Reverse tradeshow** | Our event format: buyers sit at tables and suppliers rotate to them, rather than buyers walking an expo floor. |
-| **Hosted buyer** | An event planner whose attendance is sponsored - flights and hotel covered - in exchange for completing an assigned appointment schedule. Tracked on `Registration__c.Hosted_Buyer_Type__c`. |
+| **Hosted buyer** | An event planner whose attendance is sponsored — flights and hotel covered — in exchange for completing an assigned appointment schedule. |
 | **Anchor planner** | A hosted buyer category signalling unusually high sourcing volume. |
 | **Power Pass** | A non-hosted badge. Full event access and education, but no pre-scheduled appointments. |
 | **Regiception** | Combined registration and opening reception that starts most Connect events. |
@@ -27,28 +27,31 @@ Terms are grouped by where you will meet them. Salesforce API names are given in
 
 | Term | Definition |
 | --- | --- |
-| **IO / Insertion Order** | A signed advertising order. Every Opportunity carries `IO_Number__c`. |
-| **Product year** | The calendar year a product is sold _for_. `OpportunityLineItem.Product_Year__c`. A deal closed in December 2026 can carry product year 2027. |
-| **Closed Won** | The booked stage. `StageName = 'Closed Won'`, `IsWon = true`. |
-| **Expired** | A stale deal that timed out. Closed but not lost - exclude from win-rate denominators. |
-| **Barter** | A non-cash trade deal. `Barter__c = true`. Always exclude from cash revenue. |
-| **PSL** | Prospect / Sponsorship Lead. `Contains_PSL__c` on Opportunity. |
-| **Total spend** | Denormalised historical account spend, held as rollup fields on Account going back five product years. |
-| **Sales territory** | Midwest, Northeast, South, West, or International. Derived from `BillingState`, not a separate territory object. |
+| **IO / Insertion Order** | A signed advertising order. Every Salesforce Opportunity carries one. |
+| **Product year** | The calendar year a product is sold *for*. A deal closed in December 2026 can carry product year 2027. |
+| **Closed Won** | The booked stage. |
+| **Expired** | A stale deal that timed out. Closed but not lost — exclude from win-rate denominators. |
+| **Barter** | A non-cash trade deal. Always exclude from cash revenue. |
+| **PSL** | Prospect / Sponsorship Lead. |
+| **Total spend** | Historical account spend rolled up by product year. |
+| **Sales territory** | Midwest, Northeast, South, West, or International. Taken from the account billing state. |
 
-## Systems and brands
+## Brands and programmes
 
 | Term | Definition |
 | --- | --- |
-| **`connect-prod`** | The production Salesforce org, ID `00D30000001H2naEAC`. |
-| **AdBook (AB2)** | Ad order management system deeply integrated with Salesforce. All `AB2__` prefixed fields come from it. |
-| **Visit Create** | The hosted buyer registration platform. Syncs into `Registration__c` via webhook. |
-| **BizBash** | Events media and awards brand within Informa Connect. |
-| **TSNN** | Trade Show News Network, an Informa Connect media brand. |
-| **Connect Travel** | The travel-sector arm, including eTourism Marketplace. |
-| **Agentforce** | Salesforce's agent platform. Our agent roster runs in `connect-prod`. |
+| **BizBash** | Events media and awards brand within Informa Connect. See [BizBash](/company/bizbash). |
+| **Event Experience Awards** | BizBash's annual awards for event design, strategy, and execution. 14th edition open as of August 2026. |
+| **BizBash Innovation Forum** | Three-day BizBash conference, 23–25 August 2026, Tampa Convention Center. Not an appointment marketplace. |
+| **TSNN** | Trade Show News Network. See [TSNN](/company/tsnn). |
+| **TSNN Awards** | Annual exhibition-industry awards. 16th edition in 2026; nominations close 30 September; ceremony 16 November in Milwaukee with IAEE. |
+| **TSNN Top 250** | Annual ranking of US trade shows by net square footage, attendance, exhibitors, and location. |
+| **TripEasy** | Travel partner that sends hosted-buyer flight-booking invites. |
+| **BizBashPayNow** | Square checkout link used for supplier invoices, per the Customer FAQ library. |
+| **Connect Travel** | The travel-sector arm. Live events are eTourism Marketplace and eTourism Summit. |
+| **Hosted DMO** | The hosted-buyer equivalent on Connect Travel events. |
 | **Company OS** | The Notion workspace that holds projects, people, docs, and the source-of-truth registry. |
-| **PARA** | Projects, Areas, Resources, Archive - the navigation model Company OS uses. |
+| **PARA** | Projects, Areas, Resources, Archive — the navigation model Company OS uses. |
 
 ## Governance vocabulary
 
@@ -57,4 +60,10 @@ Terms are grouped by where you will meet them. Salesforce API names are given in
 | **Canonical** | Authoritative. Exactly one canonical entry exists per information type. |
 | **Working** | Useful but unverified. Must be checked before it is relied on. |
 | **Deprecated** | Retained for history. Must not be used for new work. |
-| **Knowledge Candidates** | The human review queue for mined knowledge flagged as sensitive - pricing, legal, PII. |
+| **Knowledge Candidates** | The human review queue for mined knowledge flagged as sensitive — pricing, legal, PII. |
+
+## Next
+
+<Card title="Customer FAQs" icon="circle-help" href="/start/customer-faqs">
+  The 29 grounded supplier and hosted-buyer answers agents should cite.
+</Card>

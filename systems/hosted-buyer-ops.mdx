@@ -1,0 +1,91 @@
+---
+title: "Hosted buyer operations"
+sidebarTitle: "Hosted buyer ops"
+description: "Internal lifecycle: Visit Create webhook, Registration__c stages, qualification, travel, appointments, and deposit. Not the public Hosted Buyer Guide."
+icon: "ticket"
+---
+
+This is the **staff and agent** path for a hosted buyer. The public planner-facing version is the [Hosted Buyer Guide](/customers/hosted-buyers). Do not copy Salesforce IDs, webhook details, or known defects onto that tab.
+
+<Info>
+  Grounded on the Salesforce KB Visit Create integration (reviewed 26 June 2026), `VisitRegistrationProcessor`, `Registration__c` field definitions, [Visit Create workflows](/systems/visit-create-workflows), [Customer FAQs](/start/customer-faqs), and the public qualification page. Owners: hosted buyer experience — Rachel Piper; hosted buyer data — Bill Mathis; event delivery — Tinsley Conway.
+</Info>
+
+## Lifecycle
+
+<Steps>
+  <Step title="Application in Visit Create">
+    The planner applies on the Visit Create form for a specific expo. Public application URLs are still TODO on the Hosted Buyer Guide — do not invent one. A refundable **$200** deposit is collected as the no-show control.
+  </Step>
+  <Step title="Webhook into connect-prod">
+    Visit sends a GET notification to the Salesforce Site endpoint `/services/apexrest/visit/webhook`. `VisitWebhookReceiver` pulls changed visitors, then enqueues `VisitRegistrationProcessor`.
+  </Step>
+  <Step title="Hosted Buyer type gate">
+    The processor skips anything that is not registration type `1ze3uz619` (Hosted Buyer). It looks up `Marketplace__c` by `Visit_Expo_Id__c`. If that field is blank on the marketplace, processing errors with "No Marketplace__c found for Visit Expo ID."
+  </Step>
+  <Step title="Contact and Account match, then Registration upsert">
+    Contact match is tiered: email → first+last name → first+last+company, then create (Hosted Buyer contact record type) under a matched or created Account (`Unknown Hosted Buyer Company` fallback). Registration dedup is marketplace-scoped: `Visit_Visitor_Id__c`+`Visit_Expo_Id__c` → `Registrant__c`+`Marketplace__c` → email+`Marketplace__c`.
+  </Step>
+  <Step title="Human qualification">
+    Hosted Buyer Experience Managers vet role, two-year event history, sourcing scale, and rotation. Track bars are on [Business model](/company/business-model). Approved buyers are paired with an HBX contact.
+  </Step>
+  <Step title="Travel, hotel, appointment portal">
+    From the FAQ library: TripEasy sends the flight invite (`travelnoreply@tripeasy.com`); `connectmeetings@its.com` is the travel team. Hotel is booked via the provided link. Appointment-portal access opens closer to the event. Which platform (Map Your Show / MatchPoint / custom) per event is still unconfirmed — leave that TODO.
+  </Step>
+  <Step title="Onsite appointments, then deposit">
+    Appointments are pre-scheduled. Completing the assigned schedule is the condition for returning the deposit. Only `Registration_Stage__c = 'Fully Registered'` counts as confirmed attendance in metrics.
+  </Step>
+</Steps>
+
+## `Registration_Stage__c`
+
+From the Salesforce KB Record Types page.
+
+| Stage | Meaning |
+| --- | --- |
+| Registering | Initial form started |
+| Pending Confirmation | Awaiting qualification or approval |
+| Registered | Confirmed, not all steps complete |
+| **Fully Registered** | All requirements met (travel booked, and so on). **This is the attendance count.** |
+| Verbal | Verbal commitment, not yet formally registered |
+| Cancelled / Declined / Stopped / Date Conflict | Terminal |
+
+Visit maps `registrationState` into **Cancelled / Pending Confirmation / Registered**. Fully Registered is a later human or process step, not the raw webhook state.
+
+Also on the record: `Hosted_Buyer_Type__c` (Anchor Planner, End User, Third Party, Non-Hosted Buyer), `Qualification_Status__c`, Visit keys (`Visit_Registration_Key__c`, `Visit_Visitor_Id__c`, `Visit_Order_Id__c`, `Visit_Expo_Id__c`), `Registrant__c`, `Planner_Account__c`, `Marketplace__c`, `Meeting_Event__c` (Campaign).
+
+`Registration__c` has **237 fields** (225 custom). Do not invent a field. Describe from `sf sobject describe` if you need one that is not listed here.
+
+## Deposit — do not collapse the versions
+
+| Source | What it says |
+| --- | --- |
+| Customer FAQ (confidence 0.85) | Refund **check** at the conclusion of 1:1 appointments; must attend **all** scheduled 1:1s |
+| Archived VIP playbook | Refunded **on-site** at the end of the event; example $200 |
+| Public [qualification](/customers/buyer-qualification) page | Full refund on completing the assigned schedule; 30+ day cancel = refund or credit; 7 days or fewer = forfeit plus one hotel night |
+| Public Terms & Conditions (see Known issues) | 57+ days: refund minus 10% admin; within 56 days or no-show: full fee forfeited |
+
+Report the version that matches the registrant type and the event page. Do not average them.
+
+## Invite transfers
+
+FAQ and playbook: transfers to a qualified colleague (typically director-level or above) require **rep approval**. Reps phrase this as having received approval to transfer the invite.
+
+## What can go wrong in the sync
+
+- Marketplace missing `Visit_Expo_Id__c`.
+- Name-based Account matching creating near-duplicate Accounts when company strings vary.
+- Processor runs in the Salesforce Site (guest) context.
+- Monitor `Visit_Webhook_Log__c`, `Visit_Webhook_Activity__c`, and Setup → Apex Jobs.
+
+Do not put Visit API keys, named-credential passwords, or guest-user permission sets on this page. The Named Credential is `Visit_API`.
+
+<Warning>
+  Never share a full hosted-buyer contact list. Brand-and-title samples only. Never treat `Registered` as attendance.
+</Warning>
+
+## Next
+
+<Card title="Guardrails" icon="shield" href="/ai/guardrails">
+  What agents may and may not say, and how they should answer.
+</Card>

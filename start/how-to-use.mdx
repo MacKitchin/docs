@@ -1,6 +1,6 @@
 ---
 title: "How to use this brain"
-description: "Retrieval rules for agents, orientation path for new hires, and the conventions this site follows."
+description: "Twenty-minute orientation path for new hires, and where technical pages live."
 icon: "compass"
 ---
 
@@ -10,13 +10,13 @@ Read in this order. It should take about twenty minutes.
 
 <Steps>
   <Step title="Understand the business">
-    Start with [Business model](/company/business-model), then [Brands](/company/brands). Nothing else makes sense until the supplier-and-hosted-buyer economy does.
-  </Step>
-  <Step title="Find your people">
-    [Departments](/people/departments) tells you who owns what. [Org chart](/people/org-chart) tells you who reports to whom. [Directory](/people/directory) has emails and locations.
+    [Who we are](/company/overview), then [Business model](/company/business-model), then [Brands](/company/brands). Nothing else makes sense until the supplier-and-hosted-buyer economy does.
   </Step>
   <Step title="Learn the calendar">
-    [Events overview](/events/overview). The event calendar drives almost every deadline in the business.
+    [Event calendar](/events/overview). The event calendar drives almost every deadline in the business. Read this before the org chart.
+  </Step>
+  <Step title="Find your people">
+    [Departments](/people/departments) is the map. [Who owns what](/people/who-owns-what) is the routing table. [Org chart](/people/org-chart) is reporting lines. [Directory](/people/directory) is emails and locations.
   </Step>
   <Step title="Learn the vocabulary">
     [Glossary](/start/glossary). Terms like IO, hosted buyer, product year, and marketplace mean something specific here.
@@ -24,40 +24,20 @@ Read in this order. It should take about twenty minutes.
   <Step title="Know where truth lives">
     [Source of truth](/governance/source-of-truth). Before you edit anything or answer anything, know which system owns that fact.
   </Step>
+  <Step title="Learn the approved customer answers">
+    [Customer FAQs](/start/customer-faqs). Twenty-nine grounded pairs with confidence scores. Cite these for supplier and hosted-buyer questions; still take event dates from the calendar.
+  </Step>
 </Steps>
 
-## If you are an AI agent
-
-These rules are inherited from the Company OS AI retrieval policy and apply to anything grounded on this site.
-
-<AccordionGroup>
-  <Accordion title="Prefer canonical sources, and say when you are not on one" icon="circle-check">
-    Every major information type has exactly one canonical home, recorded in the [source-of-truth registry](/governance/source-of-truth). Entries are marked Canonical, Working, or Deprecated. If the material you are relying on is Working or Deprecated, disclose that rather than presenting it as settled.
-  </Accordion>
-
-  <Accordion title="Customer-facing event answers come from event pages only" icon="calendar">
-    Dates, venues, pricing, eligibility, and cancellation policy for any event must come from the [Events portfolio](/events/overview) or the Live Events wiki it mirrors. Never reconstruct an event fact from a project page, an email, or memory.
-  </Accordion>
-
-  <Accordion title="Hard guardrails on supplier conversations" icon="shield">
-    Never quote specific rates beyond published package pricing. Never share full attendee contact lists - brand and title samples only. Never commit to payment terms, discounts, or contract changes. Escalate anything touching billing, legal, or a complaint to a human.
-  </Accordion>
-
-  <Accordion title="Cite what you used" icon="quote">
-    Ground each answer in a specific page and cite it. Findings mined from email carry confidence scores; surface the score when the confidence is below high.
-  </Accordion>
-
-  <Accordion title="Do not silently reconcile conflicts" icon="triangle-alert">
-    Several event sites publish contradictory dates, contacts, and cancellation policies. This site preserves both versions and flags them on [Known issues](/governance/known-issues). Report the conflict; do not pick a winner.
-  </Accordion>
-</AccordionGroup>
+<Note>
+  Salesforce fields, Visit Create APIs, Agentforce, and Elysia live on the **Systems & agents** tab. Skip that tab until you need to query the org or build an agent. Agent retrieval rules are on [Agent retrieval rules](/start/agent-retrieval).
+</Note>
 
 ## Conventions used here
 
 | Convention | Meaning |
 | --- | --- |
-| Backticked names like `Total_Spend_This_Product_Year__c` | A literal Salesforce API field name in `connect-prod` |
-| Product year | The calendar year a product is sold _for_, not when the deal closed |
+| Product year | The calendar year a product is sold *for*, not when the deal closed |
 | Area vs project | Areas are ongoing departments; projects are time-bound and end |
 | Canonical / Working / Deprecated | Truth levels from the source-of-truth registry |
 | A note in square brackets | An unresolved discrepancy carried over from the source, deliberately not reconciled |
@@ -65,3 +45,9 @@ These rules are inherited from the Company OS AI retrieval policy and apply to a
 ## What this site is not
 
 It does not hold record-level data. No account lists, no contact details for customers, no deal values by name, no attendee rosters. Those live in Salesforce and are governed by access control there. This site documents structure, definitions, ownership, and process.
+
+## Next
+
+<Card title="Source of truth" icon="shield-check" href="/governance/source-of-truth">
+  Which system owns which fact, and how to treat Canonical, Working, and Deprecated sources.
+</Card>

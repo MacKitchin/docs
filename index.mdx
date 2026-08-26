@@ -5,31 +5,31 @@ description: "Orientation page for Informa Connect - Connect Meetings & Events. 
 icon: "house"
 ---
 
-This is the Company Brain for **Connect Meetings & Events**, the meetings-and-events business inside **Informa Connect** (Informa PLC). It is written to be read two ways: by a person orienting themselves, and by an AI agent that needs grounded, citable context before it answers anything.
+This is the Company Brain for **Connect Meetings & Events**, the meetings-and-events business inside **Informa Connect** (Informa PLC). It is written for people orienting themselves — new hires, sales, and ops. Salesforce fields, Visit Create APIs, and the AI platform all live in the **Projects & Systems** and **AI & Automation** sections.
 
-<Note>
+<Info>
   Everything here is a derived, human-readable mirror of systems that hold the actual truth: Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. When this site and a source system disagree, the source system wins. See [Source of truth](/governance/source-of-truth).
-</Note>
+</Info>
 
 ## The business in one paragraph
 
 We run marketplace-style appointment events for the MICE industry (Meetings, Incentives, Conferences, Exhibitions). Hospitality suppliers - convention and visitors bureaus, destination marketing organisations, hotels, venues, AV and event-tech vendors - buy packages to meet pre-qualified event planners in scheduled one-to-one appointments. The planners, called **hosted buyers**, attend on a sponsored basis: we cover flights and hotel in exchange for a committed appointment schedule. Alongside the events we sell media and advertising through BizBash, TSNN, and Connect Travel. Revenue therefore has two engines: event packages and media insertion orders.
 
 <CardGroup cols={2}>
+  <Card title="Who we are" icon="building" href="/company/overview">
+    Informa Connect, this business unit, and the two commercial engines.
+  </Card>
+
   <Card title="Business model" icon="handshake" href="/company/business-model">
     Supplier-side selling, the hosted buyer economy, and the reverse tradeshow format.
   </Card>
 
-  <Card title="Brands" icon="tag" href="/company/brands">
-    Connect, BizBash, TSNN, and Connect Travel - what each one is and who runs it.
-  </Card>
-
-  <Card title="Who does what" icon="users" href="/people/departments">
-    Six departments, their owners, and what each one is accountable for.
-  </Card>
-
   <Card title="Event calendar" icon="calendar-days" href="/events/overview">
     Every live event for 2026 and 2027 with dates, venues, and format.
+  </Card>
+
+  <Card title="Departments" icon="sitemap" href="/people/departments">
+    The eight areas, their owners, and what each one is accountable for.
   </Card>
 </CardGroup>
 
@@ -42,10 +42,10 @@ We run marketplace-style appointment events for the MICE industry (Meetings, Inc
 | Managing Director | Matt Johnson |
 | EVP, Connect Meetings | Derek Rodriguez |
 | Headquarters | 3740 Davinci Court, Norcross, GA (US) |
-| CRM | Salesforce org `connect-prod` (Org ID `00D30000001H2naEAC`) |
+| CRM | Salesforce (`connect-prod`). Org ID and schema are on [The Salesforce org](/systems/salesforce-org). |
 | Knowledge system | Notion `Company OS` workspace |
 | Flagship event | Connect Marketplace, Tampa, 24-26 August 2026 |
-| Live events tracked | 9 (2026-2027 season) |
+| Live events tracked | 12 (2026-2027 season: 9 Connect + 2 Connect Travel + BizBash Innovation Forum) |
 | Supplier account universe | ~13,800 accounts across 29 supplier categories |
 
 ## What lives where
@@ -64,17 +64,28 @@ We run marketplace-style appointment events for the MICE industry (Meetings, Inc
   </Card>
 </CardGroup>
 
+<Tip>
+  Event dates, pricing, and policy come only from the [Events portfolio](/events/overview). Agents: see [Agent retrieval rules](/ai/agents).
+</Tip>
+
+## Next
+
+<CardGroup cols={2}>
+  <Card title="How to use this brain" icon="compass" href="/start/how-to-use">
+    Twenty-minute orientation path for new hires.
+  </Card>
+  <Card title="Technical reference" icon="database" href="/systems/salesforce-org">
+    Salesforce, Visit Create, metrics, and the AI platform — skip until you need them.
+  </Card>
+</CardGroup>
+
 ## Active work
 
-Four initiatives are live or planned, all led by the Technology & AI area.
+Four initiatives are live or planned, all led by the Technology & AI area. Read them after the current-state pages, not first.
 
 | Project | Stage | Priority |
 | --- | --- | --- |
 | [Notion Workspace Rebuild - Company OS](/projects/company-os) | In progress | High |
-| [Agentforce Agent Rollout](/projects/agentforce-rollout) | In progress | High |
 | [Connect and BizBash Data Consolidation](/projects/data-consolidation) | In progress | High |
 | [Supplier Knowledge Intelligence](/projects/supplier-knowledge) | Planned | Medium |
-
-<Tip>
-  If you are an agent answering a customer-facing question about an event, answer only from the [Events portfolio](/events/overview) pages or the Live Events wiki they mirror. Do not infer dates, pricing, or policy from anywhere else.
-</Tip>
+| [Agentforce Agent Rollout](/projects/agentforce-rollout) | In progress | High |

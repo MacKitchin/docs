@@ -1,0 +1,598 @@
+/* Informa Connect Branding — Navy Header, Orange Accent, Professional Typography */
+
+:root {
+  /* Informa Core Palette */
+  --informa-navy: #002244;
+  --informa-navy-light: #0a3a6b;
+  --informa-navy-deep: #061830;
+  --informa-orange: #ec6940;
+  --informa-orange-light: #f58a6e;
+  --informa-teal: #4fa1ab;
+  --informa-teal-light: #7fc4cc;
+  --informa-white: #ffffff;
+  --informa-gray-100: #f8f9fa;
+  --informa-gray-200: #e9ecef;
+  --informa-gray-300: #dee2e6;
+  --informa-gray-400: #ced4da;
+  --informa-gray-500: #adb5bd;
+  --informa-gray-600: #6c757d;
+  --informa-gray-700: #495057;
+  --informa-gray-800: #343a40;
+  --informa-gray-900: #212529;
+
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-headings: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Header & Navigation */
+header,
+nav[aria-label="Primary"],
+.navbar {
+  --header-background: var(--informa-navy);
+  --navbar-background: var(--informa-navy);
+  --header-text: var(--informa-white);
+  --header-border: transparent;
+  background: linear-gradient(135deg, var(--informa-navy) 0%, var(--informa-navy-light) 100%) !important;
+}
+
+html.dark header,
+html.dark nav[aria-label="Primary"] {
+  --header-background: var(--informa-navy-deep);
+  --header-text: var(--informa-white);
+}
+
+/* Logo styling */
+header .logo,
+nav .logo {
+  filter: brightness(1.1);
+}
+
+/* Sidebar Navigation */
+.sidebar,
+nav[aria-label="Sidebar"],
+aside {
+  --sidebar-background: var(--informa-gray-100);
+  --sidebar-text: var(--informa-gray-800);
+  --sidebar-text-hover: var(--informa-navy);
+  --sidebar-active: var(--informa-navy);
+  --sidebar-active-background: rgba(0, 34, 68, 0.08);
+  --sidebar-border: var(--informa-gray-200);
+}
+
+html.dark .sidebar,
+html.dark nav[aria-label="Sidebar"] {
+  --sidebar-background: var(--informa-navy-deep);
+  --sidebar-text: var(--informa-gray-200);
+  --sidebar-text-hover: var(--informa-teal-light);
+  --sidebar-active: var(--informa-orange);
+  --sidebar-active-background: rgba(236, 105, 64, 0.1);
+  --sidebar-border: var(--informa-navy-light);
+}
+
+/* Navigation items */
+.sidebar a,
+.sidebar button,
+nav[aria-label="Sidebar"] a {
+  font-weight: 500;
+  transition: all 0.2s ease;
+  border-radius: 0.375rem;
+}
+
+.sidebar a:hover,
+.sidebar button:hover {
+  background-color: var(--sidebar-active-background);
+  color: var(--sidebar-active);
+}
+
+/* Active state */
+.sidebar [aria-current="page"],
+.sidebar .active {
+  background-color: var(--sidebar-active-background);
+  color: var(--sidebar-active);
+  font-weight: 600;
+}
+
+/* Group headers in sidebar */
+.sidebar h2,
+.sidebar .group-title,
+.sidebar [role="heading"] {
+  color: var(--informa-navy);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: var(--space-lg);
+}
+
+html.dark .sidebar h2,
+html.dark .sidebar .group-title,
+html.dark .sidebar [role="heading"] {
+  color: var(--informa-teal);
+}
+
+/* Collapsible sections */
+.sidebar details,
+.sidebar [data-collapsible] {
+  border-left: 2px solid var(--informa-gray-300);
+  margin-left: var(--space-sm);
+  padding-left: var(--space-md);
+}
+
+html.dark .sidebar details,
+html.dark .sidebar [data-collapsible] {
+  border-left-color: var(--informa-navy-light);
+}
+
+/* Main content area */
+main {
+  --content-max-width: 80ch;
+}
+
+/* Typography */
+body {
+  font-family: var(--font-primary);
+  line-height: 1.7;
+  color: var(--informa-gray-800);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-headings);
+  font-weight: 600;
+  color: var(--informa-navy);
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  border-bottom: 1px solid var(--informa-gray-200);
+  padding-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+h4 {
+  font-size: 1.125rem;
+  line-height: 1.4;
+}
+
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: var(--informa-teal-light);
+}
+
+html.dark h2 {
+  border-bottom-color: var(--informa-navy-light);
+}
+
+/* Links - FIXED FOR BETTER CONTRAST */
+a {
+  color: var(--informa-navy);
+  text-decoration: underline;
+  text-decoration-color: var(--informa-teal);
+  text-underline-offset: 2px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+a:hover {
+  color: var(--informa-orange);
+  text-decoration-color: var(--informa-orange);
+}
+
+/* Ensure links in paragraphs are visible */
+p a,
+li a,
+td a {
+  font-weight: 500;
+}
+
+html.dark a {
+  color: var(--informa-teal-light);
+  text-decoration-color: var(--informa-teal);
+}
+
+html.dark a:hover {
+  color: var(--informa-orange);
+  text-decoration-color: var(--informa-orange);
+}
+
+/* Cards */
+.card,
+[role="article"],
+.prose .card {
+  background: var(--informa-white);
+  border: 1px solid var(--informa-gray-200);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.card:hover,
+[role="article"]:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+html.dark .card,
+html.dark [role="article"] {
+  background: var(--informa-navy-deep);
+  border-color: var(--informa-navy-light);
+}
+
+/* Info boxes / Callouts - FIXED FOR BETTER CONTRAST */
+.info,
+.info-box,
+.tip,
+.warning,
+.error,
+.alert {
+  border-radius: 0.5rem;
+  border-left: 4px solid;
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-lg) 0;
+}
+
+.info,
+.info-box {
+  background-color: rgba(79, 161, 171, 0.08);
+  border-left-color: var(--informa-teal);
+  color: var(--informa-gray-900);
+}
+
+.info a,
+.info-box a,
+.tip a {
+  color: var(--informa-navy);
+  text-decoration: underline;
+  font-weight: 500;
+}
+
+.info a:hover,
+.info-box a:hover,
+.tip a:hover {
+  color: var(--informa-orange);
+}
+
+.tip {
+  background-color: rgba(0, 34, 68, 0.03);
+  border-left-color: var(--informa-navy);
+  color: var(--informa-gray-900);
+}
+
+.warning {
+  background-color: rgba(236, 105, 64, 0.08);
+  border-left-color: var(--informa-orange);
+  color: var(--informa-gray-900);
+}
+
+.warning a {
+  color: var(--informa-navy);
+  font-weight: 500;
+}
+
+.error,
+.alert-danger {
+  background-color: rgba(220, 38, 38, 0.08);
+  border-left-color: #dc2626;
+  color: var(--informa-gray-900);
+}
+
+html.dark .info,
+html.dark .info-box {
+  background-color: rgba(79, 161, 171, 0.12);
+  color: var(--informa-gray-100);
+}
+
+html.dark .info a,
+html.dark .info-box a {
+  color: var(--informa-teal-light);
+}
+
+html.dark .info a:hover,
+html.dark .info-box a:hover {
+  color: var(--informa-orange);
+}
+
+html.dark .tip {
+  background-color: rgba(0, 34, 68, 0.3);
+  color: var(--informa-gray-100);
+}
+
+html.dark .tip a {
+  color: var(--informa-teal-light);
+}
+
+html.dark .warning {
+  background-color: rgba(236, 105, 64, 0.12);
+  color: var(--informa-gray-100);
+}
+
+/* Buttons */
+button,
+.btn,
+[role="button"] {
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+button:hover,
+.btn:hover,
+[role="button"]:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Primary button style */
+.btn-primary,
+button[type="submit"] {
+  background-color: var(--informa-navy);
+  color: var(--informa-white);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--informa-navy-light);
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: var(--space-lg) 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+th {
+  background-color: var(--informa-navy);
+  color: var(--informa-white);
+  font-weight: 600;
+  text-align: left;
+  padding: var(--space-sm) var(--space-md);
+}
+
+td {
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--informa-gray-200);
+}
+
+tr:nth-child(even) {
+  background-color: var(--informa-gray-100);
+}
+
+tbody tr:hover {
+  background-color: rgba(79, 161, 171, 0.1);
+}
+
+html.dark th {
+  background-color: var(--informa-navy-light);
+}
+
+html.dark td {
+  border-bottom-color: var(--informa-navy-light);
+}
+
+html.dark tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+html.dark tbody tr:hover {
+  background-color: rgba(79, 161, 171, 0.1);
+}
+
+/* Steps / Process indicators */
+.steps,
+.step {
+  counter-reset: step;
+}
+
+.steps > div,
+.step > div,
+.steps > [class*="Step"] {
+  position: relative;
+  padding-left: var(--space-xl);
+  margin-bottom: var(--space-lg);
+}
+
+.steps > div::before,
+.step > div::before,
+.steps > [class*="Step"]::before {
+  content: counter(step);
+  counter-increment: step;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 1.75rem;
+  height: 1.75rem;
+  background: var(--informa-navy);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+/* Accordion */
+.accordion,
+details {
+  border: 1px solid var(--informa-gray-200);
+  border-radius: 0.5rem;
+  margin: var(--space-md) 0;
+}
+
+.accordion > summary,
+details > summary {
+  padding: var(--space-md) var(--space-lg);
+  background: var(--informa-gray-100);
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion > summary:hover,
+details > summary:hover {
+  background: var(--informa-gray-200);
+}
+
+html.dark .accordion,
+html.dark details {
+  border-color: var(--informa-navy-light);
+}
+
+html.dark .accordion > summary,
+html.dark details > summary {
+  background: var(--informa-navy-light);
+}
+
+/* Search */
+.search-input,
+[role="search"] input {
+  border-radius: 0.5rem;
+  border: 1px solid var(--informa-gray-300);
+  padding: var(--space-sm) var(--space-md);
+}
+
+.search-input:focus,
+[role="search"] input:focus {
+  border-color: var(--informa-teal);
+  box-shadow: 0 0 0 3px rgba(79, 161, 171, 0.2);
+}
+
+/* Code blocks */
+pre,
+code {
+  font-family: 'Fira Code', 'SF Mono', Monaco, 'Cascadia Code', monospace;
+  font-size: 0.875rem;
+}
+
+pre {
+  background: var(--informa-gray-900) !important;
+  border-radius: 0.5rem;
+  padding: var(--space-md);
+  overflow-x: auto;
+}
+
+code {
+  background: var(--informa-gray-200);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+html.dark code {
+  background: var(--informa-navy-light);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--informa-gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--informa-gray-400);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--informa-gray-500);
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: var(--informa-navy-deep);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: var(--informa-navy-light);
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--informa-navy);
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.875rem;
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Print styles */
+@media print {
+  header,
+  nav,
+  .sidebar,
+  button,
+  .btn {
+    display: none !important;
+  }
+
+  body {
+    color: black;
+    background: white;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75rem;
+    opacity: 0.6;
+  }
+}
