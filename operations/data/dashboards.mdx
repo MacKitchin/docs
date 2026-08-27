@@ -4,14 +4,14 @@ description: "Which Salesforce dashboards exist in connect-prod, which folders t
 icon: "layout-dashboard"
 ---
 
-Reporting dashboards are **Working** in the [source-of-truth registry](/governance/source-of-truth): live in `connect-prod`, not indexed in Notion. This page is a Company Brain index of names and purpose. It is not Canonical. It does not hold live figures.
+Reporting dashboards are **Working** in the [source-of-truth registry](/reference/source-of-truth): live in `connect-prod`, not indexed in Notion. This page is a Company Brain index of names and purpose. It is not Canonical. It does not hold live figures.
 
 <Info>
   Queried `Dashboard` in `connect-prod` on **12 August 2026**. There are **200+** dashboard records. Most are year-stamped personal or team copies from 2019–2022. Use a recently modified company, public, hosted-buyer, travel, or ops dashboard — not a 2020 personal activity clone.
 </Info>
 
 <Warning>
-  If a dashboard number disagrees with a query on [Metrics](/systems/metrics), the query wins until a human changes the definition. Do not paste dashboard totals into MDX.
+  If a dashboard number disagrees with a query on [Metrics](/operations/data/metrics), the query wins until a human changes the definition. Do not paste dashboard totals into MDX.
 </Warning>
 
 ## Folders worth opening first
@@ -54,7 +54,7 @@ Copies ("Copy of…", "for suzi", "TV Dash", named-rep media dashboards) exist a
 
 ## How to pick a dashboard
 
-1. Match the question to a [metric definition](/systems/metrics).
+1. Match the question to a [metric definition](/operations/data/metrics).
 2. Prefer `Organization__c` for brand, `Product_Year__c` for season, `Type` for new vs existing.
 3. Exclude barter and Expired unless the question needs them.
 4. If the dashboard is year-stamped 2024 or earlier and nothing newer exists, say so.
@@ -63,6 +63,6 @@ Owner of the dashboard *index* (Working): Mac Kitchin. Most current objects were
 
 ## Next
 
-<Card title="Integrations" icon="plug" href="/systems/integrations">
+<Card title="Integrations" icon="plug" href="/operations/integrations/overview">
   AdBook, Visit Create, and the rest of the managed-package estate.
 </Card>

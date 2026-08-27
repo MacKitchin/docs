@@ -4,7 +4,7 @@ description: "How a Connect deal moves: two sales processes, New vs Existing, IO
 icon: "funnel"
 ---
 
-This page is the staff view of how we sell. Field names and SOQL live on the [data model](/systems/data-model) and [metrics](/systems/metrics). The Canonical register entry is **Sales process and business processes** (Andrew Dysart, quarterly), pointing at the Salesforce Knowledge Base catalogue. That catalogue currently has **zero rows**. Until it is populated, this page is grounded on the Record Types & Business Processes note and the [Customer FAQs](/start/customer-faqs).
+This page is the staff view of how we sell. Field names and SOQL live on the [data model](/operations/data/data-model) and [metrics](/operations/data/metrics). The Canonical register entry is **Sales process and business processes** (Andrew Dysart, quarterly), pointing at the Salesforce Knowledge Base catalogue. That catalogue currently has **zero rows**. Until it is populated, this page is grounded on the Record Types & Business Processes note and the [Customer FAQs](/welcome/customer-faqs).
 
 <Warning>
   Do not treat this page as a substitute for the empty Business Processes catalogue. Inferences on the Record Types page are labelled as such in the source. Do not promote them to policy.
@@ -37,10 +37,10 @@ Stages that sit across both and matter commercially:
 | **Expired** | Timed out without a decision. Closed but **not** lost. Exclude from win-rate denominators. |
 | **Closed Lost** | Lost. `Reason_Lost__c` is blank on 421 of 424 lost deals — do not expect a structured reason. |
 
-The full stage ladder, including `IsClosed` / `IsWon`, is on the [data model](/systems/data-model).
+The full stage ladder, including `IsClosed` / `IsWon`, is on the [data model](/operations/data/data-model).
 
 <Tip>
-  `Opportunity.Type` — **New Business** vs **Existing Business** — is the most predictive commercial field in the org. Renewals win at 84.6% and average around $18.8K; new logos win at 67.2% and average around $10.1K. Rebooking is the engine.
+  `Opportunity.Type` — **New Business** vs **Existing Business** — is the most predictive commercial field in the org. Renewals win at 84.6% and average around \$18.8K; new logos win at 67.2% and average around \$10.1K. Rebooking is the engine.
 </Tip>
 
 ## How a deal is built

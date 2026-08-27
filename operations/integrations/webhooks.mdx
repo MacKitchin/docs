@@ -1,0 +1,24 @@
+---
+title: "Webhooks"
+description: "Internal index of the documented inbound Visit Create webhook pipelines and their Salesforce processing path."
+icon: "webhook"
+keywords: ["webhooks", "Visit Create", "Salesforce", "Apex"]
+---
+
+The documented webhook estate currently centres on Visit Create notifications entering Salesforce Sites and being processed by isolated Apex pipelines.
+
+| Pipeline | Registration audience | Canonical detail |
+| --- | --- | --- |
+| Hosted Buyer | Connect hosted buyers | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+| Connect Supplier | Marketplace suppliers | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+| eTourism Destination Marketer | eTourism audience | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+| Brand Experience Pass | BizBash-related pass audience | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+| Industry Supplier Pass | Supplier-pass audience | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+
+<Info>
+  The canonical implementation is the `sf-visit-webhook` repository. This page is only an index; the workflow page records matching, deduplication, logging, email, and recovery.
+</Info>
+
+<Warning>
+  Store path patterns without secret query strings. Never copy a URL containing `sig=` or another signing value into this site.
+</Warning>

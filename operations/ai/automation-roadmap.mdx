@@ -1,0 +1,85 @@
+---
+title: "Automation roadmap"
+description: "Nine automation candidates worth roughly 1,405 hours a year, prioritised."
+icon: "map"
+---
+
+Nine workflows were identified from the supplier email analysis, with an estimated total opportunity of **~1,405 hours a year**. Each was scored on frequency, judgement required, and whether a grounded source already exists to answer from.
+
+## The backlog
+
+| Priority | Workflow | Implementation | Est. hrs/yr |
+| --- | --- | --- | --- |
+| **P1** | FAQ deflection - dates, logistics, packages | Agentforce agent | 250 |
+| **P1** | Campaign analytics and reporting | Self-service plus agent | 300 |
+| **P1** | Attendee details collection and follow-up | Agentforce agent | 200 |
+| P2 | Renewal and rebooking outreach | Agentforce agent | 150 |
+| P2 | Buyer list sample responses | Agentforce agent | 125 |
+| P2 | Creative and media kit assembly | Email template | 120 |
+| P2 | Payment reminders and dunning | Salesforce Flow | 110 |
+| P2 | Hotel booking confirmation | Salesforce Flow | 80 |
+| P3 | Editorial and print deadline and rate responses | Self-service doc | 70 |
+
+## Why these three are P1
+
+<AccordionGroup>
+  <Accordion title="Campaign analytics and reporting - 300 hrs/yr" icon="chart-line">
+    The single largest time sink. Suppliers ask "how did my campaign perform?" and a rep assembles the answer by hand. Split into two parts: self-service reporting so the supplier can pull it themselves, plus an agent that assembles and explains the numbers for those who ask.
+
+    **Dependency**: reporting dashboards in `connect-prod` are currently marked **Working**, not canonical, and are not indexed in Notion. A dashboard index page is the prerequisite.
+  </Accordion>
+
+  <Accordion title="FAQ deflection - 250 hrs/yr" icon="message-circle-question">
+    The two highest-frequency supplier questions in the entire corpus are "when and where is Connect Marketplace 2026?" (confidence 0.90) and "what is included in a supplier package?" (0.82). Both are pure lookups with an existing grounded source. There is no judgement in answering them, only latency.
+
+    **Dependency**: the agent must be wired to the Customer FAQs library and the Live Events wiki, and to nothing else.
+  </Accordion>
+
+  <Accordion title="Attendee details collection and follow-up - 200 hrs/yr" icon="users">
+    The number-one question by frequency: "what attendee details do I submit after registering?" (0.86). Entirely mechanical - collect, validate, remind, escalate on non-response. It is also the moment where supplier data quality is either established or lost for the whole event cycle.
+  </Accordion>
+</AccordionGroup>
+
+## The renewal case for P2
+
+The P2 tier looks lower-value by hours, but **renewal and rebooking outreach** deserves a second look. Renewals win at 84.6 percent versus 67.2 percent for new business, and average \$18.8K versus \$10.1K. Separately, 79 supplier deals worth \$660K expired without a decision - not lost, just never followed up.
+
+<Tip>
+  An automation that reliably touches every expiring deal before it times out is worth considerably more than its 150-hour estimate suggests, because the hours saved are not the point. The recovered pipeline is.
+</Tip>
+
+## Implementation patterns
+
+| Pattern | When to use it | Examples here |
+| --- | --- | --- |
+| **Agentforce agent** | Conversational, variable phrasing, needs grounded retrieval | FAQ deflection, attendee details, renewal outreach, buyer list samples |
+| **Salesforce Flow** | Deterministic, trigger-based, no natural language needed | Payment reminders and dunning, hotel booking confirmation |
+| **Email template** | Repeatable assembly of the same materials | Creative and media kit assembly |
+| **Self-service document** | Reference information a supplier can look up | Editorial and print deadlines and rates |
+
+<Note>
+  Three of the nine are not AI at all. Reaching for an agent when a Flow or a well-written document would do is the most common way an automation programme burns credibility.
+</Note>
+
+## Prerequisites before anything ships
+
+<Steps>
+  <Step title="Grounded sources exist and are current">
+    Customer FAQs and the Live Events wiki must be canonical and refreshed. An agent grounded on stale event facts is worse than no agent.
+  </Step>
+  <Step title="Guardrails and evals are defined">
+    No rates, no contact lists, escalate billing and legal. Defining evaluation and guardrail checks is an open item on the [rollout project](/operations/projects/agentforce-rollout).
+  </Step>
+  <Step title="Escalation has somewhere to go">
+    Handoff requires knowing who owns the account. On the BizBash side that is currently 26 rep assignments against 20,876 accounts - see [data consolidation](/operations/projects/data-consolidation).
+  </Step>
+  <Step title="Every workflow is registered before launch">
+    One row in the AI & Agent Library, with owner, status, and docs link.
+  </Step>
+</Steps>
+
+## Next
+
+<Card title="Active projects" icon="rocket" href="/operations/projects/overview">
+  The four initiatives in flight, in the order they depend on each other.
+</Card>

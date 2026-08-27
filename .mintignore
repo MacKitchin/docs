@@ -5,3 +5,10 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Repository guidance and working artefacts
+AGENTS.md
+HANDOFF.md
+.mintlify/
+.atlas-analysis.json
+export.zip

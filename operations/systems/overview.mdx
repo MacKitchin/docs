@@ -1,0 +1,46 @@
+---
+title: "Systems and data"
+sidebarTitle: "Systems overview"
+description: "Task-led map of the systems, datasets, integrations, and reporting references used by Connect Meetings & Events."
+icon: "database"
+keywords: ["systems", "Salesforce", "Visit Create", "Notion", "data", "integrations"]
+---
+
+Start with the system that owns the fact or workflow. This site explains structure and operating boundaries; it does not replace live record data.
+
+<Columns cols={2}>
+  <Card title="Salesforce connect-prod" icon="cloud" href="/operations/systems/salesforce-org">
+    Accounts, contacts, opportunities, registrations, products, revenue, and operational automation.
+  </Card>
+  <Card title="Visit Create" icon="ticket" href="/operations/systems/visit-create">
+    Event registration, visitor types, expo IDs, and webhook-driven Salesforce workflows.
+  </Card>
+  <Card title="Notion and Company OS" icon="book-open" href="/operations/systems/notion-company-os">
+    Projects, people, SOPs, source registry, event facts, and governed knowledge.
+  </Card>
+  <Card title="Data and reporting" icon="chart-line" href="/operations/data/data-model">
+    Data model, metric definitions, dashboards, and data-governance controls.
+  </Card>
+  <Card title="Integrations" icon="plug" href="/operations/integrations/overview">
+    Integration map, managed packages, APIs, webhooks, and automation catalogue.
+  </Card>
+  <Card title="Other documented platforms" icon="boxes" href="/operations/systems/other-platforms">
+    Approved systems with a verified role in the current source set.
+  </Card>
+</Columns>
+
+## Choose the right reference
+
+| Need | Page |
+| --- | --- |
+| Meaning of a Salesforce field or object | [Data model](/operations/data/data-model) or [Salesforce glossary](/operations/systems/salesforce-glossary) |
+| Current CRM contents | Query `connect-prod`; do not use a static page |
+| Metric definition or query | [Metrics and definitions](/operations/data/metrics) |
+| Existing report or dashboard | [Dashboard index](/operations/data/dashboards) |
+| Visit registration or webhook path | [Visit Create workflows](/operations/systems/visit-create-workflows) |
+| System ownership | [Who owns what](/people/who-owns-what) |
+| Known defect or discrepancy | [Known issues](/reference/known-issues) |
+
+<Warning>
+  Never place customer records, credentials, tokens, signed webhook URLs, or named deal values in this knowledge base.
+</Warning>

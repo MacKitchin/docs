@@ -1,0 +1,97 @@
+---
+title: "Salesforce integrations"
+sidebarTitle: "Salesforce integrations"
+description: "AdBook, Visit Create, ZoomInfo, DocuSign, Marketing Cloud, FinancialForce, and the managed-package estate in connect-prod."
+icon: "plug"
+---
+
+`connect-prod` is a heavily integrated org. Thirteen managed packages sit on top of it, several with triggers on core objects. Understanding which package owns which field prefix is the difference between a correct query and a confusing one.
+
+## The critical two
+
+<CardGroup cols={2}>
+  <Card title="AdBook (AB2)" icon="newspaper">
+    Full ad order management: line items, rate cards, pricing, and the IO lifecycle. 25\+ objects, 200\+ Apex classes, triggers on Account, Contact, Opportunity, OpportunityLineItem, and Product2. Every `AB2__` field comes from here.
+  </Card>
+
+  <Card title="Visit Create" icon="ticket" href="/operations/systems/visit-create">
+    Registration platform. Five webhook pipelines into `Registration__c` and `Supplier_Registration__c`. Keys: `Visit_Registration_Key__c`, `Visit_Visitor_Id__c`, `Visit_Order_Id__c`, `Visit_Expo_Id__c`.
+  </Card>
+</CardGroup>
+
+### Working with AdBook fields
+
+| On Opportunity | Meaning |
+| --- | --- |
+| `AB2__ABOrderID__c` | AdBook order ID |
+| `AB2__AB_IO_Number__c` | AdBook IO number |
+| `AB2__ABTotalGrossCost__c` | Total gross cost |
+| `AB2__ABBillTo__c` | Bill to Client or Agency |
+| `AB2__ABBillType__c` | Net or Gross |
+| `AB2__ABAgencyCommission__c` | Agency commission percentage |
+| `AB2__Order_Created__c` | Whether an order exists in AdBook |
+| `AB2__ABDoNotSync__c` | Exclude from sync |
+
+| On OpportunityLineItem | Meaning |
+| --- | --- |
+| `AB2__ABDropID__c` | Ad drop or placement ID |
+| `AB2__ABDropCost__c` / `AB2__ABDropPrice__c` | Cost and price |
+| `AB2__ABPayType__c` | **PaidFor, ValueAdd, NonBillable, Barter, Promo** |
+| `AB2__ABPriceType__c` | CPM, CPC, Flat Rate, CPZ |
+| `AB2__ABImpressions__c` | Contracted impressions |
+| `AB2__ABDropCancelled__c` | Whether the drop was cancelled |
+
+<Warning>
+  Not every opportunity uses AdBook. Check `AB2__Order_Created__c = true` before relying on any `AB2__` field, or your averages will be computed over nulls. And for cash revenue at line level, filter `AB2__ABPayType__c = 'PaidFor'` - ValueAdd, NonBillable, Barter, and Promo are all non-cash.
+</Warning>
+
+## The rest of the estate
+
+| Package | Purpose | Notes |
+| --- | --- | --- |
+| **DOZISF (ZoomInfo)** | Contact and account enrichment | `ZoomInfo__c`, `ZoomInfo_Intent__c`, `ZoomInfo_Scoop__c`, plus enrich-status fields on Account and Contact |
+| **dsfs (DocuSign)** | Contract and IO e-signature | Triggers on `DocuSign_Status__c` and `DocuSign_Recipient_Status__c` |
+| **et4ae5 (Marketing Cloud Connect)** | Salesforce to Marketing Cloud email sync | `SendDefinition__c`, `IndividualEmailResult__c`, 8\+ triggers |
+| **silverpop** | Legacy email marketing | Being phased out in favour of Marketing Cloud. Sync dates and lead scores still on Contact |
+| **VisualAntidote (Formstack)** | Forms, submissions, document generation | 15\+ objects |
+| **affectlayer (Chorus / ZoomInfo)** | Call recording and conversation analytics | `Engagement__c`, `Moment__c`, `ChorusEngagementContact__c` |
+| **dlrs** | Declarative lookup rollup summaries | **Critical.** Triggers on Account, Opportunity, and OpportunityLineItem. Maintains every `Total_Spend_*` rollup |
+| **sf\_devops** | Change management and deployment pipeline | 15\+ objects, 500\+ Apex classes |
+| **FinancialForce** | Invoicing and financial documents | `Invoice__c`, `CreditNote__c`, `Transaction__c`. Field visibility is limited - prefer Opportunity billing fields |
+| **pnova (Cuneiform)** | Data quality profiling | 100\+ Apex classes |
+| **Conga Composer** | Document generation and merge | 50\+ Composer classes |
+
+## Billing and payment fields
+
+Revenue flows through three systems, and the boundaries matter.
+
+<Steps>
+  <Step title="Salesforce Opportunities are the source of truth for booked revenue">
+    `Billing_Terms__c` (One Time, Recurring, Compound, Cancelled, Billed in Full), `Billing_Start_Date__c`, `Invoice_Number__c`, `Invoice_Date__c`, `Opportunity_Paid_In_Full__c`, `PO_Number__c`, `Opportunity_Currency__c`.
+  </Step>
+  <Step title="AdBook manages digital ad orders and syncs back">
+    The IO lifecycle lives in AdBook and reflects into `AB2__` fields on the opportunity and its line items.
+  </Step>
+  <Step title="FinancialForce handles invoicing">
+    Invoice objects exist but with limited field access. For detailed invoice analysis, use Opportunity-level billing fields unless additional FinancialForce field access has been granted.
+  </Step>
+</Steps>
+
+Line-level payment fields include `AR_Payment_Status__c`, `Paid_In_Full_Date__c`, `Do_Not_Invoice__c`, and `Delayed_Invoice_Date__c`.
+
+<Warning>
+  **Currency.** Most deals are USD but some are CAD, flagged on `Opportunity_Currency__c`. Do not sum across currencies without converting.
+</Warning>
+
+## Technical debt worth knowing about
+
+- **Two agency-contact objects.** `Agency_Contact__c` and `Agency_Contacts__c` both exist and appear to overlap.
+- **`ProposalDetailsTrigger`** on `Proposal_Details__c` runs on API version 29, dating from 2014.
+- **`Order_Details__c`** is likely legacy or supplementary to `OpportunityLineItem`.
+- **Silverpop and Marketing Cloud coexist**, with Silverpop notionally being retired.
+
+## Next
+
+<Card title="Visit Create" icon="ticket" href="/operations/systems/visit-create">
+  The registration platform, live expos, and how it maps into Salesforce.
+</Card>

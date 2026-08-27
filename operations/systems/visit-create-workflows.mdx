@@ -1,0 +1,137 @@
+---
+title: "Visit Create workflows"
+sidebarTitle: "Visit Create workflows"
+description: "How Visit Create webhooks land in connect-prod: five isolated pipelines, Marketplace lookup, logging, email, and recovery."
+icon: "workflow"
+---
+
+Canonical code: `sf-visit-webhook`. The older sanitised template is `visit-to-salesforce-webhooks-automation-workflows`. This page is the Connect wiring. The planner-facing path after a hosted-buyer row exists is [Hosted buyer operations](/hosted-buyer-support/registration-and-operations).
+
+<Info>
+  Five pipelines share a pattern and are kept in separate Apex classes so a change for Marketplace buyers cannot regress eTourism or BizBash. Last reviewed against the repo README and the live Marketplace 2026 webhook list on **12 August 2026**.
+</Info>
+
+## Shared pattern
+
+```text
+Visit GET ?expoId=&webhookId=
+  → Salesforce Site /services/apexrest/visit/<pipeline>/*
+  → Apex REST receiver
+  → GET callout:Visit_API/visitors/{expoId}?registrationTypes=…&webhookId=…
+  → Queueable processor (one visitor per job, max 50 enqueued per notification)
+  → Field mapper
+  → Registration__c or Supplier_Registration__c upsert
+  → Visit_Webhook_Log__c (receipt) + Visit_Webhook_Activity__c (per visitor)
+```
+
+Visit has no body on the notify. The receiver **pulls**. It always returns HTTP 200 so Visit does not escalate; failures are logged instead.
+
+Processors run as the **VisitWebhook Site Guest User**. `VisitRecordSync` queries in system mode and must not filter on the guest user's FLS. Receivers also support a legacy POST that accepts a JSON array and skips the pre-filter.
+
+## The five pipelines
+
+| Pipeline | Site path | Type filter | Processor / mapper | Object |
+| --- | --- | --- | --- | --- |
+| Hosted Buyer | `/visit/webhook/*` | `1ze3uz619` | `VisitRegistrationProcessor` / `VisitFieldMapper` (139 question IDs) | `Registration__c` |
+| Connect Supplier | `/visit/supplier/*` | `1ze7qthhh`, `1zenu5xxe` | `SupplierRegistrationProcessor` / `SupplierFieldMapper` (65 IDs) | `Supplier_Registration__c` |
+| eTourism (Destination Marketer) | `/visit/etourism/*` | `1zhfq3ufw` | `eTourismRegistrationProcessor` / `eTourismFieldMapper` (13 IDs) | `Registration__c` |
+| Brand Experience Pass | `/visit/brand-experience/*` | `1zhfq3ug0` | `BrandExperienceRegistrationProcessor` / `BrandExperienceFieldMapper` | `Registration__c` (`Registration_Category__c = Brand Experience`) |
+| Industry Supplier Pass | `/visit/industry-supplier/*` | `1zhfq3ug1` | `IndustrySupplierRegistrationProcessor` / `IndustrySupplierFieldMapper` | `Registration__c` |
+
+Hosted-buyer stage mapping from Visit `registrationState`: `cancelled` / `unregistered` → Cancelled; `pendingConfirmation` → Pending Confirmation; otherwise Registered. **Fully Registered is not set by the webhook.**
+
+Supplier pipeline calls Visit twice (once per type), merges IDs, and will not create a new row on a cancellation event.
+
+eTourism hard-codes `Appointment_Track__c = 'eTourism Summit'` and uses the Meeting/Sales Contact record type for new Contacts.
+
+Brand Experience dispatches form fields by Visit `form.id` and picks Contact record type by expo family (Sports vs BizBash).
+
+Visa and passport questions are **intentionally unmapped** (PII policy).
+
+## Contact and registration match
+
+Hosted buyer / eTourism / pass pipelines:
+
+1. Contact: email → first+last → first+last+company → create.
+2. Registration, marketplace-scoped: `Visit_Visitor_Id__c`+`Visit_Expo_Id__c` → `Registrant__c`+`Marketplace__c` → email+`Marketplace__c`.
+
+Supplier uses `Visit_Registration_Key__c` as the stable key and marks the Contact as a Connect Meetings Supplier.
+
+If `Marketplace__c.Visit_Expo_Id__c` does not match the incoming expo, the processor skips with an activity-log error.
+
+## Active wiring (from `sf-visit-webhook` README)
+
+Marketplace Salesforce IDs below are from that README, not from a live SOQL of `Visit_Expo_Id__c` (this session's Salesforce user saw that field as null — treat as FLS).
+
+### Hosted Buyer
+
+| Event | Visit expo | Webhook | README status |
+| --- | --- | --- | --- |
+| Spring Marketplace 2026 | `05iui498hhbpn` | `1ool7nylzf9ap` | Active |
+| MEGA / Connect Marketplace 2026 | `3512dko89j55x` | `2hbdc022kyqqu` | Active — confirmed live 12 Aug 2026, `state=wait`, last send the same day |
+| Connect North 2026 | `3w3prdavo639i` | `3mdm2a1zigrdf` | Active |
+| South + Faith 2026 | `21v0o8zgtegpq` | `3ibni3fc35mm5` | Active |
+| West 2026 | `3lc7u93zax9al` | `23w8y61j2ishn` | Active |
+| Texas 2026 | `1g6fkh9uc4bhd` | `2m2pa54iut0vu` | Active |
+| Winter Marketplace 2026 | `14d0ea7t27s15` (live API) | not in README | README still said pending |
+| Spring Marketplace 2027 | `0d1ppa08k8lhu` | `2zrnq9pukhr1d` | Active |
+
+### eTourism Summit
+
+| Event | Visit expo | Webhook |
+| --- | --- | --- |
+| 2026 | `31p4239o58hz9` | `280xwgim6kpie` |
+| 2027 | `0t5po900ozhkm` | `3unla0tbcnnu7` |
+
+eTourism **Marketplace** 2026 (`3ifgqc5icj4qz`) is live in Visit and not in this table.
+
+### Brand Experience + Industry Supplier
+
+Each Sports / BizBash expo has two visitor webhooks, both pointing at the same two Apex endpoints.
+
+| Event | Visit expo |
+| --- | --- |
+| Sports Innovation Forum 2026 | `0e2lrg6h41qxa` |
+| Sports Leadership Summit 2026 | `0w5jkrrwco7yj` |
+| BizBash Innovation Forum 2026 | `2a5gwo7scw0ci` |
+| Experiential Leadership Summit 2026 | `0irj7vuovwdwg` |
+
+### Marketplace 2026 webhook list (live)
+
+`visit_list_webhooks` on `3512dko89j55x`, 12 August 2026:
+
+| ID | Type | Enabled | State | Target |
+| --- | --- | --- | --- | --- |
+| `2hbdc022kyqqu` | visitor | yes | wait | Salesforce Site `/visit/webhook` |
+| `3lythtvqv0sqv` | visitor | yes | wait | Salesforce Site `/visit/supplier` |
+| `1kjz88r0jp8nf` | visitor | no | error | placeholder URL |
+| `3rmmr473mnlwv` | visitor | no | wait | Power Automate (secret in URL — do not copy) |
+| `3s8ebi8p3b5en` | order | yes | error | Zapier (7 errors; last send 20 Nov 2025) |
+
+## After insert
+
+`Registration_Created_Email_Notification` (after-insert Flow, system context) emails **once** when `CreatedById` is the VisitWebhook guest user. From: `attendeeinfo@informa.com`. `Notification_Sent_At__c` is the send-once stamp.
+
+Processors must **not** also call `RegistrationEmailNotifier` on insert — that caused duplicate mail on 4 August 2026 for eTourism and Industry Supplier.
+
+`Supplier_Registration__c` has **no** notification Flow. That is intentional.
+
+## Recovery
+
+The repo also ships:
+
+- `VisitIngestionRecovery` / `VisitRecoveryDrainBatch` / `Visit_Recovery_Queue__c` — drain overflow when a notify would exceed 50 Queueables
+- `VisitReconciliationBatch` / `VisitReconciliationScheduler` — poll Visit by revision and backfill missed visitors
+- Visit Ingestion Ops Lightning app, dashboard, and reports
+
+Monitor `Visit_Webhook_Log__c`, `Visit_Webhook_Activity__c`, Setup → Apex Jobs, and webhook `state=error` in Visit.
+
+<Warning>
+  Activity logs store **field names**, not values. Do not "improve" them by writing form answers into MDX or into `Change_Summary__c`.
+</Warning>
+
+## Next
+
+<Card title="Hosted buyer operations" icon="ticket" href="/hosted-buyer-support/registration-and-operations">
+  After the row exists: qualification, TripEasy, appointments, deposit.
+</Card>

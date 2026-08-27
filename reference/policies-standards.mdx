@@ -1,36 +1,53 @@
 ---
-title: "Policies & Standards"
-description: "Connect Meetings organizational policies and standards"
+title: "Policies and standards"
+description: "Verified standards for Company Brain content, ownership, customer support, data governance, and internal agents."
+icon: "scale"
+keywords: ["policies", "standards", "content governance", "data governance", "AI guardrails"]
 ---
 
-## Data Governance
+These standards govern this knowledge base. They do not claim to replace HR, Legal, Finance, privacy, or information-security policies that have not been imported into the current source set.
 
-### Privacy & Compliance
-- GDPR and CCPA compliance
-- Customer data handling
-- Third-party sharing policies
+## Knowledge-base standards
 
-### Data Quality
-Standards for data entry, validation, and maintenance.
+- Write for Connect staff and approved internal agents.
+- Use British spelling, active voice, sentence-case headings, and concrete language.
+- Give each factual page one canonical navigation home; link to it from related sections.
+- Use root-relative internal links without file extensions.
+- Preserve TODO markers for unverified facts rather than filling gaps.
+- Use unique page titles for search, with shorter `sidebarTitle` values where useful.
+- Add new pages to `docs.json`, then validate navigation and links.
 
-## Brand Standards
+## Content ownership and review
 
-### Visual Identity
-- Logo usage
-- Color palette
-- Typography
+Every substantive page should identify or make discoverable:
 
-### Messaging
-- Tone and voice
-- Key messaging pillars
-- Audience-specific positioning
+1. Internal purpose and intended staff roles
+2. Canonical source
+3. Owner
+4. Canonical, Working, or Deprecated status
+5. Source or review date
+6. Staff action
+7. Customer-safe information where relevant
+8. Internal-only context
+9. Limits and escalation route
+10. Related next task
 
-## Operational Standards
+## Customer-support standards
 
-### Salesforce Data Entry
-See [Salesforce Glossary](/operations/systems/salesforce-glossary) for field standards and naming conventions.
+- Exhibitor Support and Hosted Buyer Support are internal staff playbooks.
+- Customer-facing agents may ground on approved FAQs, knowledge articles, and event sources.
+- Staff must not share internal IDs, defects, ownership gaps, private source locations, or named customer records.
+- Billing, invoices, legal, contracts, complaints, specific discounts, and unpublished rates require human escalation.
+- Never share a full attendee or buyer contact list.
 
-### Metrics & Reporting
-See [Metrics](/operations/data/metrics) for standard definitions and calculations.
+## Data-governance standards
 
-{/* TODO: Expand with actual policies from Notion Company OS */}
+See [Data quality and governance](/operations/data/data-governance) for the operating controls. The core rules are to respect the owning system, keep record data out of MDX, use canonical metric definitions, and preserve unresolved conflicts.
+
+## AI and agent standards
+
+See [Staff and agent guardrails](/operations/ai/guardrails) and [Agent retrieval rules](/operations/ai/agent-retrieval). Agents must retrieve before answering, cite the page used, disclose weak source status, and stop at escalation boundaries.
+
+<Warning>
+  Company policies, HR and legal materials, and role-specific training are marked **Working** in the source registry. Do not present this page as a complete corporate policy library.
+</Warning>

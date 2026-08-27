@@ -1,0 +1,37 @@
+---
+title: "Revenue and renewals"
+description: "How revenue is represented, why renewals are commercially important, and which fields staff should use."
+icon: "repeat"
+keywords: ["revenue", "renewals", "rebooking", "existing business", "Salesforce"]
+---
+
+## Revenue engines
+
+Connect Meetings & Events earns revenue through event appointment packages, sponsorships, media and advertising, event amplification, and related registration or service lines. The detailed product categories live on [Business and revenue model](/company/business-model).
+
+## Why renewals matter
+
+The current `connect-prod` analysis shows that Existing Business converts at a materially higher rate and larger average value than New Business. These are point-in-time CRM findings, not permanent targets.
+
+| Opportunity type | Observed win rate | Observed average |
+| --- | --- | --- |
+| Existing Business | 84.6% | Approximately \$18.8K |
+| New Business | 67.2% | Approximately \$10.1K |
+
+<Tip>
+  Rebooking is a core commercial workflow. It is not merely an onsite convenience.
+</Tip>
+
+## Salesforce representation
+
+- `Opportunity.Type` distinguishes **New Business** and **Existing Business**.
+- `Product_Year__c` is the year the product is for, not necessarily the close-date year.
+- `OpportunityLineItem.Organization__c` is the reliable business-unit split.
+- Cash reporting excludes `Barter__c = true`.
+- Historical analysis must account for edits after Closed Won.
+
+Use [Metrics and definitions](/operations/data/metrics) for current query definitions and [Sales process](/company/sales-process) for lifecycle detail.
+
+<Warning>
+  Do not quote these aggregate findings as a forecast for a named account or event. Query the live org for current operational decisions.
+</Warning>

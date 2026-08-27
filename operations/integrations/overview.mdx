@@ -1,36 +1,42 @@
 ---
-title: "Integrations Overview"
-description: "Systems integrations and data flows within Connect Meetings"
+title: "Integration map"
+sidebarTitle: "Integration overview"
+description: "Task-led map of the documented integration boundaries between Salesforce, Visit Create, media ordering, finance, marketing, and internal AI."
+icon: "plug"
+keywords: ["integrations", "Salesforce", "Visit Create", "API", "webhooks", "automation"]
 ---
 
-import { CardGroup, Card } from '/snippets/components/CardGroup.mdx';
+Use this section to identify the owning system, interface, and detailed reference before diagnosing or changing an integration.
 
-<CardGroup>
-  <Card title="Salesforce" icon="database" href="/operations/data/data-model">
-    Primary CRM and system of record for Connect Meetings
+```mermaid
+flowchart LR
+    VISIT[Visit Create] -->|webhooks and Create v2 reads| SF[Salesforce connect-prod]
+    ADBOOK[AdBook] <--> SF
+    DOCUSIGN[DocuSign] <--> SF
+    MC[Marketing Cloud] <--> SF
+    FF[FinancialForce] <--> SF
+    NOTION[Notion Company OS] --> BRAIN[Company Brain mirror]
+    SF --> BRAIN
+    EVENTS[Live Events wiki] --> BRAIN
+    MCP[MCP-connected internal agents] -->|approved tools| SF
+    MCP --> VISIT
+```
+
+<Columns cols={2}>
+  <Card title="Salesforce integrations" icon="cloud" href="/operations/integrations/salesforce-integrations">
+    Managed packages, field prefixes, billing boundaries, and technical debt.
   </Card>
-  <Card title="Visit Create" icon="ticket" href="/operations/systems/visit-create">
-    Event management and badge platform
+  <Card title="API catalogue" icon="code" href="/operations/integrations/api-catalogue">
+    The documented APIs and where their exact contracts live.
   </Card>
-  <Card title="Data Model" icon="table" href="/operations/data/data-model">
-    Cross-system data relationships
+  <Card title="Webhooks" icon="webhook" href="/operations/integrations/webhooks">
+    The five Visit Create inbound pipelines and their recovery path.
   </Card>
-  <Card title="API Documentation" icon="plug" href="/operations/systems/visit-create-api">
-    Technical integration guides
+  <Card title="Automation catalogue" icon="workflow" href="/operations/integrations/automation-catalogue">
+    Documented automations, candidates, owners, and verification status.
   </Card>
-</CardGroup>
+</Columns>
 
-## Integration Architecture
-
-Connect Meetings operates across multiple interconnected systems:
-
-### Core Systems
-- **Salesforce**: Customer data, opportunities, orders, and reporting
-- **Visit Create**: Event registration, badge printing, and on-site operations
-- **Shopify/Stripe**: Commerce and payment processing
-- **Notion**: Company OS and documentation
-
-### Data Flow
-Integration patterns ensure data consistency across platforms while maintaining each system's role as source of truth for specific domains.
-
-{/* TODO: Complete integration architecture documentation */}
+<Warning>
+  Do not place credentials, signing tokens, bearer tokens, visitor records, or webhook URLs containing secrets on this site.
+</Warning>

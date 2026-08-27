@@ -1,55 +1,56 @@
-# Mintlify Starter Kit
+# Connect Company Brain
 
-Use the starter kit to get your docs deployed and ready to customize.
+This directory is the editable Mintlify source for the internal Connect Meetings & Events knowledge base.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+The site is written for staff and approved internal agents. The Exhibitor Support and Hosted Buyer Support sections are internal playbooks, not public customer guides.
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## Work in the right directory
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+- Edit MDX, assets, and `docs.json` here in `source/`.
+- Read `AGENTS.md` before changing a fact or answering from the site.
+- Do not edit `../static-site/`; it is a frozen export.
+- Use `.mintlify/product-brief.md` for the audience, jobs-to-be-done, and architecture decisions behind the site.
 
-## AI-assisted writing
+## Preview and verify
 
-Set up your AI coding tool to work with Mintlify:
+Run these commands from this directory:
 
 ```bash
-npx skills add https://mintlify.com/docs
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 dev --no-open
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 validate
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 broken-links
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 a11y
 ```
 
-This command installs Mintlify's documentation skill for your configured AI tools like Claude Code, Cursor, Windsurf, and others. The skill includes component reference, writing standards, and workflow guidance.
+The preview normally opens at `http://localhost:3000`.
 
-See the [AI tools guides](/ai-tools) for tool-specific setup.
+The CLI is temporarily pinned because `mint@4.2.834` currently references an unpublished package. Re-test the current release before removing the pin.
 
-## Development
+## Information architecture
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+The sidebar has ten stable sections:
 
-```
-npm i -g mint
-```
+1. Welcome
+2. Company & Strategy
+3. People & Ownership
+4. Events & Products
+5. Exhibitor Support
+6. Hosted Buyer Support
+7. Systems & Data
+8. AI & Automation
+9. Projects
+10. Reference & Governance
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+The homepage and Find an answer page route by staff task. Nested sidebar groups organise detail without making every page visible at once.
 
-```
-mint dev
-```
+## Source boundaries
 
-View your local preview at `http://localhost:3000`.
+- Event dates, venues, formats, eligibility, appointment counts, and cancellation information come from `events/` or the Live Events wiki mirrored there.
+- Salesforce, Notion Company OS, and the Live Events wiki remain the owning sources; this site is a derived reference layer.
+- Preserve conflicts and source dates. Do not infer a missing fact or fill a TODO.
+- Do not add record-level customer data, credentials, secrets, unpublished rates, or attendee contact lists.
+- Full support pages stay internal. Only approved response wording and verified customer-safe facts should be adapted into replies.
 
-## Publishing changes
+## Publishing
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
-
-## Need help?
-
-### Troubleshooting
-
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
-
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
+Local validation does not publish the site. Deployment is handled separately from this working directory and should only be run when explicitly requested.

@@ -1,0 +1,114 @@
+---
+title: "Visit Create API"
+sidebarTitle: "Visit Create API"
+description: "Create v2: resources, authentication, paging, webhooks, rate limits, and the MCP plus plugin skill we use against it."
+icon: "code"
+---
+
+Official spec: [create-v2.json](https://api.visitcloud.com/create/docs/specs/create-v2.json) (OpenAPI 3.0.3, API version **2.0**). Recaptured **12 August 2026**. Interactive console: [api.visitcloud.com/create/docs](https://api.visitcloud.com/create/docs/). Vendor PDF (March 2023, source-dated): [JSON_API_V2.pdf](https://help.visitcloud.com/create/wp-content/uploads/sites/2/2023/03/JSON_API_V2.pdf). Login and the full resource list live on [Visit Create](/operations/systems/visit-create).
+
+This page is a working map for agents. For exact request bodies, open the spec or the bundled copy in `sf-visit-webhook/plugins/visit-create-api/assets/openapi-spec.json`.
+
+## Basics
+
+| | |
+| --- | --- |
+| Base URL | `https://api.visitcloud.com/create/v2` |
+| Auth | HTTP Basic. **Username = API key. Password blank.** Keys are managed by the event organiser. A key may be all-events or expo-scoped, optionally IP-allowlisted, optionally write-enabled. |
+| Write permission | Without it, only GET — **except webhooks**, which can be managed with a read-only key. |
+| Scope | Almost every path includes `{expoId}`. `GET /expos` shows what the current key can see. |
+| Revision | Incremental long. Advances on create or update. Lists return oldest revision first. |
+| Paging | Default/max **100** on most lists; **1,000** on licenses and touchpoints. Next page: `fromRevision={lastSeen+1}`. |
+| Rate limit | **Two parallel requests.** HTTP **429** if exceeded. |
+| Timeout | Spec and our MCP client use **30 seconds**. |
+
+Salesforce talks to the same base URL through Named Credential **`Visit_API`**. Do not put the key, the named-credential password, or a `Authorization: Basic …` header in MDX.
+
+## How to sync
+
+<Steps>
+  <Step title="Prefer webhooks">
+    Configure a webhook type (`visitor`, `partner`, `participant`, `action`, `connection`, `content`, `payment`, `order`, `activity`). Visit notifies `https://<your-url>?expoId=&webhookId=`. There is **no payload body**. The consumer then GETs the matching resource with `webhookId`.
+  </Step>
+  <Step title="Acknowledge within 30 seconds">
+    The consumer must return **2xx within 30s** of the notification, but only after it has received the pulled data. Failed deliveries retry at 10s, 1m, 5m, 15m, 1h, then 1 day. After the last failure, `state` becomes `error` until a PUT resets it to `wait`.
+  </Step>
+  <Step title="Or poll with fromRevision">
+    Persist the highest revision seen + 1 and request only newer rows. This is how backfills and the nightly reconciliation batch work.
+  </Step>
+</Steps>
+
+Webhook notifications originate from Visit IPs **52.30.181.174**, **52.31.69.196**, **52.50.125.171** (from the spec). Our Salesforce Site is `https://connectmeetings.my.salesforce-sites.com/VisitWebhook/services/apexrest/visit/…`.
+
+## Resources
+
+| Tag | Role | Typical verbs |
+| --- | --- | --- |
+| **Expos** | Event instances the key can access | GET list / GET one |
+| **Visitors** | Pre-event registrations. Only `registrationState=registered` may then participate | GET, POST, PUT, DELETE |
+| **Partners** | Exhibiting companies (child of a Contact) | GET, POST, PUT, DELETE |
+| **RegistrationTypes** | Visitor and partner categories, org-level or expo-level | GET |
+| **Orders** | Shop transactions. States: paying, paymentPending, completed, timeout, cancelled | GET |
+| **Payments** | PSP instructions. States: pending, paid, denied, refunded, cancelled. Methods: card, invoice, manual, free | GET, PUT (state only) |
+| **Participants** | Who actually attended, with activity times | GET |
+| **Activities** | Sessions, workshops, presentations | GET, POST, PUT, DELETE |
+| **Actions** | Raw scans / prints / interactions | GET |
+| **Connections** | Visitor–partner / content interactions. Key must have the endpoint enabled | GET |
+| **Contents** | Digital profiles and products in the apps | GET, POST, PUT, DELETE |
+| **Labels** | Content categories | GET, POST, PUT, DELETE |
+| **Licenses** | Systems and partner licences at the event | GET, POST, PUT, DELETE |
+| **Touchpoints** | NFC devices | GET |
+| **Webhooks** | Change notifications | GET, POST, PUT, DELETE |
+| **SendEmail** | Currently `type=confirmation` only; `force=true` to resend | POST |
+| **Upload** | Visitor ProfilePhoto, IdCard, IdPhoto | POST |
+
+Visitor list filters used in our receivers: `registrationStates` (`registered`, `incomplete`, `denied`, `cancelled`), `registrationTypes` (CSV of type IDs), `webhookId`, `fromRevision`, `showDeleted` (defaults **true**).
+
+## Agent tooling
+
+There is **no standalone `visit` CLI** on this machine. Agents use:
+
+### `visit-create` MCP
+
+Repo: `Visit-Create-MCP` (50+ tools wrapping Create v2). Connected in this workspace as server `visit-create`.
+
+| Resource | Tools |
+| --- | --- |
+| Expos | `visit_list_expos`, `visit_get_expo` |
+| Visitors | `visit_list_visitors`, `visit_get_visitor`, `visit_create_visitor`, `visit_update_visitor`, `visit_delete_visitor` |
+| Partners | `visit_list_partners`, `visit_get_partner`, create / update / delete |
+| Activities / contents / labels / licenses / webhooks | list, get, create, update, delete |
+| Connections, actions, participants, orders, payments, touchpoints, registration types | list / get (payments also update) |
+| Email / upload | `visit_send_email`, `visit_upload_file` |
+| Bulk | `visit_list_all` — sequential pages, max 2 parallel, default cap 1,000 |
+
+`visit_list_all` is the right tool for a complete expo extract. Do **not** paste the extract into this site.
+
+### `visit-create-api` plugin skill
+
+Lives in `sf-visit-webhook/plugins/visit-create-api/`. The skill points at a bundled OpenAPI file and the same request conventions as the spec. Use it when writing or reviewing API calls.
+
+### What the Salesforce org uses
+
+Apex `callout:Visit_API/...` from the five receivers and processors. Not the MCP. The MCP is for agents and backfill scripts.
+
+<Warning>
+  Default to **read** tools (`list` / `get`). Creating or deleting visitors, partners, or webhooks changes production registration data. Only do that when a human named the expo and the write.
+</Warning>
+
+## HTTP errors (from the spec)
+
+| Status | Meaning |
+| --- | --- |
+| 400 | Bad request / expo not found |
+| 401 | Invalid API key |
+| 403 | Key lacks write permission |
+| 404 | Resource not found |
+| 422 | Validation failed (`errors[]` with `field` and `description`) |
+| 429 | Rate limit — wait and retry |
+
+## Next
+
+<Card title="Visit Create workflows" icon="workflow" href="/operations/systems/visit-create-workflows">
+  The five Salesforce pipelines, webhook endpoints, and what happens after Visit notifies us.
+</Card>

@@ -1,0 +1,17 @@
+---
+title: "API catalogue"
+description: "Documented APIs used by Connect systems and agents, with their authoritative contract and disclosure boundary."
+icon: "code"
+keywords: ["API", "Salesforce API", "Visit Create API", "Elysia API"]
+---
+
+| API | Role | Authoritative contract | Company Brain reference |
+| --- | --- | --- | --- |
+| Salesforce data APIs | Query and update standard and custom records in `connect-prod` | Live Salesforce describe and API metadata | [Salesforce org](/operations/systems/salesforce-org) |
+| Salesforce Tooling and Metadata APIs | Inspect or deploy metadata and tooling objects | Live org metadata | [Salesforce org](/operations/systems/salesforce-org) |
+| Visit Create v2 | Read expos, registrations, visitors, types, and related event-registration resources | Vendor OpenAPI `create-v2.json` | [Visit Create API](/operations/systems/visit-create-api) |
+| Elysia HTTP API | Internal AI chat, agents, content, and applications | Live stage OpenAPI when available | [Elysia API](/operations/ai/elysia-api) |
+
+<Warning>
+  This catalogue documents interfaces, not credentials. Retrieve secrets through the approved credential store or connection and never paste them into MDX, examples, logs, or prompts.
+</Warning>

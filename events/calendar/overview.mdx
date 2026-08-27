@@ -1,36 +1,88 @@
 ---
-title: "Event Calendar"
-description: "Connect Meetings event schedule and portfolio"
+title: "Event calendar"
+description: "Every live Connect event for the 2026-2027 season with dates, venues, and format."
+icon: "calendar-days"
 ---
 
-import { CardGroup, Card } from '/snippets/components/CardGroup.mdx';
+Twelve live events run across the 2026-2027 season: nine Connect marketplace and sports events, two Connect Travel destination-marketing events, and [BizBash Innovation Forum](/events/bizbash). The Live Events wiki in Notion is the canonical source for every fact on this page; customer-service agents answer **only** from these records.
 
-<CardGroup>
-  <Card title="Flagship Marketplaces" icon="trophy" href="/events/connect-marketplace">
-    Premier industry events
-  </Card>
-  <Card title="Regional Marketplaces" icon="map-pin" href="/events/regional">
-    Geographic event series
-  </Card>
-  <Card title="Connect Travel" icon="plane" href="/events/connect-travel">
-    eTourism and travel industry events
-  </Card>
-  <Card title="Sports & Summits" icon="award" href="/events/sports-and-summits">
-    Specialty vertical events
-  </Card>
-</CardGroup>
+Calendar captured from `informaconnect.com` and `bizbash.com` on **12 August 2026**.
 
-## Upcoming Events
+## The season at a glance
 
-{/* TODO: Link to live Salesforce event data or calendar widget */}
+| Event | Dates | Location | Venue | Type |
+| --- | --- | --- | --- | --- |
+| [BizBash Innovation Forum 2026](/events/bizbash) | 23-25 Aug 2026 | Tampa, FL | Tampa Convention Center | BizBash conference |
+| [Connect Marketplace 2026](/events/connect-marketplace) | 24-26 Aug 2026 | Tampa, FL | Tampa Convention Center | Flagship marketplace |
+| [The Women's Summit 2026](/events/sports-and-summits) | 27-28 Oct 2026 | The Woodlands, TX | Woodlands Waterway Marriott | Summit (add-on track) |
+| [Connect Texas \+ Medical 2026](/events/regional) | 28-29 Oct 2026 | The Woodlands, TX | Woodlands Waterway Marriott | Regional marketplace |
+| [Sports Innovation Forum 2026](/events/sports-and-summits) | 28-30 Oct 2026 | The Woodlands, TX | Woodlands Waterway Marriott | Innovation forum |
+| [Connect West 2026](/events/regional) | 4-5 Nov 2026 | Scottsdale, AZ | The Westin Kierland Resort and Spa | Regional marketplace |
+| [Connect South \+ Faith 2026](/events/regional) | 9-10 Nov 2026 | Branson, MO | Branson Convention Center | Regional marketplace |
+| [Connect Winter Marketplace 2026](/events/regional) | 18-20 Nov 2026 | Palm Beach, FL | Palm Beach County Convention Center | Regional marketplace |
+| [eTourism Marketplace](/events/connect-travel) | 18-20 Nov (year not on hero) | Palm Beach, FL | Hilton West Palm Beach | Connect Travel marketplace |
+| [Connect North 2027](/events/regional) | 22-24 Feb 2027 | Cincinnati, OH | - | Regional marketplace |
+| [Spring Marketplace 2027](/events/connect-marketplace) | 21-23 Apr 2027 | Las Vegas, NV | The Wynn | Flagship marketplace |
+| [eTourism Summit 2027](/events/connect-travel) | 21-23 Apr 2027 | Las Vegas, NV | Wynn Las Vegas | Connect Travel conference |
 
-## Event Portfolio Structure
+<Note>
+  Two venue clusters. Tampa Convention Center hosts [BizBash Innovation Forum](/events/bizbash) on 23-25 August and Connect Marketplace on 24-26 August. The Woodlands Waterway Marriott hosts Women's Summit, Sports Innovation Forum, and Connect Texas \+ Medical in late October. The Women's Summit runs as an add-on track inside Sports Innovation Forum rather than as a separately ticketed event, and their published date ranges overlap only on 28 October.
+</Note>
 
-Connect Meetings organizes events along several dimensions:
+## The shape of a Connect event
 
-- **Brand**: Connect, BizBash, TSNN
-- **Type**: Marketplace, Summit, Forum
-- **Frequency**: Annual, Quarterly, Regional series
-- **Audience**: Hospitality suppliers, meeting planners, hosted buyers
+Nearly every event follows the same three-beat structure, which is worth internalising because it drives the whole operational calendar.
 
-For event-specific dates, venues, and pricing, see the [Event Overview](/events/overview) page or the live event listings on the Connect website.
+<Steps>
+  <Step title="Day one: arrive and open">
+    Regiception (combined registration and reception), a first-timer orientation at larger events, a welcome education session, a first block of marketplace appointments, and an opening reception hosted by the destination.
+  </Step>
+  <Step title="Day two: the working day">
+    Breakfast and education, a morning appointment block, lunch and learn, an afternoon appointment block, then an open night in the host city. This is where most of the business gets done.
+  </Step>
+  <Step title="Day three: close out">
+    Grab-and-go breakfast, a final appointment block, and departures. Flagships add a closing concert or the annual Connect 5K.
+  </Step>
+</Steps>
+
+Two-day regional events compress this into days one and two. Flagship events extend it with tradeshow experiences, speaker showcases, hosted meals, and a rebooking lounge.
+
+## Recurring operational deadlines
+
+| Deadline type | Pattern | Examples |
+| --- | --- | --- |
+| Supplier hotel room block closes | 3-4 weeks before the event | Connect Marketplace 3 Aug; Connect Texas 5 Oct; Connect West 14 Oct; Connect South 16 Oct; Winter Marketplace 27 Oct |
+| Standard cancellation cutoff | 57 days before | Refund minus 10% administration charge; nothing refunded inside 56 days |
+| Hosted buyer cancellation cutoff | 30 days before | Full refund or credit at 30\+ days; inside 7 days, no refund plus one hotel night fee |
+| Hosted buyer deposit | \$200, refundable | Returned on completing the assigned appointment schedule |
+
+<Warning>
+  Two different cancellation policies are published on nearly every event site - one on the Hosted Buyers page, one in the Terms & Conditions. They almost certainly apply to different registrant types, but no site states that explicitly. Never quote one without checking which registrant you are talking to. Logged on [Known issues](/reference/known-issues).
+</Warning>
+
+## Standing commitments across all events
+
+- **Sustainability**: reusable water bottles via Fill it Forward, onsite recycling, eco-friendly and locally sourced food, food donation to local charities, quiet and prayer rooms, recyclable signage, carpet reuse at flagships.
+- **Code of conduct**: zero tolerance for harassment, discrimination, or violence at any live or digital touchpoint, covering attendees, speakers, sponsors, exhibitors, and staff.
+- **Governing law**: New York, per Terms & Conditions, regardless of where the event is held.
+- **Media partners**: BizBash, TSNN, and Corporate Event News appear across the portfolio.
+
+## How events appear in Salesforce
+
+| Concept | Object or field |
+| --- | --- |
+| A specific event instance | `Marketplace__c` - roughly 10 to 15 per year, with `Event_Type__c`, `Start_Date__c`, `End_Date__c`, `Event_Status__c` |
+| A hosted buyer registration | `Registration__c`, linked to Contact, Account, Campaign, and `Marketplace__c` |
+| Registration lifecycle | `Registration_Stage__c`: Registering, Pending Confirmation, Registered, Fully Registered, Cancelled, Declined, Verbal, Stopped |
+| Event revenue attribution | `OpportunityLineItem.Event_Name__c` and boolean flags such as `IsSpringMarketplaceProduct__c` |
+| Registration counts | Rollup fields on `Marketplace__c` such as `Fully_Registered_Count__c` |
+
+<Tip>
+  **Fully Registered** is the only stage that means confirmed. Registering and Pending Confirmation are not attendance.
+</Tip>
+
+## Next
+
+<Card title="Flagship marketplaces" icon="star" href="/events/connect-marketplace">
+  Connect Marketplace Tampa 2026 and Spring Marketplace Las Vegas 2027.
+</Card>

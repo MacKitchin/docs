@@ -1,91 +1,83 @@
 ---
-title: "Company Brain"
+title: "Connect Company Brain"
 sidebarTitle: "Overview"
-description: "Orientation page for Informa Connect - Connect Meetings & Events. What we do, who does it, and where the truth lives."
+description: "The internal starting point for finding company, event, customer-support, systems, and ownership knowledge."
 icon: "house"
 ---
 
-This is the Company Brain for **Connect Meetings & Events**, the meetings-and-events business inside **Informa Connect** (Informa PLC). It is written for people orienting themselves — new hires, sales, and ops. Salesforce fields, Visit Create APIs, and the AI platform all live in the **Projects & Systems** and **AI & Automation** sections.
+The Company Brain is the internal reference for **Connect Meetings & Events staff and approved internal agents**. Start with the task in front of you; each section points to the source, owner, or escalation path behind the answer.
 
-<Info>
-  Everything here is a derived, human-readable mirror of systems that hold the actual truth: Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. When this site and a source system disagree, the source system wins. See [Source of truth](/governance/source-of-truth).
-</Info>
+<Warning>
+  This site contains internal context. Do not send a full page to a customer. Use the customer-safe wording in the Exhibitor Support and Hosted Buyer Support response libraries, then apply the escalation rules on the page.
+</Warning>
 
-## The business in one paragraph
-
-We run marketplace-style appointment events for the MICE industry (Meetings, Incentives, Conferences, Exhibitions). Hospitality suppliers - convention and visitors bureaus, destination marketing organisations, hotels, venues, AV and event-tech vendors - buy packages to meet pre-qualified event planners in scheduled one-to-one appointments. The planners, called **hosted buyers**, attend on a sponsored basis: we cover flights and hotel in exchange for a committed appointment schedule. Alongside the events we sell media and advertising through BizBash, TSNN, and Connect Travel. Revenue therefore has two engines: event packages and media insertion orders.
+## What do you need to do?
 
 <CardGroup cols={2}>
-  <Card title="Who we are" icon="building" href="/company/overview">
-    Informa Connect, this business unit, and the two commercial engines.
+  <Card title="Answer an exhibitor" icon="briefcase" href="/exhibitor-support/overview">
+    Internal qualification, package, registration, appointment, event-journey, and response guidance.
   </Card>
-
-  <Card title="Business model" icon="handshake" href="/company/business-model">
-    Supplier-side selling, the hosted buyer economy, and the reverse tradeshow format.
+  <Card title="Answer a hosted buyer" icon="user-check" href="/hosted-buyer-support/overview">
+    Internal eligibility, coverage, commitment, application, event-journey, and response guidance.
   </Card>
-
-  <Card title="Event calendar" icon="calendar-days" href="/events/overview">
-    Every live event for 2026 and 2027 with dates, venues, and format.
+  <Card title="Check an event fact" icon="calendar-days" href="/events/calendar/overview">
+    Source-dated dates, venues, formats, policies, and known discrepancies.
   </Card>
-
-  <Card title="Departments" icon="sitemap" href="/people/departments">
-    The eight areas, their owners, and what each one is accountable for.
+  <Card title="Find an owner" icon="users" href="/people/who-owns-what">
+    Route a question, handoff, approval, or escalation to the responsible team.
   </Card>
-</CardGroup>
-
-## Fast facts
-
-|  |  |
-| --- | --- |
-| Legal entity | Informa Connect, a division of Informa PLC |
-| Business unit | Connect Meetings & Events |
-| Managing Director | Matt Johnson |
-| EVP, Connect Meetings | Derek Rodriguez |
-| Headquarters | 3740 Davinci Court, Norcross, GA (US) |
-| CRM | Salesforce (`connect-prod`). Org ID and schema are on [The Salesforce org](/systems/salesforce-org). |
-| Knowledge system | Notion `Company OS` workspace |
-| Flagship event | Connect Marketplace, Tampa, 24-26 August 2026 |
-| Live events tracked | 12 (2026-2027 season: 9 Connect + 2 Connect Travel + BizBash Innovation Forum) |
-| Supplier account universe | ~13,800 accounts across 29 supplier categories |
-
-## What lives where
-
-<CardGroup cols={3}>
-  <Card title="Salesforce" icon="cloud" href="/systems/salesforce-org">
-    Accounts, contacts, opportunities, registrations, revenue. The record of business truth.
+  <Card title="Work with systems or data" icon="database" href="/operations/systems/overview">
+    Salesforce, Visit Create, Notion, data definitions, reporting, and integrations.
   </Card>
-
-  <Card title="Notion Company OS" icon="book" href="/governance/source-of-truth">
-    Projects, people, SOPs, event facts, the AI library, and the source-of-truth registry.
-  </Card>
-
-  <Card title="This site" icon="brain" href="/start/how-to-use">
-    The consolidated, retrieval-friendly summary layer over both.
+  <Card title="Use AI safely" icon="shield" href="/operations/ai/guardrails">
+    Retrieval rules, hard limits, tooling, Elysia, and automation guidance.
   </Card>
 </CardGroup>
 
 <Tip>
-  Event dates, pricing, and policy come only from the [Events portfolio](/events/overview). Agents: see [Agent retrieval rules](/ai/agents).
+  Not sure where to begin? Use [Find an answer](/welcome/find-an-answer) for task-based routes or [How to use this brain](/welcome/how-to-use) for a short orientation.
 </Tip>
 
-## Next
+## How to decide which page wins
 
-<CardGroup cols={2}>
-  <Card title="How to use this brain" icon="compass" href="/start/how-to-use">
-    Twenty-minute orientation path for new hires.
+| If the question is about... | Start here | Why |
+| --- | --- | --- |
+| Event date, venue, format, eligibility, appointment count, or cancellation | [Event calendar](/events/calendar/overview) | Event facts have one controlled home and retain source dates and conflicts. |
+| What staff should tell an exhibitor | [Exhibitor Support](/exhibitor-support/overview) | The pages separate internal context, customer-safe wording, and escalation boundaries. |
+| What staff should tell a hosted buyer | [Hosted Buyer Support](/hosted-buyer-support/overview) | Eligibility, coverage, commitments, and exceptions require role-specific handling. |
+| A person, team, or approval | [Who owns what](/people/who-owns-what) | Ownership and known gaps are explicit. |
+| A metric, field, record, or integration | [Systems & Data](/operations/systems/overview) | Definitions are separated from live record contents. |
+| Conflicting or weak information | [Source of truth](/reference/source-of-truth) and [Known issues](/reference/known-issues) | Canonical, Working, and Deprecated sources are treated differently. |
+
+<Info>
+  The Company Brain is a derived, human-readable mirror of Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. It is not a system of record. When this site and an owning system disagree, report the difference and follow the source and conflict rules rather than silently choosing a version.
+</Info>
+
+## The business in one paragraph
+
+Connect Meetings & Events runs marketplace-style appointment events for the MICE industry — meetings, incentives, conferences, and exhibitions. Hospitality suppliers buy packages to meet qualified event planners in scheduled one-to-one appointments. Hosted buyers attend on a sponsored basis in exchange for programme commitments. The business also sells media and advertising through BizBash, TSNN, and Connect Travel. Read [Company & Strategy](/company/overview) for the structure and [How the business works](/company/business-model) for the commercial model.
+
+## Useful reference points
+
+<CardGroup cols={3}>
+  <Card title="Glossary" icon="book-open" href="/reference/glossary">
+    Business terms and the language staff should use consistently.
   </Card>
-  <Card title="Technical reference" icon="database" href="/systems/salesforce-org">
-    Salesforce, Visit Create, metrics, and the AI platform — skip until you need them.
+  <Card title="Source of truth" icon="shield-check" href="/reference/source-of-truth">
+    Which system owns each fact and how strong the source is.
+  </Card>
+  <Card title="Policies and standards" icon="scale-balanced" href="/reference/policies-standards">
+    Content, customer-support, data, and agent governance.
   </Card>
 </CardGroup>
 
 ## Active work
 
-Four initiatives are live or planned, all led by the Technology & AI area. Read them after the current-state pages, not first.
+These pages record change initiatives. They are useful for status and decisions, but they do not override current-state reference pages.
 
-| Project | Stage | Priority |
+| Project | Recorded stage | Priority |
 | --- | --- | --- |
-| [Notion Workspace Rebuild - Company OS](/projects/company-os) | In progress | High |
-| [Connect and BizBash Data Consolidation](/projects/data-consolidation) | In progress | High |
-| [Supplier Knowledge Intelligence](/projects/supplier-knowledge) | Planned | Medium |
-| [Agentforce Agent Rollout](/projects/agentforce-rollout) | In progress | High |
+| [Notion Workspace Rebuild — Company OS](/operations/projects/company-os) | In progress | High |
+| [Connect and BizBash Data Consolidation](/operations/projects/data-consolidation) | In progress | High |
+| [Supplier Knowledge Intelligence](/operations/projects/supplier-knowledge) | Planned | Medium |
+| [Agentforce Agent Rollout](/operations/projects/agentforce-rollout) | In progress | High |

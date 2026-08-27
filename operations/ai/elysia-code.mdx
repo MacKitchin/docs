@@ -1,0 +1,77 @@
+---
+title: "Elysia Code"
+description: "elysia-code 0.3.0: Informa CLI that points Claude Code at the AI gateway, with context compression and model routing."
+icon: "terminal"
+---
+
+**Elysia Code** is Informa's CLI for Claude Code. It configures Claude Code to send traffic through the **Informa AI gateway** so you do not manage provider keys yourself. Governance, tracing, and billing apply to every model. Current version on this machine and in Notion: **0.3.0**.
+
+<Info>
+  Grounded on Notion **Elysia Code 0.3.0** (verification: verified), `Dev/elysia-code-latest/elysia-code.py` (`CLI_VERSION = "0.3.0"`), the desktop `Elysia Code.pdf` download page, and `~/.claude/commands/elysia-*.md`. **12 August 2026.** Do not copy workspace ID, config ID, user ID, or API key from the Notion credentials table onto this site.
+</Info>
+
+## Install
+
+1. Node.js 18+ and `npm install -g @anthropic-ai/claude-code`.
+2. Download from [pilots.ai.informa.com/elysia-code](https://pilots.ai.informa.com/elysia-code/).
+3. Run `setup-mac.sh` or `setup-windows.cmd`.
+4. `elysia-code --init` (prompts for workspace, config, user, API key). Or pass those flags non-interactively — still do not write the values into MDX.
+5. `claude` to start. Compression is on by default from 0.3.0.
+
+Network: **Zscaler** plus Informa VPN. SSL or network errors: confirm both, restart the terminal.
+
+Quota from the Notion page: **\$200 / month**, **100 requests / minute**, reset on the first of the month. Increase: `elysia-dev@informa.com`.
+
+Updating: `elysia-code --update`. 0.2.0 users do not re-init; run `--compression-enable` if it did not flip on after the first command.
+
+## Commands
+
+| Command | What it does |
+| --- | --- |
+| `elysia-code --init` | First-time gateway, SSL, compression, Claude Code |
+| `elysia-code --update` | Upgrade CLI and compression; restarts the proxy |
+| `elysia-code --config` | Config, model, private mode, usage |
+| `elysia-code --models` | List models; show the active one |
+| `elysia-code --model <name>` | Switch model (restart Claude Code) |
+| `elysia-code --private true\|false` | Hide inputs/outputs from traces. Usage metadata still bills |
+| `elysia-code --compression-enable` | Turn compression on |
+| `elysia-code --compression-disable` | Direct to gateway |
+| `elysia-code --compression-stats` | Status and recent proxy log |
+| `elysia-code --help` | All flags |
+
+Inside Claude Code (installed at `--init`):
+
+| Slash command | What it does |
+| --- | --- |
+| `/elysia-config` | Config and live usage (must show the full CLI output) |
+| `/elysia-model` | List or switch models |
+| `/elysia-compression` | Stats, enable/disable. Dashboard: `http://localhost:8787/dashboard` |
+
+## Context compression (0.3.0)
+
+Enabled by default. Local layer strips build logs, repeated file reads, JSON payloads, tool output, and other noise before the model. Notion claims **60–95%** fewer tokens on tool-heavy turns and about **30%** lower session cost. Nothing is permanently lost; originals stay in a local cache.
+
+State lives under `~/.elysia` (`compression.json`, `compression.log`). A LaunchAgent `com.informa.elysia-compression.plist` exists on this Mac.
+
+## Models (0.3.0)
+
+All routed through the gateway. Default in the Notion page and PDF: **`zai.glm-5`**.
+
+`kimi-k2.5`, `claude-sonnet-5`, `minimax-m2.5`, `claude-sonnet-4-6`, `claude-sonnet-4-5`, `claude-haiku-4-5`, `gpt-5-4`, `gpt-5-4-mini`, `gpt-5-4-nano`, `deepseek-v3`, `mistral-large-3`, `llama-4-maverick-17b-instruct`, `llama-4-scout-17b-instruct`.
+
+This list is the **Code** gateway catalog. The Elysia **API** chat catalog (`gpt-4o`, AWS Claude IDs, DeepSeek-V3-0324, …) is a different surface. Do not mix the two when setting `name_of_model` on `/v1/ai/chat/stream/completion`.
+
+## This machine
+
+| Path | Role |
+| --- | --- |
+| `~/.local/bin/elysia-code` | Installed CLI |
+| `/Users/william.kitchin/Dev/elysia-code-latest/` | Source / latest zip extract |
+| `~/.claude/commands/elysia-config.md` (and model, compression) | Slash-command prompts |
+| Applications `Elysia.app` and `Elysia — Salesforce Assistant.app` | Desktop wrappers; not documented further here |
+
+## Next
+
+<Card title="Automation roadmap" icon="map" href="/operations/ai/automation-roadmap">
+  Nine automation candidates, prioritised, with estimated hours.
+</Card>

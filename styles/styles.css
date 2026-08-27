@@ -7,6 +7,7 @@
   --informa-navy-deep: #061830;
   --informa-orange: #ec6940;
   --informa-orange-light: #f58a6e;
+  --informa-orange-text: #b94724;
   --informa-teal: #4fa1ab;
   --informa-teal-light: #7fc4cc;
   --informa-white: #ffffff;
@@ -38,8 +39,8 @@
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-/* Header & Navigation */
-header,
+/* Top navigation only. Page title blocks also use <header>, so never target the
+   element globally. */
 nav[aria-label="Primary"],
 .navbar {
   --header-background: var(--informa-navy);
@@ -49,15 +50,14 @@ nav[aria-label="Primary"],
   background: linear-gradient(135deg, var(--informa-navy) 0%, var(--informa-navy-light) 100%) !important;
 }
 
-html.dark header,
 html.dark nav[aria-label="Primary"] {
   --header-background: var(--informa-navy-deep);
   --header-text: var(--informa-white);
 }
 
 /* Logo styling */
-header .logo,
-nav .logo {
+.navbar .logo,
+nav[aria-label="Primary"] .logo {
   filter: brightness(1.1);
 }
 
@@ -88,7 +88,7 @@ html.dark nav[aria-label="Sidebar"] {
 .sidebar button,
 nav[aria-label="Sidebar"] a {
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
   border-radius: 0.375rem;
 }
 
@@ -149,6 +149,10 @@ body {
   color: var(--informa-gray-800);
 }
 
+html.dark body {
+  color: var(--informa-gray-200);
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-headings);
   font-weight: 600;
@@ -193,8 +197,10 @@ html.dark h2 {
   border-bottom-color: var(--informa-navy-light);
 }
 
-/* Links - FIXED FOR BETTER CONTRAST */
-a {
+/* Links in reading content */
+main p a,
+main li a,
+main td a {
   color: var(--informa-navy);
   text-decoration: underline;
   text-decoration-color: var(--informa-teal);
@@ -202,31 +208,37 @@ a {
   transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
-a:hover {
-  color: var(--informa-orange);
-  text-decoration-color: var(--informa-orange);
+main p a:hover,
+main li a:hover,
+main td a:hover {
+  color: var(--informa-orange-text);
+  text-decoration-color: var(--informa-orange-text);
 }
 
 /* Ensure links in paragraphs are visible */
-p a,
-li a,
-td a {
+main p a,
+main li a,
+main td a {
   font-weight: 500;
 }
 
-html.dark a {
+html.dark main p a,
+html.dark main li a,
+html.dark main td a {
   color: var(--informa-teal-light);
   text-decoration-color: var(--informa-teal);
 }
 
-html.dark a:hover {
-  color: var(--informa-orange);
-  text-decoration-color: var(--informa-orange);
+html.dark main p a:hover,
+html.dark main li a:hover,
+html.dark main td a:hover {
+  color: var(--informa-orange-light);
+  text-decoration-color: var(--informa-orange-light);
 }
 
 /* Cards */
 .card,
-[role="article"],
+.prose [role="article"],
 .prose .card {
   background: var(--informa-white);
   border: 1px solid var(--informa-gray-200);
@@ -236,13 +248,13 @@ html.dark a:hover {
 }
 
 .card:hover,
-[role="article"]:hover {
+.prose [role="article"]:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
 html.dark .card,
-html.dark [role="article"] {
+html.dark .prose [role="article"] {
   background: var(--informa-navy-deep);
   border-color: var(--informa-navy-light);
 }
@@ -278,7 +290,7 @@ html.dark [role="article"] {
 .info a:hover,
 .info-box a:hover,
 .tip a:hover {
-  color: var(--informa-orange);
+  color: var(--informa-orange-text);
 }
 
 .tip {
@@ -318,7 +330,7 @@ html.dark .info-box a {
 
 html.dark .info a:hover,
 html.dark .info-box a:hover {
-  color: var(--informa-orange);
+  color: var(--informa-orange-light);
 }
 
 html.dark .tip {
@@ -336,19 +348,29 @@ html.dark .warning {
 }
 
 /* Buttons */
-button,
-.btn,
-[role="button"] {
+.prose button,
+.prose .btn,
+.prose [role="button"] {
   border-radius: 0.375rem;
   font-weight: 500;
-  transition: all 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-button:hover,
-.btn:hover,
-[role="button"]:hover {
+.prose button:hover,
+.prose .btn:hover,
+.prose [role="button"]:hover {
   transform: translateY(-1px);
   box-shadow: var(--shadow-md);
+}
+
+/* Keyboard focus remains visible across content and navigation. */
+:where(a, button, summary, input, select, textarea):focus-visible {
+  outline: 3px solid var(--informa-teal);
+  outline-offset: 3px;
+}
+
+html.dark :where(a, button, summary, input, select, textarea):focus-visible {
+  outline-color: var(--informa-orange-light);
 }
 
 /* Primary button style */
@@ -592,6 +614,14 @@ main :is(table, pre) {
     word-break: break-word;
   }
 
+  /* Dense operational tables are easier to scan horizontally than when every
+     word is forced into a five-column phone layout. */
+  .prose table:has(tr > :nth-child(4)),
+  article table:has(tr > :nth-child(4)),
+  main table:has(tr > :nth-child(4)) {
+    min-width: 680px;
+  }
+
   th, td {
     padding: var(--space-sm);
     min-width: 0;
@@ -636,10 +666,10 @@ main :is(table, pre) {
 /* Touch: drop lift-on-hover; keep press feedback */
 @media (hover: none) and (pointer: coarse) {
   .card:hover,
-  [role="article"]:hover,
-  button:hover,
-  .btn:hover,
-  [role="button"]:hover {
+  .prose [role="article"]:hover,
+  .prose button:hover,
+  .prose .btn:hover,
+  .prose [role="button"]:hover {
     transform: none;
   }
 
@@ -649,9 +679,19 @@ main :is(table, pre) {
   }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
 /* Print styles */
 @media print {
-  header,
   nav,
   .sidebar,
   button,

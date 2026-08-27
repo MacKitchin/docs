@@ -1,53 +1,88 @@
 ---
 title: "How to use this brain"
-description: "Twenty-minute orientation path for new hires, and where technical pages live."
+description: "A short orientation to the internal knowledge base, its source rules, and its staff support playbooks."
 icon: "compass"
 ---
 
-## If you are a new hire
+Use the Company Brain to **find the best available answer and its owner**, not to bypass the system that owns the underlying fact. The site is written for internal staff and approved internal agents.
 
-Read in this order. It should take about twenty minutes.
+## The ten-minute orientation
 
 <Steps>
   <Step title="Understand the business">
-    [Who we are](/company/overview), then [Business model](/company/business-model), then [Brands](/company/brands). Nothing else makes sense until the supplier-and-hosted-buyer economy does.
+    Read [Company overview](/company/overview), [How the business works](/company/business-model), and [Brands](/company/brands). These explain the supplier-and-hosted-buyer economy behind the rest of the site.
   </Step>
-  <Step title="Learn the calendar">
-    [Event calendar](/events/overview). The event calendar drives almost every deadline in the business. Read this before the org chart.
+  <Step title="Learn where event facts live">
+    Use the [Event calendar](/events/calendar/overview) for dates, venues, formats, eligibility, appointment counts, and cancellation information. Event pages preserve discrepancies rather than guessing which version is correct.
   </Step>
-  <Step title="Find your people">
-    [Departments](/people/departments) is the map. [Who owns what](/people/who-owns-what) is the routing table. [Org chart](/people/org-chart) is reporting lines. [Directory](/people/directory) is emails and locations.
+  <Step title="Learn how customer questions are handled">
+    [Exhibitor Support](/exhibitor-support/overview) and [Hosted Buyer Support](/hosted-buyer-support/overview) are internal playbooks. They combine staff context, safe response wording, and escalation boundaries; they are not customer handbooks.
   </Step>
-  <Step title="Learn the vocabulary">
-    [Glossary](/start/glossary). Terms like IO, hosted buyer, product year, and marketplace mean something specific here.
+  <Step title="Find people and ownership">
+    [People & Ownership](/people/overview) explains the organisation. [Who owns what](/people/who-owns-what) is the routing table for questions, decisions, and escalation.
   </Step>
-  <Step title="Know where truth lives">
-    [Source of truth](/governance/source-of-truth). Before you edit anything or answer anything, know which system owns that fact.
-  </Step>
-  <Step title="Learn the approved customer answers">
-    [Customer FAQs](/start/customer-faqs). Twenty-nine grounded pairs with confidence scores. Cite these for supplier and hosted-buyer questions; still take event dates from the calendar.
+  <Step title="Know which source wins">
+    Read [Source of truth](/reference/source-of-truth), then [Known issues](/reference/known-issues). Check both before changing a disputed fact or treating a Working source as policy.
   </Step>
 </Steps>
 
-<Note>
-  Salesforce fields, Visit Create APIs, Agentforce, and Elysia live on the **Systems & agents** tab. Skip that tab until you need to query the org or build an agent. Agent retrieval rules are on [Agent retrieval rules](/start/agent-retrieval).
-</Note>
+## Choose the page by task
 
-## Conventions used here
+| Task | Go to |
+| --- | --- |
+| Find a page when the terminology is unclear | [Find an answer](/welcome/find-an-answer) |
+| Answer a recurring customer question | [Customer FAQs](/welcome/customer-faqs), then the matching support playbook |
+| Confirm event logistics or policy | [Event calendar](/events/calendar/overview) |
+| Route an exception or approval | [Who owns what](/people/who-owns-what) |
+| Understand a Salesforce or Visit Create workflow | [Systems & Data](/operations/systems/overview) |
+| Define a metric or dashboard | [Data and reporting](/operations/data/data-model) |
+| Build or operate an internal agent | [AI & Automation](/operations/ai/overview) |
+| Check the status of an initiative | [Projects](/operations/projects/overview) |
+
+## When the answer will be customer-facing
+
+<Steps>
+  <Step title="Identify the audience and event">
+    Establish whether the person is an exhibitor, supplier prospect, hosted-buyer applicant, approved hosted buyer, attendee, or another audience. Identify the relevant event and product year.
+  </Step>
+  <Step title="Retrieve the event fact">
+    Check the Event calendar. Do not reconstruct a date, venue, appointment count, or policy from memory, email, or a project page.
+  </Step>
+  <Step title="Use the internal playbook">
+    Open the matching support page. Use its response guidance as the basis for a concise customer reply; do not forward the full internal page.
+  </Step>
+  <Step title="Apply the boundary">
+    Escalate billing, invoices, contracts, legal terms, complaints, specific discounts, unpublished prices, and named attendee lists. If sources conflict, report both versions internally and route the discrepancy to the owner.
+  </Step>
+</Steps>
+
+<Warning>
+  A page being readable does not make every detail customer-safe. Internal rationale, system fields, data defects, owner gaps, and escalation notes stay internal.
+</Warning>
+
+## Source and status conventions
 
 | Convention | Meaning |
 | --- | --- |
-| Product year | The calendar year a product is sold *for*, not when the deal closed |
-| Area vs project | Areas are ongoing departments; projects are time-bound and end |
-| Canonical / Working / Deprecated | Truth levels from the source-of-truth registry |
-| A note in square brackets | An unresolved discrepancy carried over from the source, deliberately not reconciled |
+| **Canonical** | The registered source that owns the fact. |
+| **Working** | Useful operational material that is not yet authoritative. Disclose the status when it matters. |
+| **Deprecated** | Retained for history or migration only. Do not present it as current. |
+| Source date | When a time-sensitive source was captured or reviewed. It is not a promise that nothing has changed since. |
+| Known discrepancy | Two sources disagree. Keep both versions and ask the owner to reconcile them. |
+| `{/* TODO: ... */}` | A fact is unconfirmed. Do not fill it from inference. |
 
-## What this site is not
+## What this site does not contain
 
-It does not hold record-level data. No account lists, no contact details for customers, no deal values by name, no attendee rosters. Those live in Salesforce and are governed by access control there. This site documents structure, definitions, ownership, and process.
+The Company Brain does not hold record-level customer data, named deal values, attendee rosters, customer contact lists, credentials, or secrets. Those remain in access-controlled systems. This site documents definitions, ownership, process, safeguards, and source locations.
 
-## Next
+## If a page is wrong or incomplete
 
-<Card title="Source of truth" icon="shield-check" href="/governance/source-of-truth">
-  Which system owns which fact, and how to treat Canonical, Working, and Deprecated sources.
+1. Check the owning source in [Source of truth](/reference/source-of-truth).
+2. Check [Known issues](/reference/known-issues) for an already logged discrepancy.
+3. Capture the conflicting versions, source URLs, and review date.
+4. Route the decision to the owner in [Who owns what](/people/who-owns-what).
+5. Update the Company Brain only after the owning source or a documented decision supports the change.
+
+<Card title="Find an answer" icon="magnifying-glass" href="/welcome/find-an-answer">
+  Start from the job you are trying to complete rather than guessing a section name.
 </Card>

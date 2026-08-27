@@ -1,47 +1,84 @@
 ---
 title: "Templates"
-description: "Standardized templates and reusable content for Connect Meetings"
+description: "Reusable templates for knowledge articles, SOPs, projects, and internally governed support content."
+icon: "copy"
+keywords: ["templates", "knowledge article", "SOP", "project page", "page contract"]
 ---
 
-## Communication Templates
+## Knowledge article template
 
-### Email Templates
-
-Standard email formats for:
-- Exhibitor prospecting
-- Hosted buyer outreach
-- Post-event follow-up
-- Internal announcements
-
-### Document Templates
-
-- One-page event summaries
-- Sales proposals
-- Sponsor packages
-- Event recaps
-
-## Page Templates
-
-For creating new documentation pages, use the standard frontmatter:
-
-```yaml
+```mdx
 ---
-title: "Clear, Descriptive Title"
-description: "Concise summary for SEO and navigation"
+title: "Unique, descriptive page title"
+sidebarTitle: "Short sidebar label"
+description: "What an internal reader will learn or accomplish."
+icon: "book-open"
+keywords: ["search term", "synonym"]
 ---
+
+<Info>
+  **Audience:** Internal staff and approved agents. **Source:** [canonical source].
+  **Owner:** [owner or explicitly unowned]. **Status:** Canonical, Working, or Deprecated.
+  **Reviewed:** [date or cadence].
+</Info>
+
+## Purpose
+
+## Staff guidance
+
+## Customer-safe information
+
+## Internal-only context
+
+## Limits and escalation
+
+## Related pages
 ```
 
-## Code Snippets
+## SOP template
 
-### SOQL Query Template
+```mdx
+---
+title: "Action-oriented procedure title"
+description: "When staff use this procedure and what successful completion means."
+icon: "list-checks"
+---
 
-```sql
-SELECT Id, Name, Account.Name, StageName, Amount
-FROM Opportunity
-WHERE RecordType.Name = 'Exhibitor Opportunity'
-  AND StageName IN ('Closed Won', 'Contract Signed')
-  AND CloseDate = THIS_YEAR
-ORDER BY Amount DESC
+## Before starting
+
+## Procedure
+
+<Steps>
+  <Step title="First verified action">Instruction and expected evidence.</Step>
+  <Step title="Second verified action">Instruction and expected evidence.</Step>
+</Steps>
+
+## Exceptions and recovery
+
+## Verification
+
+## Owner and review cadence
 ```
 
-{/* TODO: Link to actual templates in Notion or other systems */}
+## Project template
+
+Project pages follow the Company OS structure:
+
+1. Overview
+2. Goals and success criteria
+3. Key decisions
+4. Next steps
+5. Risks and blockers
+6. Related documentation
+
+The Master Projects row remains authoritative for owner, stage, priority, area, and timeline.
+
+## Support-page extension
+
+Exhibitor and hosted-buyer support pages must explicitly distinguish:
+
+- what staff should do;
+- what staff may communicate externally;
+- what remains internal;
+- what must be verified for the event or record;
+- where exceptions are escalated.

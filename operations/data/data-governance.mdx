@@ -1,0 +1,42 @@
+---
+title: "Data quality and governance"
+sidebarTitle: "Data governance"
+description: "Internal controls for source ownership, record data, metric definitions, privacy, conflicts, and data-quality findings."
+icon: "shield-check"
+keywords: ["data governance", "data quality", "privacy", "Salesforce", "metrics"]
+---
+
+## Governing principles
+
+1. The owning system wins when this site disagrees with it.
+2. Company Brain pages document structure and meaning, not record-level customer data.
+3. Metric definitions and SOQL have one canonical home: [Metrics and definitions](/operations/data/metrics).
+4. Known source conflicts remain visible until the responsible owner resolves them.
+5. Working or Deprecated material must be disclosed as such.
+6. Customer, subscriber, and hosted-buyer PII must not be added to MDX.
+
+## Salesforce controls
+
+- Describe unfamiliar objects and fields before querying them.
+- Use the normal data API for records and Tooling API for metadata or tooling objects.
+- Apply the documented default filters unless the question requires otherwise.
+- Use `OpportunityLineItem.Organization__c` for the brand split.
+- Exclude barter from cash revenue and distinguish product year from close date.
+- Treat `Fully Registered` as confirmed attendance; other registration stages are not equivalent.
+
+## Data-quality workflow
+
+<Steps>
+  <Step title="Confirm the issue">
+    Reproduce it against the live owning system or an owned source.
+  </Step>
+  <Step title="Record the evidence">
+    Capture the field, population, source date, and affected workflow without copying customer records into this site.
+  </Step>
+  <Step title="Check known issues">
+    Do not create a second issue or silently reconcile an existing conflict.
+  </Step>
+  <Step title="Route to the owner">
+    Use [Who owns what](/people/who-owns-what) and update the source system, not merely the mirror.
+  </Step>
+</Steps>

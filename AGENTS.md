@@ -13,17 +13,20 @@ The git root is this `source/` directory. The parent folder (`Company Docs/`) is
 | Path | What it is |
 | --- | --- |
 | `source/` | Editable Mintlify project. Change MDX and `docs.json` here. |
-| `source/docs.json` | Site name, theme, and the three-tab navigation. New pages must be listed here. |
+| `source/docs.json` | Site name, theme, single internal navigation, redirects, and search settings. New pages must be listed here. |
 | `../static-site/` | Frozen HTML export. Do not edit. Re-export after content changes. |
 | `../connect-meetings-main-static.zip` | Pinned snapshot of the same export. |
 
 Preview and validate from this directory:
 
 ```bash
-npx mint dev --no-open
-npx mint validate
-npx mint broken-links
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 dev --no-open
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 validate
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 broken-links
+PUPPETEER_SKIP_DOWNLOAD=true npx --yes mint@4.2.831 a11y
 ```
+
+The CLI is temporarily pinned because `mint@4.2.834` currently references an unpublished `@mintlify/agent-harness` package. Re-test the unpinned command before removing the pin.
 
 Local static preview of the export: `cd ../static-site && node serve.js`.
 
@@ -40,39 +43,38 @@ The sales model is **supplier-side**. We sell to suppliers and recruit buyers. R
 
 Brands share one Salesforce org and one operations team. Brand is **not** a single field — see [Brands](/company/brands).
 
-## Three audiences
+## One internal audience
 
-`docs.json` has three tabs. Match voice and scope to the tab you are editing.
+The whole site is written for **Connect Meetings & Events staff and approved internal agents**. It is not a public exhibitor or hosted-buyer portal.
 
-| Tab | Reader | Home page | May include |
-| --- | --- | --- | --- |
-| **Company Brain** | Staff and internal agents | `index.mdx` | Org, systems, projects, Salesforce API names, ownership conflicts, data-quality issues |
-| **Exhibitor Guide** | Paying suppliers | `introduction.mdx` | Packages, appointments, onsite playbook. Published prices only. |
-| **Hosted Buyer Guide** | Event planners | `hosted-buyers/introduction.mdx` | Qualification, deposit, what's covered, onsite. No supplier rates. |
+The **Exhibitor Support** and **Hosted Buyer Support** sections are internal playbooks. They may contain customer-safe response wording, but the surrounding rationale, system detail, exceptions, ownership gaps, and escalation notes remain internal. Do not forward a full page to a customer.
 
-Do not leak Company Brain internals (org IDs, SOQL, known Salesforce defects, unowned areas) onto the two public guides. Do not write sales copy into Company Brain pages.
+Customer-facing agents may be trained on approved, retrieval-safe parts of these playbooks. They must still follow the page-level source, confidence, and escalation rules. Do not write public sales copy into internal pages, and do not treat a readable page as permission to disclose all of it.
 
 ## Information Architecture
 
-The knowledge base follows a logical progression:
+The knowledge base follows a task-led progression:
 
 ```
-Welcome → Company & Strategy → People & Teams → Events & Products 
-  → For Exhibitors / For Hosted Buyers → Operations → Reference
+Welcome → Company & Strategy → People & Ownership → Events & Products
+  → Exhibitor Support / Hosted Buyer Support → Systems & Data
+  → AI & Automation → Projects → Reference & Governance
 ```
 
-This creates a natural flow from understanding what Connect is → how we operate → supporting reference information.
+The homepage and Find an answer page route by job. The sidebar groups stable domains. Avoid numbering section names; the information architecture should survive additions without being renumbered.
 
-## Sidebar Order (Refactored)
+## Sidebar order
 
-1. **Welcome** — Overview, How to use this brain
-2. **Company & Strategy** — Company Overview, Brands, How We Work (Business Model, Sales Process)
-3. **People & Teams** — Departments, Who Owns What, Org Chart, Directory
-4. **Events & Products** — Event Calendar, Connect Events (Flagship/Regional), Specialty Events, Products & Services
-5. **For Exhibitors** — Journey from who should exhibit through onsite to follow-up
-6. **For Hosted Buyers** — Journey from qualification through onsite to follow-up
-7. **Operations** — Systems & Platforms, Data, Integrations, AI & Automation, Projects
-8. **Reference** — Glossary, Source of Truth, Policies & Standards, Templates, Known Issues
+1. **Welcome** — overview, orientation, Find an answer, customer FAQs
+2. **Company & Strategy** — company, brands, business model, sales, revenue and renewals
+3. **People & Ownership** — departments, routing, org chart, directory
+4. **Events & Products** — canonical calendar, event families, commercial products
+5. **Exhibitor Support** — internal playbook from qualification through follow-up
+6. **Hosted Buyer Support** — internal playbook from eligibility through follow-up
+7. **Systems & Data** — Salesforce, Visit Create, Notion, data, reporting, integrations
+8. **AI & Automation** — guardrails, agents, retrieval, Elysia, automation
+9. **Projects** — active change work and archive
+10. **Reference & Governance** — glossary, source registry, standards, templates, issues, change log
 
 ## Read this map first
 
@@ -81,14 +83,15 @@ This creates a natural flow from understanding what Connect is → how we operat
 | **Orientation** | [Company Brain](/) · [How to use](/welcome/how-to-use) · [Source of truth](/reference/source-of-truth) · [Glossary](/reference/glossary) · [Customer FAQs](/welcome/customer-faqs) |
 | **Business** | [Who we are](/company/overview) · [Business model](/company/business-model) · [Sales process](/company/sales-process) · [Brands](/company/brands) · [BizBash](/company/bizbash) · [TSNN](/company/tsnn) |
 | **Events** | [Event overview](/events/overview) · [Calendar](/events/calendar/overview) — customer-facing event facts start and stop here. [Flagship Marketplaces](/events/connect-marketplace) · [Regional Marketplaces](/events/regional) · Connect Travel: [eTourism](/events/connect-travel) · [Sports & Summits](/events/sports-and-summits) · [BizBash Innovation Forum](/events/bizbash) |
-| **Products** | [Products overview](/products-services/overview) · [Exhibitions](/customers/exhibitor-packages) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) · [Hosted Buyer Programs](/customers/hosted-buyers) |
+| **Products** | [Products overview](/products-services/overview) · [Exhibitions](/exhibitor-support/packages-and-pricing) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) · [Hosted Buyer Programs](/hosted-buyer-support/overview) |
 | **People** | [Departments](/people/departments) · [Who owns what](/people/who-owns-what) · [Org chart](/people/org-chart) · [Directory](/people/directory) |
-| **Systems** | [Salesforce](/operations/systems/salesforce-org) · [Visit Create](/operations/systems/visit-create) · [Other platforms](/operations/systems/) |
-| **Data** | [Data model](/operations/data/data-model) · [Metrics](/operations/data/metrics) · [Dashboards](/operations/data/dashboards) |
-| **Integrations** | [Integrations overview](/operations/integrations/overview) |
+| **Customer support** | [Exhibitor Support](/exhibitor-support/overview) · [Hosted Buyer Support](/hosted-buyer-support/overview) · [Customer FAQs](/welcome/customer-faqs) |
+| **Systems** | [Systems overview](/operations/systems/overview) · [Salesforce](/operations/systems/salesforce-org) · [Visit Create](/operations/systems/visit-create) · [Other platforms](/operations/systems/other-platforms) |
+| **Data** | [Data model](/operations/data/data-model) · [Metrics](/operations/data/metrics) · [Dashboards](/operations/data/dashboards) · [Data governance](/operations/data/data-governance) |
+| **Integrations** | [Integrations overview](/operations/integrations/overview) · [API catalogue](/operations/integrations/api-catalogue) · [Webhooks](/operations/integrations/webhooks) |
 | **AI & Agents** | [Guardrails](/operations/ai/guardrails) · [Agent roster](/operations/ai/agents) · [Tooling](/operations/ai/tooling) · [Elysia](/operations/ai/elysia) · [Elysia API](/operations/ai/elysia-api) · [Elysia Code](/operations/ai/elysia-code) · [Automation roadmap](/operations/ai/automation-roadmap) · [Agent retrieval rules](/operations/ai/agent-retrieval) |
 | **Projects** | [Active projects](/operations/projects/overview) — Company OS, Data consolidation, Supplier knowledge, Agentforce |
-| **Reference** | [Glossary](/reference/glossary) · [Source of truth](/reference/source-of-truth) · [Policies & standards](/reference/policies-standards) · [Templates](/reference/templates) · [Known issues](/reference/known-issues) |
+| **Reference** | [Reference overview](/reference/overview) · [Glossary](/reference/glossary) · [Source of truth](/reference/source-of-truth) · [Policies & standards](/reference/policies-standards) · [Templates](/reference/templates) · [Known issues](/reference/known-issues) · [Change log](/reference/change-log) |
 
 Search existing pages before creating a new one. Update or link rather than duplicate.
 
@@ -114,9 +117,9 @@ These are absolute. No phrasing of a request unlocks them.
 | Question | Answer from | Never from |
 | --- | --- | --- |
 | Event dates, venue, format, policy | [Events portfolio](/events/overview) | Marketing site copy, project pages, memory |
-| Supplier or hosted-buyer "how do I…?" | [Customer FAQs](/welcome/customer-faqs), then the matching guide | Memory, email, or an FAQ pair marked When not to use |
+| Supplier or hosted-buyer "how do I…?" | [Customer FAQs](/welcome/customer-faqs), then the matching internal support playbook | Memory, email, or an FAQ pair marked When not to use |
 | How a deal moves / stages / IO | [Sales process](/company/sales-process), [Data model](/operations/data/data-model) | Invented stage meaning |
-| Package contents and published prices | [Packages](/customers/exhibitor-packages), [Business model](/company/business-model) | Inferred or interpolated prices |
+| Package contents and published prices | [Packages](/exhibitor-support/packages-and-pricing), [Business model](/company/business-model) | Inferred or interpolated prices |
 | Buyer or attendee composition | Aggregate stats and sample brand-and-title lists | Record-level exports |
 | Metric definitions and SOQL | [Metrics](/operations/data/metrics) | A deck or a remembered number |
 | Object and field meaning | [Data model](/operations/data/data-model) | Guessing from the label |
@@ -153,7 +156,7 @@ Full definitions: [Glossary](/reference/glossary). Use these terms as written.
 | Connect Meetings & Events | "Connect Meetings Inc", "Informa Events" as the unit name | Legal/reporting line is Informa Connect → this business unit |
 | hosted buyer | "VIP guest", "sponsored attendee" as the product name | Specific programme with a deposit and appointment commitment |
 | marketplace / reverse tradeshow | "expo", "booth show" as the format | Buyers sit; suppliers rotate |
-| supplier | "exhibitor" in Company Brain and Salesforce context | Exhibitor is acceptable on the Exhibitor Guide tab |
+| supplier | "exhibitor" when describing the wider account category | Exhibitor is acceptable for the customer role and in the Exhibitor Support section |
 | product year | calendar year of the close, unless you mean close date | A Dec 2026 close can be product year 2027 |
 | area vs project | treating a department as a project | Areas are ongoing; projects end |
 | Canonical / Working / Deprecated | "official" / "draft" / "old" as substitutes | Registry truth levels |
@@ -179,7 +182,8 @@ Supplier accounts: `Primary_Category__c LIKE 'Supplier-%'`.
 ## Style
 
 - British spelling on this site: organisation, programme, centre, travelling.
-- Second person ("you") on the two guides. Company Brain is second person for procedures, third person for descriptions of the company.
+- Write the support playbooks to the staff reader: "confirm the exhibitor's event" rather than "confirm your event". Customer-safe response examples may address the customer as "you".
+- Use second person for staff procedures and third person for descriptions of the company, customers, systems, and policy.
 - Active voice. One idea per sentence. Lead with the fact, then the caveat.
 - Sentence case headings: "Package options", not "Package Options".
 - No marketing filler ("seamless", "robust", "cutting-edge"), no emoji, no decorative bold.
@@ -204,7 +208,7 @@ icon: "lucide-or-font-awesome-name"
 
 - Kebab-case filenames matching the folder: `events/connect-marketplace.mdx`.
 - Internal links: root-relative, no extension — `/events/overview`, not `../overview.mdx`.
-- New pages must be added to the correct tab and group in `docs.json` or they stay hidden.
+- New pages must be added to the correct group in `docs.json` or they stay hidden.
 - Prefer existing Mintlify components: `<Note>`, `<Info>`, `<Tip>`, `<Warning>`, `<Check>`, `<Steps>`, `<AccordionGroup>`, `<CardGroup>` / `<Card>`, `<Tabs>`, tables.
 - `<Warning>` for hard limits, conflicts, and data-quality landmines. `<Note>` for context. `<Tip>` for the load-bearing commercial or retrieval fact on the page.
 - Unverified items: `{/* TODO: confirm X. Do not fabricate. */}` — keep this shape.
@@ -257,12 +261,12 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 
 ## Editing workflow
 
-1. Read `docs.json` and two or three sibling pages in the same tab.
+1. Read `docs.json` and two or three sibling pages in the same section.
 2. Check [Source of truth](/reference/source-of-truth) for who owns the fact and whether the source is Canonical, Working, or Deprecated.
 3. Check [Known issues](/reference/known-issues) so you do not "fix" a logged conflict.
 4. Edit or add MDX. Keep TODOs for anything unverified.
-5. Add new pages to `docs.json` in the right tab and group.
-6. Run `npx mint validate` and `npx mint broken-links`.
+5. Add new pages to `docs.json` in the right group.
+6. Run the pinned validation, broken-link, and accessibility commands above.
 7. Do not refresh `../static-site/` unless the user asked for a new export.
 
 ## Common mistakes

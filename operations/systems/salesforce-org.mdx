@@ -1,0 +1,126 @@
+---
+title: "The Salesforce org"
+description: "connect-prod: what it holds, how it is structured, and how to work with it."
+icon: "cloud"
+---
+
+<Info>
+  **Org**: `connect-prod` · **Org ID**: `00D30000001H2naEAC` · **Truth level**: Canonical for all client and account data · **Refresh**: live
+</Info>
+
+Salesforce is the record of business truth for Connect Meetings & Events. Notion documents its _structure_ - objects, fields, relationships, automation - and never its record data. If you want to know what a field means, read the [data model](/operations/data/data-model). If you want to know what is in it, query the org.
+
+## What this documentation does not cover
+
+This site documents the Salesforce org so you can understand and query it. It does not document how to operate the Salesforce UI.
+
+For task-based, in-app how-tos, go to the source:
+
+- **Creating or editing records** (Accounts, Contacts, Opportunities, Registrations): use Salesforce's own [Help documentation](https://help.salesforce.com) or ask your Salesforce admin. Standard record creation is done from the object tab in Lightning (**App Launcher → Accounts → New**), not through a custom process.
+- **Permissions, sharing, licences**: contact the Salesforce admin. See [People & org](/people/who-owns-what) for who owns Salesforce administration.
+- **Reports and dashboards inside Salesforce**: use the Reports tab in the org. For metric definitions and the SOQL behind them, see [metrics](/operations/data/metrics).
+
+If a record-creation workflow is Connect-specific (for example, hosted buyer registrations flowing in from Visit Create), it will be documented under [Visit Create workflows](/operations/systems/visit-create-workflows) or the relevant object in the [data model](/operations/data/data-model).
+
+## What the org supports
+
+A B2B events business running marketplace-style appointment events plus media and digital advertising products. The sales model is supplier-side: CVBs, DMOs, hotels, venues, and other hospitality suppliers purchase booth, appointment, sponsorship, and digital products in order to meet hosted-buyer planners.
+
+## Querying it
+
+<CardGroup cols={2}>
+  <Card title="Query language" icon="terminal">
+    SOQL. Use `salesforce_query_records` for records and `salesforce_aggregate_query` for COUNT, SUM, AVG, MIN, MAX, and GROUP BY.
+  </Card>
+
+  <Card title="Schema refresh" icon="refresh-cw">
+    `sf sobject describe` and `sf data query`. The Salesforce Knowledge Base in Notion is regenerated from these.
+  </Card>
+</CardGroup>
+
+### SOQL is not SQL
+
+| SQL habit | What to do in SOQL |
+| --- | --- |
+| `JOIN` | Not supported. Use dot notation for parents (`Account.Name` on Opportunity) and subqueries for children |
+| `UNION`, `HAVING`, complex subqueries | Not supported |
+| `CASE` | Not supported. Run two queries and compute client-side |
+| Date arithmetic | Use literals: `TODAY`, `LAST_N_DAYS:30`, `THIS_YEAR`, `LAST_YEAR`, `THIS_QUARTER` |
+| Case-sensitive string comparison | SOQL string comparison is case-insensitive by default |
+
+`ORDER BY` supports `NULLS FIRST` and `NULLS LAST`. `LIMIT` and `OFFSET` are supported.
+
+### Standard filters
+
+Apply these unless you have a specific reason not to.
+
+```sql
+-- Exclude inactive and test accounts
+WHERE Account_Status__c != 'Inactive'
+
+-- Pipeline and revenue reporting
+WHERE StageName NOT IN ('Expired', 'Closed Lost')
+
+-- Always
+WHERE IsDeleted = false
+```
+
+When to override: include `Closed Lost` for win/loss and loss-reason analysis; include `Inactive` accounts for historical spend analysis; include `Expired` when analysing stale or ageing pipeline.
+
+## Object landscape
+
+<Tabs>
+  <Tab title="Core standard">
+    | Object | Role | Volume |
+    | --- | --- | --- |
+    | **Account** | Clients, suppliers, prospects, agencies, and planners. `Type` and `Primary_Category__c` separate them. Territory derives from `BillingState`. | High |
+    | **Opportunity** | A sales deal, effectively an insertion order. `IO_Number__c` and `Opportunity_No__c` are required. | High |
+    | **Contact** | People at accounts. 30\+ newsletter subscription booleans, quality scoring, Marketing Cloud sync fields. | Large |
+    | **OpportunityLineItem** | The revenue line items. Carries the full product taxonomy. | Very high |
+    | **Campaign** | Lightly customised. Serves as the event reference for `Registration__c`. | Medium |
+  </Tab>
+  <Tab title="Core custom">
+    | Object | Role | Volume |
+    | --- | --- | --- |
+    | **`Registration__c`** | Hosted buyer registrations. 40\+ fields sourced from Visit hosted-buyer registration forms. | High |
+    | **`Marketplace__c`** | A specific event instance, e.g. Spring Marketplace 2026. Holds dates, status, appointment tracks, and registration rollups. | Low, ~10-15/year |
+    | **`Visit_Webhook_Log__c`** | Audit log for the Visit Create webhook integration. | Medium |
+    | **`Attendee_Assignment_Detail__c`** | Attendee assignment tracking. | Medium |
+    | **`Categorized_Sales_Total__c`** | Pre-aggregated sales totals by category, for reporting performance. | Medium |
+    | **`Quota__c`, `Sales_Goal__c`, `Sales_Team_Split__c`, `SalesTeam__c`** | Quota and revenue-split management. | Low to medium |
+    | **`Digital_Work_Order__c`, `Production__c`** | Fulfilment workflow for digital and print deliverables. | Medium |
+    | **`External_Lead__c`, `External_Lead_Map__c`** | External lead intake and mapping. | Medium |
+  </Tab>
+  <Tab title="Highest volume">
+    1. `OpportunityLineItem` - multiple per opportunity
+    2. `Contact` - large database with extensive marketing fields
+    3. `Account`
+    4. `Opportunity`
+    5. `Registration__c` - one per planner per event, across years
+    6. `AB2__AdBookIndependentDrop__c` - ad line items synced from AdBook
+    7. `et4ae5__IndividualEmailResult__c` - email tracking results
+  </Tab>
+</Tabs>
+
+## Junction and bridge objects
+
+| Object | Bridges |
+| --- | --- |
+| `OpportunityLineItem` | Opportunity to Product2 |
+| `Sales_Team_Split__c` | Opportunity to sales team members |
+| `AB2__OpportunityABRep__c` | Opportunity to AdBook reps |
+| `AB2__ClientAgencyRelation__c` | Client to agency, inside AdBook |
+| `Agency_Contact__c` / `Agency_Contacts__c` | Agency accounts to contacts - **two similar objects exist, likely technical debt** |
+
+## Performance notes
+
+- Filter on dates (`CloseDate`, `CreatedDate`) to limit the scan.
+- Use `LIMIT` while exploring.
+- For large result sets use the aggregate query tool rather than pulling records.
+- Prefer Account rollup fields (`Total_Spend_*`) over aggregating opportunities. The `dlrs` package maintains them.
+
+## Next
+
+<Card title="Data model" icon="database" href="/operations/data/data-model">
+  Core objects, relationships, and the fields that matter for analysis.
+</Card>
