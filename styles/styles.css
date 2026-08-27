@@ -545,28 +545,107 @@ html.dark ::-webkit-scrollbar-thumb:hover {
   background: var(--informa-navy);
 }
 
-/* Mobile responsive */
+/* ============================================
+   Mobile — do not fight Mintlify chrome
+   Mintlify already hides the desktop sidebar and
+   provides a drawer + hamburger. Custom CSS here
+   only scales type, lets tables scroll, and
+   avoids hover-only affordances.
+   ============================================ */
+
+/* Prevent wide tables / code from blowing the page */
+.prose table,
+article table,
+main table {
+  display: table;
+  width: 100%;
+  max-width: 100%;
+}
+
+.prose,
+article,
+main {
+  overflow-x: clip;
+}
+
+.prose :is(table, pre),
+article :is(table, pre),
+main :is(table, pre) {
+  max-width: 100%;
+}
+
+/* Scroll the table, keep cells wrapping */
 @media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-  }
-
-  h2 {
-    font-size: 1.25rem;
-  }
-
-  h3 {
-    font-size: 1.125rem;
-  }
-
-  .sidebar {
-    width: 100%;
+  .prose :has(> table),
+  article :has(> table),
+  main :has(> table) {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    margin: var(--space-lg) 0;
   }
 
   table {
     font-size: 0.875rem;
-    display: block;
-    overflow-x: auto;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  th, td {
+    padding: var(--space-sm);
+    min-width: 0;
+    white-space: normal;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.375rem; }
+  h3 { font-size: 1.125rem; }
+
+  /* Mintlify CardGroups already collapse; force one column
+     only on the card grid, never on header/nav. */
+  .prose [class*="card-group"],
+  .prose [class*="CardGroup"] {
+    grid-template-columns: 1fr;
+  }
+
+  /* iOS: 16px on search so the page does not zoom on focus */
+  [role="search"] input,
+  input[type="search"] {
+    font-size: 1rem;
+  }
+
+  pre {
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.25rem; }
+
+  table {
+    font-size: 0.8125rem;
+  }
+
+  ul, ol {
+    padding-left: var(--space-md);
+  }
+}
+
+/* Touch: drop lift-on-hover; keep press feedback */
+@media (hover: none) and (pointer: coarse) {
+  .card:hover,
+  [role="article"]:hover,
+  button:hover,
+  .btn:hover,
+  [role="button"]:hover {
+    transform: none;
+  }
+
+  .sidebar a,
+  nav[aria-label="Sidebar"] a {
+    min-height: 44px;
   }
 }
 
