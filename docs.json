@@ -24,45 +24,115 @@
   "navigation": {
     "groups": [
       {
-        "group": "Welcome",
+        "group": "1. Welcome",
         "icon": "compass",
         "pages": [
           "index",
-          "start/how-to-use"
+          "welcome/how-to-use"
         ]
       },
       {
-        "group": "Company & Strategy",
+        "group": "2. Company & Strategy",
         "icon": "building",
         "pages": [
           {
-            "group": "Who we are",
-            "icon": "building",
+            "group": "Company Overview",
+            "icon": "building-2",
             "pages": [
               "company/overview",
               "company/brands"
             ]
           },
           {
-            "group": "How we work",
-            "icon": "handshake",
-            "pages": [
-              "company/business-model",
-              "company/sales-process"
-            ]
-          },
-          {
-            "group": "Our brands",
+            "group": "Brands",
             "icon": "flag",
             "pages": [
               "company/bizbash",
               "company/tsnn"
             ]
+          },
+          {
+            "group": "How We Work",
+            "icon": "handshake",
+            "pages": [
+              "company/business-model",
+              "company/sales-process"
+            ]
           }
         ]
       },
       {
-        "group": "For Exhibitors",
+        "group": "3. People & Teams",
+        "icon": "users",
+        "pages": [
+          "people/departments",
+          "people/who-owns-what",
+          "people/org-chart",
+          "people/directory"
+        ]
+      },
+      {
+        "group": "4. Events & Products",
+        "icon": "calendar-days",
+        "pages": [
+          "events/overview",
+          "events/calendar/overview",
+          {
+            "group": "Connect Events",
+            "icon": "users",
+            "pages": [
+              {
+                "group": "Flagship Marketplaces",
+                "icon": "trophy",
+                "pages": [
+                  "events/connect-marketplace"
+                ]
+              },
+              {
+                "group": "Regional Marketplaces",
+                "icon": "map-pin",
+                "pages": [
+                  "events/regional"
+                ]
+              }
+            ]
+          },
+          {
+            "group": "Specialty Events",
+            "icon": "star",
+            "pages": [
+              "events/connect-travel",
+              "events/sports-and-summits",
+              "events/bizbash"
+            ]
+          },
+          {
+            "group": "Products & Services",
+            "icon": "tag",
+            "pages": [
+              "products-services/overview",
+              "products-services/event-sponsorships",
+              "products-services/media-amplification",
+              {
+                "group": "Exhibitions",
+                "icon": "building-2",
+                "pages": [
+                  "customers/exhibitor-packages"
+                ]
+              },
+              {
+                "group": "Hosted Buyer Programs",
+                "icon": "user-check",
+                "pages": [
+                  "customers/hosted-buyers"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "group": "5. For Exhibitors",
         "icon": "briefcase",
         "pages": [
           "customers/exhibitors",
@@ -84,11 +154,11 @@
               "customers/exhibitor-after"
             ]
           },
-          "start/customer-faqs"
+          "welcome/customer-faqs"
         ]
       },
       {
-        "group": "For Hosted Buyers",
+        "group": "6. For Hosted Buyers",
         "icon": "user-check",
         "pages": [
           "customers/hosted-buyers",
@@ -113,108 +183,85 @@
         ]
       },
       {
-        "group": "Events & Products",
-        "icon": "calendar-days",
-        "pages": [
-          "events/overview",
-          {
-            "group": "Connect Events",
-            "icon": "users",
-            "pages": [
-              "events/connect-marketplace",
-              "events/regional"
-            ]
-          },
-          {
-            "group": "Specialty Events",
-            "icon": "star",
-            "pages": [
-              "events/connect-travel",
-              "events/sports-and-summits",
-              "events/bizbash"
-            ]
-          },
-          {
-            "group": "Products & Services",
-            "icon": "tag",
-            "pages": [
-              "products-services/overview",
-              "products-services/event-sponsorships",
-              "products-services/media-amplification"
-            ]
-          }
-        ]
-      },
-      {
-        "group": "People & Teams",
-        "icon": "users",
-        "pages": [
-          "people/departments",
-          "people/who-owns-what",
-          "people/org-chart",
-          "people/directory"
-        ]
-      },
-      {
-        "group": "Operations",
+        "group": "7. Operations",
         "icon": "cog",
         "pages": [
           {
-            "group": "Projects",
-            "icon": "rocket",
+            "group": "Systems & Platforms",
+            "icon": "monitor",
             "pages": [
-              "projects/overview",
-              "projects/company-os",
-              "projects/data-consolidation",
-              "projects/supplier-knowledge",
-              "projects/agentforce-rollout"
+              {
+                "group": "Visit Create",
+                "icon": "ticket",
+                "pages": [
+                  "operations/systems/visit-create",
+                  "operations/systems/visit-create-api",
+                  "operations/systems/visit-create-workflows"
+                ]
+              },
+              {
+                "group": "Salesforce",
+                "icon": "database",
+                "pages": [
+                  "operations/systems/salesforce-org",
+                  "operations/systems/salesforce-glossary",
+                  "operations/systems/hosted-buyer-ops"
+                ]
+              }
             ]
           },
           {
-            "group": "Systems & Data",
-            "icon": "database",
+            "group": "Data",
+            "icon": "bar-chart-2",
             "pages": [
-              "systems/salesforce-org",
-              "systems/salesforce-glossary",
-              "systems/data-model",
-              "systems/metrics",
-              "systems/dashboards",
-              "systems/integrations",
-              "systems/hosted-buyer-ops"
+              "operations/data/data-model",
+              "operations/data/metrics",
+              "operations/data/dashboards"
             ]
           },
           {
-            "group": "Visit Create",
-            "icon": "ticket",
+            "group": "Integrations",
+            "icon": "plug",
             "pages": [
-              "systems/visit-create",
-              "systems/visit-create-api",
-              "systems/visit-create-workflows"
+              "operations/integrations/overview"
             ]
           },
           {
             "group": "AI & Automation",
             "icon": "bot",
             "pages": [
-              "ai/agents",
-              "ai/tooling",
-              "ai/guardrails",
-              "ai/elysia",
-              "ai/elysia-api",
-              "ai/elysia-code",
-              "ai/automation-roadmap",
-              "start/agent-retrieval"
+              "operations/ai/agents",
+              "operations/ai/tooling",
+              "operations/ai/guardrails",
+              "operations/ai/elysia",
+              "operations/ai/elysia-api",
+              "operations/ai/elysia-code",
+              "operations/ai/automation-roadmap",
+              "operations/ai/agent-retrieval"
+            ]
+          },
+          {
+            "group": "Projects",
+            "icon": "rocket",
+            "pages": [
+              "operations/projects/overview",
+              "operations/projects/company-os",
+              "operations/projects/data-consolidation",
+              "operations/projects/supplier-knowledge",
+              "operations/projects/agentforce-rollout"
             ]
           }
         ]
       },
       {
-        "group": "Reference",
+        "group": "8. Reference",
         "icon": "book",
         "pages": [
-          "start/glossary",
-          "governance/source-of-truth",
-          "governance/known-issues"
+          "reference/glossary",
+          "reference/source-of-truth",
+          "reference/policies-standards",
+          "reference/templates",
+          "reference/known-issues"
         ]
       }
     ]

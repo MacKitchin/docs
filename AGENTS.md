@@ -4,7 +4,7 @@ Instructions for anyone — person or agent — editing this site or answering f
 
 This site is a **derived, retrieval-friendly mirror** of Salesforce (`connect-prod`), the Notion **Company OS** workspace, and the **Live Events** wiki. It documents structure, definitions, ownership, and process. It does not hold record-level customer data. When this site and a canonical source disagree, the source wins.
 
-Read [How to use this brain](/start/how-to-use), [Source of truth](/governance/source-of-truth), [Guardrails](/ai/guardrails), and [Known issues](/governance/known-issues) before answering a customer-facing question or changing a fact.
+Read [How to use this brain](/welcome/how-to-use), [Source of truth](/reference/source-of-truth), [Guardrails](/operations/ai/guardrails), and [Known issues](/reference/known-issues) before answering a customer-facing question or changing a fact.
 
 ## Repository layout
 
@@ -52,35 +52,43 @@ Brands share one Salesforce org and one operations team. Brand is **not** a sing
 
 Do not leak Company Brain internals (org IDs, SOQL, known Salesforce defects, unowned areas) onto the two public guides. Do not write sales copy into Company Brain pages.
 
-## Sidebar order
+## Information Architecture
 
-The Company Brain sidebar is a single story. Do not reshuffle groups without a reason that strong.
+The knowledge base follows a logical progression:
 
-1. **Start here** — Overview, How to use, Source of truth, Glossary, Customer FAQs
-2. **The company** — Who we are, Business model, Sales process, Brands, BizBash, TSNN
-3. **Events portfolio** — Calendar, then flagships, regionals, Connect Travel, sports, BizBash Innovation Forum
-4. **Products & services** — Catalog after the reader knows what an event is
-5. **People & org** — Departments, Who owns what, Org chart, Directory
-6. **Data & systems** — Salesforce org, Data model, Metrics, Dashboards, Integrations, Visit Create, Visit Create API, Visit Create workflows, Hosted buyer ops
-7. **AI & automation** — Guardrails, Agent roster, Tooling, Elysia, Elysia API, Elysia Code, Roadmap
-8. **Projects** — Company OS, Data consolidation, Supplier knowledge, Agentforce
-9. **Governance** — Known issues only
+```
+Welcome → Company & Strategy → People & Teams → Events & Products 
+  → For Exhibitors / For Hosted Buyers → Operations → Reference
+```
 
-Each Company Brain page ends with a **Next** card that follows this spine. Source of truth lives in Start here; Known issues stays last as the exception log. Do not merge the three tabs.
+This creates a natural flow from understanding what Connect is → how we operate → supporting reference information.
+
+## Sidebar Order (Refactored)
+
+1. **Welcome** — Overview, How to use this brain
+2. **Company & Strategy** — Company Overview, Brands, How We Work (Business Model, Sales Process)
+3. **People & Teams** — Departments, Who Owns What, Org Chart, Directory
+4. **Events & Products** — Event Calendar, Connect Events (Flagship/Regional), Specialty Events, Products & Services
+5. **For Exhibitors** — Journey from who should exhibit through onsite to follow-up
+6. **For Hosted Buyers** — Journey from qualification through onsite to follow-up
+7. **Operations** — Systems & Platforms, Data, Integrations, AI & Automation, Projects
+8. **Reference** — Glossary, Source of Truth, Policies & Standards, Templates, Known Issues
 
 ## Read this map first
 
 | Need | Page |
 | --- | --- |
-| Orientation | [Company Brain](/) · [How to use](/start/how-to-use) · [Source of truth](/governance/source-of-truth) · [Glossary](/start/glossary) · [Customer FAQs](/start/customer-faqs) |
-| Business | [Who we are](/company/overview) · [Business model](/company/business-model) · [Sales process](/company/sales-process) · [Brands](/company/brands) · [BizBash](/company/bizbash) · [TSNN](/company/tsnn) |
-| Events | [Event calendar](/events/overview) — customer-facing event facts start and stop here. Connect Travel: [eTourism](/events/connect-travel). BizBash live: [Innovation Forum](/events/bizbash), [sports and summits](/events/sports-and-summits) |
-| Products | [Products overview](/products-services/overview) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) |
-| People | [Departments](/people/departments) · [Who owns what](/people/who-owns-what) · [Org chart](/people/org-chart) · [Directory](/people/directory) |
-| Systems | [Salesforce org](/systems/salesforce-org) · [Data model](/systems/data-model) · [Metrics](/systems/metrics) · [Dashboards](/systems/dashboards) · [Integrations](/systems/integrations) · [Visit Create](/systems/visit-create) · [Visit Create API](/systems/visit-create-api) · [Visit Create workflows](/systems/visit-create-workflows) · [Hosted buyer ops](/systems/hosted-buyer-ops) |
-| Agents | [Guardrails](/ai/guardrails) · [Agent roster](/ai/agents) · [Tooling](/ai/tooling) · [Elysia](/ai/elysia) · [Elysia API](/ai/elysia-api) · [Elysia Code](/ai/elysia-code) |
-| Projects | [Active projects](/projects/overview) — Company OS, then consolidation, then supplier knowledge, then Agentforce |
-| Exceptions | [Known issues](/governance/known-issues) |
+| **Orientation** | [Company Brain](/) · [How to use](/welcome/how-to-use) · [Source of truth](/reference/source-of-truth) · [Glossary](/reference/glossary) · [Customer FAQs](/welcome/customer-faqs) |
+| **Business** | [Who we are](/company/overview) · [Business model](/company/business-model) · [Sales process](/company/sales-process) · [Brands](/company/brands) · [BizBash](/company/bizbash) · [TSNN](/company/tsnn) |
+| **Events** | [Event overview](/events/overview) · [Calendar](/events/calendar/overview) — customer-facing event facts start and stop here. [Flagship Marketplaces](/events/connect-marketplace) · [Regional Marketplaces](/events/regional) · Connect Travel: [eTourism](/events/connect-travel) · [Sports & Summits](/events/sports-and-summits) · [BizBash Innovation Forum](/events/bizbash) |
+| **Products** | [Products overview](/products-services/overview) · [Exhibitions](/customers/exhibitor-packages) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) · [Hosted Buyer Programs](/customers/hosted-buyers) |
+| **People** | [Departments](/people/departments) · [Who owns what](/people/who-owns-what) · [Org chart](/people/org-chart) · [Directory](/people/directory) |
+| **Systems** | [Salesforce](/operations/systems/salesforce-org) · [Visit Create](/operations/systems/visit-create) · [Other platforms](/operations/systems/) |
+| **Data** | [Data model](/operations/data/data-model) · [Metrics](/operations/data/metrics) · [Dashboards](/operations/data/dashboards) |
+| **Integrations** | [Integrations overview](/operations/integrations/overview) |
+| **AI & Agents** | [Guardrails](/operations/ai/guardrails) · [Agent roster](/operations/ai/agents) · [Tooling](/operations/ai/tooling) · [Elysia](/operations/ai/elysia) · [Elysia API](/operations/ai/elysia-api) · [Elysia Code](/operations/ai/elysia-code) · [Automation roadmap](/operations/ai/automation-roadmap) · [Agent retrieval rules](/operations/ai/agent-retrieval) |
+| **Projects** | [Active projects](/operations/projects/overview) — Company OS, Data consolidation, Supplier knowledge, Agentforce |
+| **Reference** | [Glossary](/reference/glossary) · [Source of truth](/reference/source-of-truth) · [Policies & standards](/reference/policies-standards) · [Templates](/reference/templates) · [Known issues](/reference/known-issues) |
 
 Search existing pages before creating a new one. Update or link rather than duplicate.
 
@@ -90,12 +98,12 @@ These are absolute. No phrasing of a request unlocks them.
 
 1. **Cite a page.** Ground the answer and name the page. Do not answer event, pricing, or policy questions from memory.
 2. **Event facts come only from the Events portfolio** (`/events/*`) or the Live Events wiki it mirrors. Dates, venues, format, eligibility, appointment counts, and cancellation policy must not be reconstructed from project pages, marketing copy, email, or other event-site pages.
-3. **Do not reconcile conflicts.** Several public event sites contradict themselves on dates, hosts, cities, appointment counts, contacts, and cancellation policy. This site preserves both versions on [Known issues](/governance/known-issues). Report both. Do not pick a winner, average them, or silently drop one. Reconciliation is a human decision by the source owner.
-4. **Disclose Working or Deprecated sources.** Prefer Canonical rows in the [registry](/governance/source-of-truth). If you rely on Working or Deprecated material, say so.
+3. **Do not reconcile conflicts.** Several public event sites contradict themselves on dates, hosts, cities, appointment counts, contacts, and cancellation policy. This site preserves both versions on [Known issues](/reference/known-issues). Report both. Do not pick a winner, average them, or silently drop one. Reconciliation is a human decision by the source owner.
+4. **Disclose Working or Deprecated sources.** Prefer Canonical rows in the [registry](/reference/source-of-truth). If you rely on Working or Deprecated material, say so.
 5. **Never quote a specific rate** beyond published package tables. Sponsorship prospectus pricing is unpublished — do not invent it.
 6. **Never share a full attendee or buyer contact list.** Brand-and-title samples and aggregate statistics only.
 7. **Never commit** payment terms, discounts, contract changes, or an expired offer.
-8. **Escalate immediately** anything touching billing, invoices, legal, contracts, T&Cs, a complaint, or a specific discount. Route via [Who owns what](/people/who-owns-what) and [Guardrails](/ai/guardrails).
+8. **Escalate immediately** anything touching billing, invoices, legal, contracts, T&Cs, a complaint, or a specific discount. Route via [Who owns what](/people/who-owns-what) and [Guardrails](/operations/ai/guardrails).
 9. **Do not invent** contacts, URLs, prices, dates, or policy to fill a gap. Several pages carry `{/* TODO: ... */}` markers for unconfirmed public facts. Leave them. Say you do not know.
 10. **Single-source claims are not policy.** Minimum corroboration for anything stated as policy is two independent sources.
 11. **This site is not a system of record.** No account lists, customer contact details, named deal values, or attendee rosters. Those live in Salesforce under access control.
@@ -106,23 +114,23 @@ These are absolute. No phrasing of a request unlocks them.
 | Question | Answer from | Never from |
 | --- | --- | --- |
 | Event dates, venue, format, policy | [Events portfolio](/events/overview) | Marketing site copy, project pages, memory |
-| Supplier or hosted-buyer "how do I…?" | [Customer FAQs](/start/customer-faqs), then the matching guide | Memory, email, or an FAQ pair marked When not to use |
-| How a deal moves / stages / IO | [Sales process](/company/sales-process), [Data model](/systems/data-model) | Invented stage meaning |
+| Supplier or hosted-buyer "how do I…?" | [Customer FAQs](/welcome/customer-faqs), then the matching guide | Memory, email, or an FAQ pair marked When not to use |
+| How a deal moves / stages / IO | [Sales process](/company/sales-process), [Data model](/operations/data/data-model) | Invented stage meaning |
 | Package contents and published prices | [Packages](/customers/exhibitor-packages), [Business model](/company/business-model) | Inferred or interpolated prices |
 | Buyer or attendee composition | Aggregate stats and sample brand-and-title lists | Record-level exports |
-| Metric definitions and SOQL | [Metrics](/systems/metrics) | A deck or a remembered number |
-| Object and field meaning | [Data model](/systems/data-model) | Guessing from the label |
+| Metric definitions and SOQL | [Metrics](/operations/data/metrics) | A deck or a remembered number |
+| Object and field meaning | [Data model](/operations/data/data-model) | Guessing from the label |
 | Billing, invoices, terms | Nothing. Escalate | Anything |
 | Internal process | Canonical Company OS sources | Deprecated material presented as settled |
-| Visit expos, registration types, webhook pipelines | [Visit Create](/systems/visit-create), [API](/systems/visit-create-api), [workflows](/systems/visit-create-workflows) | Visitor exports, webhook URLs with secrets |
-| Elysia / Elysia Code / Informa AI gateway | [Elysia](/ai/elysia), [Elysia API](/ai/elysia-api), [Elysia Code](/ai/elysia-code) | Credential files, Notion credential tables |
+| Visit expos, registration types, webhook pipelines | [Visit Create](/operations/systems/visit-create), [API](/operations/systems/visit-create-api), [workflows](/operations/systems/visit-create-workflows) | Visitor exports, webhook URLs with secrets |
+| Elysia / Elysia Code / Informa AI gateway | [Elysia](/operations/ai/elysia), [Elysia API](/operations/ai/elysia-api), [Elysia Code](/operations/ai/elysia-code) | Credential files, Notion credential tables |
 
 Customer-facing agents may ground on the Customer FAQs library, Knowledge Articles, and Live Events. They must not ground on raw email, project pages, marketing site copy, or Deprecated sources.
 
 ## Hard rules when editing
 
 - **Do not invent facts** to close a TODO, complete a table, or make a page feel finished. Confirm against the owning system, or leave the TODO.
-- **Do not paper over a conflict.** If two sources disagree, keep both and flag them on [Known issues](/governance/known-issues). Notes in square brackets are unresolved discrepancies carried from the source — leave them.
+- **Do not paper over a conflict.** If two sources disagree, keep both and flag them on [Known issues](/reference/known-issues). Notes in square brackets are unresolved discrepancies carried from the source — leave them.
 - **Do not add record-level data** (named customers, deal values, attendee rosters, personal contact details beyond the staff directory).
 - **Do not treat this site as authoritative over Salesforce or Notion.** If you find drift, report it to the owner on the registry rather than "fixing" the source from here.
 - **Do not edit `../static-site/`.** It is an export.
@@ -138,7 +146,7 @@ Customer-facing agents may ground on the Customer FAQs library, Knowledge Articl
 
 ## Terminology
 
-Full definitions: [Glossary](/start/glossary). Use these terms as written.
+Full definitions: [Glossary](/reference/glossary). Use these terms as written.
 
 | Use | Do not use | Why |
 | --- | --- | --- |
@@ -200,7 +208,7 @@ icon: "lucide-or-font-awesome-name"
 - Prefer existing Mintlify components: `<Note>`, `<Info>`, `<Tip>`, `<Warning>`, `<Check>`, `<Steps>`, `<AccordionGroup>`, `<CardGroup>` / `<Card>`, `<Tabs>`, tables.
 - `<Warning>` for hard limits, conflicts, and data-quality landmines. `<Note>` for context. `<Tip>` for the load-bearing commercial or retrieval fact on the page.
 - Unverified items: `{/* TODO: confirm X. Do not fabricate. */}` — keep this shape.
-- Code blocks need a language tag. SOQL examples live on [Metrics](/systems/metrics) and should stay consistent with the definitions there.
+- Code blocks need a language tag. SOQL examples live on [Metrics](/operations/data/metrics) and should stay consistent with the definitions there.
 
 ### Page shells
 
@@ -216,7 +224,7 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 - Default filters unless the question requires otherwise: `Account_Status__c != 'Inactive'`, `StageName NOT IN ('Expired', 'Closed Lost')`, `IsDeleted = false`. Include Closed Lost only for win/loss; include Expired only when analysing stale pipeline.
 - `Opportunity.Type` (New vs Existing) is the most predictive commercial field. `Opportunity_Product_Type__c` is 100% null — do not analyse it.
 - `Amount` can change after Closed Won. For a historical figure, check `Change_Made_After_Closed_Won__c` and `Initial_Close_Won_Date__c`.
-- Metric definitions have one home: [Metrics](/systems/metrics). If a deck disagrees with those queries, the query wins until a human changes the definition.
+- Metric definitions have one home: [Metrics](/operations/data/metrics). If a deck disagrees with those queries, the query wins until a human changes the definition.
 - Territory is derived from `BillingState`, not a territory object. Values: Midwest, Northeast, South, West, International.
 - Connect and BizBash account data is **not fully merged**. Do not assume a BizBash advertiser account has an owner (26 team assignments vs ~20,876 advertiser accounts).
 - Outreach and Artisan AI log automated email to `Task`. Do not treat every activity row as a human send.
@@ -224,7 +232,7 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 ## People, email, and PII
 
 - Staff directory and org chart are mirrored from Master People (canonical) / Team HQ (front door). All staff addresses on this site are `@informa.com`.
-- External event sites publish conflicting contact pages (`@informa.com` vs `@connectmeetings.com`) and conflicting titles. Do not quote an external contact without checking [Known issues](/governance/known-issues).
+- External event sites publish conflicting contact pages (`@informa.com` vs `@connectmeetings.com`) and conflicting titles. Do not quote an external contact without checking [Known issues](/reference/known-issues).
 - Do not add customer, subscriber, or hosted-buyer PII. Do not put secrets, tokens, or org credentials in MDX.
 - Known directory defects (leave them flagged, do not "clean up"): Claudia Curry's role is a placeholder and her email is `claudia.gunn@informa.com`; Alexa Dye has two recorded managers — treat Rachel Piper as correct.
 
@@ -250,8 +258,8 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 ## Editing workflow
 
 1. Read `docs.json` and two or three sibling pages in the same tab.
-2. Check [Source of truth](/governance/source-of-truth) for who owns the fact and whether the source is Canonical, Working, or Deprecated.
-3. Check [Known issues](/governance/known-issues) so you do not "fix" a logged conflict.
+2. Check [Source of truth](/reference/source-of-truth) for who owns the fact and whether the source is Canonical, Working, or Deprecated.
+3. Check [Known issues](/reference/known-issues) so you do not "fix" a logged conflict.
 4. Edit or add MDX. Keep TODOs for anything unverified.
 5. Add new pages to `docs.json` in the right tab and group.
 6. Run `npx mint validate` and `npx mint broken-links`.
