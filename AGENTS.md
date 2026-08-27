@@ -53,7 +53,7 @@ Customer-facing agents may be trained on approved, retrieval-safe parts of these
 
 ## Information Architecture
 
-The knowledge base follows a task-led progression:
+The knowledge base follows a task-led progression. Section **order** is fixed; section **numbers** must not appear in the live sidebar.
 
 ```
 Welcome → Company & Strategy → People & Ownership → Events & Products
@@ -61,20 +61,24 @@ Welcome → Company & Strategy → People & Ownership → Events & Products
   → AI & Automation → Projects → Reference & Governance
 ```
 
-The homepage and Find an answer page route by job. The sidebar groups stable domains. Avoid numbering section names; the information architecture should survive additions without being renumbered.
+The homepage and Find an answer page route by job. A page has one canonical home. Welcome is orientation only. Find an answer and Customer FAQs live under Reference & Governance. Source of truth and Guardrails stay on their canonical pages.
+
+Exhibitor Support and Hosted Buyer Support are staff playbooks, not public guides. Use **supplier** in internal terms; **exhibitor** is appropriate in Exhibitor Support when reflecting customer-facing language.
 
 ## Sidebar order
 
-1. **Welcome** — overview, orientation, Find an answer, customer FAQs
-2. **Company & Strategy** — company, brands, business model, sales, revenue and renewals
-3. **People & Ownership** — departments, routing, org chart, directory
-4. **Events & Products** — canonical calendar, event families, commercial products
-5. **Exhibitor Support** — internal playbook from qualification through follow-up
-6. **Hosted Buyer Support** — internal playbook from eligibility through follow-up
-7. **Systems & Data** — Salesforce, Visit Create, Notion, data, reporting, integrations
-8. **AI & Automation** — guardrails, agents, retrieval, Elysia, automation
-9. **Projects** — active change work and archive
-10. **Reference & Governance** — glossary, source registry, standards, templates, issues, change log
+The left sidebar is a traditional documentation tree: every top-level section is listed vertically, and nested folders stay expanded so pages remain visible while moving through the site. Do not use a top tab bar or a section dropdown. Major section headers keep a fixed accent colour (icon and light tint only; never a saturated fill) and identical height and padding. Ordinary pages use normal weight and no icon. Nested parent groups use semibold text so they organise the list without competing with the page title. Icons are reserved for those major section headers. Do not add icons to nested groups or child pages. Prefer three levels: section, parent group, child page.
+
+- **Welcome** — overview and how to use
+- **Company & Strategy** — who we are, brands, how the business works
+- **People & Ownership** — departments, who owns what, org chart, directory
+- **Events & Products** — calendar, marketplaces, specialty events, commercial products
+- **Exhibitor Support** — fit, commercial journey, event journey, response library
+- **Hosted Buyer Support** — eligibility, application, event journey, response library
+- **Systems & Data** — systems landscape, data and reporting, integrations
+- **AI & Automation** — guardrails, agents, retrieval, Elysia, roadmap
+- **Projects** — active work and archive
+- **Reference & Governance** — find an answer, glossary, source registry, policies, templates, known issues, change log
 
 ## Read this map first
 
@@ -82,7 +86,7 @@ The homepage and Find an answer page route by job. The sidebar groups stable dom
 | --- | --- |
 | **Orientation** | [Company Brain](/) · [How to use](/welcome/how-to-use) · [Source of truth](/reference/source-of-truth) · [Glossary](/reference/glossary) · [Customer FAQs](/welcome/customer-faqs) |
 | **Business** | [Who we are](/company/overview) · [Business model](/company/business-model) · [Sales process](/company/sales-process) · [Brands](/company/brands) · [BizBash](/company/bizbash) · [TSNN](/company/tsnn) |
-| **Events** | [Event overview](/events/overview) · [Calendar](/events/calendar/overview) — customer-facing event facts start and stop here. [Flagship Marketplaces](/events/connect-marketplace) · [Regional Marketplaces](/events/regional) · Connect Travel: [eTourism](/events/connect-travel) · [Sports & Summits](/events/sports-and-summits) · [BizBash Innovation Forum](/events/bizbash) |
+| **Events** | [Event overview](/events/overview) · [Calendar](/events/calendar/overview) — customer-facing event facts start and stop here. [Public event sites](/events/public-sites) for live homepages, registration, maps, and decks. [Flagship Marketplaces](/events/connect-marketplace) · [Regional Marketplaces](/events/regional) · Connect Travel: [eTourism](/events/connect-travel) · [Sports & Summits](/events/sports-and-summits) · [BizBash Innovation Forum](/events/bizbash) |
 | **Products** | [Products overview](/products-services/overview) · [Exhibitions](/exhibitor-support/packages-and-pricing) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) · [Hosted Buyer Programs](/hosted-buyer-support/overview) |
 | **People** | [Departments](/people/departments) · [Who owns what](/people/who-owns-what) · [Org chart](/people/org-chart) · [Directory](/people/directory) |
 | **Customer support** | [Exhibitor Support](/exhibitor-support/overview) · [Hosted Buyer Support](/hosted-buyer-support/overview) · [Customer FAQs](/welcome/customer-faqs) |
@@ -142,7 +146,7 @@ Customer-facing agents may ground on the Customer FAQs library, Knowledge Articl
 
 ### Unowned or unverified — do not invent an owner
 
-- Customer Success (area) and Finance (area) have no recorded owner.
+- Customer Success (area) has no recorded owner. Finance area owner is Stephen Han; he is not yet in Master People and Master Areas still has an empty Finance owner.
 - Operations owner conflicts: Team HQ says Rachel Piper; Areas database says Andrew Dysart. Both are logged.
 - Reporting dashboards, company policies, and training materials are **Working**, not Canonical.
 - Public exhibitor and hosted-buyer contacts/URLs are still TODO on several guide pages.
@@ -190,17 +194,16 @@ Supplier accounts: `Primary_Category__c LIKE 'Supplier-%'`.
 - Bold for UI elements and key terms on first use. Backticks for API names, org aliases, field values, emails, and paths.
 - Be concrete: dates, venues, dollar figures, field names. Name the source of every figure.
 - Published marketing figures are approximate. CRM figures are point-in-time. Say which.
-- Product and sponsorship prices are **source-dated**. The Marketplace sponsorship deck is Tampa 24–26 Aug 2026; the media kit is 2025. Availability counts in those docs are not live inventory.
+- Product and sponsorship prices are **source-dated**. The Marketplace sponsorship deck is Tampa 24–26 Aug 2026. The cross-brand media kit on this site is the 2026 Events | Travel | Sports PDF (captured 27 August 2026); the 2025 kit remains as comparison. Availability counts in those docs are not live inventory.
 
 ### Frontmatter
 
-Every page needs `title` and `description`. Most pages also set `icon`. Use `sidebarTitle` when the H1 would wrap badly in the sidebar (`index.mdx` → "Overview"; `introduction.mdx` → "Introduction").
+Every page needs `title` and `description`. Page frontmatter should not include a sidebar `icon`. Icons belong only on top-level section headers in `docs.json`. Nested groups and child pages stay text-only. Use semibold group labels for structure, not decorative emphasis. Aim for three visual levels: section, parent group, then plain-text child page. Avoid deeper nesting unless the content genuinely requires it. Use `sidebarTitle` when the H1 would wrap badly in the sidebar (`index.mdx` → "Overview"; `introduction.mdx` → "Introduction").
 
 ```yaml
 ---
 title: "Clear, descriptive title"
 description: "One sentence that says what the reader gets."
-icon: "lucide-or-font-awesome-name"
 ---
 ```
 
@@ -211,6 +214,7 @@ icon: "lucide-or-font-awesome-name"
 - New pages must be added to the correct group in `docs.json` or they stay hidden.
 - Prefer existing Mintlify components: `<Note>`, `<Info>`, `<Tip>`, `<Warning>`, `<Check>`, `<Steps>`, `<AccordionGroup>`, `<CardGroup>` / `<Card>`, `<Tabs>`, tables.
 - `<Warning>` for hard limits, conflicts, and data-quality landmines. `<Note>` for context. `<Tip>` for the load-bearing commercial or retrieval fact on the page.
+- Callouts with labeled fields are snippet rows, not a wrapping paragraph. Put each `**Label:**` on its own list item. Do not mix a second typeface inside the box; identifiers stay in the callout font.
 - Unverified items: `{/* TODO: confirm X. Do not fabricate. */}` — keep this shape.
 - Code blocks need a language tag. SOQL examples live on [Metrics](/operations/data/metrics) and should stay consistent with the definitions there.
 
@@ -238,13 +242,18 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 - Staff directory and org chart are mirrored from Master People (canonical) / Team HQ (front door). All staff addresses on this site are `@informa.com`.
 - External event sites publish conflicting contact pages (`@informa.com` vs `@connectmeetings.com`) and conflicting titles. Do not quote an external contact without checking [Known issues](/reference/known-issues).
 - Do not add customer, subscriber, or hosted-buyer PII. Do not put secrets, tokens, or org credentials in MDX.
-- Known directory defects (leave them flagged, do not "clean up"): Claudia Curry's role is a placeholder and her email is `claudia.gunn@informa.com`; Alexa Dye has two recorded managers — treat Rachel Piper as correct.
+- Do not publish personal notes about employees (former names, marriage, maiden-name emails, or similar). Directory rows are name, role, email, location only.
+- Alexa Dye has two recorded managers — treat Rachel Piper as correct. Where Master People and `connect-prod` User emails disagree, the directory uses the Salesforce User address. Stephen Han is the Finance area owner and is not in Master People.
+
+## Compile-at-ingest
+
+Dropped files live in gitignored `source/inbox/incoming/`. The launchd job `com.connect.company-brain-ingest` (Claude Agent SDK, `source/.grok/ingest/`) compiles them to Notion **Draft / Unverified** and emails `mac.kitchin@informa.com` from `company-brain@agentmail.to`. Company Brain MDX updates only when Master Docs is **Published** and **Verified**. Secrets stay in `source/.env`. Do not run this against customer mailboxes. See [Company Brain ingest agent](/operations/ai/company-brain-ingest).
 
 ## Escalation
 
 | Topic | Goes to |
 | --- | --- |
-| Billing, invoices, payment terms | Human, Finance routing (area currently unowned) |
+| Billing, invoices, payment terms | Human, Stephen Han (Finance) |
 | Contracts, legal, T&Cs | Human, Legal routing |
 | Complaints | Human, named account owner |
 | Specific discounts | The account's sales owner |

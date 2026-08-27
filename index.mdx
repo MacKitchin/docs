@@ -1,17 +1,17 @@
 ---
 title: "Connect Company Brain"
-sidebarTitle: "Overview"
+sidebarTitle: "Welcome"
 description: "The internal starting point for finding company, event, customer-support, systems, and ownership knowledge."
-icon: "house"
+boost: 10
 ---
-
-The Company Brain is the internal reference for **Connect Meetings & Events staff and approved internal agents**. Start with the task in front of you; each section points to the source, owner, or escalation path behind the answer.
 
 <Warning>
   This site contains internal context. Do not send a full page to a customer. Use the customer-safe wording in the Exhibitor Support and Hosted Buyer Support response libraries, then apply the escalation rules on the page.
 </Warning>
 
-## What do you need to do?
+## Setting up
+
+Start with the task in front of you. Each route points to the source, owner, and escalation path behind the answer.
 
 <CardGroup cols={2}>
   <Card title="Answer an exhibitor" icon="briefcase" href="/exhibitor-support/overview">
@@ -23,61 +23,64 @@ The Company Brain is the internal reference for **Connect Meetings & Events staf
   <Card title="Check an event fact" icon="calendar-days" href="/events/calendar/overview">
     Source-dated dates, venues, formats, policies, and known discrepancies.
   </Card>
-  <Card title="Find an owner" icon="users" href="/people/who-owns-what">
+  <Card title="Find an owner" icon="key" href="/people/who-owns-what">
     Route a question, handoff, approval, or escalation to the responsible team.
-  </Card>
-  <Card title="Work with systems or data" icon="database" href="/operations/systems/overview">
-    Salesforce, Visit Create, Notion, data definitions, reporting, and integrations.
-  </Card>
-  <Card title="Use AI safely" icon="shield" href="/operations/ai/guardrails">
-    Retrieval rules, hard limits, tooling, Elysia, and automation guidance.
   </Card>
 </CardGroup>
 
-<Tip>
-  Not sure where to begin? Use [Find an answer](/welcome/find-an-answer) for task-based routes or [How to use this brain](/welcome/how-to-use) for a short orientation.
-</Tip>
+## Make it yours
+
+<CardGroup cols={2}>
+  <Card title="Find an answer" icon="magnifying-glass" href="/welcome/find-an-answer">
+    Task-led routes when you do not already know the section name.
+  </Card>
+  <Card title="How to use this brain" icon="compass" href="/welcome/how-to-use">
+    Source rules, playbooks, and the difference between Canonical, Working, and Deprecated.
+  </Card>
+  <Card title="Source of truth" icon="shield-check" href="/reference/source-of-truth">
+    Which system owns each fact and how often it refreshes.
+  </Card>
+  <Card title="Staff and agent guardrails" icon="shield" href="/operations/ai/guardrails">
+    Hard limits for anyone answering on Connect's behalf.
+  </Card>
+</CardGroup>
 
 ## How to decide which page wins
 
-| If the question is about... | Start here | Why |
-| --- | --- | --- |
-| Event date, venue, format, eligibility, appointment count, or cancellation | [Event calendar](/events/calendar/overview) | Event facts have one controlled home and retain source dates and conflicts. |
-| What staff should tell an exhibitor | [Exhibitor Support](/exhibitor-support/overview) | The pages separate internal context, customer-safe wording, and escalation boundaries. |
-| What staff should tell a hosted buyer | [Hosted Buyer Support](/hosted-buyer-support/overview) | Eligibility, coverage, commitments, and exceptions require role-specific handling. |
-| A person, team, or approval | [Who owns what](/people/who-owns-what) | Ownership and known gaps are explicit. |
-| A metric, field, record, or integration | [Systems & Data](/operations/systems/overview) | Definitions are separated from live record contents. |
-| Conflicting or weak information | [Source of truth](/reference/source-of-truth) and [Known issues](/reference/known-issues) | Canonical, Working, and Deprecated sources are treated differently. |
+<AccordionGroup>
+  <Accordion icon="calendar-days" title="Event date, venue, format, or cancellation">
+    Start at the [Event calendar](/events/calendar/overview). Event facts have one controlled home. If two public pages disagree, report both from [Known issues](/reference/known-issues).
+  </Accordion>
+  <Accordion icon="briefcase" title="What staff should tell an exhibitor">
+    Use [Exhibitor Support](/exhibitor-support/overview). Those pages separate internal context, customer-safe wording, and escalation boundaries.
+  </Accordion>
+  <Accordion icon="user-check" title="What staff should tell a hosted buyer">
+    Use [Hosted Buyer Support](/hosted-buyer-support/overview). Eligibility, coverage, and exceptions require the playbook, not a paraphrased FAQ.
+  </Accordion>
+  <Accordion icon="database" title="A metric, field, record, or integration">
+    Use [Systems & Data](/operations/systems/overview). Definitions live here; live record contents stay in the owning system.
+  </Accordion>
+</AccordionGroup>
 
 <Info>
-  The Company Brain is a derived, human-readable mirror of Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. It is not a system of record. When this site and an owning system disagree, report the difference and follow the source and conflict rules rather than silently choosing a version.
+  The Company Brain is a derived, human-readable mirror of Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. It is not a system of record.
 </Info>
-
-## The business in one paragraph
-
-Connect Meetings & Events runs marketplace-style appointment events for the MICE industry — meetings, incentives, conferences, and exhibitions. Hospitality suppliers buy packages to meet qualified event planners in scheduled one-to-one appointments. Hosted buyers attend on a sponsored basis in exchange for programme commitments. The business also sells media and advertising through BizBash, TSNN, and Connect Travel. Read [Company & Strategy](/company/overview) for the structure and [How the business works](/company/business-model) for the commercial model.
-
-## Useful reference points
-
-<CardGroup cols={3}>
-  <Card title="Glossary" icon="book-open" href="/reference/glossary">
-    Business terms and the language staff should use consistently.
-  </Card>
-  <Card title="Source of truth" icon="shield-check" href="/reference/source-of-truth">
-    Which system owns each fact and how strong the source is.
-  </Card>
-  <Card title="Policies and standards" icon="scale-balanced" href="/reference/policies-standards">
-    Content, customer-support, data, and agent governance.
-  </Card>
-</CardGroup>
 
 ## Active work
 
-These pages record change initiatives. They are useful for status and decisions, but they do not override current-state reference pages.
+These pages record change initiatives. They do not override current-state reference pages.
 
-| Project | Recorded stage | Priority |
-| --- | --- | --- |
-| [Notion Workspace Rebuild — Company OS](/operations/projects/company-os) | In progress | High |
-| [Connect and BizBash Data Consolidation](/operations/projects/data-consolidation) | In progress | High |
-| [Supplier Knowledge Intelligence](/operations/projects/supplier-knowledge) | Planned | Medium |
-| [Agentforce Agent Rollout](/operations/projects/agentforce-rollout) | In progress | High |
+<CardGroup cols={2}>
+  <Card title="Company OS" icon="book" href="/operations/projects/company-os">
+    In progress · High
+  </Card>
+  <Card title="Data consolidation" icon="database" href="/operations/projects/data-consolidation">
+    In progress · High
+  </Card>
+  <Card title="Supplier knowledge" icon="brain" href="/operations/projects/supplier-knowledge">
+    Planned · Medium
+  </Card>
+  <Card title="Agentforce rollout" icon="sparkles" href="/operations/projects/agentforce-rollout">
+    In progress · High
+  </Card>
+</CardGroup>

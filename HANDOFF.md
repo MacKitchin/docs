@@ -19,17 +19,17 @@ Exhibitor Support and Hosted Buyer Support are internal playbooks. They may incl
 ## Current architecture
 
 1. Welcome
-2. Company & Strategy
-3. People & Ownership
-4. Events & Products
-5. Exhibitor Support
-6. Hosted Buyer Support
-7. Systems & Data
-8. AI & Automation
+2. Company
+3. People
+4. Events
+5. Exhibitors
+6. Hosted buyers
+7. Systems
+8. AI
 9. Projects
-10. Reference & Governance
+10. Reference
 
-Section numbers are not shown in the interface. Top-level groups have landing pages; detailed groups are collapsed by default. The homepage and Find an answer page route staff by task rather than by organisational jargon.
+Section numbers are not shown in the interface. The left sidebar is a single API-docs-style list: section labels, then pages, with nested folders collapsed by default. The homepage and Find an answer page route staff by task rather than by organisational jargon.
 
 ## What changed in this refactor
 

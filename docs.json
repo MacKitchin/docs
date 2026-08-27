@@ -3,71 +3,56 @@
   "name": "Connect Company Brain",
   "theme": "maple",
   "layout": "sidenav",
-  "sidebar": {
-    "items": "collapsible"
+  "interaction": {
+    "drilldown": false
   },
   "disableAnchors": false,
+  "fonts": {
+    "family": "Inter"
+  },
   "colors": {
     "primary": "#002244",
-    "light": "#7fc4cc",
-    "dark": "#c64c28"
+    "light": "#F78AF2",
+    "dark": "#F131EC"
   },
   "logo": {
-    "light": "/images/informa-connect-logo.png",
+    "light": "/images/informa-connect-logo-light.png",
     "dark": "/images/informa-connect-logo.png",
     "href": "/"
   },
   "favicon": {
-    "light": "/favicon.svg",
-    "dark": "/favicon.svg"
+    "light": "/favicon.png",
+    "dark": "/favicon.png"
   },
   "banner": {
-    "content": "Internal only — do not share full pages externally. Follow page-level customer-safe and escalation guidance.",
-    "dismissible": false
+    "content": "Internal only \u2014 do not share full pages externally. Follow page-level customer-safe and escalation guidance.",
+    "dismissible": false,
+    "color": {
+      "light": "#002244",
+      "dark": "#001A33"
+    }
   },
   "navigation": {
     "groups": [
       {
         "group": "Welcome",
         "icon": "compass",
-        "root": "index",
-        "boost": 10,
         "pages": [
-          "welcome/how-to-use",
-          {
-            "group": "Find an answer",
-            "icon": "magnifying-glass",
-            "root": "welcome/find-an-answer",
-            "directory": "card",
-            "expanded": true,
-            "pages": [
-              "welcome/customer-faqs"
-            ]
-          }
+          "index",
+          "welcome/how-to-use"
         ]
       },
       {
         "group": "Company & Strategy",
         "icon": "building",
-        "root": "company/overview",
         "pages": [
-          {
-            "group": "Company overview",
-            "icon": "building-2",
-            "directory": "card",
-            "expanded": false,
-            "pages": [
-              "company/history",
-              "company/mission-value",
-              "company/structure"
-            ]
-          },
+          "company/overview",
+          "company/mission-value",
+          "company/structure",
           {
             "group": "Brands",
-            "icon": "flag",
             "root": "company/brands",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "company/connect",
               "company/connect-travel-brand",
@@ -77,10 +62,8 @@
           },
           {
             "group": "How the business works",
-            "icon": "handshake",
             "root": "company/business-model",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "company/sales-process",
               "company/revenue-renewals"
@@ -91,8 +74,8 @@
       {
         "group": "People & Ownership",
         "icon": "users",
-        "root": "people/overview",
         "pages": [
+          "people/overview",
           "people/departments",
           "people/who-owns-what",
           "people/org-chart",
@@ -102,14 +85,13 @@
       {
         "group": "Events & Products",
         "icon": "calendar-days",
-        "root": "events/overview",
         "pages": [
+          "events/overview",
           "events/calendar/overview",
+          "events/public-sites",
           {
-            "group": "Marketplaces",
-            "icon": "trophy",
-            "directory": "card",
-            "expanded": false,
+            "group": "Connect marketplaces",
+            "expanded": true,
             "pages": [
               "events/connect-marketplace",
               "events/regional"
@@ -117,9 +99,7 @@
           },
           {
             "group": "Specialty events",
-            "icon": "star",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "events/connect-travel",
               "events/sports-and-summits",
@@ -128,13 +108,27 @@
           },
           {
             "group": "Commercial products",
-            "icon": "tag",
             "root": "products-services/overview",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
+              "exhibitor-support/packages-and-pricing",
               "products-services/event-sponsorships",
               "products-services/media-amplification"
+            ]
+          },
+          {
+            "group": "Media specs",
+            "root": "products-services/media-specs/overview",
+            "expanded": true,
+            "pages": [
+              "products-services/media-specs/onsite-banners",
+              "products-services/media-specs/offsite-banners",
+              "products-services/media-specs/dedicated-email",
+              "products-services/media-specs/newsletters",
+              "products-services/media-specs/content-activation",
+              "products-services/media-specs/native-ads",
+              "products-services/media-specs/editorial-calendar",
+              "products-services/media-specs/customer-acquisition"
             ]
           }
         ]
@@ -142,15 +136,12 @@
       {
         "group": "Exhibitor Support",
         "icon": "briefcase",
-        "root": "exhibitor-support/overview",
-        "boost": 8,
         "pages": [
+          "exhibitor-support/overview",
           "exhibitor-support/fit-and-qualification",
           {
             "group": "Commercial journey",
-            "icon": "file-signature",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "exhibitor-support/packages-and-pricing",
               "exhibitor-support/contracting-billing-escalation",
@@ -158,10 +149,8 @@
             ]
           },
           {
-            "group": "Registration and event journey",
-            "icon": "route",
-            "directory": "card",
-            "expanded": false,
+            "group": "Event journey",
+            "expanded": true,
             "pages": [
               "exhibitor-support/registration-onboarding",
               "exhibitor-support/preparing-for-the-event",
@@ -170,26 +159,25 @@
             ]
           },
           {
-            "group": "Answer customers",
-            "icon": "messages",
+            "group": "Response library",
             "root": "exhibitor-support/response-library",
-            "directory": "card",
-            "expanded": false,
-            "pages": []
+            "expanded": true,
+            "pages": [
+              "exhibitor-support/faqs",
+              "exhibitor-support/what-staff-may-communicate",
+              "exhibitor-support/exceptions-and-escalation"
+            ]
           }
         ]
       },
       {
         "group": "Hosted Buyer Support",
         "icon": "user-check",
-        "root": "hosted-buyer-support/overview",
-        "boost": 8,
         "pages": [
+          "hosted-buyer-support/overview",
           {
             "group": "Eligibility and commitments",
-            "icon": "clipboard-check",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "hosted-buyer-support/eligibility",
               "hosted-buyer-support/coverage",
@@ -198,9 +186,7 @@
           },
           {
             "group": "Application and registration",
-            "icon": "user-plus",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "hosted-buyer-support/application-and-approval",
               "hosted-buyer-support/registration-and-operations"
@@ -208,9 +194,7 @@
           },
           {
             "group": "Event journey",
-            "icon": "route",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "hosted-buyer-support/preparing-for-the-event",
               "hosted-buyer-support/onsite-experience",
@@ -218,49 +202,47 @@
             ]
           },
           {
-            "group": "Answer customers",
-            "icon": "messages",
+            "group": "Response library",
             "root": "hosted-buyer-support/response-library",
-            "directory": "card",
-            "expanded": false,
-            "pages": []
+            "expanded": true,
+            "pages": [
+              "hosted-buyer-support/faqs",
+              "hosted-buyer-support/what-staff-may-communicate",
+              "hosted-buyer-support/exceptions-and-escalation"
+            ]
           }
         ]
       },
       {
         "group": "Systems & Data",
         "icon": "database",
-        "root": "operations/systems/overview",
         "pages": [
+          "operations/systems/overview",
           {
             "group": "Salesforce",
-            "icon": "cloud",
             "root": "operations/systems/salesforce-org",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
-              "operations/systems/salesforce-glossary"
+              "operations/systems/salesforce-glossary",
+              "operations/systems/visit-create-workflows"
             ]
           },
           {
             "group": "Visit Create",
-            "icon": "ticket",
             "root": "operations/systems/visit-create",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
-              "operations/systems/visit-create-api",
-              "operations/systems/visit-create-workflows"
+              "operations/systems/visit-create-api"
             ]
           },
           "operations/systems/notion-company-os",
+          "operations/systems/registration-platforms",
+          "operations/systems/shopify-and-stripe",
           "operations/systems/other-platforms",
           {
             "group": "Data and reporting",
-            "icon": "chart-line",
             "root": "operations/data/data-model",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "operations/data/metrics",
               "operations/data/dashboards",
@@ -269,10 +251,8 @@
           },
           {
             "group": "Integrations",
-            "icon": "plug",
             "root": "operations/integrations/overview",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "operations/integrations/salesforce-integrations",
               "operations/integrations/api-catalogue",
@@ -285,18 +265,17 @@
       {
         "group": "AI & Automation",
         "icon": "shield",
-        "root": "operations/ai/overview",
         "pages": [
+          "operations/ai/overview",
           "operations/ai/guardrails",
           "operations/ai/agents",
+          "operations/ai/company-brain-ingest",
           "operations/ai/tooling",
           "operations/ai/agent-retrieval",
           {
             "group": "Elysia",
-            "icon": "sparkles",
             "root": "operations/ai/elysia",
-            "directory": "card",
-            "expanded": false,
+            "expanded": true,
             "pages": [
               "operations/ai/elysia-api",
               "operations/ai/elysia-code"
@@ -308,8 +287,8 @@
       {
         "group": "Projects",
         "icon": "rocket",
-        "root": "operations/projects/overview",
         "pages": [
+          "operations/projects/overview",
           "operations/projects/company-os",
           "operations/projects/data-consolidation",
           "operations/projects/supplier-knowledge",
@@ -320,13 +299,43 @@
       {
         "group": "Reference & Governance",
         "icon": "book",
-        "root": "reference/overview",
-        "boost": 6,
         "pages": [
+          "reference/overview",
+          {
+            "group": "Find an answer",
+            "root": "welcome/find-an-answer",
+            "expanded": true,
+            "pages": [
+              "welcome/find-an-event",
+              "welcome/find-a-product",
+              "welcome/find-an-owner",
+              "welcome/work-with-systems",
+              "welcome/use-ai-safely",
+              "welcome/customer-faqs"
+            ]
+          },
           "reference/glossary",
           "reference/source-of-truth",
-          "reference/policies-standards",
-          "reference/templates",
+          {
+            "group": "Policies and standards",
+            "root": "reference/policies-standards",
+            "expanded": true,
+            "pages": [
+              "reference/knowledge-base-standards",
+              "reference/content-ownership",
+              "reference/data-governance-standards"
+            ]
+          },
+          {
+            "group": "Templates",
+            "root": "reference/templates",
+            "expanded": true,
+            "pages": [
+              "reference/knowledge-article-template",
+              "reference/sop-template",
+              "reference/project-template"
+            ]
+          },
           "reference/known-issues",
           "reference/change-log"
         ]
@@ -360,16 +369,17 @@
     "default": "system"
   },
   "styling": {
-    "eyebrows": "breadcrumbs"
+    "eyebrows": "section"
   },
   "search": {
-    "prompt": "Search staff guidance, events, systems, and owners..."
+    "prompt": "Search"
   },
   "contextual": {
     "options": [
-      "copy"
+      "copy",
+      "view"
     ],
-    "display": "toc"
+    "display": "header"
   },
   "metadata": {
     "timestamp": true
@@ -388,50 +398,235 @@
     }
   },
   "redirects": [
-    { "source": "/start/how-to-use", "destination": "/welcome/how-to-use", "permanent": true },
-    { "source": "/start/customer-faqs", "destination": "/welcome/customer-faqs", "permanent": true },
-    { "source": "/start/glossary", "destination": "/reference/glossary", "permanent": true },
-    { "source": "/start/agent-retrieval", "destination": "/operations/ai/agent-retrieval", "permanent": true },
-    { "source": "/governance/source-of-truth", "destination": "/reference/source-of-truth", "permanent": true },
-    { "source": "/governance/known-issues", "destination": "/reference/known-issues", "permanent": true },
-    { "source": "/systems/salesforce-org", "destination": "/operations/systems/salesforce-org", "permanent": true },
-    { "source": "/systems/salesforce-glossary", "destination": "/operations/systems/salesforce-glossary", "permanent": true },
-    { "source": "/systems/visit-create", "destination": "/operations/systems/visit-create", "permanent": true },
-    { "source": "/systems/visit-create-api", "destination": "/operations/systems/visit-create-api", "permanent": true },
-    { "source": "/systems/visit-create-workflows", "destination": "/operations/systems/visit-create-workflows", "permanent": true },
-    { "source": "/systems/data-model", "destination": "/operations/data/data-model", "permanent": true },
-    { "source": "/systems/metrics", "destination": "/operations/data/metrics", "permanent": true },
-    { "source": "/systems/dashboards", "destination": "/operations/data/dashboards", "permanent": true },
-    { "source": "/systems/integrations", "destination": "/operations/integrations/overview", "permanent": true },
-    { "source": "/systems/hosted-buyer-ops", "destination": "/hosted-buyer-support/registration-and-operations", "permanent": true },
-    { "source": "/ai/agents", "destination": "/operations/ai/agents", "permanent": true },
-    { "source": "/ai/tooling", "destination": "/operations/ai/tooling", "permanent": true },
-    { "source": "/ai/guardrails", "destination": "/operations/ai/guardrails", "permanent": true },
-    { "source": "/ai/elysia", "destination": "/operations/ai/elysia", "permanent": true },
-    { "source": "/ai/elysia-api", "destination": "/operations/ai/elysia-api", "permanent": true },
-    { "source": "/ai/elysia-code", "destination": "/operations/ai/elysia-code", "permanent": true },
-    { "source": "/ai/automation-roadmap", "destination": "/operations/ai/automation-roadmap", "permanent": true },
-    { "source": "/projects/overview", "destination": "/operations/projects/overview", "permanent": true },
-    { "source": "/projects/company-os", "destination": "/operations/projects/company-os", "permanent": true },
-    { "source": "/projects/data-consolidation", "destination": "/operations/projects/data-consolidation", "permanent": true },
-    { "source": "/projects/supplier-knowledge", "destination": "/operations/projects/supplier-knowledge", "permanent": true },
-    { "source": "/projects/agentforce-rollout", "destination": "/operations/projects/agentforce-rollout", "permanent": true },
-    { "source": "/customers/exhibitors", "destination": "/exhibitor-support/overview", "permanent": true },
-    { "source": "/customers/who-should-exhibit", "destination": "/exhibitor-support/fit-and-qualification", "permanent": true },
-    { "source": "/customers/exhibitor-packages", "destination": "/exhibitor-support/packages-and-pricing", "permanent": true },
-    { "source": "/customers/exhibitor-appointments", "destination": "/exhibitor-support/appointment-model", "permanent": true },
-    { "source": "/customers/exhibitor-prepare", "destination": "/exhibitor-support/preparing-for-the-event", "permanent": true },
-    { "source": "/customers/exhibitor-onsite", "destination": "/exhibitor-support/onsite-experience", "permanent": true },
-    { "source": "/customers/exhibitor-after", "destination": "/exhibitor-support/after-the-event", "permanent": true },
-    { "source": "/customers/hosted-buyers", "destination": "/hosted-buyer-support/overview", "permanent": true },
-    { "source": "/customers/who-qualifies", "destination": "/hosted-buyer-support/eligibility", "permanent": true },
-    { "source": "/customers/buyer-whats-covered", "destination": "/hosted-buyer-support/coverage", "permanent": true },
-    { "source": "/customers/buyer-qualification", "destination": "/hosted-buyer-support/application-and-approval", "permanent": true },
-    { "source": "/customers/buyer-prepare", "destination": "/hosted-buyer-support/preparing-for-the-event", "permanent": true },
-    { "source": "/customers/buyer-onsite", "destination": "/hosted-buyer-support/onsite-experience", "permanent": true },
-    { "source": "/customers/buyer-after", "destination": "/hosted-buyer-support/after-the-event", "permanent": true },
-    { "source": "/hosted-buyers/qualification", "destination": "/hosted-buyer-support/application-and-approval", "permanent": true },
-    { "source": "/events/calendar", "destination": "/events/calendar/overview", "permanent": true },
-    { "source": "/operations/integrations/managed-packages", "destination": "/operations/integrations/salesforce-integrations", "permanent": true }
+    {
+      "source": "/company/history",
+      "destination": "/company/overview",
+      "permanent": true
+    },
+    {
+      "source": "/start/how-to-use",
+      "destination": "/welcome/how-to-use",
+      "permanent": true
+    },
+    {
+      "source": "/start/customer-faqs",
+      "destination": "/welcome/customer-faqs",
+      "permanent": true
+    },
+    {
+      "source": "/start/glossary",
+      "destination": "/reference/glossary",
+      "permanent": true
+    },
+    {
+      "source": "/start/agent-retrieval",
+      "destination": "/operations/ai/agent-retrieval",
+      "permanent": true
+    },
+    {
+      "source": "/governance/source-of-truth",
+      "destination": "/reference/source-of-truth",
+      "permanent": true
+    },
+    {
+      "source": "/governance/known-issues",
+      "destination": "/reference/known-issues",
+      "permanent": true
+    },
+    {
+      "source": "/systems/salesforce-org",
+      "destination": "/operations/systems/salesforce-org",
+      "permanent": true
+    },
+    {
+      "source": "/systems/salesforce-glossary",
+      "destination": "/operations/systems/salesforce-glossary",
+      "permanent": true
+    },
+    {
+      "source": "/systems/visit-create",
+      "destination": "/operations/systems/visit-create",
+      "permanent": true
+    },
+    {
+      "source": "/systems/visit-create-api",
+      "destination": "/operations/systems/visit-create-api",
+      "permanent": true
+    },
+    {
+      "source": "/systems/visit-create-workflows",
+      "destination": "/operations/systems/visit-create-workflows",
+      "permanent": true
+    },
+    {
+      "source": "/systems/data-model",
+      "destination": "/operations/data/data-model",
+      "permanent": true
+    },
+    {
+      "source": "/systems/metrics",
+      "destination": "/operations/data/metrics",
+      "permanent": true
+    },
+    {
+      "source": "/systems/dashboards",
+      "destination": "/operations/data/dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/systems/integrations",
+      "destination": "/operations/integrations/overview",
+      "permanent": true
+    },
+    {
+      "source": "/systems/hosted-buyer-ops",
+      "destination": "/hosted-buyer-support/registration-and-operations",
+      "permanent": true
+    },
+    {
+      "source": "/ai/agents",
+      "destination": "/operations/ai/agents",
+      "permanent": true
+    },
+    {
+      "source": "/ai/tooling",
+      "destination": "/operations/ai/tooling",
+      "permanent": true
+    },
+    {
+      "source": "/ai/guardrails",
+      "destination": "/operations/ai/guardrails",
+      "permanent": true
+    },
+    {
+      "source": "/ai/elysia",
+      "destination": "/operations/ai/elysia",
+      "permanent": true
+    },
+    {
+      "source": "/ai/elysia-api",
+      "destination": "/operations/ai/elysia-api",
+      "permanent": true
+    },
+    {
+      "source": "/ai/elysia-code",
+      "destination": "/operations/ai/elysia-code",
+      "permanent": true
+    },
+    {
+      "source": "/ai/automation-roadmap",
+      "destination": "/operations/ai/automation-roadmap",
+      "permanent": true
+    },
+    {
+      "source": "/projects/overview",
+      "destination": "/operations/projects/overview",
+      "permanent": true
+    },
+    {
+      "source": "/projects/company-os",
+      "destination": "/operations/projects/company-os",
+      "permanent": true
+    },
+    {
+      "source": "/projects/data-consolidation",
+      "destination": "/operations/projects/data-consolidation",
+      "permanent": true
+    },
+    {
+      "source": "/projects/supplier-knowledge",
+      "destination": "/operations/projects/supplier-knowledge",
+      "permanent": true
+    },
+    {
+      "source": "/projects/agentforce-rollout",
+      "destination": "/operations/projects/agentforce-rollout",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitors",
+      "destination": "/exhibitor-support/overview",
+      "permanent": true
+    },
+    {
+      "source": "/customers/who-should-exhibit",
+      "destination": "/exhibitor-support/fit-and-qualification",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitor-packages",
+      "destination": "/exhibitor-support/packages-and-pricing",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitor-appointments",
+      "destination": "/exhibitor-support/appointment-model",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitor-prepare",
+      "destination": "/exhibitor-support/preparing-for-the-event",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitor-onsite",
+      "destination": "/exhibitor-support/onsite-experience",
+      "permanent": true
+    },
+    {
+      "source": "/customers/exhibitor-after",
+      "destination": "/exhibitor-support/after-the-event",
+      "permanent": true
+    },
+    {
+      "source": "/customers/hosted-buyers",
+      "destination": "/hosted-buyer-support/overview",
+      "permanent": true
+    },
+    {
+      "source": "/customers/who-qualifies",
+      "destination": "/hosted-buyer-support/eligibility",
+      "permanent": true
+    },
+    {
+      "source": "/customers/buyer-whats-covered",
+      "destination": "/hosted-buyer-support/coverage",
+      "permanent": true
+    },
+    {
+      "source": "/customers/buyer-qualification",
+      "destination": "/hosted-buyer-support/application-and-approval",
+      "permanent": true
+    },
+    {
+      "source": "/customers/buyer-prepare",
+      "destination": "/hosted-buyer-support/preparing-for-the-event",
+      "permanent": true
+    },
+    {
+      "source": "/customers/buyer-onsite",
+      "destination": "/hosted-buyer-support/onsite-experience",
+      "permanent": true
+    },
+    {
+      "source": "/customers/buyer-after",
+      "destination": "/hosted-buyer-support/after-the-event",
+      "permanent": true
+    },
+    {
+      "source": "/hosted-buyers/qualification",
+      "destination": "/hosted-buyer-support/application-and-approval",
+      "permanent": true
+    },
+    {
+      "source": "/events/calendar",
+      "destination": "/events/calendar/overview",
+      "permanent": true
+    },
+    {
+      "source": "/operations/integrations/managed-packages",
+      "destination": "/operations/integrations/salesforce-integrations",
+      "permanent": true
+    }
   ]
 }

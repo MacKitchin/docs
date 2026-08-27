@@ -10,5 +10,8 @@ drafts/
 AGENTS.md
 HANDOFF.md
 .mintlify/
+.grok/
 .atlas-analysis.json
 export.zip
+inbox/
+.env

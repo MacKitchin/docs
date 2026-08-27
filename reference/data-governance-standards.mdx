@@ -1,0 +1,44 @@
+---
+title: "Data governance standards"
+description: "Company Brain rules for record data, metric definitions, and unresolved conflicts."
+keywords: ["data governance", "PII", "metrics", "conflicts"]
+---
+
+<Info>
+- **Purpose:** Keep record data out of this site and preserve source ownership.
+- **Audience:** Anyone querying systems or editing data pages.
+- **Canonical source:** [Data quality and governance](/operations/data/data-governance) for operating controls.
+- **Owner:** Mac Kitchin for this site's data pages; hosted buyer datasets — Bill Mathis.
+- **Source status:** Canonical for the Company Brain rules; dashboards remain Working.
+- **Last reviewed:** 27 August 2026.
+</Info>
+
+## Staff guidance
+
+- Respect the owning system. This site is not a system of record.
+- Keep record-level customer, visitor, and payment data out of MDX.
+- Use canonical metric definitions on [Metrics and definitions](/operations/data/metrics).
+- Preserve unresolved conflicts on [Known issues](/reference/known-issues). Do not pick a winner.
+
+## Customer-safe information
+
+Aggregate statistics and published package tables only. Never a full attendee or buyer contact list.
+
+## Internal-only context
+
+SOQL, object API names, known Salesforce defects, and unowned-area notes.
+
+## Limits and escalation
+
+Do not copy webhook URLs that contain secrets. Hosted-buyer dataset questions go to Bill Mathis. Schema questions go to Mac Kitchin.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Data quality and governance" icon="shield" href="/operations/data/data-governance">
+    Operating controls in the systems section.
+  </Card>
+  <Card title="Known issues" icon="triangle-alert" href="/reference/known-issues">
+    Open data-quality problems.
+  </Card>
+</CardGroup>

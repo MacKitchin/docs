@@ -1,36 +1,36 @@
 ---
 title: "Policies and standards"
 description: "Verified standards for Company Brain content, ownership, customer support, data governance, and internal agents."
-icon: "scale"
 keywords: ["policies", "standards", "content governance", "data governance", "AI guardrails"]
 ---
 
-These standards govern this knowledge base. They do not claim to replace HR, Legal, Finance, privacy, or information-security policies that have not been imported into the current source set.
+<Info>
+- **Purpose:** Find the right governance rule before editing or answering.
+- **Audience:** Staff and page authors.
+- **Canonical source:** This section.
+- **Owner:** Mac Kitchin.
+- **Source status:** Canonical for this knowledge base. Company HR, Legal, and training policies remain Working and are not imported.
+- **Last reviewed:** 27 August 2026.
+</Info>
 
-## Knowledge-base standards
+These standards govern this knowledge base. They do not replace HR, Legal, Finance, privacy, or information-security policies that have not been imported.
 
-- Write for Connect staff and approved internal agents.
-- Use British spelling, active voice, sentence-case headings, and concrete language.
-- Give each factual page one canonical navigation home; link to it from related sections.
-- Use root-relative internal links without file extensions.
-- Preserve TODO markers for unverified facts rather than filling gaps.
-- Use unique page titles for search, with shorter `sidebarTitle` values where useful.
-- Add new pages to `docs.json`, then validate navigation and links.
+## Staff guidance
 
-## Content ownership and review
-
-Every substantive page should identify or make discoverable:
-
-1. Internal purpose and intended staff roles
-2. Canonical source
-3. Owner
-4. Canonical, Working, or Deprecated status
-5. Source or review date
-6. Staff action
-7. Customer-safe information where relevant
-8. Internal-only context
-9. Limits and escalation route
-10. Related next task
+<Columns cols={2}>
+  <Card title="Knowledge-base standards" icon="pen-line" href="/reference/knowledge-base-standards">
+    Writing, linking, titles, and navigation rules.
+  </Card>
+  <Card title="Content ownership and review" icon="user-pen" href="/reference/content-ownership">
+    The eleven-part page contract.
+  </Card>
+  <Card title="Data governance standards" icon="database" href="/reference/data-governance-standards">
+    Record data, metrics, and conflict handling.
+  </Card>
+  <Card title="Staff and agent guardrails" icon="shield" href="/operations/ai/guardrails">
+    Hard limits for internal agents.
+  </Card>
+</Columns>
 
 ## Customer-support standards
 
@@ -40,14 +40,18 @@ Every substantive page should identify or make discoverable:
 - Billing, invoices, legal, contracts, complaints, specific discounts, and unpublished rates require human escalation.
 - Never share a full attendee or buyer contact list.
 
-## Data-governance standards
+## Customer-safe information
 
-See [Data quality and governance](/operations/data/data-governance) for the operating controls. The core rules are to respect the owning system, keep record data out of MDX, use canonical metric definitions, and preserve unresolved conflicts.
+Not applicable. These are internal rules.
 
-## AI and agent standards
+## Internal-only context
 
-See [Staff and agent guardrails](/operations/ai/guardrails) and [Agent retrieval rules](/operations/ai/agent-retrieval). Agents must retrieve before answering, cite the page used, disclose weak source status, and stop at escalation boundaries.
+Working labels on company policies, HR, legal, and training materials.
+
+## Limits and escalation
+
+Do not present this page as a complete corporate policy library.
 
 <Warning>
-  Company policies, HR and legal materials, and role-specific training are marked **Working** in the source registry. Do not present this page as a complete corporate policy library.
+  Company policies, HR and legal materials, and role-specific training are marked **Working** in the source registry.
 </Warning>

@@ -1,0 +1,10 @@
+.firecrawl/
+.mintlify/
+.DS_Store
+*.log
+.env
+.env.*
+export.zip
+inbox/
+.grok/ingest/.venv/
+**/__pycache__/

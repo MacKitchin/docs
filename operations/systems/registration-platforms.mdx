@@ -1,0 +1,46 @@
+---
+title: "Registration platforms"
+description: "Documented registration path for hosted buyers and the limits of what this site can say about attendee portals."
+keywords: ["registration", "visit create", "map your show", "matchpoint"]
+---
+
+<Info>
+- **Purpose:** Find the documented registration system without inventing an attendee-portal vendor.
+- **Audience:** Operations, Hosted Buyer Experience, and approved internal agents.
+- **Canonical source:** Visit Create integration and hosted-buyer registration playbook.
+- **Owner:** Hosted buyer data — Bill Mathis; Visit Create workflows — as named on those pages.
+- **Source status:** Canonical for Visit Create; Working or TODO for Map Your Show / MatchPoint / custom portals.
+- **Last reviewed:** 27 August 2026.
+</Info>
+
+## Staff guidance
+
+Hosted-buyer applications enter through **Visit Create** and sync into `connect-prod`. Use:
+
+- [Visit Create platform overview](/operations/systems/visit-create)
+- [Create API](/operations/systems/visit-create-api)
+- [Salesforce workflows](/operations/systems/visit-create-workflows)
+- [Hosted-buyer registration](/hosted-buyer-support/registration-and-operations)
+
+## Customer-safe information
+
+None from the integration internals. Do not describe webhook URLs, registration-type IDs, or processor behaviour to a customer.
+
+## Internal-only context
+
+Visit webhook routing, `Registration_Stage__c`, and known marketplace lookup defects.
+
+## Limits and escalation
+
+Which appointment portal (Map Your Show, MatchPoint, or custom) applies to each event is still unconfirmed. Leave that TODO. Do not invent a public application URL.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Visit Create" icon="ticket" href="/operations/systems/visit-create">
+    Documented registration platform.
+  </Card>
+  <Card title="Other approved platforms" icon="boxes" href="/operations/systems/other-platforms">
+    Supporting packages with a verified role.
+  </Card>
+</CardGroup>

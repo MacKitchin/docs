@@ -1,0 +1,49 @@
+---
+title: "Shopify and Stripe"
+description: "Placeholder architecture slot. Shopify and Stripe are not verified in the current source set."
+keywords: ["shopify", "stripe", "payments"]
+---
+
+<Info>
+- **Purpose:** Prevent staff and agents from treating an unverified payments stack as approved.
+- **Audience:** Information systems, finance, and approved internal agents.
+- **Canonical source:** None imported.
+- **Owner:** Unverified.
+- **Source status:** Working. Not an approved platform until a source and owner are imported.
+- **Last reviewed:** 27 August 2026.
+</Info>
+
+<Warning>
+  Shopify and Stripe appeared in an earlier placeholder architecture. They are **not sufficiently documented** in the current Salesforce, Company OS, or Live Events source set. Do not describe them as Connect payment or storefront systems.
+</Warning>
+
+## Staff guidance
+
+Use documented billing and agreement paths instead:
+
+- Invoicing: FinancialForce, via [Salesforce integration contracts](/operations/integrations/salesforce-integrations)
+- Agreements: DocuSign, via [Sales process](/company/sales-process)
+- Invoice exceptions: Stephen Han (Finance)
+
+## Customer-safe information
+
+None from this page.
+
+## Internal-only context
+
+That the slot exists only so the architecture gap is explicit.
+
+## Limits and escalation
+
+Do not invent a Shopify storefront, Stripe account, or payment-link process. Billing questions escalate to Finance.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Other approved platforms" icon="boxes" href="/operations/systems/other-platforms">
+    Platforms that do have a verified role.
+  </Card>
+  <Card title="Who owns what" icon="key" href="/people/who-owns-what">
+    Finance and systems routing.
+  </Card>
+</CardGroup>

@@ -1,0 +1,66 @@
+---
+title: "Company Brain ingest agent"
+description: "Launchd agent on this Mac that compiles dropped files and Mac-only AgentMail into Notion drafts, then mirrors Company Brain MDX after Published and Verified."
+---
+
+This is the always-on compile-at-ingest process for Connect Company Brain. It is a **Claude Agent SDK** job on Mac Kitchin's machine, not an Agentforce agent in `connect-prod`.
+
+<Warning>
+  The site remains a derived mirror. This agent proposes Notion drafts. It does not silently publish, invent facts, reconcile conflicts, or copy record-level customer data.
+</Warning>
+
+## What it does
+
+| Input | Action |
+| --- | --- |
+| File in `source/inbox/incoming/` | Parse, guardrail gate, classify, move to `_processed/` or `_rejected/` |
+| Mail to `company-brain@agentmail.to` from `mac.kitchin@informa.com` | Save real attachments into `incoming/`; reply in-thread |
+| Accepted file | Master Docs row at **Draft / Unverified**, or a Live Events wiki child for event facts |
+| Master Docs **Published** and **Verified** | Update the matching Company Brain MDX |
+
+Mail from anyone other than Mac is ignored. Outbound copies from `company-brain@agentmail.to` are not treated as engagement. Inline signature images are ignored.
+
+Company Brain MDX is **not** written from Draft, In Review, or Published-but-Unverified rows. Both Status = Published **and** Verification Status = Verified are required.
+
+## Where it runs
+
+| | |
+| --- | --- |
+| Host | This Mac (launchd LaunchAgent) |
+| Label | `com.connect.company-brain-ingest` |
+| Plist | `~/Library/LaunchAgents/com.connect.company-brain-ingest.plist` |
+| Code | `source/.grok/ingest/` |
+| Secrets | `source/.env` (gitignored): `ANTHROPIC_API_KEY`, `AGENTMAIL_API_KEY` |
+| Model | `claude-sonnet-4-6` via `https://api.anthropic.com`. Does not inherit the local Claude Code model (`kimi-k2.5`). |
+| Logs | `source/inbox/_logs/` (gitignored) |
+| Menu bar | `com.connect.company-brain-ingest-tray` — **● Ingest** when the job is running, **○** when it is not. The menu lists today and this week. |
+
+KeepAlive and RunAtLoad are on. The process loops about every 60 seconds. Empty ticks do not call Claude. Notion Published/Verified scans run about every fifth tick.
+
+A systemd unit template lives at `source/.grok/ingest/systemd/company-brain-ingest.service` for a Linux host. This machine uses launchd.
+
+## Operator commands
+
+From `source/`:
+
+```bash
+PYTHONPATH=.grok python3 -m ingest --no-notify
+PYTHONPATH=.grok .grok/ingest/.venv/bin/python -m ingest.daemon --self-check
+PYTHONPATH=.grok .grok/ingest/.venv/bin/python -m ingest.daemon --once
+source/.grok/ingest/install_launchd.sh
+launchctl print gui/$(id -u)/com.connect.company-brain-ingest
+```
+
+To stop the ingest job: `launchctl bootout gui/$(id -u)/com.connect.company-brain-ingest`.
+
+The menu-bar icon is a separate LaunchAgent (`com.connect.company-brain-ingest-tray`). Quit from the menu removes the icon only; it does not stop ingest. Restart ingest from the menu with **Restart ingest job**.
+
+## Guardrails the agent must keep
+
+- Event dates, venues, eligibility, and cancellation policy land in Live Events, not as a silent overwrite of `/events/*`.
+- Conflicts stay dual-sourced on [Known issues](/reference/known-issues).
+- Rejects for `pii_roster`, `record_crm`, `secrets`, `unpublished_rates`, `empty`, and `unsupported` never create a Notion page.
+- Do not quote unpublished rates. Do not attach source files to email.
+- Do not git commit or deploy from the daemon.
+
+Owner: Mac Kitchin. Escalate billing, contracts, discounts, and complaints per [Who owns what](/people/who-owns-what).

@@ -1,10 +1,11 @@
 ---
 title: "Agent roster"
-description: "The six Agentforce agents running in connect-prod and what each one is for."
-icon: "users"
+description: "Agentforce agents in connect-prod, plus the Company Brain ingest job on this Mac."
 ---
 
-Six agents are recorded in the AI & Agent Library, all on the Salesforce Agentforce platform in `connect-prod`, all with status **Active**, all owned by Mac Kitchin. Deployment status per agent is an open confirmation item on the [rollout project](/operations/projects/agentforce-rollout).
+Six agents are recorded in the AI & Agent Library on the Salesforce Agentforce platform in `connect-prod`, all with status **Active**, all owned by Mac Kitchin. Deployment status per Agentforce agent is an open confirmation item on the [rollout project](/operations/projects/agentforce-rollout).
+
+A seventh asset, the [Company Brain ingest agent](/operations/ai/company-brain-ingest), is a launchd job on this Mac. It is not Agentforce.
 
 <CardGroup cols={2}>
   <Card title="Connect (SF Agent)" icon="message-circle">
@@ -29,6 +30,9 @@ Six agents are recorded in the AI & Agent Library, all on the Salesforce Agentfo
 
   <Card title="Agentforce Sales Coach" icon="graduation-cap">
     Sales coaching against real conversation data - Chorus conversation intelligence is already in the org.
+  </Card>
+  <Card title="Company Brain ingest" icon="inbox" href="/operations/ai/company-brain-ingest">
+    Launchd / Claude Agent SDK job. Drop-folder and Mac-only AgentMail compile to Notion drafts; MDX updates only after Published and Verified.
   </Card>
 </CardGroup>
 

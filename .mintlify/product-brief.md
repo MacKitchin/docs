@@ -28,3 +28,4 @@ Business knowledge currently spans Salesforce, Notion, the Live Events wiki, sou
 
 - The published Company Brain will be protected as an internal resource. Repository configuration can discourage external indexing, but authentication must be enforced by the hosting layer.
 - The current content inventory is the approved scope. New factual pages should not be invented solely to fill a navigation slot; unverified gaps remain explicitly marked.
+- The live sidebar follows the ten-section architecture (Welcome through Reference & Governance) without numbering. Exhibitor Support and Hosted Buyer Support are internal playbooks.

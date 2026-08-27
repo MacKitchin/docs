@@ -1,10 +1,41 @@
 ---
 title: "Knowledge-base change log"
-sidebarTitle: "Change log"
+sidebarTitle: "Change log and archive"
 description: "Material architecture, governance, and publication-boundary changes to Connect Company Brain."
-icon: "history"
 keywords: ["change log", "architecture", "navigation", "governance"]
 ---
+
+<Update label="27 August 2026" description="Locked reading type scale">
+  - Replaced Maple's display title, large lead, and em-based headings with a hardcoded rem scale so page title, lead, section headings, and body keep one hierarchy on every viewport.
+</Update>
+
+<Update label="27 August 2026" description="Company Brain ingest daemon">
+  - Added a launchd Claude Agent SDK job that watches `source/inbox/incoming/` and `company-brain@agentmail.to` (Mac Kitchin only), writes Notion drafts, and mirrors Company Brain MDX only after Master Docs is Published and Verified. See [Company Brain ingest agent](/operations/ai/company-brain-ingest).
+</Update>
+
+<Update label="27 August 2026" description="2026 media kit">
+  - [Media and amplification](/products-services/media-amplification) now source-dates starting prices to the 2026 Events | Travel | Sports kit PDF, after the Master Docs extract was marked Published. 2025 figures stay on the page as comparison. Conflicts are logged on [Known issues](/reference/known-issues). Notion verification of that row is still Unverified.
+</Update>
+
+<Update label="27 August 2026" description="Maple theme chrome">
+  - Restored Maple sidenav groups (no top tab bar), section eyebrows, and default Maple typography.
+  - Removed custom CSS that hid sidebar icons and uppercased group labels. Informa navy remains on the internal banner only.
+</Update>
+
+<Update label="27 August 2026" description="Architecture navigation">
+  - Rebuilt the sidebar around the ten-section Company Brain architecture, without section numbers.
+  - Welcome Find-an-answer routes, exhibitor and hosted-buyer response-library children, systems registration and Shopify/Stripe gap pages, and split policy/template pages were added. Shopify and Stripe remain unverified.
+  - Customer FAQs stay at `/welcome/customer-faqs` as the canonical extract and are linked from both response libraries rather than duplicated.
+</Update>
+
+<Update label="27 August 2026" description="Directory email corrections">
+  - Directory now uses `connect-prod` User emails where they disagreed with Master People.
+</Update>
+
+<Update label="27 August 2026" description="Finance owner and directory emails">
+  - Recorded Stephen Han as Finance area owner. He is not in Master People; Master Areas still has no Finance owner.
+  - Added `@informa.com` addresses to the [staff directory](/people/directory) from Master People, and logged Master People vs `connect-prod` email conflicts on [Known issues](/reference/known-issues).
+</Update>
 
 <Update label="27 August 2026" description="Internal-staff architecture">
   - Reframed Exhibitor Support and Hosted Buyer Support as internal staff playbooks.

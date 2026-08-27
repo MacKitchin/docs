@@ -1,7 +1,6 @@
 ---
 title: "Known issues"
 description: "Open data-quality problems, unresolved content conflicts, and documentation gaps."
-icon: "sensor-alert"
 ---
 
 Everything on this page is a known, unresolved problem. It is here so that nobody - person or agent - has to rediscover it, and so that nobody quietly papers over a conflict by picking a side.
@@ -26,11 +25,30 @@ Everything on this page is a known, unresolved problem. It is here so that nobod
 | Gap | Detail |
 | --- | --- |
 | **Customer Success has no area owner** | Three Customer Success Managers work in it, each reporting to a different sales leader |
-| **Finance has no area owner** |  |
+| **Stephen Han is Finance owner here but not in Company OS** | Staff confirmation 27 August 2026. Active `connect-prod` User `stephen.han@informa.com`. Master People has no Stephen Han row. Master Areas Finance Owner is empty |
+| **Staff email conflicts between Master People and `connect-prod` User** | Directory uses the Salesforce User address where the two sources disagree |
 | **Operations has two recorded owners** | Team HQ names Rachel Piper; the Areas database names Andrew Dysart |
 | **Alexa Dye has two recorded managers** | Master People records Rachel Piper; Matt Johnson's direct-reports rollup also lists her. Rachel Piper is treated as correct |
-| **Claudia Curry's role is a placeholder** | Recorded role is a single-character placeholder, and the email `claudia.gunn@informa.com` does not match the recorded name |
 | **An unnamed placeholder area exists** | Created without a name or owner, retained for review rather than deleted. Merge or archive once ownership is confirmed |
+
+## Media spec conflicts
+
+Captured 27 August 2026 from OneDrive `Documents/Media Specs`. Full tables live on [Media specs](/products-services/media-specs/overview).
+
+<AccordionGroup>
+  <Accordion title="Onsite banners — three sheets, three file-size and unit tables">
+    `Onsite Display AdSpecs1.pdf` and `Banner_Program_Specs` cap image files at 100KB and allow desktop-leaderboard animation. `Onsite_Display_Ads` Rev 20220902 caps files at 250KB and marks the desktop leaderboard static only. The 300 x 50 unit is Mobile leaderboard on two sheets and Mobile billboard on the 20220902 sheet. The 300 x 250 unit is Display box or Medium rectangle depending on the sheet.
+  </Accordion>
+  <Accordion title="Dedicated email width and height disagree by year">
+    The 2025 dedicated-email sheet caps HTML at 600 pixels wide and states no minimum height. The 2024 sheet still in the folder allows 600–728 pixels and requires a minimum height of 820 pixels.
+  </Accordion>
+  <Accordion title="Three production inboxes on the same folder of sheets">
+    `bizbashprod@informa.com`, `production@bizbash.com`, and `connectprod@informa.com` all appear. Offsite banners reject most third-party tags; onsite sheets accept DoubleClick-class tags after confirmation.
+  </Accordion>
+  <Accordion title="Newsletter product name disagrees with the spec sheet title">
+    The index PDF labels the newsletter **BizBash Buzz**. The spec PDF is titled **Today in Events: Our New Daily eNewsletter**.
+  </Accordion>
+</AccordionGroup>
 
 ## Event content conflicts
 
@@ -77,6 +95,14 @@ Found during the August 2026 site crawl. All are live on `informaconnect.com` as
     Homepage body copy refers to "Connect Winter Marketplace 2027" despite dates of 18-20 November 2026. This may be a season-year branding convention rather than an error.
   </Accordion>
 
+  <Accordion title="Connect Winter Marketplace 2026 - How to Attend button labels disagree with body copy" icon="link">
+    Captured 27 August 2026. The Hosted Buyer heading is followed by supplier package copy, and the Suppliers heading is followed by hosted-buyer copy. Button labels are Hosted Buyer Registration (`3d5r46gen3aq5`) and Supplier Registration (`25ss34wgg94rd`). This site records the button labels and the swapped copy. Do not silently correct either.
+  </Accordion>
+
+  <Accordion title="eTourism Marketplace - How to Attend registration CTAs collapse to one VisitCloud form" icon="link">
+    Captured 27 August 2026. Destination Marketer and Travel Industry Supplier "Register Now" buttons on How to Attend both pointed at `https://register.visitcloud.com/survey/0vuudv97bjcrg`. The homepage also exposed `https://register.visitcloud.com/survey/2137bv9pn7avg`. Report both.
+  </Accordion>
+
   <Accordion title="Women's Summit and Sports Innovation Forum dates overlap by one day" icon="calendar-x">
     The Women's Summit is dated 27-28 October 2026, the parent Sports Innovation Forum 28-30 October 2026. They overlap only on 28 October, despite the Summit running as a track inside the Forum.
   </Accordion>
@@ -99,6 +125,10 @@ Found during the August 2026 site crawl. All are live on `informaconnect.com` as
 
   <Accordion title="BizBash About Us readership does not match the 2025 media kit" icon="hash">
     Captured 12 August 2026. [bizbash.com/about-us](https://www.bizbash.com/about-us) says average monthly readership of **500,000**. The 2025 Events | Travel | Sports media kit cites **107K monthly uniques** and **231K monthly views**. Do not average them or present one as a rounding of the other.
+  </Accordion>
+
+  <Accordion title="2025 and 2026 Events | Travel | Sports media kits disagree and use different audience metrics" icon="hash">
+    Captured 27 August 2026 from `BizBash_MediaKit_2026-5_1.pdf`, published in Master Docs the same day. The 2025 kit (still the public Turtl copy) uses combined social **378K**, monthly uniques **164K**, owned-channel views **411K**, newsletter subscribers **93.8K**. The 2026 PDF labels 2024 users **1.8M**, newsletter subscribers **60,000+**, and active subscribers **215,000** approx., with split lines that do not add to the combined line. Print body copy inside the 2026 file still describes 2024/2025 issues. The Industry This Week, Wallpapers, Interstitials, and Lead Insights appear in the 2025 extract and not the 2026 extract. Bookends, Big Sky, In-Article Video, and Fast Chat Video appear in 2026 and not 2025. Do not blend the metric sets. Company Brain now source-dates [Media and amplification](/products-services/media-amplification) to the 2026 PDF and keeps the 2025 figures as comparison.
   </Accordion>
 
   <Accordion title="BizBash Innovation Forum - Tampa hero, Miami and sports leftovers in meta" icon="map-pin-x">
