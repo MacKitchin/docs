@@ -4,7 +4,11 @@
 
 **Working directory:** `/Users/william.kitchin/repos/Company Docs/source`
 
-**State:** local implementation complete and validated; not committed, pushed, exported, or deployed in this session
+**State:** source committed and pushed; 91-page static export generated and deployed to Cloudflare Pages; Cloudflare Access initialization awaiting an authenticated dashboard session
+
+**Release commit:** `71bc7d3615214bb431cbf6ebc94fb731d4d8f1f4`
+
+**Production deployment:** `6df8c0d1-1ecb-44e6-bdb9-cd4ff55c75e2` at `https://company-brain-4cp.pages.dev`
 
 ## Current product decision
 
@@ -65,15 +69,15 @@ The Mintlify CLI is temporarily pinned to `mint@4.2.831`. The current `mint@4.2.
 
 ## Important remaining boundary
 
-`robots: noindex, nofollow` discourages search-engine discovery; it is **not access control**. Because the intended audience is internal, the deployed Cloudflare Pages site still needs an authenticated access layer if one is not already enforced outside this repository. Do not treat the banner or robots metadata as a security boundary.
+`robots: noindex, nofollow` discourages search-engine discovery; it is **not access control**. The Pages deployment is currently public while Cloudflare Access is initialized. The Cloudflare account currently has no Access application, policy, or identity provider, and the deployment OAuth grant cannot create those resources. Complete the authenticated dashboard setup before treating the site as staff-only.
 
-## Before publishing
+## Release follow-up
 
-1. Review the working diff and confirm the intended content moves.
-2. Re-run the pinned validation, broken-link, and accessibility commands.
-3. Confirm the deployment environment has staff-only access control.
-4. Deploy only when explicitly authorised.
-5. Smoke-test the homepage, both support landing pages, the event calendar, Source of truth, and one retired route after deployment.
+1. Sign in to the Cloudflare dashboard for account `b1681b984a74d7961e225e7dcfb49945`.
+2. Initialize Cloudflare Access for `company-brain-4cp.pages.dev` and attach a staff-only allow policy.
+3. Confirm an unauthenticated request receives an Access challenge instead of site content.
+4. Confirm an approved staff identity can authenticate and open the homepage.
+5. Recheck the homepage, both support landing pages, the event calendar, Source of truth, and one retired route after Access is active.
 
 ## Do not do
 
