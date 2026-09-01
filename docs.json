@@ -39,20 +39,28 @@
         "icon": "compass",
         "pages": [
           "index",
-          "welcome/how-to-use"
+          "welcome/find-an-answer",
+          "welcome/how-to-use",
+          "welcome/customer-faqs"
         ]
       },
       {
         "group": "Company & Strategy",
         "icon": "building",
         "pages": [
-          "company/overview",
-          "company/mission-value",
-          "company/structure",
+          {
+            "group": "About Connect",
+            "root": "company/overview",
+            "expanded": false,
+            "pages": [
+              "company/mission-value",
+              "company/structure"
+            ]
+          },
           {
             "group": "Brands",
             "root": "company/brands",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "company/connect",
               "company/connect-travel-brand",
@@ -63,7 +71,7 @@
           {
             "group": "How the business works",
             "root": "company/business-model",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "company/sales-process",
               "company/revenue-renewals"
@@ -76,10 +84,10 @@
         "icon": "users",
         "pages": [
           "people/overview",
-          "people/departments",
           "people/who-owns-what",
-          "people/org-chart",
-          "people/directory"
+          "people/directory",
+          "people/departments",
+          "people/org-chart"
         ]
       },
       {
@@ -91,7 +99,7 @@
           "events/public-sites",
           {
             "group": "Connect marketplaces",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "events/connect-marketplace",
               "events/regional"
@@ -99,7 +107,7 @@
           },
           {
             "group": "Specialty events",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "events/connect-travel",
               "events/sports-and-summits",
@@ -109,9 +117,8 @@
           {
             "group": "Commercial products",
             "root": "products-services/overview",
-            "expanded": true,
+            "expanded": false,
             "pages": [
-              "exhibitor-support/packages-and-pricing",
               "products-services/event-sponsorships",
               "products-services/media-amplification"
             ]
@@ -119,7 +126,7 @@
           {
             "group": "Media specs",
             "root": "products-services/media-specs/overview",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "products-services/media-specs/onsite-banners",
               "products-services/media-specs/offsite-banners",
@@ -141,7 +148,7 @@
           "exhibitor-support/fit-and-qualification",
           {
             "group": "Commercial journey",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "exhibitor-support/packages-and-pricing",
               "exhibitor-support/contracting-billing-escalation",
@@ -150,7 +157,7 @@
           },
           {
             "group": "Event journey",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "exhibitor-support/registration-onboarding",
               "exhibitor-support/preparing-for-the-event",
@@ -161,7 +168,7 @@
           {
             "group": "Response library",
             "root": "exhibitor-support/response-library",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "exhibitor-support/faqs",
               "exhibitor-support/what-staff-may-communicate",
@@ -177,7 +184,7 @@
           "hosted-buyer-support/overview",
           {
             "group": "Eligibility and commitments",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "hosted-buyer-support/eligibility",
               "hosted-buyer-support/coverage",
@@ -186,7 +193,7 @@
           },
           {
             "group": "Application and registration",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "hosted-buyer-support/application-and-approval",
               "hosted-buyer-support/registration-and-operations"
@@ -194,7 +201,7 @@
           },
           {
             "group": "Event journey",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "hosted-buyer-support/preparing-for-the-event",
               "hosted-buyer-support/onsite-experience",
@@ -204,7 +211,7 @@
           {
             "group": "Response library",
             "root": "hosted-buyer-support/response-library",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "hosted-buyer-support/faqs",
               "hosted-buyer-support/what-staff-may-communicate",
@@ -221,28 +228,33 @@
           {
             "group": "Salesforce",
             "root": "operations/systems/salesforce-org",
-            "expanded": true,
+            "expanded": false,
             "pages": [
-              "operations/systems/salesforce-glossary",
-              "operations/systems/visit-create-workflows"
+              "operations/systems/salesforce-glossary"
             ]
           },
           {
             "group": "Visit Create",
             "root": "operations/systems/visit-create",
-            "expanded": true,
+            "expanded": false,
             "pages": [
+              "operations/systems/visit-create-workflows",
               "operations/systems/visit-create-api"
             ]
           },
-          "operations/systems/notion-company-os",
-          "operations/systems/registration-platforms",
-          "operations/systems/shopify-and-stripe",
-          "operations/systems/other-platforms",
+          {
+            "group": "Other systems",
+            "root": "operations/systems/other-platforms",
+            "expanded": false,
+            "pages": [
+              "operations/systems/notion-company-os",
+              "operations/systems/registration-platforms"
+            ]
+          },
           {
             "group": "Data and reporting",
             "root": "operations/data/data-model",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "operations/data/metrics",
               "operations/data/dashboards",
@@ -252,7 +264,7 @@
           {
             "group": "Integrations",
             "root": "operations/integrations/overview",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "operations/integrations/salesforce-integrations",
               "operations/integrations/api-catalogue",
@@ -268,14 +280,20 @@
         "pages": [
           "operations/ai/overview",
           "operations/ai/guardrails",
-          "operations/ai/agents",
-          "operations/ai/company-brain-ingest",
-          "operations/ai/tooling",
           "operations/ai/agent-retrieval",
+          {
+            "group": "Agents and tooling",
+            "root": "operations/ai/agents",
+            "expanded": false,
+            "pages": [
+              "operations/ai/company-brain-ingest",
+              "operations/ai/tooling"
+            ]
+          },
           {
             "group": "Elysia",
             "root": "operations/ai/elysia",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "operations/ai/elysia-api",
               "operations/ai/elysia-code"
@@ -288,11 +306,17 @@
         "group": "Projects",
         "icon": "rocket",
         "pages": [
-          "operations/projects/overview",
-          "operations/projects/company-os",
-          "operations/projects/data-consolidation",
-          "operations/projects/supplier-knowledge",
-          "operations/projects/agentforce-rollout",
+          {
+            "group": "Active projects",
+            "root": "operations/projects/overview",
+            "expanded": false,
+            "pages": [
+              "operations/projects/company-os",
+              "operations/projects/data-consolidation",
+              "operations/projects/supplier-knowledge",
+              "operations/projects/agentforce-rollout"
+            ]
+          },
           "operations/projects/archive"
         ]
       },
@@ -301,25 +325,12 @@
         "icon": "book",
         "pages": [
           "reference/overview",
-          {
-            "group": "Find an answer",
-            "root": "welcome/find-an-answer",
-            "expanded": true,
-            "pages": [
-              "welcome/find-an-event",
-              "welcome/find-a-product",
-              "welcome/find-an-owner",
-              "welcome/work-with-systems",
-              "welcome/use-ai-safely",
-              "welcome/customer-faqs"
-            ]
-          },
           "reference/glossary",
           "reference/source-of-truth",
           {
             "group": "Policies and standards",
             "root": "reference/policies-standards",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "reference/knowledge-base-standards",
               "reference/content-ownership",
@@ -329,7 +340,7 @@
           {
             "group": "Templates",
             "root": "reference/templates",
-            "expanded": true,
+            "expanded": false,
             "pages": [
               "reference/knowledge-article-template",
               "reference/sop-template",
@@ -366,7 +377,8 @@
   },
   "description": "Internal company knowledge base for Connect Meetings & Events staff and approved internal agents.",
   "appearance": {
-    "default": "system"
+    "default": "system",
+    "strict": false
   },
   "styling": {
     "eyebrows": "section"

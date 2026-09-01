@@ -1,14 +1,47 @@
 # Company Brain handoff
 
-**Updated:** 27 August 2026
+**Updated:** 1 September 2026
 
 **Working directory:** `/Users/william.kitchin/repos/Company Docs/source`
 
-**State:** source committed and pushed; 91-page static export generated and deployed to Cloudflare Pages; Cloudflare Access initialization awaiting an authenticated dashboard session
+**State:** the 1 September information-architecture cleanup is committed. The 31 August static export remains the production deployment behind Cloudflare Access until a new export is requested.
 
 **Release commit:** `71bc7d3615214bb431cbf6ebc94fb731d4d8f1f4`
 
 **Production deployment:** `6df8c0d1-1ecb-44e6-bdb9-cd4ff55c75e2` at `https://company-brain-4cp.pages.dev`
+
+## 1 September 2026 session — progressive-disclosure cleanup
+
+The local source now presents a smaller set of choices while keeping the detailed material available through search and direct links:
+
+- `index.mdx`: replaced the long orientation page with a concise task-led home for the six most common jobs, plus essential reference links.
+- `welcome/how-to-use.mdx`: moved the detailed orientation guidance into a dedicated How to use page.
+- `docs.json`: reduced the visible Welcome list, grouped secondary Company, Systems, AI, and Projects material, and made all nested groups collapsed by default.
+- `expand-nav.js` and `styles/styles.css`: removed forced expansion and restored Mintlify's native disclosure controls. Top-level section icons remain the visual landmarks; nested items do not receive decorative icons.
+- `header-logo.js` and `docs.json`: restored the native light/dark/system theme choice instead of forcing light mode.
+- The task-routing pages omitted from the primary sidebar still exist and remain reachable through links and search. No business facts were changed.
+
+Run the full validation suite and inspect the rendered desktop and mobile navigation before exporting. Do not refresh `../static-site/` or deploy unless the user explicitly asks.
+
+## 1 September 2026 session — reading measure and table fixes
+
+`styles/styles.css` gained a final section (dated 1 September 2026) that: widens `#content-area` from Maple's 576px cap to 46rem (49rem at 2xl); adds slightly more space between paragraphs; drops tables to `--type-small` with compact leading and tighter cell padding; lowers the five-plus-column cell floor to 110px; styles a visible thin scrollbar on scrollable tables; and on mobile replaces the min-width-0 / overflow-wrap-anywhere compression (which shredded columns to single characters) with a 6rem cell floor plus horizontal scroll. Verified against the static export at 1440/1280/390 widths. Exported and deployed 1 September 2026 to both company-brain-share (basic-auth _worker.js preserved) and company-brain production; this deploy also carries the 31 August navigation fixes.
+
+## 31 August 2026 session — structural review fixes
+
+A structural review of the deployed site led to these changes (content facts untouched):
+
+- `docs.json`: moved `operations/systems/visit-create-workflows` from the Salesforce group to the Visit Create group, where it belongs.
+- `docs.json`: removed the duplicate `exhibitor-support/packages-and-pricing` entry from Events & Products > Commercial products (its canonical home stays in Exhibitor Support > Commercial journey). A cross-link was added to `products-services/overview.mdx` instead.
+- `docs.json`: moved the Find an answer group (at that point, the root plus six task pages) from Reference & Governance up into Welcome, next to the homepage that routes to it. `AGENTS.md` was updated to match. The 1 September cleanup subsequently removed the routing stubs from the visible sidebar while retaining the pages.
+- Replaced the stale parent-level `../HANDOFF.md` (it still described the retired four-tab navigation) with a pointer to this file.
+
+Notes for the next agent:
+
+- The 14 group `root` pages (e.g. `operations/systems/salesforce-org`, `company/business-model`) are intentionally not listed as ordinary sidebar items — they are the clickable group headers. Do not "re-add" them to `pages`, and do not remove the `root` keys.
+- The earlier claim in this file that every MDX page appears in `docs.json` holds only via those `root` keys; a naive nav-vs-disk diff will report 14 "orphans" that are not orphans.
+- Deploy is still manual (validate, export, wrangler — see README/AGENTS). The 31 August nav fixes are awaiting export + deploy.
+- Thin stub pages remain in nav (`operations/integrations/api-catalogue`, `operations/integrations/webhooks`, `operations/systems/other-platforms`, `operations/projects/archive`): fill from owning sources or fold into their group overview — do not invent content.
 
 ## Current product decision
 
@@ -69,15 +102,15 @@ The Mintlify CLI is temporarily pinned to `mint@4.2.831`. The current `mint@4.2.
 
 ## Important remaining boundary
 
-`robots: noindex, nofollow` discourages search-engine discovery; it is **not access control**. The Pages deployment is currently public while Cloudflare Access is initialized. The Cloudflare account currently has no Access application, policy, or identity provider, and the deployment OAuth grant cannot create those resources. Complete the authenticated dashboard setup before treating the site as staff-only.
+`robots: noindex, nofollow` discourages search-engine discovery; it is **not access control**. Cloudflare Access was verified on the current production deployment on 31 August 2026. Treat that as a release gate: every later deployment must be checked from an unauthenticated session to confirm the Access challenge still appears before the site is considered staff-only.
 
 ## Release follow-up
 
-1. Sign in to the Cloudflare dashboard for account `b1681b984a74d7961e225e7dcfb49945`.
-2. Initialize Cloudflare Access for `company-brain-4cp.pages.dev` and attach a staff-only allow policy.
-3. Confirm an unauthenticated request receives an Access challenge instead of site content.
-4. Confirm an approved staff identity can authenticate and open the homepage.
-5. Recheck the homepage, both support landing pages, the event calendar, Source of truth, and one retired route after Access is active.
+1. Run the pinned Mintlify validation, broken-link, and accessibility checks from `source/`.
+2. Inspect the homepage, expanded and collapsed navigation, search, and mobile menu in a rendered preview.
+3. Commit and push only after reviewing the diff and preserving unrelated local work.
+4. Export and deploy only when explicitly requested.
+5. After deployment, confirm an unauthenticated request receives an Access challenge, then recheck the homepage, both support landing pages, the event calendar, Source of truth, and one retired route as an approved staff user.
 
 ## Do not do
 

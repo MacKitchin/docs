@@ -61,15 +61,15 @@ Welcome → Company & Strategy → People & Ownership → Events & Products
   → AI & Automation → Projects → Reference & Governance
 ```
 
-The homepage and Find an answer page route by job. A page has one canonical home. Welcome is orientation only. Find an answer and Customer FAQs live under Reference & Governance. Source of truth and Guardrails stay on their canonical pages.
+The homepage and Find an answer page route by job. A page has one canonical home. Welcome holds the task-led homepage, orientation, Find an answer, and Customer FAQs. Source of truth and Guardrails stay on their canonical pages.
 
 Exhibitor Support and Hosted Buyer Support are staff playbooks, not public guides. Use **supplier** in internal terms; **exhibitor** is appropriate in Exhibitor Support when reflecting customer-facing language.
 
 ## Sidebar order
 
-The left sidebar is a traditional documentation tree: every top-level section is listed vertically, and nested folders stay expanded so pages remain visible while moving through the site. Do not use a top tab bar or a section dropdown. Major section headers keep a fixed accent colour (icon and light tint only; never a saturated fill) and identical height and padding. Ordinary pages use normal weight and no icon. Nested parent groups use semibold text so they organise the list without competing with the page title. Icons are reserved for those major section headers. Do not add icons to nested groups or child pages. Prefer three levels: section, parent group, child page.
+The left sidebar is a traditional documentation tree: every top-level section is listed vertically, while nested folders use Mintlify's native disclosure controls and stay collapsed until needed. Do not use a top tab bar or a section dropdown. Major section headers keep a fixed accent colour (icon and light tint only; never a saturated fill) and identical height and padding. Ordinary pages use normal weight and no icon. Nested parent groups use semibold text so they organise the list without competing with the page title. Keep the disclosure chevron visible. Icons are reserved for major section headers. Do not add icons to nested groups or child pages. Prefer three levels: section, parent group, child page.
 
-- **Welcome** — overview and how to use
+- **Welcome** — task-led homepage, Find an answer, how to use, and Customer FAQs
 - **Company & Strategy** — who we are, brands, how the business works
 - **People & Ownership** — departments, who owns what, org chart, directory
 - **Events & Products** — calendar, marketplaces, specialty events, commercial products
@@ -78,13 +78,13 @@ The left sidebar is a traditional documentation tree: every top-level section is
 - **Systems & Data** — systems landscape, data and reporting, integrations
 - **AI & Automation** — guardrails, agents, retrieval, Elysia, roadmap
 - **Projects** — active work and archive
-- **Reference & Governance** — find an answer, glossary, source registry, policies, templates, known issues, change log
+- **Reference & Governance** — glossary, source registry, policies, templates, known issues, change log
 
 ## Read this map first
 
 | Need | Page |
 | --- | --- |
-| **Orientation** | [Company Brain](/) · [How to use](/welcome/how-to-use) · [Source of truth](/reference/source-of-truth) · [Glossary](/reference/glossary) · [Customer FAQs](/welcome/customer-faqs) |
+| **Orientation** | [Welcome](/) · [How to use this brain](/welcome/how-to-use) · [Source of truth](/reference/source-of-truth) · [Glossary](/reference/glossary) · [Customer FAQs](/welcome/customer-faqs) |
 | **Business** | [Who we are](/company/overview) · [Business model](/company/business-model) · [Sales process](/company/sales-process) · [Brands](/company/brands) · [BizBash](/company/bizbash) · [TSNN](/company/tsnn) |
 | **Events** | [Event overview](/events/overview) · [Calendar](/events/calendar/overview) — customer-facing event facts start and stop here. [Public event sites](/events/public-sites) for live homepages, registration, maps, and decks. [Flagship Marketplaces](/events/connect-marketplace) · [Regional Marketplaces](/events/regional) · Connect Travel: [eTourism](/events/connect-travel) · [Sports & Summits](/events/sports-and-summits) · [BizBash Innovation Forum](/events/bizbash) |
 | **Products** | [Products overview](/products-services/overview) · [Exhibitions](/exhibitor-support/packages-and-pricing) · [Sponsorships](/products-services/event-sponsorships) · [Media](/products-services/media-amplification) · [Hosted Buyer Programs](/hosted-buyer-support/overview) |
@@ -247,7 +247,7 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 
 ## Compile-at-ingest
 
-Dropped files live in gitignored `source/inbox/incoming/`. The launchd job `com.connect.company-brain-ingest` (Claude Agent SDK, `source/.grok/ingest/`) compiles them to Notion **Draft / Unverified** and emails `mac.kitchin@informa.com` from `company-brain@agentmail.to`. Company Brain MDX updates only when Master Docs is **Published** and **Verified**. Secrets stay in `source/.env`. Do not run this against customer mailboxes. See [Company Brain ingest agent](/operations/ai/company-brain-ingest).
+Dropped files live in gitignored `source/inbox/incoming/`. The launchd job `com.connect.company-brain-ingest` (`source/.grok/ingest/`) parses them in Python, writes Notion **Draft / Unverified** rows over the Notion REST API, and emails `mac.kitchin@informa.com` from `company-brain@agentmail.to`. Claude Agent SDK is used only for engagement replies and for mirroring Company Brain MDX after Master Docs is **Published** and **Verified**. Secrets stay in `source/.env`. Do not run this against customer mailboxes. See [Company Brain ingest agent](/operations/ai/company-brain-ingest).
 
 ## Escalation
 

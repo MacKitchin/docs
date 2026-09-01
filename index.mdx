@@ -1,86 +1,63 @@
 ---
-title: "Connect Company Brain"
+title: "Find the right answer, owner, or source"
 sidebarTitle: "Welcome"
-description: "The internal starting point for finding company, event, customer-support, systems, and ownership knowledge."
+description: "The task-led starting point for Connect Meetings & Events staff and approved internal agents."
 boost: 10
+keywords: ["welcome", "find an answer", "event", "owner", "customer support", "systems"]
 ---
 
-<Warning>
-  This site contains internal context. Do not send a full page to a customer. Use the customer-safe wording in the Exhibitor Support and Hosted Buyer Support response libraries, then apply the escalation rules on the page.
-</Warning>
+Use the Company Brain to reach the best available answer and the person or system that owns it. Start with the task in front of you rather than guessing how the organisation files it.
 
-## Setting up
-
-Start with the task in front of you. Each route points to the source, owner, and escalation path behind the answer.
+## Start with a task
 
 <CardGroup cols={2}>
   <Card title="Answer an exhibitor" icon="briefcase" href="/exhibitor-support/overview">
-    Internal qualification, package, registration, appointment, event-journey, and response guidance.
+    Qualification, packages, appointments, registration, event delivery, response guidance, and escalation.
   </Card>
   <Card title="Answer a hosted buyer" icon="user-check" href="/hosted-buyer-support/overview">
-    Internal eligibility, coverage, commitment, application, event-journey, and response guidance.
+    Eligibility, coverage, commitments, application, event support, response guidance, and escalation.
   </Card>
   <Card title="Check an event fact" icon="calendar-days" href="/events/calendar/overview">
     Source-dated dates, venues, formats, policies, and known discrepancies.
   </Card>
   <Card title="Find an owner" icon="key" href="/people/who-owns-what">
-    Route a question, handoff, approval, or escalation to the responsible team.
+    Route a question, approval, exception, or handoff to the responsible person or team.
+  </Card>
+  <Card title="Work with systems or data" icon="database" href="/operations/systems/overview">
+    Salesforce, Visit Create, Company OS, metrics, dashboards, integrations, and system boundaries.
+  </Card>
+  <Card title="Use AI safely" icon="shield" href="/operations/ai/guardrails">
+    Retrieval rules, disclosure limits, agent inventory, tooling, Elysia, and automation guidance.
   </Card>
 </CardGroup>
 
-## Make it yours
+<Warning>
+  This site contains internal context. Use the customer-safe wording in the support playbooks; do not send a full page to a customer.
+</Warning>
+
+## Essential references
 
 <CardGroup cols={2}>
   <Card title="Find an answer" icon="magnifying-glass" href="/welcome/find-an-answer">
-    Task-led routes when you do not already know the section name.
+    Browse common staff questions when you do not know the right section or terminology.
+  </Card>
+  <Card title="Customer FAQs" icon="messages-square" href="/welcome/customer-faqs">
+    Grounded supplier and hosted-buyer answers with confidence and when-not-to-use guidance.
   </Card>
   <Card title="How to use this brain" icon="compass" href="/welcome/how-to-use">
-    Source rules, playbooks, and the difference between Canonical, Working, and Deprecated.
+    Learn which page wins, how sources are classified, and when staff must escalate.
   </Card>
   <Card title="Source of truth" icon="shield-check" href="/reference/source-of-truth">
-    Which system owns each fact and how often it refreshes.
+    Identify the system that owns a fact and check its source status and review cadence.
   </Card>
-  <Card title="Staff and agent guardrails" icon="shield" href="/operations/ai/guardrails">
-    Hard limits for anyone answering on Connect's behalf.
+  <Card title="Known issues" icon="triangle-alert" href="/reference/known-issues">
+    Check unresolved conflicts, data-quality problems, ownership gaps, and unverified material.
+  </Card>
+  <Card title="Active projects" icon="rocket" href="/operations/projects/overview">
+    Review current initiatives without mistaking planned work for current-state guidance.
   </Card>
 </CardGroup>
-
-## How to decide which page wins
-
-<AccordionGroup>
-  <Accordion icon="calendar-days" title="Event date, venue, format, or cancellation">
-    Start at the [Event calendar](/events/calendar/overview). Event facts have one controlled home. If two public pages disagree, report both from [Known issues](/reference/known-issues).
-  </Accordion>
-  <Accordion icon="briefcase" title="What staff should tell an exhibitor">
-    Use [Exhibitor Support](/exhibitor-support/overview). Those pages separate internal context, customer-safe wording, and escalation boundaries.
-  </Accordion>
-  <Accordion icon="user-check" title="What staff should tell a hosted buyer">
-    Use [Hosted Buyer Support](/hosted-buyer-support/overview). Eligibility, coverage, and exceptions require the playbook, not a paraphrased FAQ.
-  </Accordion>
-  <Accordion icon="database" title="A metric, field, record, or integration">
-    Use [Systems & Data](/operations/systems/overview). Definitions live here; live record contents stay in the owning system.
-  </Accordion>
-</AccordionGroup>
 
 <Info>
-  The Company Brain is a derived, human-readable mirror of Salesforce (`connect-prod`), the Notion Company OS workspace, and the Live Events wiki. It is not a system of record.
+  The Company Brain is a derived mirror of Salesforce (`connect-prod`), Notion Company OS, and the Live Events wiki. The owning system remains authoritative.
 </Info>
-
-## Active work
-
-These pages record change initiatives. They do not override current-state reference pages.
-
-<CardGroup cols={2}>
-  <Card title="Company OS" icon="book" href="/operations/projects/company-os">
-    In progress · High
-  </Card>
-  <Card title="Data consolidation" icon="database" href="/operations/projects/data-consolidation">
-    In progress · High
-  </Card>
-  <Card title="Supplier knowledge" icon="brain" href="/operations/projects/supplier-knowledge">
-    Planned · Medium
-  </Card>
-  <Card title="Agentforce rollout" icon="sparkles" href="/operations/projects/agentforce-rollout">
-    In progress · High
-  </Card>
-</CardGroup>

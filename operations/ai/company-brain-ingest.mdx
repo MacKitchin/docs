@@ -3,7 +3,7 @@ title: "Company Brain ingest agent"
 description: "Launchd agent on this Mac that compiles dropped files and Mac-only AgentMail into Notion drafts, then mirrors Company Brain MDX after Published and Verified."
 ---
 
-This is the always-on compile-at-ingest process for Connect Company Brain. It is a **Claude Agent SDK** job on Mac Kitchin's machine, not an Agentforce agent in `connect-prod`.
+This is the always-on compile-at-ingest process for Connect Company Brain. It is a launchd job on Mac Kitchin's machine, not an Agentforce agent in `connect-prod`. File parse, guardrail gating, classification, and Notion draft writes are ordinary Python. Claude Agent SDK is used only for Mac email replies and for mirroring Company Brain MDX after a page is Published and Verified.
 
 <Warning>
   The site remains a derived mirror. This agent proposes Notion drafts. It does not silently publish, invent facts, reconcile conflicts, or copy record-level customer data.
@@ -30,12 +30,13 @@ Company Brain MDX is **not** written from Draft, In Review, or Published-but-Unv
 | Label | `com.connect.company-brain-ingest` |
 | Plist | `~/Library/LaunchAgents/com.connect.company-brain-ingest.plist` |
 | Code | `source/.grok/ingest/` |
-| Secrets | `source/.env` (gitignored): `ANTHROPIC_API_KEY`, `AGENTMAIL_API_KEY` |
-| Model | `claude-sonnet-4-6` via `https://api.anthropic.com`. Does not inherit the local Claude Code model (`kimi-k2.5`). |
+| Secrets | `source/.env` (gitignored): `ANTHROPIC_API_KEY`, `AGENTMAIL_API_KEY`, `NOTION_TOKEN` |
+| Notion drafts | REST (`https://api.notion.com`). Master Docs rows at Draft / Unverified, owned by Mac Kitchin. Event facts go to a Live Events wiki child. No Claude. |
+| Claude | Engagement replies and Published+Verified MDX promotion only. `claude-sonnet-4-6` via `https://api.anthropic.com`. Does not inherit the local Claude Code model (`kimi-k2.5`). |
 | Logs | `source/inbox/_logs/` (gitignored) |
 | Menu bar | `com.connect.company-brain-ingest-tray` — **● Ingest** when the job is running, **○** when it is not. The menu lists today and this week. |
 
-KeepAlive and RunAtLoad are on. The process loops about every 60 seconds. Empty ticks do not call Claude. Notion Published/Verified scans run about every fifth tick.
+KeepAlive and RunAtLoad are on. The process loops about every 60 seconds. Empty ticks do not call Claude. Accepted files become a local draft packet, then a Notion page over REST (`NOTION_TOKEN`). A sidecar that fails the Notion write twice is left in `inbox/_processed/` until `notion_attempts` is reset. About every fifth tick the job reads Notion Status and Verification Status. The promote agent runs only for pages that are already **Published** and **Verified**. AgentMail attachments that return JSON metadata are fetched via `download_url`; metadata is never written into `incoming/`.
 
 A systemd unit template lives at `source/.grok/ingest/systemd/company-brain-ingest.service` for a Linux host. This machine uses launchd.
 

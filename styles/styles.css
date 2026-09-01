@@ -210,15 +210,6 @@ html.dark #banner {
     display: none;
   }
 
-  /* Keep nested folders open without clicking group headers.
-     Headers with a `root` page navigate when clicked. */
-  #navigation-items li ul {
-    display: block !important;
-    height: auto !important;
-    overflow: visible !important;
-    visibility: visible !important;
-  }
-
   #navigation-items > ul.mt-8 {
     margin-top: 0;
   }
@@ -431,7 +422,6 @@ html.dark #navigation-items button[aria-expanded] span {
   color: #cbd5e1;
 }
 
-#navigation-items button[aria-expanded] > div:last-child,
 #navigation-items li :is(a, button) > div:first-child:has(svg) {
   display: none !important;
 }
@@ -1365,5 +1355,95 @@ html.dark [data-company-brain-search] [data-search-results] a:focus-visible {
   a {
     color: black;
     text-decoration: underline;
+  }
+}
+
+/* =========================================================================
+   Reading measure and table density — 1 September 2026.
+   Maple caps #content-area at max-w-xl (576px at <1536px viewports), which
+   wraps prose early, crushes tables into tall multi-line cells, and forces
+   horizontal clipping. Widen the reading column and give tables a compact
+   type role so cells stop towering.
+   ========================================================================= */
+
+@media (min-width: 1024px) {
+  #content-area {
+    max-width: 46rem !important; /* 736px reading measure */
+  }
+}
+
+@media (min-width: 1536px) {
+  #content-area {
+    max-width: 49rem !important;
+  }
+}
+
+/* Paragraph rhythm: slightly more air between blocks so long pages do not
+   read as one slab. */
+.mdx-content :is(p, ul, ol, [data-as="p"]) + :is(p, ul, ol, [data-as="p"]) {
+  margin-top: 1.05rem !important;
+}
+
+/* Tables: one size smaller with compact leading, tighter cell padding.
+   Body copy stays at --type-body; tables are reference material. */
+.prose table,
+article table,
+main table {
+  font-size: var(--type-small) !important;
+  line-height: var(--leading-compact) !important;
+}
+
+.prose table :is(th, td),
+article table :is(th, td),
+main table :is(th, td) {
+  padding: 0.55rem 0.85rem !important;
+  font-size: var(--type-small) !important;
+  line-height: var(--leading-compact) !important;
+}
+
+/* With the wider column, five-plus-column tables need a smaller per-cell
+   floor before the scroll container takes over. Overrides the 150px rule
+   above (same selector, later in the cascade). */
+@media (min-width: 769px) {
+  .prose table:has(tr > :nth-child(5)) td,
+  article table:has(tr > :nth-child(5)) td,
+  main table:has(tr > :nth-child(5)) td {
+    min-width: 110px !important;
+  }
+}
+
+/* Wide tables keep a visible, thin scrollbar so hidden columns read as
+   scrollable rather than cut off. */
+[data-component-part="scroll-area-viewport"][aria-label="Scrollable table"] {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+[data-component-part="scroll-area-viewport"][aria-label="Scrollable table"]::-webkit-scrollbar {
+  height: 8px;
+}
+
+[data-component-part="scroll-area-viewport"][aria-label="Scrollable table"]::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+html.dark [data-component-part="scroll-area-viewport"][aria-label="Scrollable table"] {
+  scrollbar-color: #475569 transparent;
+}
+
+html.dark [data-component-part="scroll-area-viewport"][aria-label="Scrollable table"]::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+/* Mobile: never shred columns to single characters. Cells keep a real
+   floor and natural word wrapping; the scroll container handles overflow.
+   Overrides the min-width: 0 / overflow-wrap: anywhere compression above. */
+@media (max-width: 768px) {
+  .prose table :is(th, td),
+  article table :is(th, td),
+  main table :is(th, td) {
+    min-width: 6rem !important;
+    overflow-wrap: normal !important;
   }
 }
