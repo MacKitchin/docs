@@ -1,0 +1,21 @@
+services:
+  web:
+    image: node:22
+    working_dir: /app
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - PUPPETEER_SKIP_DOWNLOAD=true
+      - BASE44_PUBLIC_HOST_SUFFIX=${BASE44_PUBLIC_HOST_SUFFIX}
+      # Mintlify's dev server is Next.js-based; allow the preview origin's dev assets/HMR.
+      - NODE_OPTIONS=--max-old-space-size=2048
+    command: sh -c "npx --yes mint@4.2.831 dev --no-open --host 0.0.0.0 --port 3000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/', r => process.exit(r.statusCode < 500 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s

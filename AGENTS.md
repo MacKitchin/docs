@@ -279,3 +279,9 @@ Project pages follow the Company OS six-section shell: Overview, Goals and succe
 - Filling a TODO or a missing regional price from a flagship table.
 - Adding customer record data "for realism".
 - Editing the static export instead of `source/`.
+
+## Base44 dev environment
+
+The repo runs in the Base44 sandbox via `docker-compose.base44.yml` (a `node:22` container that bind-mounts the source and runs `npx --yes mint@4.2.831 dev --no-open --host 0.0.0.0 --port 3000`). No external credentials are needed — the Mintlify CLI runs entirely locally. Search shows a "Run mint login" notice in the logs; that only affects the search feature, not the preview itself.
+
+Verify it is up: `docker compose -f docker-compose.base44.yml ps` (the `web` service should be `healthy`) and `curl -sf http://localhost:3000/`. Edits to MDX/`docs.json` hot-reload in the preview.
